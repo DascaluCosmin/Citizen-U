@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_welcome"
-    tools:context=".WelcomeFragment">
+    tools:context=".fragments.WelcomeFragment">
+
+    <data>
+        <variable
+            name="welcomeFragment"
+            type="com.ubb.citizen_u.fragments.WelcomeFragment" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -60,6 +66,7 @@
             android:text="@string/welcome_sign_in_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> welcomeFragment.successfulSignIn()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_welcome" />
     </androidx.constraintlayout.widget.ConstraintLayout>

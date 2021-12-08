@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/WelcomeFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.ubb.citizen_u.WelcomeFragment"
+        android:id="@+id/WelcomeFragment"
+        android:name="com.ubb.citizen_u.fragments.WelcomeFragment"
         android:label="@string/welcome_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_welcome">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_WelcomeFragment_to_SignedInMockupFragment"
+            app:destination="@id/SignedInMockupFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.ubb.citizen_u.SignedInMockupFragment"
+        android:id="@+id/SignedInMockupFragment"
+        android:name="com.ubb.citizen_u.fragments.SignedInMockupFragment"
         android:label="@string/signed_in_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_signed_in_mockup">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_SignedInMockupFragment_to_WelcomeFragment"
+            app:destination="@id/WelcomeFragment" />
     </fragment>
 </navigation>

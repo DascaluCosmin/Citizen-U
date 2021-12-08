@@ -1,15 +1,17 @@
-package com.ubb.citizen_u
+package com.ubb.citizen_u.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ubb.citizen_u.databinding.FragmentFirstBinding
+import androidx.navigation.fragment.findNavController
+import com.ubb.citizen_u.R
+import com.ubb.citizen_u.databinding.FragmentWelcomeBinding
 
 class WelcomeFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentWelcomeBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -20,17 +22,20 @@ class WelcomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+
+        binding.apply {
+            welcomeFragment = this@WelcomeFragment
+        }
         return binding.root
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun successfulSignIn() {
+        findNavController().navigate(R.id.action_WelcomeFragment_to_SignedInMockupFragment)
     }
 }
