@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentSecondBinding
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
-class SecondFragment : Fragment() {
+
+class SignedInMockupFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
 

@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.ubb.citizen_u.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:name="com.ubb.citizen_u.WelcomeFragment"
+        android:label="@string/welcome_fragment_label"
         tools:layout="@layout/fragment_first">
 
         <action
@@ -17,8 +17,8 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.ubb.citizen_u.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:name="com.ubb.citizen_u.SignedInMockupFragment"
+        android:label="@string/signed_in_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
