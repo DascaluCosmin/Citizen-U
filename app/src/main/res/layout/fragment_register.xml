@@ -72,6 +72,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/register_textview" />
 
+        <ImageView
+            android:id="@+id/logo_imageview"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
+            android:layout_marginBottom="@dimen/generic_margin_between_element"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toTopOf="@id/register_textview"
+            app:layout_constraintEnd_toEndOf="@id/register_textview"
+            app:layout_constraintStart_toStartOf="@id/register_textview"
+
+            tools:srcCompat="@drawable/logo" />
+        />
+
         <!-- TODO: Add the remaining fields, e.g. email, name, dob
              - This is up for debate, since the Administration could use the CNP to determine those details
         -->

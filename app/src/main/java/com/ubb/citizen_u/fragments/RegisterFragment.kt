@@ -20,6 +20,10 @@ import com.ubb.citizen_u.util.ValidationConstants
  */
 class RegisterFragment : Fragment() {
 
+    companion object {
+        private const val TAG = "RegisterFragment"
+    }
+
     private var _binding: FragmentRegisterBinding? = null
 
     private val binding get() = _binding!!
@@ -79,6 +83,7 @@ class RegisterFragment : Fragment() {
                                 .show()
                             findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
                         } else {
+                            // TODO: Show to the User the Fail Registration cause
                             Toast.makeText(
                                 context,
                                 AuthenticationConstants.FAILED_REGISTER_MESSAGE,

@@ -2,4 +2,6 @@
     <dimen name="generic_margin_between_element">16dp</dimen>
     <dimen name="welcome_width_views">280dp</dimen>
 
+    <dimen name="logo_width">120dp</dimen>
+    <dimen name="logo_height">120dp</dimen>
 </resources>

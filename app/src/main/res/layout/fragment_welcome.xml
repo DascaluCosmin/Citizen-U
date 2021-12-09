@@ -18,11 +18,11 @@
 
         <TextView
             android:id="@+id/welcome_textview"
+            style="@style/TextAppearance.MaterialComponents.Headline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome_sign_in_textview"
             android:textAlignment="center"
-            android:textSize="28sp"
             app:layout_constraintBottom_toTopOf="@id/sign_in_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,14 +86,13 @@
 
         <ImageView
             android:id="@+id/logo_imageview"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
             android:layout_marginBottom="@dimen/generic_margin_between_element"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toTopOf="@id/welcome_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:src="@tools:sample/avatars"
             tools:srcCompat="@drawable/logo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
