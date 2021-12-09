@@ -7,4 +7,20 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="primaryColor">#b388ff</color>
+    <color name="primaryLightColor">#e7b9ff</color>
+    <color name="primaryDarkColor">#805acb</color>
+    <color name="secondaryColor">#8c9eff</color>
+    <color name="secondaryLightColor">#c0cfff</color>
+    <color name="secondaryDarkColor">#5870cb</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#000000</color>
+
+    <color name="ic_launcher_background">#8181B1</color>
+
+    <!--
+    Other interesting colors I have seen:
+    <color name="colorPrimaryDark">#222934</color> - dark blue-ish
+    -->
 </resources>

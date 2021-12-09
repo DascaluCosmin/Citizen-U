@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_register"
+    tools:context=".fragments.RegisterFragment">
+
+    <data>
+
+        <variable
+            name="registerFragment"
+            type="com.ubb.citizen_u.fragments.RegisterFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/register_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_create_account_textview"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            app:layout_constraintBottom_toTopOf="@id/create_account_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_textfield"
+            android:layout_width="@dimen/welcome_width_views"
+            android:layout_height="wrap_content"
+            android:hint="@string/generic_email_hint"
+            android:paddingTop="@dimen/generic_margin_between_element"
+            app:layout_constraintEnd_toEndOf="@id/register_textview"
+            app:layout_constraintStart_toStartOf="@id/register_textview"
+            app:layout_constraintTop_toBottomOf="@id/register_textview">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_textfield"
+            android:layout_width="@dimen/welcome_width_views"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_between_element"
+            android:hint="@string/generic_password_hint"
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="@id/email_textfield"
+            app:layout_constraintStart_toStartOf="@id/email_textfield"
+            app:layout_constraintTop_toBottomOf="@id/email_textfield">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/create_account_button"
+            android:layout_width="@dimen/welcome_width_views"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> registerFragment.createAccount()}"
+            android:text="@string/register_create_account_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/register_textview" />
+
+        <!-- TODO: Add the remaining fields, e.g. email, name, dob
+             - This is up for debate, since the Administration could use the CNP to determine those details
+        -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_welcome"
+    tools:context=".fragments.WelcomeFragment">
+
+    <data>
+
+        <variable
+            name="welcomeFragment"
+            type="com.ubb.citizen_u.fragments.WelcomeFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/welcome_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_sign_in_textview"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            app:layout_constraintBottom_toTopOf="@id/sign_in_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_textfield"
+            android:layout_width="@dimen/welcome_width_views"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_between_element"
+            android:hint="@string/generic_email_hint"
+            app:layout_constraintEnd_toEndOf="@+id/welcome_textview"
+            app:layout_constraintStart_toStartOf="@+id/welcome_textview"
+            app:layout_constraintTop_toBottomOf="@id/welcome_textview">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_textfield"
+            android:layout_width="@dimen/welcome_width_views"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_between_element"
+            android:hint="@string/generic_password_hint"
+            app:endIconMode="password_toggle"
+            app:layout_constraintStart_toStartOf="@id/email_textfield"
+            app:layout_constraintTop_toBottomOf="@id/email_textfield">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="@dimen/welcome_width_views"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/sign_in_button"
+            android:layout_width="@dimen/welcome_width_views"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> welcomeFragment.successfulSignIn()}"
+            android:text="@string/welcome_sign_in_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcome_textview" />
+
+        <Button
+            android:id="@+id/register_button"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="@dimen/welcome_width_views"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> welcomeFragment.register()}"
+            android:text="@string/welcome_register_button"
+            app:layout_constraintStart_toStartOf="@id/sign_in_button"
+            app:layout_constraintTop_toBottomOf="@id/sign_in_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
