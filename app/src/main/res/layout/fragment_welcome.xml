@@ -21,7 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome_sign_in_textview"
-            android:textAppearance="?attr/textAppearanceHeadline4"
+            android:textAlignment="center"
+            android:textSize="28sp"
             app:layout_constraintBottom_toTopOf="@id/sign_in_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,5 +83,17 @@
             android:text="@string/welcome_register_button"
             app:layout_constraintStart_toStartOf="@id/sign_in_button"
             app:layout_constraintTop_toBottomOf="@id/sign_in_button" />
+
+        <ImageView
+            android:id="@+id/logo_imageview"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="@dimen/generic_margin_between_element"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toTopOf="@id/welcome_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@tools:sample/avatars"
+            tools:srcCompat="@drawable/logo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

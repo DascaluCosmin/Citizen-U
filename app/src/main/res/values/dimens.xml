@@ -1,5 +1,5 @@
 <resources>
     <dimen name="generic_margin_between_element">16dp</dimen>
-    <dimen name="welcome_width_views">250dp</dimen>
+    <dimen name="welcome_width_views">280dp</dimen>
 
 </resources>

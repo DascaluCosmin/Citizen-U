@@ -8,7 +8,7 @@
     <string name="generic_email_hint">Email</string>
     <string name="generic_password_hint">Password</string>
 
-    <string name="welcome_sign_in_textview">Welcome</string>
+    <string name="welcome_sign_in_textview">Primăria și Consiliul Local Cluj-Napoca</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="welcome_register_button">Register</string>
 
