@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentSignedInMockupBinding
-
 
 class SignedInMockupFragment : Fragment() {
 
@@ -31,13 +31,25 @@ class SignedInMockupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_signedInMockupFragment_to_welcomeFragment)
+        binding.apply {
+            signedInMockupFragment = this@SignedInMockupFragment
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * TODO: Improve the signOut. Scenarios:
+     * - The apps closes unexpectedly.
+     *      - If you call signOut on the onStop callback, watch for Configuration Changes, e.g. Device Rotation
+     * - The User uses the Home button. Question: what happens then?
+     * - The User presses the Back button.
+     */
+    fun signOut() {
+        FirebaseAuth.getInstance().signOut()
+        findNavController().navigate(R.id.action_signedInMockupFragment_to_welcomeFragment)
     }
 }
