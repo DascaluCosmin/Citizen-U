@@ -20,7 +20,7 @@ class WelcomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
 
@@ -36,6 +36,10 @@ class WelcomeFragment : Fragment() {
     }
 
     fun successfulSignIn() {
-        findNavController().navigate(R.id.action_WelcomeFragment_to_SignedInMockupFragment)
+        findNavController().navigate(R.id.action_welcomeFragment_to_signedInMockupFragment)
+    }
+
+    fun register() {
+        findNavController().navigate(R.id.action_welcomeFragment_to_registerFragment)
     }
 }

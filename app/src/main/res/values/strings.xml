@@ -1,14 +1,19 @@
 <resources>
     <string name="app_name">Citizen-U</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="welcome_fragment_label">Welcome</string>
     <string name="signed_in_fragment_label">Signed In</string>
     <string name="welcome_sign_in_button">Sign In</string>
     <string name="previous">Previous</string>
-    <string name="welcome_username_hint">Username</string>
-    <string name="welcome_password_hint">Password</string>
+    <string name="generic_email_hint">Email</string>
+    <string name="generic_password_hint">Password</string>
 
-    <string name="welcome_sign_in">Welcome</string>
+    <string name="welcome_sign_in_textview">Welcome</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="welcome_register_button">Register</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register_create_account_textview">Create Account</string>
+    <string name="register_create_account_button">Create Account</string>
+    <string name="register_fragment_label">Create Account</string>
 </resources>
