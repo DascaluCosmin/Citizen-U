@@ -89,10 +89,23 @@
             android:layout_width="@dimen/logo_width"
             android:layout_height="@dimen/logo_height"
             android:layout_marginBottom="@dimen/generic_margin_between_element"
+            android:importantForAccessibility="no"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toTopOf="@id/welcome_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@drawable/logo" />
+
+        <ProgressBar
+            android:id="@+id/sign_in_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/generic_margin_between_element"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/sign_in_button"
+            app:layout_constraintStart_toStartOf="@+id/sign_in_button"
+            app:layout_constraintTop_toBottomOf="@id/register_button"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

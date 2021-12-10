@@ -61,6 +61,7 @@ class WelcomeFragment : Fragment() {
             }
 
             else -> {
+                binding.signInProgressbar.visibility = View.VISIBLE
                 val email = binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }
                 val password =
                     binding.passwordTextfield.editText?.text.toString().trim { it <= ' ' }
@@ -75,6 +76,7 @@ class WelcomeFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             )
                                 .show()
+                            binding.signInProgressbar.visibility = View.GONE
                         }
                     }
             }

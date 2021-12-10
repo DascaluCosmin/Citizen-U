@@ -67,6 +67,7 @@ class RegisterFragment : Fragment() {
             }
 
             else -> {
+                binding.registerProgressbar.visibility = View.VISIBLE
                 val email =
                     binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }
                 val password =
@@ -83,6 +84,8 @@ class RegisterFragment : Fragment() {
                                 .show()
                             findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
                         } else {
+                            binding.registerProgressbar.visibility = View.GONE
+
                             // TODO: Show to the User the Fail Registration cause
                             Toast.makeText(
                                 context,
