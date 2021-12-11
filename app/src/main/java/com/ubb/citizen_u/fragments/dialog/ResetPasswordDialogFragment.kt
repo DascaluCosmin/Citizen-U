@@ -68,18 +68,8 @@ class ResetPasswordDialogFragment : DialogFragment() {
                             AuthenticationConstants.FAILED_RESET_PASSWORD_EMAIL_NOT_SENT,
                             Toast.LENGTH_SHORT
                         ).show()
-//                        closeKeyboard()
                     }
                 }
         }
     }
-
-    // TODO: Hide the keyboard on button click
-//    private fun closeKeyboard() {
-//        val currentlyFocusedView = activity?.currentFocus
-//        if (currentlyFocusedView != null) {
-//            val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//            inputMethodManager.hideSoftInputFromWindow(currentlyFocusedView.windowToken, 0)
-//        }
-//    }
 }
