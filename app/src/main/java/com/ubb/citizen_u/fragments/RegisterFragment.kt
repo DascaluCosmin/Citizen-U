@@ -52,7 +52,7 @@ class RegisterFragment : Fragment() {
                 binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }) -> {
                 Toast.makeText(
                     context,
-                    ValidationConstants.INVALID_USERNAME_ERROR_MESSAGE,
+                    ValidationConstants.INVALID_EMAIL_ERROR_MESSAGE,
                     Toast.LENGTH_SHORT
                 ).show()
             }
