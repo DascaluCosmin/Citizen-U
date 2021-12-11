@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentWelcomeBinding
+import com.ubb.citizen_u.fragments.dialog.ResetPasswordDialogFragment
 import com.ubb.citizen_u.util.AuthenticationConstants
 import com.ubb.citizen_u.util.ValidationConstants
 
@@ -46,7 +47,7 @@ class WelcomeFragment : Fragment() {
                 binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }) -> {
                 Toast.makeText(
                     context,
-                    ValidationConstants.INVALID_USERNAME_ERROR_MESSAGE,
+                    ValidationConstants.INVALID_EMAIL_ERROR_MESSAGE,
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -65,6 +66,7 @@ class WelcomeFragment : Fragment() {
                 val email = binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }
                 val password =
                     binding.passwordTextfield.editText?.text.toString().trim { it <= ' ' }
+
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -85,5 +87,9 @@ class WelcomeFragment : Fragment() {
 
     fun register() {
         findNavController().navigate(R.id.action_welcomeFragment_to_registerFragment)
+    }
+
+    fun resetPassword() {
+        ResetPasswordDialogFragment().show(parentFragmentManager, "Reset Password")
     }
 }
