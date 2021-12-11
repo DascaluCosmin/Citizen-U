@@ -2,6 +2,7 @@ package com.ubb.citizen_u.fragments
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,15 +68,18 @@ class RegisterFragment : Fragment() {
             }
 
             else -> {
+                Log.d(TAG, "Registering user")
                 binding.registerProgressbar.visibility = View.VISIBLE
                 val email =
                     binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }
                 val password =
                     binding.passwordTextfield.editText?.text.toString().trim { it <= ' ' }
 
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                val firebaseAuth = FirebaseAuth.getInstance()
+                firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            firebaseAuth.currentUser?.sendEmailVerification()
                             Toast.makeText(
                                 context,
                                 AuthenticationConstants.SUCCESSFUL_REGISTER_MESSAGE,

@@ -67,10 +67,22 @@ class WelcomeFragment : Fragment() {
                 val password =
                     binding.passwordTextfield.editText?.text.toString().trim { it <= ' ' }
 
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                val firebaseAuth = FirebaseAuth.getInstance()
+                firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            findNavController().navigate(R.id.action_welcomeFragment_to_signedInMockupFragment)
+                            val currentUser = firebaseAuth.currentUser
+                            if (currentUser?.isEmailVerified == false) {
+                                currentUser.sendEmailVerification()
+                                Toast.makeText(
+                                    context,
+                                    AuthenticationConstants.FAILED_SIGN_IN_UNVERIFIED_EMAIL_MESSAGE,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                binding.signInProgressbar.visibility = View.GONE
+                            } else {
+                                findNavController().navigate(R.id.action_welcomeFragment_to_signedInMockupFragment)
+                            }
                         } else {
                             Toast.makeText(
                                 context,
