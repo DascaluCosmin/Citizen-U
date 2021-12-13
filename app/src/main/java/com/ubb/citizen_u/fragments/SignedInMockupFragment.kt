@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentSignedInMockupBinding
+import com.ubb.citizen_u.util.FirebaseSingleton
 
 class SignedInMockupFragment : Fragment() {
 
@@ -49,7 +49,7 @@ class SignedInMockupFragment : Fragment() {
      * - The User presses the Back button.
      */
     fun signOut() {
-        FirebaseAuth.getInstance().signOut()
+        FirebaseSingleton.FIREBASE.auth.signOut()
         findNavController().navigate(R.id.action_signedInMockupFragment_to_welcomeFragment)
     }
 }

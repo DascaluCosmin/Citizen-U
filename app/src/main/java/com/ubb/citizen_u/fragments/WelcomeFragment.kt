@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentWelcomeBinding
 import com.ubb.citizen_u.fragments.dialog.ResetPasswordDialogFragment
 import com.ubb.citizen_u.util.AuthenticationConstants
+import com.ubb.citizen_u.util.FirebaseSingleton
 import com.ubb.citizen_u.util.ValidationConstants
 
 class WelcomeFragment : Fragment() {
@@ -67,7 +67,7 @@ class WelcomeFragment : Fragment() {
                 val password =
                     binding.passwordTextfield.editText?.text.toString().trim { it <= ' ' }
 
-                val firebaseAuth = FirebaseAuth.getInstance()
+                val firebaseAuth = FirebaseSingleton.FIREBASE.auth
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
