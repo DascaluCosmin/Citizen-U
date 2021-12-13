@@ -7,10 +7,10 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.google.firebase.auth.FirebaseAuth
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentDialogResetPasswordBinding
 import com.ubb.citizen_u.util.AuthenticationConstants
+import com.ubb.citizen_u.util.FirebaseSingleton
 import com.ubb.citizen_u.util.ValidationConstants
 
 class ResetPasswordDialogFragment : DialogFragment() {
@@ -54,7 +54,7 @@ class ResetPasswordDialogFragment : DialogFragment() {
                 Toast.LENGTH_SHORT
             ).show()
         } else {
-            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+            FirebaseSingleton.FIREBASE.auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(
