@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.ubb.citizen_u.databinding.ActivityMainBinding
+import com.ubb.citizen_u.util.FirebaseSingleton
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,9 +26,17 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (FirebaseSingleton.FIREBASE.auth.currentUser != null) {
+            navController.navigate(R.id.action_welcomeFragment_to_signedInMockupFragment)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
