@@ -4,7 +4,7 @@
     <string name="welcome_fragment_label">Welcome</string>
     <string name="signed_in_fragment_label">Signed In</string>
     <string name="welcome_sign_in_button">Sign In</string>
-    <string name="signed_in_mockup_logout_button">Logout</string>
+    <string name="signed_in_mockup_logout_button">Sign Out</string>
     <string name="generic_email_hint">Email</string>
     <string name="generic_password_hint">Password</string>
 

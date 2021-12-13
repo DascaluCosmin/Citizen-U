@@ -11,7 +11,7 @@ object FirebaseSingleton {
 
         companion object {
             // Could also be set to BuildConfig.DEBUG / BuildConfig.RELEASE
-            const val USE_EMULATOR = true
+            const val USE_EMULATOR = false
             const val EMULATOR_SPECIAL_IP = "10.0.2.2"
             const val EMULATOR_SPECIAL_PORT_FIRESTORE = 8080
             const val EMULATOR_SPECIAL_PORT_AUTH = 9099
