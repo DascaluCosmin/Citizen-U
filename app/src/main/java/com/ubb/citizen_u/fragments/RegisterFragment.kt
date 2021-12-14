@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentRegisterBinding
+import com.ubb.citizen_u.model.Citizen
 import com.ubb.citizen_u.util.AuthenticationConstants
+import com.ubb.citizen_u.util.Collection
 import com.ubb.citizen_u.util.FirebaseSingleton
 import com.ubb.citizen_u.util.ValidationConstants
 
@@ -79,14 +81,20 @@ class RegisterFragment : Fragment() {
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            firebaseAuth.currentUser?.sendEmailVerification()
+                            val currentUser = firebaseAuth.currentUser
+                            currentUser?.sendEmailVerification()
+
+                            FirebaseSingleton.FIREBASE.firestore.collection(Collection.USERS)
+                                .document(currentUser?.uid ?: "null")
+                                .set(Citizen("Admin", "Dasco"))
+
                             Toast.makeText(
                                 context,
                                 AuthenticationConstants.SUCCESSFUL_REGISTER_MESSAGE,
                                 Toast.LENGTH_SHORT
                             )
                                 .show()
-                            findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
+                            findNavController().navigate(R.id.action_registerFragment_to_identityInformationFragment)
                         } else {
                             binding.registerProgressbar.visibility = View.GONE
 

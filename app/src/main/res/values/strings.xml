@@ -15,7 +15,11 @@
     <string name="register_create_account_textview">Create Account</string>
     <string name="register_create_account_button">Create Account</string>
     <string name="register_fragment_label">Create Account</string>
+    <string name="multistep_register_identity_information_label">Identity Information</string>
     <string name="signed_in_mockup_your_account_textview">Your Account</string>
     <string name="welcome_reset_password_textview">Forgot your password?</string>
     <string name="reset_password_dialog_positive_button">Send Password Reset email</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="multistep_registration_next_button">Next</string>
 </resources>

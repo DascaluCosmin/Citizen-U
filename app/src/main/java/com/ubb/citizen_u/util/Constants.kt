@@ -23,3 +23,8 @@ object AuthenticationConstants {
         "An error has occurred! The email reset password has not been sent."
     //endregion
 }
+
+object Collection {
+
+    const val USERS = "users"
+}
