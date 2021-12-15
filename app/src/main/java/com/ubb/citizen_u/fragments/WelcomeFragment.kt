@@ -11,9 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentWelcomeBinding
 import com.ubb.citizen_u.fragments.dialog.ResetPasswordDialogFragment
-import com.ubb.citizen_u.util.AuthenticationConstants
-import com.ubb.citizen_u.util.FirebaseSingleton
-import com.ubb.citizen_u.util.ValidationConstants
+import com.ubb.citizen_u.util.*
 
 class WelcomeFragment : Fragment() {
 
@@ -27,7 +25,6 @@ class WelcomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
 
         binding.apply {

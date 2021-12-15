@@ -9,12 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentRegisterBinding
-import com.ubb.citizen_u.model.Citizen
-import com.ubb.citizen_u.util.AuthenticationConstants
-import com.ubb.citizen_u.util.Collection
-import com.ubb.citizen_u.util.FirebaseSingleton
 import com.ubb.citizen_u.util.ValidationConstants
 
 /**
@@ -49,7 +44,7 @@ class RegisterFragment : Fragment() {
         _binding = null
     }
 
-    fun createAccount() {
+    fun goNext() {
         when {
             TextUtils.isEmpty(
                 binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }) -> {
@@ -71,42 +66,16 @@ class RegisterFragment : Fragment() {
 
             else -> {
                 Log.d(TAG, "Registering user")
-                binding.registerProgressbar.visibility = View.VISIBLE
                 val email =
                     binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }
                 val password =
                     binding.passwordTextfield.editText?.text.toString().trim { it <= ' ' }
-
-                val firebaseAuth = FirebaseSingleton.FIREBASE.auth
-                firebaseAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            val currentUser = firebaseAuth.currentUser
-                            currentUser?.sendEmailVerification()
-
-                            FirebaseSingleton.FIREBASE.firestore.collection(Collection.USERS)
-                                .document(currentUser?.uid ?: "null")
-                                .set(Citizen("Admin", "Dasco"))
-
-                            Toast.makeText(
-                                context,
-                                AuthenticationConstants.SUCCESSFUL_REGISTER_MESSAGE,
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                            findNavController().navigate(R.id.action_registerFragment_to_identityInformationFragment)
-                        } else {
-                            binding.registerProgressbar.visibility = View.GONE
-
-                            // TODO: Show to the User the Fail Registration cause
-                            Toast.makeText(
-                                context,
-                                AuthenticationConstants.FAILED_REGISTER_MESSAGE,
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                        }
-                    }
+                val action =
+                    RegisterFragmentDirections.actionRegisterFragmentToIdentityInformationFragment(
+                        email,
+                        password
+                    )
+                findNavController().navigate(action)
             }
         }
     }

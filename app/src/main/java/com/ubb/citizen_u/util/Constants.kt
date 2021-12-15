@@ -3,6 +3,8 @@ package com.ubb.citizen_u.util
 object ValidationConstants {
     const val INVALID_EMAIL_ERROR_MESSAGE = "Please enter a valid email!"
     const val INVALID_PASSWORD_ERROR_MESSAGE = "Please enter a valid password!"
+    const val INVALID_FIRST_NAME_ERROR_MESSAGE = "Please enter a valid first name!"
+    const val INVALID_LAST_NAME_ERROR_MESSAGE = "Please enter a valid last name!"
 }
 
 object AuthenticationConstants {
@@ -24,7 +26,10 @@ object AuthenticationConstants {
     //endregion
 }
 
-object Collection {
-
+object CollectionConstants {
     const val USERS = "users"
+}
+
+object DocumentConstants {
+    const val UNDEFINED_DOCUMENT = "undefined"
 }
