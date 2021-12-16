@@ -2,6 +2,7 @@ package com.ubb.citizen_u.fragments.multistep.registration
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +12,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentIdentityInformationBinding
+import com.ubb.citizen_u.fragments.RegisterFragment
 import com.ubb.citizen_u.model.Citizen
 import com.ubb.citizen_u.util.*
-import com.ubb.citizen_u.util.CollectionConstants
 
 class IdentityInformationFragment : Fragment() {
+
+    companion object {
+        const val TAG = "IdentityInformationFragment"
+    }
 
     private var _binding: FragmentIdentityInformationBinding? = null
 
@@ -70,8 +75,8 @@ class IdentityInformationFragment : Fragment() {
                             val currentUser = auth.currentUser
                             currentUser?.sendEmailVerification()
 
-                            FirebaseSingleton.FIREBASE.firestore.collection(CollectionConstants.USERS)
-                                .document(currentUser?.uid ?: DocumentConstants.UNDEFINED_DOCUMENT)
+                            FirebaseSingleton.FIREBASE.firestore.collection(USERS_COL)
+                                .document(currentUser?.uid ?: UNDEFINED_DOC)
                                 .set(citizen)
 
                             Toast.makeText(
@@ -80,6 +85,7 @@ class IdentityInformationFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
 
+                            Log.d(TAG, "Registering User in Multistep Register Identity")
                             findNavController().navigate(R.id.action_identityInformationFragment_to_welcomeFragment)
                         } else {
                             binding.multistepRegisterProgressbar.visibility = View.GONE

@@ -65,7 +65,7 @@ class RegisterFragment : Fragment() {
             }
 
             else -> {
-                Log.d(TAG, "Registering user")
+                Log.d(TAG, "Registering User in Multistep Register Credentials")
                 val email =
                     binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }
                 val password =

@@ -1,6 +1,7 @@
 package com.ubb.citizen_u.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +10,15 @@ import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentSignedInMockupBinding
 import com.ubb.citizen_u.model.Citizen
-import com.ubb.citizen_u.util.CollectionConstants
-import com.ubb.citizen_u.util.DocumentConstants
 import com.ubb.citizen_u.util.FirebaseSingleton
+import com.ubb.citizen_u.util.UNDEFINED_DOC
+import com.ubb.citizen_u.util.USERS_COL
 
 class SignedInMockupFragment : Fragment() {
+
+    companion object {
+        const val TAG = "SignedInMockupFragment"
+    }
 
     private val firestore = FirebaseSingleton.FIREBASE.firestore
     private val firebaseAuth = FirebaseSingleton.FIREBASE.auth
@@ -40,12 +45,24 @@ class SignedInMockupFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val currentUser = firebaseAuth.currentUser
-        val citizen = firestore.collection(CollectionConstants.USERS)
-            .document(currentUser?.uid ?: DocumentConstants.UNDEFINED_DOCUMENT)
-            .get().result?.toObject(Citizen::class.javaObjectType)
-
-        binding.welcomeTextview.text =
-            getString(R.string.signed_in_mockup_your_account_textview, citizen?.firstName)
+        var citizen: Citizen?
+        firestore.collection(USERS_COL)
+            .document(currentUser?.uid ?: UNDEFINED_DOC)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    citizen = task.result?.toObject(Citizen::class.java)
+                    if (citizen != null) {
+                        binding.welcomeTextview.text =
+                            getString(
+                                R.string.signed_in_mockup_your_account_textview_params,
+                                citizen?.firstName
+                            )
+                    }
+                } else {
+                    Log.e(TAG, "Error at getting the user ${currentUser?.uid}: ${task.exception}")
+                }
+            }
     }
 
     override fun onDestroyView() {

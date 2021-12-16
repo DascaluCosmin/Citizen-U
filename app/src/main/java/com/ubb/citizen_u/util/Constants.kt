@@ -26,10 +26,6 @@ object AuthenticationConstants {
     //endregion
 }
 
-object CollectionConstants {
-    const val USERS = "users"
-}
-
-object DocumentConstants {
-    const val UNDEFINED_DOCUMENT = "undefined"
-}
+const val USERS_COL = "users"
+const val UNDEFINED_DOC = "undefined"
+const val UNDEFINED = "undefined"

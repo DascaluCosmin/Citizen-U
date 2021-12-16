@@ -30,8 +30,9 @@
 
     <!-- Signed In -->
     <string name="signed_in_fragment_label">Signed In</string>
+    <string name="signed_in_mockup_your_account_textview">Welcome</string>
+    <string name="signed_in_mockup_your_account_textview_params">Welcome, %s</string>
     <string name="signed_in_mockup_your_account_textview_tools">Welcome, Cosmin</string>
-    <string name="signed_in_mockup_your_account_textview">Welcome, %s</string>
     <string name="signed_in_mockup_logout_button">Sign Out</string>
     <string name="generic_undefined_value">undefined</string>
 
