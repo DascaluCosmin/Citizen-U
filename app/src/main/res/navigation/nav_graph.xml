@@ -33,13 +33,30 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.ubb.citizen_u.fragments.RegisterFragment"
-        android:label="@string/register_fragment_label"
-        tools:layout="@layout/fragment_register" >
+        android:label="@string/multistep_register_fragment_label"
+        tools:layout="@layout/fragment_register">
         <action
-            android:id="@+id/action_registerFragment_to_welcomeFragment"
+            android:id="@+id/action_registerFragment_to_identityInformationFragment"
+            app:destination="@id/identityInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/identityInformationFragment"
+        android:name="com.ubb.citizen_u.fragments.multistep.registration.IdentityInformationFragment"
+        android:label="@string/multistep_register_identity_information_label"
+        tools:layout="@layout/fragment_identity_information">
+        <action
+            android:id="@+id/action_identityInformationFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment"
             app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue="undefined" />
+        <argument
+            android:name="password"
+            app:argType="string"
+            android:defaultValue="undefined" />
     </fragment>
 
 </navigation>

@@ -20,7 +20,7 @@
             android:id="@+id/register_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register_create_account_textview"
+            android:text="@string/multistep_register_create_account_textview"
             android:textAppearance="?attr/textAppearanceHeadline4"
             app:layout_constraintBottom_toTopOf="@id/create_account_button"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_textfield"
-            android:layout_width="@dimen/welcome_width_views"
+            android:layout_width="@dimen/width_views"
             android:layout_height="wrap_content"
             android:hint="@string/generic_email_hint"
             android:paddingTop="@dimen/generic_margin_between_element"
@@ -46,7 +46,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_textfield"
-            android:layout_width="@dimen/welcome_width_views"
+            android:layout_width="@dimen/width_views"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/generic_margin_between_element"
             android:hint="@string/generic_password_hint"
@@ -63,10 +63,10 @@
 
         <Button
             android:id="@+id/create_account_button"
-            android:layout_width="@dimen/welcome_width_views"
+            android:layout_width="@dimen/width_views"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> registerFragment.createAccount()}"
-            android:text="@string/register_create_account_button"
+            android:onClick="@{() -> registerFragment.goNext()}"
+            android:text="@string/multistep_register_next_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,17 +84,6 @@
             app:layout_constraintStart_toStartOf="@id/register_textview"
 
             tools:srcCompat="@drawable/logo" />
-
-        <ProgressBar
-            android:id="@+id/register_progressbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/generic_margin_between_element"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@id/create_account_button"
-            app:layout_constraintStart_toStartOf="@id/create_account_button"
-            app:layout_constraintTop_toBottomOf="@id/create_account_button"
-            tools:visibility="visible" />
 
         <!-- TODO: Add the remaining fields, e.g. email, name, dob
              - This is up for debate, since the Administration could use the CNP to determine those details

@@ -3,6 +3,8 @@ package com.ubb.citizen_u.util
 object ValidationConstants {
     const val INVALID_EMAIL_ERROR_MESSAGE = "Please enter a valid email!"
     const val INVALID_PASSWORD_ERROR_MESSAGE = "Please enter a valid password!"
+    const val INVALID_FIRST_NAME_ERROR_MESSAGE = "Please enter a valid first name!"
+    const val INVALID_LAST_NAME_ERROR_MESSAGE = "Please enter a valid last name!"
 }
 
 object AuthenticationConstants {
@@ -23,3 +25,7 @@ object AuthenticationConstants {
         "An error has occurred! The email reset password has not been sent."
     //endregion
 }
+
+const val USERS_COL = "users"
+const val UNDEFINED_DOC = "undefined"
+const val UNDEFINED = "undefined"

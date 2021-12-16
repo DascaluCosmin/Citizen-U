@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_identity_information"
+    tools:context=".fragments.multistep.registration.IdentityInformationFragment">
+
+    <data>
+
+        <variable
+            name="identityInformationFragment"
+            type="com.ubb.citizen_u.fragments.multistep.registration.IdentityInformationFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/multistep_register_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bottom_margin_principal_textview"
+            android:text="@string/multistep_register_identity_information_textview"
+            android:textAppearance="?attr/textAppearanceHeadline4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/firstname_textfield"
+            android:layout_width="@dimen/width_views"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_between_element"
+            android:hint="@string/generic_firstname_hint"
+            app:layout_constraintEnd_toEndOf="@id/multistep_register_textview"
+            app:layout_constraintStart_toStartOf="@id/multistep_register_textview"
+            app:layout_constraintTop_toBottomOf="@id/multistep_register_textview">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lastname_textfield"
+            android:layout_width="@dimen/width_views"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_between_element"
+            android:hint="@string/generic_lastname_hint"
+            app:layout_constraintEnd_toEndOf="@id/firstname_textfield"
+            app:layout_constraintStart_toStartOf="@id/firstname_textfield"
+            app:layout_constraintTop_toBottomOf="@id/firstname_textfield">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="@dimen/width_views"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> identityInformationFragment.goNext()}"
+            android:text="@string/multistep_register_next_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/multistep_register_textview" />
+
+        <ProgressBar
+            android:id="@+id/multistep_register_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin_between_element"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/next_button"
+            app:layout_constraintStart_toStartOf="@id/next_button"
+            app:layout_constraintTop_toBottomOf="@+id/next_button"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,7 +1,13 @@
 <resources>
-    <dimen name="generic_margin_between_element">16dp</dimen>
-    <dimen name="welcome_width_views">280dp</dimen>
 
+    <!-- Generics -->
+    <dimen name="generic_margin_between_element">16dp</dimen>
+    <dimen name="width_views">280dp</dimen>
+
+    <!-- Media -->
     <dimen name="logo_width">120dp</dimen>
     <dimen name="logo_height">120dp</dimen>
+
+    <!-- Multistep Register -->
+    <dimen name="bottom_margin_principal_textview">300dp</dimen>
 </resources>

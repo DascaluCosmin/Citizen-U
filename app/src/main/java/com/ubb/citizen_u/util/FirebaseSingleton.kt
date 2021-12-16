@@ -1,7 +1,7 @@
 package com.ubb.citizen_u.util
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.firestore.FirebaseFirestore
 
 object FirebaseSingleton {
 
@@ -17,11 +17,11 @@ object FirebaseSingleton {
             const val EMULATOR_SPECIAL_PORT_AUTH = 9099
         }
 
-        private var _firestore: FirebaseStorage? = null
-        val firestore: FirebaseStorage
+        private var _firestore: FirebaseFirestore? = null
+        val firestore: FirebaseFirestore
             get() {
                 if (_firestore == null) {
-                    _firestore = FirebaseStorage.getInstance()
+                    _firestore = FirebaseFirestore.getInstance()
 
                     if (USE_EMULATOR) {
                         _firestore?.useEmulator(
