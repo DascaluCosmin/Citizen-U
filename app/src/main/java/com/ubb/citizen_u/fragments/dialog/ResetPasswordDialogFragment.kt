@@ -65,8 +65,9 @@ class ResetPasswordDialogFragment : DialogFragment() {
                     } else {
                         Toast.makeText(
                             requireContext(),
-                            AuthenticationConstants.FAILED_RESET_PASSWORD_EMAIL_NOT_SENT,
-                            Toast.LENGTH_SHORT
+                            "${AuthenticationConstants.FAILED_RESET_PASSWORD_EMAIL_NOT_SENT} " +
+                                    "${task.exception?.message}",
+                            Toast.LENGTH_LONG
                         ).show()
                     }
                 }
