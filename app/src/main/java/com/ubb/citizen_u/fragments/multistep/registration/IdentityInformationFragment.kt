@@ -91,7 +91,7 @@ class IdentityInformationFragment : Fragment() {
                             binding.multistepRegisterProgressbar.visibility = View.GONE
                             Toast.makeText(
                                 context,
-                                AuthenticationConstants.FAILED_REGISTER_MESSAGE,
+                                "${AuthenticationConstants.FAILED_REGISTER_MESSAGE} ${task.exception?.message}",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
