@@ -81,4 +81,8 @@ class SignedInMockupFragment : Fragment() {
         FirebaseSingleton.FIREBASE.auth.signOut()
         findNavController().navigate(R.id.action_signedInMockupFragment_to_welcomeFragment)
     }
+
+    fun viewEventsList() {
+        findNavController().navigate(R.id.action_signedInMockupFragment_to_eventsListFragment)
+    }
 }

@@ -29,6 +29,9 @@
             app:destination="@id/welcomeFragment"
             app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_signedInMockupFragment_to_eventsListFragment"
+            app:destination="@id/eventsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -58,5 +61,10 @@
             app:argType="string"
             android:defaultValue="undefined" />
     </fragment>
+    <fragment
+        android:id="@+id/eventsListFragment"
+        android:name="com.ubb.citizen_u.fragments.events.EventsListFragment"
+        android:label="@string/events_list_fragment_label"
+        tools:layout="@layout/fragment_events_list" />
 
 </navigation>
