@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.model.events
+package com.ubb.citizen_u.data.model.events
 
 import com.ubb.citizen_u.util.UNDEFINED
 

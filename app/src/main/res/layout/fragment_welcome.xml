@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_welcome"
-    tools:context=".fragments.WelcomeFragment">
+    tools:context=".ui.fragments.WelcomeFragment">
 
     <data>
 
         <variable
             name="welcomeFragment"
-            type="com.ubb.citizen_u.fragments.WelcomeFragment" />
+            type="com.ubb.citizen_u.ui.fragments.WelcomeFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

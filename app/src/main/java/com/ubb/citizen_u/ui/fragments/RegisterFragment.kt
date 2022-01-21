@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.fragments
+package com.ubb.citizen_u.ui.fragments
 
 import android.os.Bundle
 import android.text.TextUtils

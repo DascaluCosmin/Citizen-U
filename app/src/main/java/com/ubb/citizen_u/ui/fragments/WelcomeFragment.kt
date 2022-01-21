@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.fragments
+package com.ubb.citizen_u.ui.fragments
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentWelcomeBinding
-import com.ubb.citizen_u.fragments.dialog.ResetPasswordDialogFragment
+import com.ubb.citizen_u.ui.fragments.dialog.ResetPasswordDialogFragment
 import com.ubb.citizen_u.util.*
 
 class WelcomeFragment : Fragment() {

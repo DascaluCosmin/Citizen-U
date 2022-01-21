@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.fragments.multistep.registration
+package com.ubb.citizen_u.ui.fragments.multistep.registration
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -12,8 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentIdentityInformationBinding
-import com.ubb.citizen_u.fragments.RegisterFragment
-import com.ubb.citizen_u.model.Citizen
+import com.ubb.citizen_u.data.model.Citizen
 import com.ubb.citizen_u.util.*
 
 class IdentityInformationFragment : Fragment() {

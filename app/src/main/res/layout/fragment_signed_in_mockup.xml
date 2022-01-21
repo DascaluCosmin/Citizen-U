@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_signed_in_mockup"
-    tools:context=".fragments.SignedInMockupFragment">
+    tools:context=".ui.fragments.SignedInMockupFragment">
 
     <data>
 
         <variable
             name="signedInMockupFragment"
-            type="com.ubb.citizen_u.fragments.SignedInMockupFragment" />
+            type="com.ubb.citizen_u.ui.fragments.SignedInMockupFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

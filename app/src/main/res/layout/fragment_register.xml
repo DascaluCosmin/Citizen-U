@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_register"
-    tools:context=".fragments.RegisterFragment">
+    tools:context=".ui.fragments.RegisterFragment">
 
     <data>
 
         <variable
             name="registerFragment"
-            type="com.ubb.citizen_u.fragments.RegisterFragment" />
+            type="com.ubb.citizen_u.ui.fragments.RegisterFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

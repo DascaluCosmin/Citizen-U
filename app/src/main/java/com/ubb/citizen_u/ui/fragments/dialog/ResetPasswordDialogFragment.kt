@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.fragments.dialog
+package com.ubb.citizen_u.ui.fragments.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog

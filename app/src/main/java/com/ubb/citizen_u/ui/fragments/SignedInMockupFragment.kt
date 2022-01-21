@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.fragments
+package com.ubb.citizen_u.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentSignedInMockupBinding
-import com.ubb.citizen_u.model.Citizen
+import com.ubb.citizen_u.data.model.Citizen
 import com.ubb.citizen_u.util.FirebaseSingleton
 import com.ubb.citizen_u.util.UNDEFINED_DOC
 import com.ubb.citizen_u.util.USERS_COL

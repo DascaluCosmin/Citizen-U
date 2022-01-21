@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.fragments.events
+package com.ubb.citizen_u.ui.fragments.events
 
 import android.os.Bundle
 import android.view.LayoutInflater
