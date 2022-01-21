@@ -1,4 +1,4 @@
-package com.ubb.citizen_u
+package com.ubb.citizen_u.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -9,14 +9,21 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.ActivityMainBinding
-import com.ubb.citizen_u.util.FirebaseSingleton
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        if (FirebaseSingleton.FIREBASE.auth.currentUser != null) {
+        if (firebaseAuth.currentUser != null) {
             navController.navigate(R.id.action_welcomeFragment_to_signedInMockupFragment)
         }
     }

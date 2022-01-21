@@ -10,11 +10,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.ubb.citizen_u.R
-import com.ubb.citizen_u.databinding.FragmentIdentityInformationBinding
 import com.ubb.citizen_u.data.model.Citizen
+import com.ubb.citizen_u.databinding.FragmentIdentityInformationBinding
 import com.ubb.citizen_u.util.*
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class IdentityInformationFragment : Fragment() {
 
     companion object {
@@ -25,6 +30,12 @@ class IdentityInformationFragment : Fragment() {
 
     private val binding get() = _binding!!
     private val args: IdentityInformationFragmentArgs by navArgs()
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
+
+    @Inject
+    lateinit var firebaseFirestore: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,14 +78,13 @@ class IdentityInformationFragment : Fragment() {
                 val password = args.password
                 val citizen = Citizen(firstName, lastName)
 
-                val auth = FirebaseSingleton.FIREBASE.auth
-                auth.createUserWithEmailAndPassword(email, password)
+                firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            val currentUser = auth.currentUser
+                            val currentUser = firebaseAuth.currentUser
                             currentUser?.sendEmailVerification()
 
-                            FirebaseSingleton.FIREBASE.firestore.collection(USERS_COL)
+                            firebaseFirestore.collection(USERS_COL)
                                 .document(currentUser?.uid ?: UNDEFINED_DOC)
                                 .set(citizen)
 

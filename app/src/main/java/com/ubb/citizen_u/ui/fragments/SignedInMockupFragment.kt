@@ -2,26 +2,33 @@ package com.ubb.citizen_u.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.ubb.citizen_u.R
-import com.ubb.citizen_u.databinding.FragmentSignedInMockupBinding
 import com.ubb.citizen_u.data.model.Citizen
-import com.ubb.citizen_u.util.FirebaseSingleton
+import com.ubb.citizen_u.databinding.FragmentSignedInMockupBinding
 import com.ubb.citizen_u.util.UNDEFINED_DOC
 import com.ubb.citizen_u.util.USERS_COL
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SignedInMockupFragment : Fragment() {
 
     companion object {
         const val TAG = "SignedInMockupFragment"
     }
 
-    private val firestore = FirebaseSingleton.FIREBASE.firestore
-    private val firebaseAuth = FirebaseSingleton.FIREBASE.auth
+    @Inject
+    lateinit var firestore: FirebaseFirestore
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     private var _binding: FragmentSignedInMockupBinding? = null
 
@@ -78,7 +85,7 @@ class SignedInMockupFragment : Fragment() {
      * - The User presses the Back button.
      */
     fun signOut() {
-        FirebaseSingleton.FIREBASE.auth.signOut()
+        firebaseAuth.signOut()
         findNavController().navigate(R.id.action_signedInMockupFragment_to_welcomeFragment)
     }
 

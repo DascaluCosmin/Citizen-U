@@ -7,19 +7,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentWelcomeBinding
 import com.ubb.citizen_u.ui.fragments.dialog.ResetPasswordDialogFragment
+import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.util.*
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class WelcomeFragment : Fragment() {
 
     private var _binding: FragmentWelcomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+
+    private val authenticationViewModel: AuthenticationViewModel by activityViewModels()
+
+    @Inject
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +49,8 @@ class WelcomeFragment : Fragment() {
     }
 
     fun successfulSignIn() {
+        authenticationViewModel.foo()
+
         when {
             TextUtils.isEmpty(
                 binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }) -> {
@@ -64,7 +76,6 @@ class WelcomeFragment : Fragment() {
                 val password =
                     binding.passwordTextfield.editText?.text.toString().trim { it <= ' ' }
 
-                val firebaseAuth = FirebaseSingleton.FIREBASE.auth
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
