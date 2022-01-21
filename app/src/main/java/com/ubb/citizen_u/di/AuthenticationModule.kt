@@ -6,6 +6,7 @@ import com.ubb.citizen_u.data.repositories.AuthenticationRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.authentication.AuthenticationUseCases
 import com.ubb.citizen_u.domain.usescases.authentication.GetCurrentUser
 import com.ubb.citizen_u.domain.usescases.authentication.SignIn
+import com.ubb.citizen_u.domain.usescases.authentication.SignOut
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +27,7 @@ class AuthenticationModule {
     fun providesAuthenticationUseCases(authenticationRepository: AuthenticationRepository) =
         AuthenticationUseCases(
             signIn = SignIn(authenticationRepository),
-            getCurrentUser =  GetCurrentUser(authenticationRepository)
+            signOut = SignOut(authenticationRepository),
+            getCurrentUser = GetCurrentUser(authenticationRepository)
         )
 }

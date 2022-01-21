@@ -63,8 +63,8 @@ class WelcomeFragment : Fragment() {
                                 if (user == null) {
                                     showFailedSignIn()
                                 } else {
-                                    user.sendEmailVerification()
                                     if (!user.isEmailVerified) {
+                                        user.sendEmailVerification()
                                         Toast.makeText(
                                             context,
                                             AuthenticationConstants.FAILED_SIGN_IN_UNVERIFIED_EMAIL_MESSAGE,
@@ -98,8 +98,6 @@ class WelcomeFragment : Fragment() {
                 }
             }
         }
-
-        authenticationViewModel.getCurrentUser()
     }
 
 

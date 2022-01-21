@@ -32,6 +32,10 @@ class AuthenticationRepositoryImpl @Inject constructor(
             }
         }
 
+    override suspend fun signOut() {
+        firebaseAuth.signOut()
+    }
+
     override suspend fun getCurrentUser() =
         flow {
             emit(firebaseAuth.currentUser)

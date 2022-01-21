@@ -35,6 +35,12 @@ class AuthenticationViewModel @Inject constructor(
         }
     }
 
+    fun signOut() {
+        viewModelScope.launch {
+            authenticationUseCases.signOut()
+        }
+    }
+
     fun getCurrentUser() {
         viewModelScope.launch {
             authenticationUseCases.getCurrentUser().collect {
