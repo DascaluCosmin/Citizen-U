@@ -51,7 +51,6 @@ class RegisterFragment : Fragment() {
     }
 
     fun goNext() {
-        authenticationViewModel.foo()
         when {
             TextUtils.isEmpty(
                 binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }) -> {

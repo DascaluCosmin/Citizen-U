@@ -22,9 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
 
-    @Inject
-    lateinit var firebaseAuth: FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,14 +33,6 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        if (firebaseAuth.currentUser != null) {
-            navController.navigate(R.id.action_welcomeFragment_to_signedInMockupFragment)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
