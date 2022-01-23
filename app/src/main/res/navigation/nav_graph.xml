@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_signedInMockupFragment_to_eventsListFragment"
             app:destination="@id/eventsListFragment" />
+        <argument
+            android:name="connectedUserId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"

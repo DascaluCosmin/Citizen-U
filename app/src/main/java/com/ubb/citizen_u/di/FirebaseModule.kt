@@ -2,7 +2,7 @@ package com.ubb.citizen_u.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.ubb.citizen_u.util.DatabaseConstants
+import com.ubb.citizen_u.util.DatabaseConstants.USERS_COL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,15 +12,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class FirebaseModule {
+object FirebaseModule {
 
-    companion object {
-        // Could also be set to BuildConfig.DEBUG / BuildConfig.RELEASE
-        const val USE_EMULATOR = true
-        const val EMULATOR_SPECIAL_IP = "10.0.2.2"
-        const val EMULATOR_SPECIAL_PORT_FIRESTORE = 8080
-        const val EMULATOR_SPECIAL_PORT_AUTH = 9099
-    }
+    // Could also be set to BuildConfig.DEBUG / BuildConfig.RELEASE
+    private const val USE_EMULATOR = true
+    private const val EMULATOR_SPECIAL_IP = "10.0.2.2"
+    private const val EMULATOR_SPECIAL_PORT_FIRESTORE = 8080
+    private const val EMULATOR_SPECIAL_PORT_AUTH = 9099
 
     @Provides
     @Singleton
@@ -50,7 +48,7 @@ class FirebaseModule {
 
     @Provides
     @Singleton
-    @Named(DatabaseConstants.USERS_COL)
+    @Named(USERS_COL)
     fun providesUsersRef(firebaseFirestore: FirebaseFirestore) =
-        firebaseFirestore.collection(DatabaseConstants.USERS_COL)
+        firebaseFirestore.collection(USERS_COL)
 }

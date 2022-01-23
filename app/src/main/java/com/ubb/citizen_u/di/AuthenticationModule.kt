@@ -2,9 +2,8 @@ package com.ubb.citizen_u.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.ubb.citizen_u.data.repositories.AuthenticationRepository
-import com.ubb.citizen_u.data.repositories.AuthenticationRepositoryImpl
+import com.ubb.citizen_u.data.repositories.impl.AuthenticationRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.authentication.*
 import com.ubb.citizen_u.util.DatabaseConstants.USERS_COL
 import dagger.Module
@@ -16,7 +15,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AuthenticationModule {
+object AuthenticationModule {
 
     @Provides
     @Singleton

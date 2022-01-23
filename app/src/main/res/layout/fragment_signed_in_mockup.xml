@@ -16,39 +16,59 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/welcome_textview"
-            style="?attr/textAppearanceHeadline4"
+        <ProgressBar
+            android:id="@+id/main_progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/principal_text_view_margin_top"
-            android:text="@string/signed_in_mockup_your_account_textview"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/signed_in_mockup_your_account_textview_tools" />
+            tools:visibility="visible" />
 
-        <Button
-            android:id="@+id/view_events_button"
-            android:layout_width="@dimen/width_views"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/generic_margin_between_element"
-            android:onClick="@{() -> signedInMockupFragment.viewEventsList()}"
-            android:text="@string/signed_in_mockup_view_events_button"
-            app:layout_constraintEnd_toEndOf="@id/welcome_textview"
-            app:layout_constraintStart_toStartOf="@id/welcome_textview"
-            app:layout_constraintTop_toBottomOf="@id/welcome_textview" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="visible">
 
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp"
-            android:onClick="@{() -> signedInMockupFragment.signOut()}"
-            android:text="@string/signed_in_mockup_logout_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/welcome_textview"
+                style="?attr/textAppearanceHeadline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/principal_text_view_margin_top"
+                android:text="@string/signed_in_mockup_your_account_textview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/signed_in_mockup_your_account_textview_tools" />
+
+            <Button
+                android:id="@+id/view_events_button"
+                android:layout_width="@dimen/width_views"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_margin_between_element"
+                android:onClick="@{() -> signedInMockupFragment.viewEventsList()}"
+                android:text="@string/signed_in_mockup_view_events_button"
+                app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                app:layout_constraintTop_toBottomOf="@id/welcome_textview" />
+
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="40dp"
+                android:onClick="@{() -> signedInMockupFragment.signOut()}"
+                android:text="@string/signed_in_mockup_logout_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>

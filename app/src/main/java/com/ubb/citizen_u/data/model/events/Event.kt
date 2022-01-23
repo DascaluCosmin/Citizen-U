@@ -1,7 +1,14 @@
 package com.ubb.citizen_u.data.model.events
 
-import com.ubb.citizen_u.util.UNDEFINED
+import java.util.*
 
-data class Event(val title: String) {
-    constructor() : this(title = UNDEFINED)
+data class Event(
+    val id: String,
+    val title: String,
+    val address: String,
+    val location: String,
+    val startDate: Date,
+    val endDate: Date,
+) {
+
 }

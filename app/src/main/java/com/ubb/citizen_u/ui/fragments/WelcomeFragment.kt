@@ -83,7 +83,7 @@ class WelcomeFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
                         } else {
-                            navigateToUserProfile()
+                            navigateToUserProfile(user.uid)
                         }
                     }
                     binding.signInProgressbar.visibility = View.GONE
@@ -104,7 +104,7 @@ class WelcomeFragment : Fragment() {
             Log.d(TAG, "collectCurrentUserState: Collecting response $it")
             if (it != null) {
                 Log.d(TAG, "collectCurrentUserState: Collected response ${it.email}")
-                navigateToUserProfile()
+                navigateToUserProfile(it.uid)
             }
         }
     }
@@ -131,8 +131,11 @@ class WelcomeFragment : Fragment() {
         }
     }
 
-    private fun navigateToUserProfile() {
-        findNavController().navigate(R.id.action_welcomeFragment_to_signedInMockupFragment)
+    private fun navigateToUserProfile(userId: String) {
+        val action = WelcomeFragmentDirections.actionWelcomeFragmentToSignedInMockupFragment(
+            connectedUserId = userId
+        )
+        findNavController().navigate(action)
     }
 
     private fun showFailedSignIn() {

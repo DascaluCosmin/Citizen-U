@@ -1,8 +1,10 @@
-package com.ubb.citizen_u.data.repositories
+package com.ubb.citizen_u.data.repositories.impl
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.ubb.citizen_u.data.model.Citizen
+import com.ubb.citizen_u.data.repositories.AuthenticationRepository
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.AuthenticationConstants
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
@@ -33,6 +35,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
                     )
                 )
             } catch (exception: Exception) {
+                Log.d(TAG, "signIn: An error has occurred: ${exception.message}")
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
             }
         }
@@ -52,6 +55,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
                 firebaseAuth.sendPasswordResetEmail(email)
                 emit(true)
             } catch (exception: Exception) {
+                Log.d(TAG, "sendEmailResetUserPassword: An error has occurred: ${exception.message}")
                 emit(false)
             }
         }
@@ -77,6 +81,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
                     }
                 }
             } catch (exception: Exception) {
+                Log.d(TAG, "registerUser: An error has occurred: ${exception.message}")
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
             }
         }

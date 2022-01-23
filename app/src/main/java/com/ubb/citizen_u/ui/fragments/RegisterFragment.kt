@@ -76,8 +76,8 @@ class RegisterFragment : Fragment() {
                     binding.passwordTextfield.editText?.text.toString().trim { it <= ' ' }
                 val action =
                     RegisterFragmentDirections.actionRegisterFragmentToIdentityInformationFragment(
-                        email,
-                        password
+                        email = email,
+                        password = password
                     )
                 findNavController().navigate(action)
             }

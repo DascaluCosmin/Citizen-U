@@ -100,7 +100,7 @@ class AuthenticationViewModel @Inject constructor(
             "registerUser: Registering user ${email}, citizen ${citizen.firstName}, ${citizen.lastName}"
         )
         viewModelScope.launch(Dispatchers.IO) {
-            authenticationUseCases.registerUserUseCase(email, password, citizen).collect() {
+            authenticationUseCases.registerUserUseCase(email, password, citizen).collect {
                 _registerUserState.tryEmit(it)
             }
         }

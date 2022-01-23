@@ -34,3 +34,5 @@ object DatabaseConstants {
 const val UNDEFINED = "undefined"
 
 const val DEFAULT_ERROR_MESSAGE = "An unexpected error has occurred"
+const val DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN =
+    "An unexpected error has occurred! Please try again!"
