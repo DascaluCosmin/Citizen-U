@@ -26,8 +26,11 @@ object AuthenticationConstants {
     //endregion
 }
 
-const val USERS_COL = "users"
-const val UNDEFINED_DOC = "undefined"
+object DatabaseConstants {
+    const val USERS_COL = "users"
+    const val UNDEFINED_DOC = "undefined"
+}
+
 const val UNDEFINED = "undefined"
 
 const val DEFAULT_ERROR_MESSAGE = "An unexpected error has occurred"

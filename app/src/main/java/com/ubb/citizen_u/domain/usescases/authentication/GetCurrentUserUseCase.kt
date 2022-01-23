@@ -3,7 +3,7 @@ package com.ubb.citizen_u.domain.usescases.authentication
 import com.ubb.citizen_u.data.repositories.AuthenticationRepository
 import javax.inject.Inject
 
-class GetCurrentUser @Inject constructor(
+class GetCurrentUserUseCase @Inject constructor(
     private val authenticationRepository: AuthenticationRepository
 ) {
 

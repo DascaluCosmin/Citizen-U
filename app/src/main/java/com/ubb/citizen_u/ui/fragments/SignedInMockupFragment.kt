@@ -11,12 +11,14 @@ import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentSignedInMockupBinding
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class SignedInMockupFragment : Fragment() {
 
     companion object {
-        const val TAG = "SignedInMockupFragment"
+        const val TAG = "UBB-SignedInMockupFragment"
     }
 
     private val authenticationViewModel: AuthenticationViewModel by activityViewModels()

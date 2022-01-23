@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 class WelcomeFragment : Fragment() {
 
     companion object {
-        const val TAG = "WelcomeFragment"
+        const val TAG = "UBB-WelcomeFragment"
     }
 
     private var _binding: FragmentWelcomeBinding? = null

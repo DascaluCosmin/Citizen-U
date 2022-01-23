@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 class ResetPasswordDialogFragment : DialogFragment() {
 
     companion object {
-        const val TAG = "ResetPasswordDialogFragment"
+        const val TAG = "UBB-ResetPasswordDialogFragment"
     }
 
     private lateinit var binding: FragmentDialogResetPasswordBinding

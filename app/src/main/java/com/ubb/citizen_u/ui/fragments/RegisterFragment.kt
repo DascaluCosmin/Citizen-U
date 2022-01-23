@@ -23,10 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     companion object {
-        private const val TAG = "RegisterFragment"
+        private const val TAG = "UBB-RegisterFragment"
     }
-
-    private val authenticationViewModel: AuthenticationViewModel by activityViewModels()
 
     private var _binding: FragmentRegisterBinding? = null
 

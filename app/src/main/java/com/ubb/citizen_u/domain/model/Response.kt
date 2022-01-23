@@ -2,8 +2,6 @@ package com.ubb.citizen_u.domain.model
 
 sealed class Response<out T> {
 
-    object Initial : Response<Nothing>()
-
     object Loading : Response<Nothing>() {
         override fun toString(): String {
             return "Loading"

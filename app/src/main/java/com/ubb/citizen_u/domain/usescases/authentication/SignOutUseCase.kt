@@ -2,7 +2,7 @@ package com.ubb.citizen_u.domain.usescases.authentication
 
 import com.ubb.citizen_u.data.repositories.AuthenticationRepository
 
-class SignOut(
+class SignOutUseCase(
     private val repository: AuthenticationRepository
 ) {
 

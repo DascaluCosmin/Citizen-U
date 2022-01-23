@@ -6,7 +6,7 @@ import com.ubb.citizen_u.domain.model.Response
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class SignIn @Inject constructor(
+class SignInUseCase @Inject constructor(
     private val authenticationRepository: AuthenticationRepository
 ) {
 
