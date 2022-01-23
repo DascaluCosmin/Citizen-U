@@ -11,4 +11,6 @@ interface AuthenticationRepository {
     suspend fun signOut()
 
     suspend fun getCurrentUser(): Flow<FirebaseUser?>
+
+    suspend fun sendEmailResetUserPassword(email: String): Flow<Boolean>
 }

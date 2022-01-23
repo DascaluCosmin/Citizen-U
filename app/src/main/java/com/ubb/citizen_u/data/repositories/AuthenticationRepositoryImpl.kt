@@ -40,4 +40,14 @@ class AuthenticationRepositoryImpl @Inject constructor(
         flow {
             emit(firebaseAuth.currentUser)
         }
+
+    override suspend fun sendEmailResetUserPassword(email: String) =
+        flow {
+            try {
+                firebaseAuth.sendPasswordResetEmail(email)
+                emit(true)
+            } catch (exception: Exception) {
+                emit(false)
+            }
+        }
 }

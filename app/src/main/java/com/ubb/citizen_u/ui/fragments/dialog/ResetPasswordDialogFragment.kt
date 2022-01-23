@@ -5,27 +5,34 @@ import android.app.Dialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.google.firebase.auth.FirebaseAuth
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentDialogResetPasswordBinding
+import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.util.AuthenticationConstants
 import com.ubb.citizen_u.util.ValidationConstants
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class ResetPasswordDialogFragment : DialogFragment() {
-
-    private lateinit var binding: FragmentDialogResetPasswordBinding
-
-    @Inject
-    lateinit var firebaseAuth: FirebaseAuth
 
     companion object {
         const val TAG = "ResetPasswordDialogFragment"
     }
+
+    private lateinit var binding: FragmentDialogResetPasswordBinding
+
+    private val authenticationViewModel: AuthenticationViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = activity?.let {
@@ -60,23 +67,7 @@ class ResetPasswordDialogFragment : DialogFragment() {
                 Toast.LENGTH_SHORT
             ).show()
         } else {
-            firebaseAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(
-                            requireContext(),
-                            AuthenticationConstants.SUCCESSFUL_RESET_PASSWORD_EMAIL_SENT,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "${AuthenticationConstants.FAILED_RESET_PASSWORD_EMAIL_NOT_SENT} " +
-                                    "${task.exception?.message}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
+            authenticationViewModel.sendEmailResetUserPassword(email)
         }
     }
 }

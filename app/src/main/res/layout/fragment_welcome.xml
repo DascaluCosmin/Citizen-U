@@ -67,7 +67,7 @@
             android:id="@+id/sign_in_button"
             android:layout_width="@dimen/width_views"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> welcomeFragment.successfulSignIn()}"
+            android:onClick="@{() -> welcomeFragment.signIn()}"
             android:text="@string/welcome_sign_in_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
