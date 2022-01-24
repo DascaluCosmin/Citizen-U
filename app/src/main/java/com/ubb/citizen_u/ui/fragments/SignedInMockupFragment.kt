@@ -62,28 +62,11 @@ class SignedInMockupFragment : Fragment() {
                 launch { collectCitizenState() }
             }
         }
+    }
 
+    override fun onStart() {
+        super.onStart()
         citizenViewModel.getCitizen(args.connectedUserId)
-
-//        val currentUser = firebaseAuth.currentUser
-//        var citizen: Citizen?
-//        firestore.collection(USERS_COL)
-//            .document(currentUser?.uid ?: UNDEFINED_DOC)
-//            .get()
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    citizen = task.result?.toObject(Citizen::class.java)
-//                    if (citizen != null) {
-//                        binding.welcomeTextview.text =
-//                            getString(
-//                                R.string.signed_in_mockup_your_account_textview_params,
-//                                citizen?.firstName
-//                            )
-//                    }
-//                } else {
-//                    Log.e(TAG, "Error at getting the user ${currentUser?.uid}: ${task.exception}")
-//                }
-//            }
     }
 
     private suspend fun collectCitizenState() {

@@ -8,6 +8,7 @@
     <string name="generic_password_hint">Password</string>
     <string name="generic_firstname_hint">First Name</string>
     <string name="generic_lastname_hint">Last Name</string>
+    <string name="date_separator_label">-</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label">Welcome</string>

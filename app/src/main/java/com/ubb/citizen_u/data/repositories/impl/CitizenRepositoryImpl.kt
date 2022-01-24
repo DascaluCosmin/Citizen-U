@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
+
 class CitizenRepositoryImpl @Inject constructor(
     private val usersRef: CollectionReference,
 ) : CitizenRepository {
@@ -18,8 +19,8 @@ class CitizenRepositoryImpl @Inject constructor(
         flow {
             try {
                 emit(Response.Loading)
-                val docSnapshot = usersRef.document(userId).get().await()
-                val citizen = docSnapshot.toObject(Citizen::class.java)
+                val citizenSnapshot = usersRef.document(userId).get().await()
+                val citizen = citizenSnapshot.toObject(Citizen::class.java)
                 emit(Response.Success(citizen))
             } catch (exception: Exception) {
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))

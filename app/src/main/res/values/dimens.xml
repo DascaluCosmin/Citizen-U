@@ -4,6 +4,7 @@
     <dimen name="generic_margin_between_element">16dp</dimen>
     <dimen name="generic_margin">16dp</dimen>
     <dimen name="width_views">280dp</dimen>
+    <dimen name="generic_margin_between_dates_separator">8dp</dimen>
 
     <!-- Media -->
     <dimen name="logo_width">120dp</dimen>

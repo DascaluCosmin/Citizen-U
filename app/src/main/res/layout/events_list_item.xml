@@ -22,15 +22,54 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/event_name_item_textview"
-            style="?attr/textAppearanceHeadline5"
+            android:id="@+id/event_item_title"
+            style="?attr/textAppearanceHeadline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/events_list_margin_between_items"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/event_item_image"
             app:layout_constraintTop_toBottomOf="@id/event_item_image"
-            tools:text="@tools:sample/cities" />
+            tools:text="Untold" />
+
+        <TextView
+            android:id="@+id/event_item_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/event_item_image"
+            app:layout_constraintTop_toBottomOf="@id/event_item_title"
+            tools:text="Cluj-Arena" />
+
+
+        <TextView
+            android:id="@+id/event_item_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/generic_margin_between_dates_separator"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/date_separator_label"
+            app:layout_constraintEnd_toStartOf="@id/date_separator_label"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <TextView
+            android:id="@+id/date_separator_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/generic_margin_between_dates_separator"
+            android:text="@string/date_separator_label"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/event_item_end_date"
+            app:layout_constraintEnd_toStartOf="@id/event_item_end_date" />
+
+        <TextView
+            android:id="@+id/event_item_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/event_item_address"
+            app:layout_constraintEnd_toEndOf="@id/event_item_image"
+            tools:text="@tools:sample/date/ddmmyy" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
