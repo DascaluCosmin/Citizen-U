@@ -29,6 +29,7 @@ object AuthenticationConstants {
 object DatabaseConstants {
     const val USERS_COL = "users"
     const val EVENTS_COL = "events"
+    const val EVENTS_PHOTOS_COL = "photos"
     const val UNDEFINED_DOC = "undefined"
 }
 

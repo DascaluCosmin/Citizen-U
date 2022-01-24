@@ -56,6 +56,12 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0' // For repeatOnLifecycle
 
+    // region Glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    // endregion
+
     // region Firebase
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:29.0.1')
@@ -72,6 +78,8 @@ dependencies {
 
     // Firebase Storage
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
+
+    implementation 'com.firebaseui:firebase-ui-storage:3.2.1' // For Firebase Storage + Glide
 
     // endregion
 

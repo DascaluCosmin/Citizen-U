@@ -1,6 +1,7 @@
 package com.ubb.citizen_u.di
 
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
 import com.ubb.citizen_u.data.repositories.CitizenRepository
 import com.ubb.citizen_u.data.repositories.impl.CitizenRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.citizen.CitizenUseCases
@@ -32,4 +33,10 @@ object CitizenModule {
         CitizenUseCases(
             getCitizenUseCase = GetCitizenUseCase(citizenRepository)
         )
+
+    @Provides
+    @Singleton
+    @Named(USERS_COL)
+    fun providesUsersRef(firebaseFirestore: FirebaseFirestore) =
+        firebaseFirestore.collection(USERS_COL)
 }
