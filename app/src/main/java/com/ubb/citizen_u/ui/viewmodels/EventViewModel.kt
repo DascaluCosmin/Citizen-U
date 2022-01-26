@@ -9,7 +9,6 @@ import com.ubb.citizen_u.domain.usescases.event.EventUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collect
@@ -31,12 +30,11 @@ class EventViewModel @Inject constructor(
     )
     val getAllEventsState: SharedFlow<Response<List<Event?>>> get() = _getAllEventsState
 
-    fun getAllEvents() {
-        Log.d(TAG, "getAllEvents: Getting all events...")
+    fun getAllEventsOrderedByDate() {
+        Log.d(TAG, "getAllEventsOrderedByDate: Getting all events ordered by date...")
         viewModelScope.launch(Dispatchers.IO) {
-            eventUseCases.getAllEventsUseCase().collect {
+            eventUseCases.getAllEventsOrderedByDateUseCase().collect {
                 _getAllEventsState.tryEmit(it)
-                delay(1000L)
             }
         }
     }

@@ -8,6 +8,7 @@ import com.ubb.citizen_u.data.repositories.EventRepository
 import com.ubb.citizen_u.data.repositories.impl.EventPhotoRepositoryImpl
 import com.ubb.citizen_u.data.repositories.impl.EventRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.event.EventUseCases
+import com.ubb.citizen_u.domain.usescases.event.GetAllEventsOrderedByDateUseCase
 import com.ubb.citizen_u.domain.usescases.event.GetAllEventsUseCase
 import com.ubb.citizen_u.util.DatabaseConstants.EVENTS_COL
 import dagger.Module
@@ -43,7 +44,8 @@ object EventModule {
     @Singleton
     fun providesEventUseCases(eventRepository: EventRepository): EventUseCases =
         EventUseCases(
-            getAllEventsUseCase = GetAllEventsUseCase(eventRepository)
+            getAllEventsUseCase = GetAllEventsUseCase(eventRepository),
+            getAllEventsOrderedByDateUseCase = GetAllEventsOrderedByDateUseCase(eventRepository)
         )
 
     @Provides

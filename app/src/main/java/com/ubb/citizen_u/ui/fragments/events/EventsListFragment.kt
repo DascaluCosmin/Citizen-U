@@ -56,7 +56,7 @@ class EventsListFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        eventViewModel.getAllEvents()
+        eventViewModel.getAllEventsOrderedByDate()
     }
 
     private suspend fun collectGetAllEventsState() {

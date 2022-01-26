@@ -24,20 +24,37 @@ class EventRepositoryImpl @Inject constructor(
             try {
                 emit(Response.Loading)
 
-                val eventsSnapshot = eventsRef.get().await()
-                val events = eventsSnapshot.documents.map {
-                    it.toObject(Event::class.java)?.apply {
-                        photos = getEventPhotos(it).apply {
-                            setFirstEventPhotoStorageReference(it, this)
-                        }
-                    }
-                }
-
+                val events = getAllEventsList()
                 emit(Response.Success(events))
             } catch (exception: Exception) {
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
             }
         }
+
+    override suspend fun getAllEventsOrderedByDate(): Flow<Response<List<Event?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val sortedEvents = getAllEventsList().sortedBy {
+                    it?.startDate
+                }
+                emit(Response.Success(sortedEvents))
+            } catch (exception: Exception) {
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    private suspend fun getAllEventsList(): List<Event?> {
+        val eventsSnapshot = eventsRef.get().await()
+        return eventsSnapshot.documents.map {
+            it.toObject(Event::class.java)?.apply {
+                photos = getEventPhotos(it).apply {
+                    setFirstEventPhotoStorageReference(it, this)
+                }
+            }
+        }
+    }
 
     private suspend fun setFirstEventPhotoStorageReference(
         eventsDocSnapshot: DocumentSnapshot, eventPhotos: MutableList<EventPhoto?>
