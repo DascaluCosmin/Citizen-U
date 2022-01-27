@@ -2,7 +2,9 @@
 
     <!-- Generics -->
     <dimen name="generic_margin_between_element">16dp</dimen>
+    <dimen name="generic_margin">16dp</dimen>
     <dimen name="width_views">280dp</dimen>
+    <dimen name="generic_margin_between_dates_separator">8dp</dimen>
 
     <!-- Media -->
     <dimen name="logo_width">120dp</dimen>
@@ -10,4 +12,12 @@
 
     <!-- Multistep Register -->
     <dimen name="bottom_margin_principal_textview">300dp</dimen>
+    <dimen name="principal_text_view_margin_top">240dp</dimen>
+    <dimen name="principal_text_view_half_margin_top">120dp</dimen>
+    <dimen name="principal_text_view_quarter_margin_top">60dp</dimen>
+    <dimen name="cardview_margin">8dp</dimen>
+
+    <!-- Events -->
+    <dimen name="events_list_image_height">200dp</dimen>
+    <dimen name="events_list_margin_between_items">8dp</dimen>
 </resources>

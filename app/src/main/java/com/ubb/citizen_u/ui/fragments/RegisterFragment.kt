@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.fragments
+package com.ubb.citizen_u.ui.fragments
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -8,18 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentRegisterBinding
+import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.util.ValidationConstants
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * lateinit works with only non-null var, lateinit works only with non-primitives
  * var needs to be initialized, regardless of nullable or non-nullable
  */
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     companion object {
-        private const val TAG = "RegisterFragment"
+        private const val TAG = "UBB-RegisterFragment"
     }
 
     private var _binding: FragmentRegisterBinding? = null
@@ -72,8 +76,8 @@ class RegisterFragment : Fragment() {
                     binding.passwordTextfield.editText?.text.toString().trim { it <= ' ' }
                 val action =
                     RegisterFragmentDirections.actionRegisterFragmentToIdentityInformationFragment(
-                        email,
-                        password
+                        email = email,
+                        password = password
                     )
                 findNavController().navigate(action)
             }

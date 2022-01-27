@@ -8,6 +8,7 @@
     <string name="generic_password_hint">Password</string>
     <string name="generic_firstname_hint">First Name</string>
     <string name="generic_lastname_hint">Last Name</string>
+    <string name="date_separator_label">-</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label">Welcome</string>
@@ -35,5 +36,11 @@
     <string name="signed_in_mockup_your_account_textview_tools">Welcome, Cosmin</string>
     <string name="signed_in_mockup_logout_button">Sign Out</string>
     <string name="generic_undefined_value">undefined</string>
+    <string name="signed_in_mockup_view_events_button">View Events</string>
+
+    <!-- Events -->
+    <!-- TODO: Decide whether or not to use the principal textview, since we have the label in the App Bar -->
+    <string name="events_list_fragment_label">Events</string>
+    <string name="events_list_principal_textview">Upcoming Events</string>
 
 </resources>

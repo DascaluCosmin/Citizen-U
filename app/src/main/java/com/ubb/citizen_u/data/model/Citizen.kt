@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.model
+package com.ubb.citizen_u.data.model
 
 import com.ubb.citizen_u.util.UNDEFINED
 

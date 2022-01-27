@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_identity_information"
-    tools:context=".fragments.multistep.registration.IdentityInformationFragment">
+    tools:context=".ui.fragments.multistep.registration.IdentityInformationFragment">
 
     <data>
 
         <variable
             name="identityInformationFragment"
-            type="com.ubb.citizen_u.fragments.multistep.registration.IdentityInformationFragment" />
+            type="com.ubb.citizen_u.ui.fragments.multistep.registration.IdentityInformationFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

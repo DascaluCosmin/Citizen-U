@@ -4,7 +4,7 @@
 
     <!-- usesCleartextTraffic is set to true in order to allow communication with the Emulator -->
     <application
-
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:theme="@style/Theme.CitizenU"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.CitizenU.NoActionBar">
