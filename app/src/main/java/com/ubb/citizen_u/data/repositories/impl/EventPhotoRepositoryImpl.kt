@@ -2,7 +2,6 @@ package com.ubb.citizen_u.data.repositories.impl
 
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.ubb.citizen_u.data.model.events.EventPhoto
 import com.ubb.citizen_u.data.repositories.EventPhotoRepository
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -23,11 +22,10 @@ class EventPhotoRepositoryImpl @Inject constructor(
         return firebaseStorage.reference.child(pathToEventPhoto)
     }
 
-    override suspend fun getAllEventPhotos(eventId: String): List<EventPhoto> {
+    override suspend fun getAllEventPhotos(eventId: String): List<StorageReference> {
         val pathToEventPhotosFolder = "$FIREBASE_STORAGE_EVENTS_IMAGES/$eventId/"
-        val result = firebaseStorage.reference.child(FIREBASE_STORAGE_EVENTS_IMAGES)
+        val result = firebaseStorage.reference.child(pathToEventPhotosFolder)
             .listAll().await()
-
-        return listOf(EventPhoto())
+        return result.items
     }
 }

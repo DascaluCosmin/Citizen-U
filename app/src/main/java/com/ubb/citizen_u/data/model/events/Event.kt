@@ -10,6 +10,6 @@ data class Event(
     var location: String? = null,
     var startDate: Date? = null,
     var endDate: Date? = null,
-    var photos: MutableList<EventPhoto?>? = mutableListOf()
+    var photos: MutableList<EventPhoto?> = mutableListOf()
 ) {
 }

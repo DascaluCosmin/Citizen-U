@@ -30,11 +30,26 @@ class EventViewModel @Inject constructor(
     )
     val getAllEventsState: SharedFlow<Response<List<Event?>>> get() = _getAllEventsState
 
+    private val _getEventDetailsState = MutableSharedFlow<Response<Event?>>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val getEventDetailsState: SharedFlow<Response<Event?>> = _getEventDetailsState
+
     fun getAllEventsOrderedByDate() {
         Log.d(TAG, "getAllEventsOrderedByDate: Getting all events ordered by date...")
         viewModelScope.launch(Dispatchers.IO) {
             eventUseCases.getAllEventsOrderedByDateUseCase().collect {
                 _getAllEventsState.tryEmit(it)
+            }
+        }
+    }
+
+    fun getEventDetails(eventId: String) {
+        Log.d(TAG, "getEventDetails: Getting details for event $eventId")
+        viewModelScope.launch(Dispatchers.IO) {
+            eventUseCases.getEventDetailsUseCase(eventId).collect {
+                _getEventDetailsState.tryEmit(it)
             }
         }
     }

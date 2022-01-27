@@ -130,7 +130,7 @@ class SignedInMockupFragment : Fragment() {
      * - The apps closes unexpectedly.
      *      - If you call signOut on the onStop callback, watch for Configuration Changes, e.g. Device Rotation
      * - The User uses the Home button. Question: what happens then?
-     * - The User presses the Back button.
+     * - The User presses the Back button. - DONE
      */
     fun signOut() {
         authenticationViewModel.signOut()

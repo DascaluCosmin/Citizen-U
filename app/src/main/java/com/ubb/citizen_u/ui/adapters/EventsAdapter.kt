@@ -10,7 +10,7 @@ import com.ubb.citizen_u.databinding.EventsListItemBinding
 import com.ubb.citizen_u.ui.adapters.viewholders.EventViewHolder
 
 class EventsAdapter(
-
+    private val eventsDetailsOnClickCallBack: (Event) -> Unit
 ) : ListAdapter<Event, RecyclerView.ViewHolder>(EventsDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return EventViewHolder(
@@ -18,7 +18,8 @@ class EventsAdapter(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            eventsDetailsOnClickCallBack = eventsDetailsOnClickCallBack
         )
     }
 
