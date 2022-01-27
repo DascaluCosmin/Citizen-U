@@ -7,7 +7,10 @@ import com.ubb.citizen_u.data.model.events.EventPhoto
 
 object ImageFiller {
 
-    fun fill(context: Context, imageView: ImageView, eventPhoto: EventPhoto) {
+    fun fill(context: Context, imageView: ImageView, eventPhoto: EventPhoto?) {
+        if (eventPhoto == null) {
+            return
+        }
         val storageReference = eventPhoto.storageReference
 
         Glide.with(context)

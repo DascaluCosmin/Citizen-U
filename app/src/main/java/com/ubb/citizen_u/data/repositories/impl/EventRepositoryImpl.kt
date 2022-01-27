@@ -45,6 +45,29 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
+    override suspend fun getEventDetails(eventId: String): Flow<Response<Event?>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val eventSnapshot = eventsRef.document(eventId).get().await()
+                val event = eventSnapshot.toObject(Event::class.java)
+
+                event?.photos = getEventPhotos(eventSnapshot)
+                eventPhotoRepository.getAllEventPhotos(eventId).forEach { storageReference ->
+                    event?.photos?.forEach { photo ->
+                        if (photo != null && storageReference.path.contains(photo.id)) {
+                            photo.storageReference = storageReference
+                        }
+                    }
+                }
+
+                emit(Response.Success(event))
+            } catch (exception: Exception) {
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
     private suspend fun getAllEventsList(): List<Event?> {
         val eventsSnapshot = eventsRef.get().await()
         return eventsSnapshot.documents.map {
@@ -56,6 +79,7 @@ class EventRepositoryImpl @Inject constructor(
         }
     }
 
+    // TODO: These two have to be refactored and moved to EventPhotoRepository
     private suspend fun setFirstEventPhotoStorageReference(
         eventsDocSnapshot: DocumentSnapshot, eventPhotos: MutableList<EventPhoto?>
     ) {

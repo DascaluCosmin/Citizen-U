@@ -7,5 +7,5 @@ interface EventPhotoRepository {
 
     suspend fun getMainEventPhotoStorageReference(eventId: String, photoId: String): StorageReference
 
-    suspend fun getAllEventPhotos(eventId: String): List<EventPhoto>
+    suspend fun getAllEventPhotos(eventId: String): List<StorageReference>
 }

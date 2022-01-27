@@ -19,5 +19,10 @@
 
     <!-- Events -->
     <dimen name="events_list_image_height">200dp</dimen>
+    <dimen name="event_details_image_height">250dp</dimen>
     <dimen name="events_list_margin_between_items">8dp</dimen>
+    <dimen name="event_date_dimension">20sp</dimen>
+    <dimen name="event_text_dimension">20sp</dimen>
+    <dimen name="event_details_icons_dimension">32dp</dimen>
+    <dimen name="events_margin_between_imageview_content">8dp</dimen>
 </resources>

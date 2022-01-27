@@ -9,4 +9,6 @@ interface EventRepository {
     suspend fun getAllEvents(): Flow<Response<List<Event?>>>
 
     suspend fun getAllEventsOrderedByDate(): Flow<Response<List<Event?>>>
+
+    suspend fun getEventDetails(eventId: String): Flow<Response<Event?>>
 }

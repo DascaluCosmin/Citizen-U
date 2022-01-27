@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentEventsListBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.adapters.EventsAdapter
@@ -28,7 +29,8 @@ class EventsListFragment : Fragment() {
     private var _binding: FragmentEventsListBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter = EventsAdapter()
+    private lateinit var adapter: EventsAdapter
+
     private val eventViewModel: EventViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -41,6 +43,14 @@ class EventsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapter = EventsAdapter {
+            val action =
+                EventsListFragmentDirections.actionEventsListFragmentToEventDetailsFragment(
+                    eventId = it.id
+                )
+            findNavController().navigate(action)
+        }
 
         binding.apply {
             eventsListFragment = this@EventsListFragment

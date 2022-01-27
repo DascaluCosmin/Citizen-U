@@ -7,7 +7,8 @@ import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.glide.ImageFiller
 
 class EventViewHolder(
-    private val eventsListItemBinding: EventsListItemBinding
+    private val eventsListItemBinding: EventsListItemBinding,
+    private val eventsDetailsOnClickCallBack: (Event) -> Unit
 ) : RecyclerView.ViewHolder(eventsListItemBinding.root) {
 
     fun bind(event: Event) {
@@ -22,12 +23,16 @@ class EventViewHolder(
                 eventItemEndDate.text = DateFormatter.toEventFormat(it)
             }
 
-            event.photos?.let { eventPhotos ->
-                if (eventPhotos.size > 0) {
+            event.photos.let { eventPhotos ->
+                if (eventPhotos.isNotEmpty()) {
                     eventPhotos[0]?.let { eventPhoto ->
                         ImageFiller.fill(itemView.context, eventItemImage, eventPhoto)
                     }
                 }
+            }
+
+            eventCard.setOnClickListener {
+                eventsDetailsOnClickCallBack(event)
             }
         }
     }
