@@ -3,6 +3,7 @@ package com.ubb.citizen_u.data.repositories.impl
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.ubb.citizen_u.data.model.events.Event
+import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.data.model.events.EventPhoto
 import com.ubb.citizen_u.data.repositories.EventPhotoRepository
 import com.ubb.citizen_u.data.repositories.EventRepository
@@ -19,7 +20,7 @@ class EventRepositoryImpl @Inject constructor(
     private val eventPhotoRepository: EventPhotoRepository
 ) : EventRepository {
 
-    override suspend fun getAllEvents(): Flow<Response<List<Event?>>> =
+    override suspend fun getAllPublicEvents(): Flow<Response<List<PublicEvent?>>> =
         flow {
             try {
                 emit(Response.Loading)
@@ -31,7 +32,7 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getAllEventsOrderedByDate(): Flow<Response<List<Event?>>> =
+    override suspend fun getAllEventsOrderedByDate(): Flow<Response<List<PublicEvent?>>> =
         flow {
             try {
                 emit(Response.Loading)
@@ -45,13 +46,13 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getEventDetails(eventId: String): Flow<Response<Event?>> =
+    override suspend fun getPublicEventDetails(eventId: String): Flow<Response<PublicEvent?>> =
         flow {
             try {
                 emit(Response.Loading)
 
                 val eventSnapshot = eventsRef.document(eventId).get().await()
-                val event = eventSnapshot.toObject(Event::class.java)
+                val event = eventSnapshot.toObject(PublicEvent::class.java)
 
                 event?.photos = getEventPhotos(eventSnapshot)
                 eventPhotoRepository.getAllEventPhotos(eventId).forEach { storageReference ->
@@ -68,10 +69,10 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
-    private suspend fun getAllEventsList(): List<Event?> {
+    private suspend fun getAllEventsList(): List<PublicEvent?> {
         val eventsSnapshot = eventsRef.get().await()
         return eventsSnapshot.documents.map {
-            it.toObject(Event::class.java)?.apply {
+            it.toObject(PublicEvent::class.java)?.apply {
                 photos = getEventPhotos(it).apply {
                     setFirstEventPhotoStorageReference(it, this)
                 }

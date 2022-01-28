@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.di
+package com.ubb.citizen_u.util.di
 
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -8,9 +8,9 @@ import com.ubb.citizen_u.data.repositories.EventRepository
 import com.ubb.citizen_u.data.repositories.impl.EventPhotoRepositoryImpl
 import com.ubb.citizen_u.data.repositories.impl.EventRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.event.EventUseCases
-import com.ubb.citizen_u.domain.usescases.event.GetAllEventsOrderedByDateUseCase
-import com.ubb.citizen_u.domain.usescases.event.GetAllEventsUseCase
-import com.ubb.citizen_u.domain.usescases.event.GetEventDetailsUseCase
+import com.ubb.citizen_u.domain.usescases.event.GetAllPublicEventsOrderedByDateUseCase
+import com.ubb.citizen_u.domain.usescases.event.GetAllPublicEventsUseCase
+import com.ubb.citizen_u.domain.usescases.event.GetPublicEventDetailsUseCase
 import com.ubb.citizen_u.util.DatabaseConstants.EVENTS_COL
 import dagger.Module
 import dagger.Provides
@@ -45,9 +45,9 @@ object EventModule {
     @Singleton
     fun providesEventUseCases(eventRepository: EventRepository): EventUseCases =
         EventUseCases(
-            getAllEventsUseCase = GetAllEventsUseCase(eventRepository),
-            getAllEventsOrderedByDateUseCase = GetAllEventsOrderedByDateUseCase(eventRepository),
-            getEventDetailsUseCase = GetEventDetailsUseCase(eventRepository)
+            getAllPublicPublicEventsUseCase = GetAllPublicEventsUseCase(eventRepository),
+            getAllPublicPublicEventsOrderedByDateUseCase = GetAllPublicEventsOrderedByDateUseCase(eventRepository),
+            getPublicEventDetailsUseCase = GetPublicEventDetailsUseCase(eventRepository)
         )
 
     @Provides

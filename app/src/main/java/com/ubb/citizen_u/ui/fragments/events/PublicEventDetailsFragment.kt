@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.data.model.events.Event
 import com.ubb.citizen_u.data.model.events.EventPhoto
-import com.ubb.citizen_u.databinding.FragmentEventDetailsBinding
+import com.ubb.citizen_u.databinding.FragmentPublicEventDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.fragments.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
@@ -24,24 +24,24 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-class EventDetailsFragment : Fragment() {
+class PublicEventDetailsFragment : Fragment() {
 
     companion object {
-        private const val TAG = "UBB-EventDetailsFragment"
+        private const val TAG = "UBB-PublicEventDetailsFragment"
     }
 
-    private var _binding: FragmentEventDetailsBinding? = null
+    private var _binding: FragmentPublicEventDetailsBinding? = null
     private val binding get() = _binding!!
 
     private val eventViewModel: EventViewModel by activityViewModels()
 
-    private val args: EventDetailsFragmentArgs by navArgs()
+    private val args: PublicEventDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEventDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentPublicEventDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -50,14 +50,14 @@ class EventDetailsFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch { collectEventDetailsState() }
+                launch { collectGetPublicEventDetailsState() }
             }
         }
     }
 
-    private suspend fun collectEventDetailsState() {
-        eventViewModel.getEventDetailsState.collect {
-            Log.d(TAG, "onViewCreated: Collecting response $it")
+    private suspend fun collectGetPublicEventDetailsState() {
+        eventViewModel.getPublicEventDetailsState.collect {
+            Log.d(TAG, "collectGetPublicEventDetailsState: Collecting response $it")
             when (it) {
                 is Response.Error -> {
                     binding.mainProgressbar.visibility = View.GONE
@@ -106,6 +106,6 @@ class EventDetailsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        eventViewModel.getEventDetails(args.eventId)
+        eventViewModel.getPublicEventDetails(args.eventId)
     }
 }

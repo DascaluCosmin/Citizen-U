@@ -11,7 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.ubb.citizen_u.databinding.FragmentEventsListBinding
+import com.ubb.citizen_u.databinding.FragmentPublicEventsListBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.adapters.EventsAdapter
 import com.ubb.citizen_u.ui.fragments.toastErrorMessage
@@ -20,13 +20,13 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
-class EventsListFragment : Fragment() {
+class PublicEventsListFragment : Fragment() {
 
     companion object {
-        private const val TAG = "UBB-EventsListFragment"
+        private const val TAG = "UBB-PublicEventsListFragment"
     }
 
-    private var _binding: FragmentEventsListBinding? = null
+    private var _binding: FragmentPublicEventsListBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var adapter: EventsAdapter
@@ -37,7 +37,7 @@ class EventsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentEventsListBinding.inflate(inflater, container, false)
+        _binding = FragmentPublicEventsListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -46,20 +46,20 @@ class EventsListFragment : Fragment() {
 
         adapter = EventsAdapter {
             val action =
-                EventsListFragmentDirections.actionEventsListFragmentToEventDetailsFragment(
+                PublicEventsListFragmentDirections.actionEventsListFragmentToEventDetailsFragment(
                     eventId = it.id
                 )
             findNavController().navigate(action)
         }
 
         binding.apply {
-            eventsListFragment = this@EventsListFragment
+            eventsListFragment = this@PublicEventsListFragment
             eventsRecyclerview.adapter = adapter
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch { collectGetAllEventsState() }
+                launch { collectGetAllPublicEventsState() }
             }
         }
     }
@@ -69,17 +69,17 @@ class EventsListFragment : Fragment() {
         eventViewModel.getAllEventsOrderedByDate()
     }
 
-    private suspend fun collectGetAllEventsState() {
+    private suspend fun collectGetAllPublicEventsState() {
         eventViewModel.getAllEventsState.collect {
             when (it) {
                 is Response.Loading -> {
-                    Log.d(TAG, "collectGetAllEventsState: Collecting response $it")
+                    Log.d(TAG, "collectGetAllPublicEventsState: Collecting response $it")
                     binding.mainProgressbar.visibility = View.VISIBLE
                 }
                 is Response.Error -> {
                     Log.d(
                         TAG,
-                        "collectGetAllEventsState: Collecting response $it. An error has occurred ${it.message}"
+                        "collectGetAllPublicEventsState: Collecting response $it. An error has occurred ${it.message}"
                     )
                     binding.mainProgressbar.visibility = View.GONE
                     toastErrorMessage()
@@ -88,7 +88,7 @@ class EventsListFragment : Fragment() {
                     binding.mainProgressbar.visibility = View.GONE
                     Log.d(
                         TAG,
-                        "collectGetAllEventsState: Successfully collected ${it.data.size} events "
+                        "collectGetAllPublicEventsState: Successfully collected ${it.data.size} public events "
                     )
                     adapter.submitList(it.data)
                 }

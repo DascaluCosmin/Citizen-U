@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ubb.citizen_u.data.model.events.Event
+import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.databinding.EventsListItemBinding
 import com.ubb.citizen_u.ui.adapters.viewholders.EventViewHolder
 
 class EventsAdapter(
-    private val eventsDetailsOnClickCallBack: (Event) -> Unit
-) : ListAdapter<Event, RecyclerView.ViewHolder>(EventsDiffCallBack()) {
+    private val eventsDetailsOnClickCallBack: (PublicEvent) -> Unit
+) : ListAdapter<PublicEvent, RecyclerView.ViewHolder>(EventsDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return EventViewHolder(
             eventsListItemBinding = EventsListItemBinding.inflate(
@@ -29,13 +30,13 @@ class EventsAdapter(
     }
 }
 
-private class EventsDiffCallBack : DiffUtil.ItemCallback<Event>() {
+private class EventsDiffCallBack : DiffUtil.ItemCallback<PublicEvent>() {
 
-    override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {
+    override fun areItemsTheSame(oldItem: PublicEvent, newItem: PublicEvent): Boolean {
         return oldItem.title == newItem.title
     }
 
-    override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {
+    override fun areContentsTheSame(oldItem: PublicEvent, newItem: PublicEvent): Boolean {
         return oldItem == newItem
     }
 

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_events_list"
-    tools:context=".ui.fragments.events.EventsListFragment">
+    tools:context=".ui.fragments.events.PublicEventsListFragment">
 
     <data>
 
         <variable
             name="eventsListFragment"
-            type="com.ubb.citizen_u.ui.fragments.events.EventsListFragment" />
+            type="com.ubb.citizen_u.ui.fragments.events.PublicEventsListFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

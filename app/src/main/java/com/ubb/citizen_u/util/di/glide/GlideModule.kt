@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.di.glide
+package com.ubb.citizen_u.util.di.glide
 
 import android.content.Context
 import com.bumptech.glide.Glide
