@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ubb.citizen_u.data.model.events.Event
 import com.ubb.citizen_u.data.model.events.PublicEvent
-import com.ubb.citizen_u.databinding.EventsListItemBinding
+import com.ubb.citizen_u.databinding.PublicEventsListItemBinding
 import com.ubb.citizen_u.ui.adapters.viewholders.EventViewHolder
 
 class EventsAdapter(
@@ -15,7 +14,7 @@ class EventsAdapter(
 ) : ListAdapter<PublicEvent, RecyclerView.ViewHolder>(EventsDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return EventViewHolder(
-            eventsListItemBinding = EventsListItemBinding.inflate(
+            eventsListItemBinding = PublicEventsListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

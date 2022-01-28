@@ -2,12 +2,12 @@ package com.ubb.citizen_u.ui.adapters.viewholders
 
 import androidx.recyclerview.widget.RecyclerView
 import com.ubb.citizen_u.data.model.events.PublicEvent
-import com.ubb.citizen_u.databinding.EventsListItemBinding
+import com.ubb.citizen_u.databinding.PublicEventsListItemBinding
 import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.glide.ImageFiller
 
 class EventViewHolder(
-    private val eventsListItemBinding: EventsListItemBinding,
+    private val eventsListItemBinding: PublicEventsListItemBinding,
     private val eventsDetailsOnClickCallBack: (PublicEvent) -> Unit
 ) : RecyclerView.ViewHolder(eventsListItemBinding.root) {
 
@@ -15,6 +15,7 @@ class EventViewHolder(
         eventsListItemBinding.apply {
             eventItemTitle.text = publicEvent.title
             eventItemAddress.text = publicEvent.address
+            eventItemCategory.text = publicEvent.category
 
             publicEvent.startDate?.let {
                 eventItemStartDate.text = DateFormatter.toEventFormat(it)

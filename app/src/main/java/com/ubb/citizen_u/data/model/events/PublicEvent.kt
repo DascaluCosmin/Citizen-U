@@ -6,6 +6,8 @@ import java.util.*
 abstract class Event(
     @DocumentId var id: String = "",
     var title: String? = null,
+    var category: String? = null,
+    var content: String? = null,
     var photos: MutableList<EventPhoto?> = mutableListOf()
 ) {
 
