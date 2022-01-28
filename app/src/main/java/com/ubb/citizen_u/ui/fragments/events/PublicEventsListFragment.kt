@@ -29,7 +29,7 @@ class PublicEventsListFragment : Fragment() {
     private var _binding: FragmentPublicEventsListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapterPublic: PublicEventsAdapter
+    private lateinit var adapter: PublicEventsAdapter
 
     private val eventViewModel: EventViewModel by activityViewModels()
 
@@ -44,7 +44,7 @@ class PublicEventsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapterPublic = PublicEventsAdapter {
+        adapter = PublicEventsAdapter {
             val action =
                 PublicEventsListFragmentDirections.actionEventsListFragmentToEventDetailsFragment(
                     eventId = it.id
@@ -54,7 +54,7 @@ class PublicEventsListFragment : Fragment() {
 
         binding.apply {
             eventsListFragment = this@PublicEventsListFragment
-            eventsRecyclerview.adapter = adapterPublic
+            eventsRecyclerview.adapter = adapter
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -90,7 +90,7 @@ class PublicEventsListFragment : Fragment() {
                         TAG,
                         "collectGetAllPublicEventsState: Successfully collected ${it.data.size} public events "
                     )
-                    adapterPublic.submitList(it.data)
+                    adapter.submitList(it.data)
                 }
             }
         }

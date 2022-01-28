@@ -90,9 +90,23 @@ class EventRepositoryImpl @Inject constructor(
                 val sortedCouncilMeetEvents = getAllCouncilMeetEventsList().sortedBy {
                     it?.publicationDate
                 }
+//                sortedCouncilMeetEvents.forEach {
+//                    it?.photos?.apply {
+//                        if (size > 0) {
+//                            val firstPhotoId = this[0]?.id
+//                            if (firstPhotoId != null) {
+//                                eventPhotoRepository.getMainEventPhotoStorageReference(
+//                                    it.id,
+//                                    firstPhotoId
+//                                )
+//                            }
+//                        }
+//                    }
+//                }
                 emit(Response.Success(sortedCouncilMeetEvents))
             } catch (exception: Exception) {
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+
             }
         }
 
@@ -109,10 +123,13 @@ class EventRepositoryImpl @Inject constructor(
 
     private suspend fun getAllCouncilMeetEventsList(): List<CouncilMeetEvent?> {
         val eventsSnapshot = councilMeetEventsRef.get().await()
-        val councilMeetEvents = eventsSnapshot.documents.map {
-            it.toObject(CouncilMeetEvent::class.java)
+        return eventsSnapshot.documents.map {
+            it.toObject(CouncilMeetEvent::class.java)?.apply {
+                photos = getEventPhotos(it).apply {
+                    setFirstEventPhotoStorageReference(it, this)
+                }
+            }
         }
-        return councilMeetEvents
     }
 
 

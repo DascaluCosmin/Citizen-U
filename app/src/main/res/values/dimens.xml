@@ -26,4 +26,5 @@
     <dimen name="event_details_icons_dimension">32dp</dimen>
     <dimen name="events_margin_between_imageview_content">8dp</dimen>
     <dimen name="event_item_text_dimension">16sp</dimen>
+    <dimen name="event_margin_between_title_headline">8dp</dimen>
 </resources>

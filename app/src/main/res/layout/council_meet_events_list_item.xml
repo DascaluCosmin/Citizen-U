@@ -1,7 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/event_card"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/cardview_margin">
 
-</androidx.cardview.widget.CardView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/event_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/events_list_image_height"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/event_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/generic_margin"
+            android:layout_marginTop="@dimen/generic_margin"
+            android:textSize="@dimen/event_item_text_dimension"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/event_image"
+            tools:text="The mayor's agenda" />
+
+        <TextView
+            android:id="@+id/event_publication_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/generic_margin"
+            app:layout_constraintBottom_toBottomOf="@id/event_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <TextView
+            android:id="@+id/event_title"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/generic_margin"
+            android:layout_marginTop="@dimen/events_list_margin_between_items"
+            app:layout_constraintStart_toStartOf="@id/event_category"
+            app:layout_constraintTop_toBottomOf="@id/event_category"
+            tools:text="The draft budget of the municipality for the year 2022" />
+
+        <TextView
+            android:id="@+id/event_headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/generic_margin"
+            android:layout_marginTop="@dimen/event_margin_between_title_headline"
+            android:layout_marginBottom="@dimen/generic_margin"
+            android:textColor="@color/grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/event_category"
+            app:layout_constraintTop_toBottomOf="@id/event_title"
+            tools:text="@string/event_headline_tools_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

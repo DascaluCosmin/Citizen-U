@@ -50,6 +50,10 @@ class CouncilMeetEventsListFragment : Fragment() {
             Log.d(TAG, "onViewCreated: Clicked on council meet ${it.id}")
         }
 
+        binding.apply {
+            eventsRecyclerview.adapter = adapter
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -80,6 +84,7 @@ class CouncilMeetEventsListFragment : Fragment() {
                         "collectGetAllCouncilMeetEventsState: Successfully collected ${it.data.size} council meet events"
                     )
                     binding.mainProgressbar.visibility = View.GONE
+                    adapter.submitList(it.data)
                 }
             }
         }
