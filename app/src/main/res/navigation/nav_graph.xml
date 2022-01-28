@@ -35,6 +35,9 @@
         <argument
             android:name="connectedUserId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_signedInMockupFragment_to_councilMeetEventsListFragment"
+            app:destination="@id/councilMeetEventsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -82,5 +85,10 @@
             android:name="eventId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/councilMeetEventsListFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.events.CouncilMeetEventsListFragment"
+        android:label="fragment_council_meet_events_list"
+        tools:layout="@layout/fragment_council_meet_events_list" />
 
 </navigation>

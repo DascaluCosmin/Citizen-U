@@ -3,6 +3,7 @@ package com.ubb.citizen_u.ui.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ubb.citizen_u.data.model.events.CouncilMeetEvent
 import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.event.EventUseCases
@@ -24,23 +25,38 @@ class EventViewModel @Inject constructor(
         private const val TAG = "UBB-EventViewModel"
     }
 
-    private val _getAllEventsState = MutableSharedFlow<Response<List<PublicEvent?>>>(
+    // region Public Events
+    private val _getAllPublicEventsState = MutableSharedFlow<Response<List<PublicEvent?>>>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
-    val getAllEventsState: SharedFlow<Response<List<PublicEvent?>>> get() = _getAllEventsState
+    val getAllPublicEventsState: SharedFlow<Response<List<PublicEvent?>>>
+        get() = _getAllPublicEventsState
 
-    private val _getEventDetailsState = MutableSharedFlow<Response<PublicEvent?>>(
+    private val _getPublicEventDetailsState = MutableSharedFlow<Response<PublicEvent?>>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
-    val getPublicEventDetailsState: SharedFlow<Response<PublicEvent?>> = _getEventDetailsState
+    val getPublicEventDetailsState: SharedFlow<Response<PublicEvent?>>
+        get() = _getPublicEventDetailsState
+    // endregion
 
-    fun getAllEventsOrderedByDate() {
+    // region Council Meet Events
+    private val _getAllCouncilMeetEventsState =
+        MutableSharedFlow<Response<List<CouncilMeetEvent?>>>(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val getAllCouncilMeetEventsState: SharedFlow<Response<List<CouncilMeetEvent?>>>
+        get() = _getAllCouncilMeetEventsState
+
+    // endregion
+
+    fun getAllPublicEventsOrderedByDate() {
         Log.d(TAG, "getAllEventsOrderedByDate: Getting all public events ordered by date...")
         viewModelScope.launch(Dispatchers.IO) {
-            eventUseCases.getAllPublicPublicEventsOrderedByDateUseCase().collect {
-                _getAllEventsState.tryEmit(it)
+            eventUseCases.getAllPublicEventsOrderedByDateUseCase().collect {
+                _getAllPublicEventsState.tryEmit(it)
             }
         }
     }
@@ -49,7 +65,19 @@ class EventViewModel @Inject constructor(
         Log.d(TAG, "getPublicEventDetails: Getting details for public event $eventId")
         viewModelScope.launch(Dispatchers.IO) {
             eventUseCases.getPublicEventDetailsUseCase(eventId).collect {
-                _getEventDetailsState.tryEmit(it)
+                _getPublicEventDetailsState.tryEmit(it)
+            }
+        }
+    }
+
+    fun getAllCouncilMeetEventsOrderedByDate() {
+        Log.d(
+            TAG,
+            "getAllCouncilMeetEventsOrderedByDate: Getting all council events ordered by date..."
+        )
+        viewModelScope.launch(Dispatchers.IO) {
+            eventUseCases.getAllCouncilMeetEventsOrderedByUseCase().collect {
+                _getAllCouncilMeetEventsState.tryEmit(it)
             }
         }
     }

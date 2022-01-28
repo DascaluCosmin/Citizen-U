@@ -7,36 +7,35 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.databinding.PublicEventsListItemBinding
-import com.ubb.citizen_u.ui.adapters.viewholders.EventViewHolder
+import com.ubb.citizen_u.ui.adapters.viewholders.PublicEventViewHolder
 
-class EventsAdapter(
-    private val eventsDetailsOnClickCallBack: (PublicEvent) -> Unit
+class PublicEventsAdapter(
+    private val eventDetailsOnClickCallBack: (PublicEvent) -> Unit
 ) : ListAdapter<PublicEvent, RecyclerView.ViewHolder>(EventsDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return EventViewHolder(
+        return PublicEventViewHolder(
             eventsListItemBinding = PublicEventsListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             ),
-            eventsDetailsOnClickCallBack = eventsDetailsOnClickCallBack
+            eventsDetailsOnClickCallBack = eventDetailsOnClickCallBack
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val event = getItem(position)
-        (holder as EventViewHolder).bind(event)
+        (holder as PublicEventViewHolder).bind(event)
+    }
+
+    class EventsDiffCallBack : DiffUtil.ItemCallback<PublicEvent>() {
+        override fun areItemsTheSame(oldItem: PublicEvent, newItem: PublicEvent): Boolean {
+            return oldItem.title == newItem.title
+        }
+
+        override fun areContentsTheSame(oldItem: PublicEvent, newItem: PublicEvent): Boolean {
+            return oldItem == newItem
+        }
     }
 }
 
-private class EventsDiffCallBack : DiffUtil.ItemCallback<PublicEvent>() {
-
-    override fun areItemsTheSame(oldItem: PublicEvent, newItem: PublicEvent): Boolean {
-        return oldItem.title == newItem.title
-    }
-
-    override fun areContentsTheSame(oldItem: PublicEvent, newItem: PublicEvent): Boolean {
-        return oldItem == newItem
-    }
-
-}

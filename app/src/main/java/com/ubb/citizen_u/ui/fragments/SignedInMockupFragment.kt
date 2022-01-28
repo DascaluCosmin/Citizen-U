@@ -137,8 +137,12 @@ class SignedInMockupFragment : Fragment() {
         findNavController().navigate(R.id.action_signedInMockupFragment_to_welcomeFragment)
     }
 
-    fun viewEventsList() {
+    fun viewPublicEventsList() {
         findNavController().navigate(R.id.action_signedInMockupFragment_to_eventsListFragment)
+    }
+
+    fun viewCouncilMeetEventsList() {
+        findNavController().navigate(R.id.action_signedInMockupFragment_to_councilMeetEventsListFragment)
     }
 }
 

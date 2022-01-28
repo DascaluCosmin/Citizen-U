@@ -2,9 +2,9 @@ package com.ubb.citizen_u.data.repositories.impl
 
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
-import com.ubb.citizen_u.data.model.events.Event
-import com.ubb.citizen_u.data.model.events.PublicEvent
+import com.ubb.citizen_u.data.model.events.CouncilMeetEvent
 import com.ubb.citizen_u.data.model.events.EventPhoto
+import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.data.repositories.EventPhotoRepository
 import com.ubb.citizen_u.data.repositories.EventRepository
 import com.ubb.citizen_u.domain.model.Response
@@ -16,7 +16,8 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class EventRepositoryImpl @Inject constructor(
-    private val eventsRef: CollectionReference,
+    private val publicEventsRef: CollectionReference,
+    private val councilMeetEventsRef: CollectionReference,
     private val eventPhotoRepository: EventPhotoRepository
 ) : EventRepository {
 
@@ -25,7 +26,7 @@ class EventRepositoryImpl @Inject constructor(
             try {
                 emit(Response.Loading)
 
-                val events = getAllEventsList()
+                val events = getAllPublicEventsList()
                 emit(Response.Success(events))
             } catch (exception: Exception) {
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
@@ -37,7 +38,7 @@ class EventRepositoryImpl @Inject constructor(
             try {
                 emit(Response.Loading)
 
-                val sortedEvents = getAllEventsList().sortedBy {
+                val sortedEvents = getAllPublicEventsList().sortedBy {
                     it?.startDate
                 }
                 emit(Response.Success(sortedEvents))
@@ -51,7 +52,7 @@ class EventRepositoryImpl @Inject constructor(
             try {
                 emit(Response.Loading)
 
-                val eventSnapshot = eventsRef.document(eventId).get().await()
+                val eventSnapshot = publicEventsRef.document(eventId).get().await()
                 val event = eventSnapshot.toObject(PublicEvent::class.java)
 
                 event?.photos = getEventPhotos(eventSnapshot)
@@ -69,8 +70,34 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
-    private suspend fun getAllEventsList(): List<PublicEvent?> {
-        val eventsSnapshot = eventsRef.get().await()
+    override suspend fun getAllCouncilMeetEvents(): Flow<Response<List<CouncilMeetEvent?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val councilMeetEvents = getAllCouncilMeetEventsList()
+                emit(Response.Success(councilMeetEvents))
+            } catch (exception: Exception) {
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    override suspend fun getAllCouncilMeetEventsOrderedByDate(): Flow<Response<List<CouncilMeetEvent?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val sortedCouncilMeetEvents = getAllCouncilMeetEventsList().sortedBy {
+                    it?.publicationDate
+                }
+                emit(Response.Success(sortedCouncilMeetEvents))
+            } catch (exception: Exception) {
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    private suspend fun getAllPublicEventsList(): List<PublicEvent?> {
+        val eventsSnapshot = publicEventsRef.get().await()
         return eventsSnapshot.documents.map {
             it.toObject(PublicEvent::class.java)?.apply {
                 photos = getEventPhotos(it).apply {
@@ -79,6 +106,15 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    private suspend fun getAllCouncilMeetEventsList(): List<CouncilMeetEvent?> {
+        val eventsSnapshot = councilMeetEventsRef.get().await()
+        val councilMeetEvents = eventsSnapshot.documents.map {
+            it.toObject(CouncilMeetEvent::class.java)
+        }
+        return councilMeetEvents
+    }
+
 
     // TODO: These two have to be refactored and moved to EventPhotoRepository
     private suspend fun setFirstEventPhotoStorageReference(

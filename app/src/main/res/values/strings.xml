@@ -36,7 +36,8 @@
     <string name="signed_in_mockup_your_account_textview_tools">Welcome, Cosmin</string>
     <string name="signed_in_mockup_logout_button">Sign Out</string>
     <string name="generic_undefined_value">undefined</string>
-    <string name="signed_in_mockup_view_events_button">View Events</string>
+    <string name="signed_in_mockup_view_public_events_button">View Public Events</string>
+    <string name="signed_in_mockup_view_council_meet_events_button">View Council Meet Events Briefings</string>
 
     <!-- Events -->
     <!-- TODO: Decide whether or not to use the principal textview, since we have the label in the App Bar -->

@@ -6,7 +6,7 @@ import com.ubb.citizen_u.databinding.PublicEventsListItemBinding
 import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.glide.ImageFiller
 
-class EventViewHolder(
+class PublicEventViewHolder(
     private val eventsListItemBinding: PublicEventsListItemBinding,
     private val eventsDetailsOnClickCallBack: (PublicEvent) -> Unit
 ) : RecyclerView.ViewHolder(eventsListItemBinding.root) {

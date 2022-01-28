@@ -16,7 +16,7 @@ abstract class Event(
     }
 }
 
-class PublicEvent(
+data class PublicEvent(
     var startDate: Date? = null,
     var endDate: Date? = null,
     var address: String? = null,
@@ -47,5 +47,33 @@ class PublicEvent(
 
     override fun toString(): String {
         return "${super.toString()}, Location = $location, Address = $address"
+    }
+}
+
+data class CouncilMeetEvent(
+    var publicationDate: Date? = null,
+    var headline: String? = null
+) : Event() {
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as CouncilMeetEvent
+
+        if (publicationDate != other.publicationDate) return false
+        if (headline != other.headline) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = publicationDate?.hashCode() ?: 0
+        result = 31 * result + (headline?.hashCode() ?: 0)
+        return result
+    }
+
+    override fun toString(): String {
+        return "${super.toString()}, Publication Date = $publicationDate, Headline = $headline"
     }
 }

@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentPublicEventsListBinding
 import com.ubb.citizen_u.domain.model.Response
-import com.ubb.citizen_u.ui.adapters.EventsAdapter
+import com.ubb.citizen_u.ui.adapters.PublicEventsAdapter
 import com.ubb.citizen_u.ui.fragments.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import kotlinx.coroutines.flow.collect
@@ -29,7 +29,7 @@ class PublicEventsListFragment : Fragment() {
     private var _binding: FragmentPublicEventsListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: EventsAdapter
+    private lateinit var adapterPublic: PublicEventsAdapter
 
     private val eventViewModel: EventViewModel by activityViewModels()
 
@@ -44,7 +44,7 @@ class PublicEventsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = EventsAdapter {
+        adapterPublic = PublicEventsAdapter {
             val action =
                 PublicEventsListFragmentDirections.actionEventsListFragmentToEventDetailsFragment(
                     eventId = it.id
@@ -54,7 +54,7 @@ class PublicEventsListFragment : Fragment() {
 
         binding.apply {
             eventsListFragment = this@PublicEventsListFragment
-            eventsRecyclerview.adapter = adapter
+            eventsRecyclerview.adapter = adapterPublic
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -66,11 +66,11 @@ class PublicEventsListFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        eventViewModel.getAllEventsOrderedByDate()
+        eventViewModel.getAllPublicEventsOrderedByDate()
     }
 
     private suspend fun collectGetAllPublicEventsState() {
-        eventViewModel.getAllEventsState.collect {
+        eventViewModel.getAllPublicEventsState.collect {
             when (it) {
                 is Response.Loading -> {
                     Log.d(TAG, "collectGetAllPublicEventsState: Collecting response $it")
@@ -90,7 +90,7 @@ class PublicEventsListFragment : Fragment() {
                         TAG,
                         "collectGetAllPublicEventsState: Successfully collected ${it.data.size} public events "
                     )
-                    adapter.submitList(it.data)
+                    adapterPublic.submitList(it.data)
                 }
             }
         }

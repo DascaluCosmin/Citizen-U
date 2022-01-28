@@ -7,11 +7,9 @@ import com.ubb.citizen_u.data.repositories.EventPhotoRepository
 import com.ubb.citizen_u.data.repositories.EventRepository
 import com.ubb.citizen_u.data.repositories.impl.EventPhotoRepositoryImpl
 import com.ubb.citizen_u.data.repositories.impl.EventRepositoryImpl
-import com.ubb.citizen_u.domain.usescases.event.EventUseCases
-import com.ubb.citizen_u.domain.usescases.event.GetAllPublicEventsOrderedByDateUseCase
-import com.ubb.citizen_u.domain.usescases.event.GetAllPublicEventsUseCase
-import com.ubb.citizen_u.domain.usescases.event.GetPublicEventDetailsUseCase
-import com.ubb.citizen_u.util.DatabaseConstants.EVENTS_COL
+import com.ubb.citizen_u.domain.usescases.event.*
+import com.ubb.citizen_u.util.DatabaseConstants.COUNCIL_MEET_EVENTS_COL
+import com.ubb.citizen_u.util.DatabaseConstants.PUBLIC_EVENTS_COL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,11 +24,13 @@ object EventModule {
     @Provides
     @Singleton
     fun providesEventRepository(
-        @Named(EVENTS_COL) eventsRef: CollectionReference,
+        @Named(PUBLIC_EVENTS_COL) publicEventsRef: CollectionReference,
+        @Named(COUNCIL_MEET_EVENTS_COL) councilEventsRef: CollectionReference,
         eventPhotoRepository: EventPhotoRepository
     ): EventRepository =
         EventRepositoryImpl(
-            eventsRef = eventsRef,
+            publicEventsRef = publicEventsRef,
+            councilMeetEventsRef = councilEventsRef,
             eventPhotoRepository = eventPhotoRepository
         )
 
@@ -45,14 +45,26 @@ object EventModule {
     @Singleton
     fun providesEventUseCases(eventRepository: EventRepository): EventUseCases =
         EventUseCases(
-            getAllPublicPublicEventsUseCase = GetAllPublicEventsUseCase(eventRepository),
-            getAllPublicPublicEventsOrderedByDateUseCase = GetAllPublicEventsOrderedByDateUseCase(eventRepository),
-            getPublicEventDetailsUseCase = GetPublicEventDetailsUseCase(eventRepository)
+            getAllPublicEventsUseCase = GetAllPublicEventsUseCase(eventRepository),
+            getAllPublicEventsOrderedByDateUseCase = GetAllPublicEventsOrderedByDateUseCase(
+                eventRepository
+            ),
+            getPublicEventDetailsUseCase = GetPublicEventDetailsUseCase(eventRepository),
+            getAllCouncilMeetEventsUseCase = GetAllCouncilMeetEventsUseCase(eventRepository),
+            getAllCouncilMeetEventsOrderedByUseCase = GetAllCouncilMeetEventsOrderedByDateUseCase(
+                eventRepository
+            )
         )
 
     @Provides
     @Singleton
-    @Named(EVENTS_COL)
-    fun providesEventsRef(firebaseFirestore: FirebaseFirestore) =
-        firebaseFirestore.collection(EVENTS_COL)
+    @Named(PUBLIC_EVENTS_COL)
+    fun providesPublicEventsRef(firebaseFirestore: FirebaseFirestore) =
+        firebaseFirestore.collection(PUBLIC_EVENTS_COL)
+
+    @Provides
+    @Singleton
+    @Named(COUNCIL_MEET_EVENTS_COL)
+    fun providesCouncilMeetEventsRef(firebaseFirestore: FirebaseFirestore) =
+        firebaseFirestore.collection(COUNCIL_MEET_EVENTS_COL)
 }
