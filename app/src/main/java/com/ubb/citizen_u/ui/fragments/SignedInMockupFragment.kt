@@ -144,6 +144,10 @@ class SignedInMockupFragment : Fragment() {
     fun viewCouncilMeetEventsList() {
         findNavController().navigate(R.id.action_signedInMockupFragment_to_councilMeetEventsListFragment)
     }
+
+    fun goToReportIncident() {
+        findNavController().navigate(R.id.action_signedInMockupFragment_to_reportIncidentFragment)
+    }
 }
 
 fun Fragment.toastErrorMessage() {
