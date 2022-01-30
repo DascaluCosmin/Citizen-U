@@ -47,15 +47,25 @@
                 tools:text="@string/signed_in_mockup_your_account_textview_tools" />
 
             <Button
-                android:id="@+id/view_events_button"
+                android:id="@+id/view_public_events_button"
                 android:layout_width="@dimen/width_views"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/generic_margin_between_element"
-                android:onClick="@{() -> signedInMockupFragment.viewEventsList()}"
-                android:text="@string/signed_in_mockup_view_events_button"
+                android:onClick="@{() -> signedInMockupFragment.viewPublicEventsList()}"
+                android:text="@string/signed_in_mockup_view_public_events_button"
                 app:layout_constraintEnd_toEndOf="@id/welcome_textview"
                 app:layout_constraintStart_toStartOf="@id/welcome_textview"
                 app:layout_constraintTop_toBottomOf="@id/welcome_textview" />
+
+            <Button
+                android:id="@+id/view_council_meet_events_button"
+                android:layout_width="@dimen/width_views"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> signedInMockupFragment.viewCouncilMeetEventsList()}"
+                android:text="@string/signed_in_mockup_view_council_meet_events_button"
+                app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                app:layout_constraintTop_toBottomOf="@id/view_public_events_button" />
 
             <Button
                 android:id="@+id/logout_button"

@@ -2,8 +2,9 @@ package com.ubb.citizen_u.data.repositories.impl
 
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
-import com.ubb.citizen_u.data.model.events.Event
+import com.ubb.citizen_u.data.model.events.CouncilMeetEvent
 import com.ubb.citizen_u.data.model.events.EventPhoto
+import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.data.repositories.EventPhotoRepository
 import com.ubb.citizen_u.data.repositories.EventRepository
 import com.ubb.citizen_u.domain.model.Response
@@ -15,28 +16,29 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class EventRepositoryImpl @Inject constructor(
-    private val eventsRef: CollectionReference,
+    private val publicEventsRef: CollectionReference,
+    private val councilMeetEventsRef: CollectionReference,
     private val eventPhotoRepository: EventPhotoRepository
 ) : EventRepository {
 
-    override suspend fun getAllEvents(): Flow<Response<List<Event?>>> =
+    override suspend fun getAllPublicEvents(): Flow<Response<List<PublicEvent?>>> =
         flow {
             try {
                 emit(Response.Loading)
 
-                val events = getAllEventsList()
+                val events = getAllPublicEventsList()
                 emit(Response.Success(events))
             } catch (exception: Exception) {
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
             }
         }
 
-    override suspend fun getAllEventsOrderedByDate(): Flow<Response<List<Event?>>> =
+    override suspend fun getAllEventsOrderedByDate(): Flow<Response<List<PublicEvent?>>> =
         flow {
             try {
                 emit(Response.Loading)
 
-                val sortedEvents = getAllEventsList().sortedBy {
+                val sortedEvents = getAllPublicEventsList().sortedBy {
                     it?.startDate
                 }
                 emit(Response.Success(sortedEvents))
@@ -45,13 +47,13 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getEventDetails(eventId: String): Flow<Response<Event?>> =
+    override suspend fun getPublicEventDetails(eventId: String): Flow<Response<PublicEvent?>> =
         flow {
             try {
                 emit(Response.Loading)
 
-                val eventSnapshot = eventsRef.document(eventId).get().await()
-                val event = eventSnapshot.toObject(Event::class.java)
+                val eventSnapshot = publicEventsRef.document(eventId).get().await()
+                val event = eventSnapshot.toObject(PublicEvent::class.java)
 
                 event?.photos = getEventPhotos(eventSnapshot)
                 eventPhotoRepository.getAllEventPhotos(eventId).forEach { storageReference ->
@@ -68,16 +70,68 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
-    private suspend fun getAllEventsList(): List<Event?> {
-        val eventsSnapshot = eventsRef.get().await()
+    override suspend fun getAllCouncilMeetEvents(): Flow<Response<List<CouncilMeetEvent?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val councilMeetEvents = getAllCouncilMeetEventsList()
+                emit(Response.Success(councilMeetEvents))
+            } catch (exception: Exception) {
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    override suspend fun getAllCouncilMeetEventsOrderedByDate(): Flow<Response<List<CouncilMeetEvent?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val sortedCouncilMeetEvents = getAllCouncilMeetEventsList().sortedBy {
+                    it?.publicationDate
+                }
+//                sortedCouncilMeetEvents.forEach {
+//                    it?.photos?.apply {
+//                        if (size > 0) {
+//                            val firstPhotoId = this[0]?.id
+//                            if (firstPhotoId != null) {
+//                                eventPhotoRepository.getMainEventPhotoStorageReference(
+//                                    it.id,
+//                                    firstPhotoId
+//                                )
+//                            }
+//                        }
+//                    }
+//                }
+                emit(Response.Success(sortedCouncilMeetEvents))
+            } catch (exception: Exception) {
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+
+            }
+        }
+
+    private suspend fun getAllPublicEventsList(): List<PublicEvent?> {
+        val eventsSnapshot = publicEventsRef.get().await()
         return eventsSnapshot.documents.map {
-            it.toObject(Event::class.java)?.apply {
+            it.toObject(PublicEvent::class.java)?.apply {
                 photos = getEventPhotos(it).apply {
                     setFirstEventPhotoStorageReference(it, this)
                 }
             }
         }
     }
+
+    private suspend fun getAllCouncilMeetEventsList(): List<CouncilMeetEvent?> {
+        val eventsSnapshot = councilMeetEventsRef.get().await()
+        return eventsSnapshot.documents.map {
+            it.toObject(CouncilMeetEvent::class.java)?.apply {
+                photos = getEventPhotos(it).apply {
+                    setFirstEventPhotoStorageReference(it, this)
+                }
+            }
+        }
+    }
+
 
     // TODO: These two have to be refactored and moved to EventPhotoRepository
     private suspend fun setFirstEventPhotoStorageReference(

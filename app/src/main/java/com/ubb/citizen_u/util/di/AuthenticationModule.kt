@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.di
+package com.ubb.citizen_u.util.di
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference

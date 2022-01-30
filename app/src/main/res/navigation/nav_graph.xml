@@ -35,6 +35,9 @@
         <argument
             android:name="connectedUserId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_signedInMockupFragment_to_councilMeetEventsListFragment"
+            app:destination="@id/councilMeetEventsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -66,21 +69,26 @@
     </fragment>
     <fragment
         android:id="@+id/eventsListFragment"
-        android:name="com.ubb.citizen_u.ui.fragments.events.EventsListFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.events.PublicEventsListFragment"
         android:label="@string/events_list_fragment_label"
-        tools:layout="@layout/fragment_events_list" >
+        tools:layout="@layout/fragment_public_events_list">
         <action
             android:id="@+id/action_eventsListFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventDetailsFragment"
-        android:name="com.ubb.citizen_u.ui.fragments.events.EventDetailsFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.events.PublicEventDetailsFragment"
         android:label="@string/event_details_fragment_label"
-        tools:layout="@layout/fragment_event_details" >
+        tools:layout="@layout/fragment_public_event_details" >
         <argument
             android:name="eventId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/councilMeetEventsListFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.events.CouncilMeetEventsListFragment"
+        android:label="fragment_council_meet_events_list"
+        tools:layout="@layout/fragment_council_meet_events_list" />
 
 </navigation>

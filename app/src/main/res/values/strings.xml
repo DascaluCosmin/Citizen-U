@@ -36,7 +36,8 @@
     <string name="signed_in_mockup_your_account_textview_tools">Welcome, Cosmin</string>
     <string name="signed_in_mockup_logout_button">Sign Out</string>
     <string name="generic_undefined_value">undefined</string>
-    <string name="signed_in_mockup_view_events_button">View Events</string>
+    <string name="signed_in_mockup_view_public_events_button">View Public Events</string>
+    <string name="signed_in_mockup_view_council_meet_events_button">View Council Meet Events Briefings</string>
 
     <!-- Events -->
     <!-- TODO: Decide whether or not to use the principal textview, since we have the label in the App Bar -->
@@ -45,5 +46,7 @@
     <string name="events_list_principal_textview">Upcoming Events</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="event_headline_tools_text">The general budget of Cluj-Napoca municipality this year is worth 434,484,383 euros, an increase of 1.13% compared to last year.</string>
+    <string name="council_meet_events_list_principal_textview">Council Meet Briefings</string>
 
 </resources>

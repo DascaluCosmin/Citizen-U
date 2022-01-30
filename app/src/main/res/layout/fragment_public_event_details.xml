@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.events.EventDetailsFragment">
+    tools:context=".ui.fragments.events.PublicEventDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/event_details"
@@ -128,7 +128,7 @@
             android:layout_width="@dimen/event_details_icons_dimension"
             android:layout_height="@dimen/event_details_icons_dimension"
             android:layout_marginTop="@dimen/generic_margin_between_element"
-            android:src="@drawable/ic_baseline_location_on_24"
+            android:src="@drawable/ic_outline_location_on_24"
             app:layout_constraintStart_toStartOf="@id/vertical_guideline"
             app:layout_constraintTop_toBottomOf="@id/event_location" />
 
