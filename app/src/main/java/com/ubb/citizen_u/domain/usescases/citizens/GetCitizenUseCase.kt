@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.domain.usescases.citizen
+package com.ubb.citizen_u.domain.usescases.citizens
 
 import com.ubb.citizen_u.data.repositories.CitizenRepository
 import javax.inject.Inject

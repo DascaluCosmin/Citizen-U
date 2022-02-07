@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ubb.citizen_u.data.model.events.CouncilMeetEvent
 import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.domain.model.Response
-import com.ubb.citizen_u.domain.usescases.event.EventUseCases
+import com.ubb.citizen_u.domain.usescases.events.EventUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow

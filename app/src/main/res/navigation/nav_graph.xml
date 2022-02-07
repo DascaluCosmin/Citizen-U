@@ -95,8 +95,12 @@
         tools:layout="@layout/fragment_council_meet_events_list" />
     <fragment
         android:id="@+id/reportIncidentFragment"
-        android:name="com.ubb.citizen_u.ui.fragments.report.ReportIncidentFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.reports.ReportIncidentFragment"
         android:label="fragment_report_incident"
-        tools:layout="@layout/fragment_report_incident" />
+        tools:layout="@layout/fragment_report_incident" >
+        <argument
+            android:name="citizenId"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

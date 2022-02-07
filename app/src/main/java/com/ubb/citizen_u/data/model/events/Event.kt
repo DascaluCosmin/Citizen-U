@@ -1,6 +1,7 @@
 package com.ubb.citizen_u.data.model.events
 
 import com.google.firebase.firestore.DocumentId
+import com.ubb.citizen_u.data.model.Photo
 import java.util.*
 
 abstract class Event(
@@ -8,7 +9,7 @@ abstract class Event(
     var title: String? = null,
     var category: String? = null,
     var content: String? = null,
-    var photos: MutableList<EventPhoto?> = mutableListOf()
+    var photos: MutableList<Photo?> = mutableListOf()
 ) {
 
     override fun toString(): String {

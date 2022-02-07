@@ -102,9 +102,24 @@ class WelcomeFragment : Fragment() {
     private suspend fun collectCurrentUserState() {
         authenticationViewModel.currentUserState.collect {
             Log.d(TAG, "collectCurrentUserState: Collecting response $it")
-            if (it != null) {
-                Log.d(TAG, "collectCurrentUserState: Collected response ${it.email}")
-                navigateToUserProfile(it.uid)
+            when (it) {
+                is Response.Error -> {
+                    Log.d(
+                        TAG,
+                        "collectCurrentUserState: Error at fetching the current user: ${it.message}"
+                    )
+                }
+                Response.Loading -> {
+                    // TODO: fix this, the layout is shown for a second before logging the user
+                    Log.d(TAG, "collectCurrentUserState: Fetching current user")
+                }
+                is Response.Success -> {
+                    Log.d(
+                        TAG,
+                        "collectCurrentUserState: Successfully collected user with id ${it.data!!.id}"
+                    )
+                    navigateToUserProfile(it.data.id)
+                }
             }
         }
     }

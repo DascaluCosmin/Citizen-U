@@ -51,5 +51,6 @@
     <string name="report_incident_text">Report Incident</string>
     <string name="send_report_button_text">Send Report</string>
     <string name="take_photo_button_text">Take photo</string>
+    <string name="incident_description_hint">Incident Description</string>
 
 </resources>

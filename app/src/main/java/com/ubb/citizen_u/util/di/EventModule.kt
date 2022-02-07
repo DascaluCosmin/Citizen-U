@@ -3,11 +3,11 @@ package com.ubb.citizen_u.util.di
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.ubb.citizen_u.data.repositories.EventPhotoRepository
 import com.ubb.citizen_u.data.repositories.EventRepository
-import com.ubb.citizen_u.data.repositories.impl.EventPhotoRepositoryImpl
+import com.ubb.citizen_u.data.repositories.PhotoRepository
 import com.ubb.citizen_u.data.repositories.impl.EventRepositoryImpl
-import com.ubb.citizen_u.domain.usescases.event.*
+import com.ubb.citizen_u.data.repositories.impl.PhotoRepositoryImpl
+import com.ubb.citizen_u.domain.usescases.events.*
 import com.ubb.citizen_u.util.DatabaseConstants.COUNCIL_MEET_EVENTS_COL
 import com.ubb.citizen_u.util.DatabaseConstants.PUBLIC_EVENTS_COL
 import dagger.Module
@@ -26,18 +26,18 @@ object EventModule {
     fun providesEventRepository(
         @Named(PUBLIC_EVENTS_COL) publicEventsRef: CollectionReference,
         @Named(COUNCIL_MEET_EVENTS_COL) councilEventsRef: CollectionReference,
-        eventPhotoRepository: EventPhotoRepository
+        photoRepository: PhotoRepository
     ): EventRepository =
         EventRepositoryImpl(
             publicEventsRef = publicEventsRef,
             councilMeetEventsRef = councilEventsRef,
-            eventPhotoRepository = eventPhotoRepository
+            photoRepository = photoRepository
         )
 
     @Provides
     @Singleton
-    fun providesEventPhotoRepository(firebaseStorage: FirebaseStorage): EventPhotoRepository =
-        EventPhotoRepositoryImpl(
+    fun providesEventPhotoRepository(firebaseStorage: FirebaseStorage): PhotoRepository =
+        PhotoRepositoryImpl(
             firebaseStorage = firebaseStorage
         )
 

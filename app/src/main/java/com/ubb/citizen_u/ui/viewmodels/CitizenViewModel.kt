@@ -3,9 +3,9 @@ package com.ubb.citizen_u.ui.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ubb.citizen_u.data.model.Citizen
+import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.domain.model.Response
-import com.ubb.citizen_u.domain.usescases.citizen.CitizenUseCases
+import com.ubb.citizen_u.domain.usescases.citizens.CitizenUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow

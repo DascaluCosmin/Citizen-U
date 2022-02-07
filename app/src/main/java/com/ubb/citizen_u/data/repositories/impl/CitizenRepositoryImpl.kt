@@ -1,7 +1,7 @@
 package com.ubb.citizen_u.data.repositories.impl
 
 import com.google.firebase.firestore.CollectionReference
-import com.ubb.citizen_u.data.model.Citizen
+import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.data.repositories.CitizenRepository
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
