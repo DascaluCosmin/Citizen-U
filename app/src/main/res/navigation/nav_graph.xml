@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_signedInMockupFragment_to_councilMeetEventsListFragment"
             app:destination="@id/councilMeetEventsListFragment" />
+        <action
+            android:id="@+id/action_signedInMockupFragment_to_reportIncidentFragment"
+            app:destination="@id/reportIncidentFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -90,5 +93,14 @@
         android:name="com.ubb.citizen_u.ui.fragments.events.CouncilMeetEventsListFragment"
         android:label="fragment_council_meet_events_list"
         tools:layout="@layout/fragment_council_meet_events_list" />
+    <fragment
+        android:id="@+id/reportIncidentFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.reports.ReportIncidentFragment"
+        android:label="fragment_report_incident"
+        tools:layout="@layout/fragment_report_incident" >
+        <argument
+            android:name="citizenId"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

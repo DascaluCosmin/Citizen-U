@@ -3,7 +3,7 @@ package com.ubb.citizen_u.data.repositories.impl
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
-import com.ubb.citizen_u.data.model.Citizen
+import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.data.repositories.AuthenticationRepository
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.AuthenticationConstants
@@ -46,7 +46,19 @@ class AuthenticationRepositoryImpl @Inject constructor(
 
     override suspend fun getCurrentUser() =
         flow {
-            emit(firebaseAuth.currentUser)
+            try {
+                val firebaseUser = firebaseAuth.currentUser
+                if (firebaseUser == null) {
+                    emit(Response.Error("Error at retrieving the current user. The user is null"))
+                } else {
+                    val citizenSnapshot = usersRef.document(firebaseUser.uid).get().await()
+                    val citizen = citizenSnapshot.toObject(Citizen::class.java)
+                    emit(Response.Success(citizen))
+                }
+            } catch (exception: Exception) {
+                Log.d(TAG, "getCurrentUser: An error has occurred: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
         }
 
     override suspend fun sendEmailResetUserPassword(email: String) =
@@ -55,7 +67,10 @@ class AuthenticationRepositoryImpl @Inject constructor(
                 firebaseAuth.sendPasswordResetEmail(email)
                 emit(true)
             } catch (exception: Exception) {
-                Log.d(TAG, "sendEmailResetUserPassword: An error has occurred: ${exception.message}")
+                Log.d(
+                    TAG,
+                    "sendEmailResetUserPassword: An error has occurred: ${exception.message}"
+                )
                 emit(false)
             }
         }

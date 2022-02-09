@@ -48,5 +48,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="event_headline_tools_text">The general budget of Cluj-Napoca municipality this year is worth 434,484,383 euros, an increase of 1.13% compared to last year.</string>
     <string name="council_meet_events_list_principal_textview">Council Meet Briefings</string>
+    <string name="report_incident_text">Report Incident</string>
+    <string name="send_report_button_text">Send Report</string>
+    <string name="take_photo_button_text">Take photo</string>
+    <string name="incident_description_hint">Incident Description</string>
 
 </resources>

@@ -5,6 +5,7 @@ object ValidationConstants {
     const val INVALID_PASSWORD_ERROR_MESSAGE = "Please enter a valid password!"
     const val INVALID_FIRST_NAME_ERROR_MESSAGE = "Please enter a valid first name!"
     const val INVALID_LAST_NAME_ERROR_MESSAGE = "Please enter a valid last name!"
+    const val INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE = "Please describe the incident!"
 }
 
 object AuthenticationConstants {
@@ -26,8 +27,17 @@ object AuthenticationConstants {
     //endregion
 }
 
+object CitizenRequestConstants {
+
+    // region Success
+    const val SUCCESSFUL_REPORT_INCIDENT = "The incident has been reported successfully!"
+
+    // endregion
+}
+
 object DatabaseConstants {
     const val USERS_COL = "users"
+    const val USER_REQUESTS_INCIDENTS_COL = "request_incidents"
     const val PUBLIC_EVENTS_COL = "events"
     const val COUNCIL_MEET_EVENTS_COL = "council_events"
     const val EVENTS_PHOTOS_COL = "photos"

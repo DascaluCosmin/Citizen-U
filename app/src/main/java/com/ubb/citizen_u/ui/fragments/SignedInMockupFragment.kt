@@ -144,8 +144,16 @@ class SignedInMockupFragment : Fragment() {
     fun viewCouncilMeetEventsList() {
         findNavController().navigate(R.id.action_signedInMockupFragment_to_councilMeetEventsListFragment)
     }
+
+    fun goToReportIncident() {
+        val action =
+            SignedInMockupFragmentDirections.actionSignedInMockupFragmentToReportIncidentFragment(
+                citizenId = args.connectedUserId
+            )
+        findNavController().navigate(action)
+    }
 }
 
-fun Fragment.toastErrorMessage() {
-    Toast.makeText(context, DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN, Toast.LENGTH_SHORT).show()
+fun Fragment.toastErrorMessage(errorMessage: String = DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN) {
+    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
 }

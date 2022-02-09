@@ -1,7 +1,7 @@
 package com.ubb.citizen_u.data.repositories
 
 import com.google.firebase.auth.FirebaseUser
-import com.ubb.citizen_u.data.model.Citizen
+import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.domain.model.Response
 import kotlinx.coroutines.flow.Flow
 
@@ -11,7 +11,7 @@ interface AuthenticationRepository {
 
     suspend fun signOut()
 
-    suspend fun getCurrentUser(): Flow<FirebaseUser?>
+    suspend fun getCurrentUser(): Flow<Response<Citizen?>>
 
     suspend fun sendEmailResetUserPassword(email: String): Flow<Boolean>
 

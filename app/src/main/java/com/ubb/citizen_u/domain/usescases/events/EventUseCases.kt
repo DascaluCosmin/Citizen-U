@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.domain.usescases.event
+package com.ubb.citizen_u.domain.usescases.events
 
 data class EventUseCases(
     val getAllPublicEventsUseCase: GetAllPublicEventsUseCase,

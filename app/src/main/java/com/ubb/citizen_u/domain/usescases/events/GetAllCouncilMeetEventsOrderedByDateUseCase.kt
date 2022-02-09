@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.domain.usescases.event
+package com.ubb.citizen_u.domain.usescases.events
 
 import com.ubb.citizen_u.data.repositories.EventRepository
 import javax.inject.Inject

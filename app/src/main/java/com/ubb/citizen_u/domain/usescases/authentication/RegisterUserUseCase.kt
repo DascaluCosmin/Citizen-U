@@ -1,6 +1,6 @@
 package com.ubb.citizen_u.domain.usescases.authentication
 
-import com.ubb.citizen_u.data.model.Citizen
+import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.data.repositories.AuthenticationRepository
 import javax.inject.Inject
 

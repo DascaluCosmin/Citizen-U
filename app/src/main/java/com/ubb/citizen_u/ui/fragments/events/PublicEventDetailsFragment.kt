@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.data.model.events.Event
-import com.ubb.citizen_u.data.model.events.EventPhoto
+import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.databinding.FragmentPublicEventDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.fragments.toastErrorMessage
@@ -99,7 +99,7 @@ class PublicEventDetailsFragment : Fragment() {
         }
     }
 
-    private fun chooseRandomEventPhoto(event: Event): EventPhoto? {
+    private fun chooseRandomEventPhoto(event: Event): Photo? {
         val randomIndex = Random().nextInt(event.photos.size)
         return event.photos[randomIndex]
     }

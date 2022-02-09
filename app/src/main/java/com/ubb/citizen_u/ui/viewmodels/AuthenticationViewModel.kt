@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
-import com.ubb.citizen_u.data.model.Citizen
+import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.authentication.AuthenticationUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,11 +33,11 @@ class AuthenticationViewModel @Inject constructor(
     )
     val signInState: SharedFlow<Response<FirebaseUser?>> = _signInState
 
-    private val _currentUserState = MutableSharedFlow<FirebaseUser?>(
+    private val _currentUserState = MutableSharedFlow<Response<Citizen?>>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
-    val currentUserState: SharedFlow<FirebaseUser?> = _currentUserState
+    val currentUserState: SharedFlow<Response<Citizen?>> = _currentUserState
 
     private val _sendEmailResetUserPasswordState = MutableSharedFlow<Boolean>(
         replay = 1,

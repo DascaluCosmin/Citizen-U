@@ -17,7 +17,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ubb.citizen_u.R
-import com.ubb.citizen_u.data.model.Citizen
+import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.databinding.FragmentIdentityInformationBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel

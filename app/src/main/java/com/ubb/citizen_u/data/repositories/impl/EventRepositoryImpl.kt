@@ -3,9 +3,9 @@ package com.ubb.citizen_u.data.repositories.impl
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.ubb.citizen_u.data.model.events.CouncilMeetEvent
-import com.ubb.citizen_u.data.model.events.EventPhoto
+import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.events.PublicEvent
-import com.ubb.citizen_u.data.repositories.EventPhotoRepository
+import com.ubb.citizen_u.data.repositories.PhotoRepository
 import com.ubb.citizen_u.data.repositories.EventRepository
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class EventRepositoryImpl @Inject constructor(
     private val publicEventsRef: CollectionReference,
     private val councilMeetEventsRef: CollectionReference,
-    private val eventPhotoRepository: EventPhotoRepository
+    private val photoRepository: PhotoRepository
 ) : EventRepository {
 
     override suspend fun getAllPublicEvents(): Flow<Response<List<PublicEvent?>>> =
@@ -56,7 +56,7 @@ class EventRepositoryImpl @Inject constructor(
                 val event = eventSnapshot.toObject(PublicEvent::class.java)
 
                 event?.photos = getEventPhotos(eventSnapshot)
-                eventPhotoRepository.getAllEventPhotos(eventId).forEach { storageReference ->
+                photoRepository.getAllEventPhotos(eventId).forEach { storageReference ->
                     event?.photos?.forEach { photo ->
                         if (photo != null && storageReference.path.contains(photo.id)) {
                             photo.storageReference = storageReference
@@ -135,25 +135,25 @@ class EventRepositoryImpl @Inject constructor(
 
     // TODO: These two have to be refactored and moved to EventPhotoRepository
     private suspend fun setFirstEventPhotoStorageReference(
-        eventsDocSnapshot: DocumentSnapshot, eventPhotos: MutableList<EventPhoto?>
+        eventsDocSnapshot: DocumentSnapshot, photos: MutableList<Photo?>
     ) {
-        if (eventPhotos.size > 0) {
-            val firstPhotoId = eventPhotos[0]?.id
+        if (photos.size > 0) {
+            val firstPhotoId = photos[0]?.id
             if (firstPhotoId != null) {
-                eventPhotos[0]?.storageReference =
-                    eventPhotoRepository.getMainEventPhotoStorageReference(
+                photos[0]?.storageReference =
+                    photoRepository.getMainEventPhotoStorageReference(
                         eventsDocSnapshot.id, firstPhotoId
                     )
             }
         }
     }
 
-    private suspend fun getEventPhotos(eventDocSnapshot: DocumentSnapshot): MutableList<EventPhoto?> {
+    private suspend fun getEventPhotos(eventDocSnapshot: DocumentSnapshot): MutableList<Photo?> {
         val eventPhotosSnapshot =
             eventDocSnapshot.reference.collection(EVENTS_PHOTOS_COL).get().await()
 
         val eventPhotos = eventPhotosSnapshot.documents.map {
-            it.toObject(EventPhoto::class.java)
+            it.toObject(Photo::class.java)
         }.toMutableList()
 
         return eventPhotos
