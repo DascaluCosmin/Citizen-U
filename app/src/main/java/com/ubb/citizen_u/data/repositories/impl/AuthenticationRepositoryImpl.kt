@@ -49,7 +49,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
             try {
                 val firebaseUser = firebaseAuth.currentUser
                 if (firebaseUser == null) {
-                    emit(Response.Error("Error at retrieving the current user. The user is null"))
+                    emit(Response.Success(null))
                 } else {
                     val citizenSnapshot = usersRef.document(firebaseUser.uid).get().await()
                     val citizen = citizenSnapshot.toObject(Citizen::class.java)
