@@ -3,7 +3,6 @@ package com.ubb.citizen_u.data.repositories.impl
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
-import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.data.repositories.CitizenRequestRepository
 import com.ubb.citizen_u.data.repositories.PhotoRepository
@@ -24,11 +23,12 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         private const val TAG = "CitizenRequestRepositoryImpl"
     }
 
+    // TODO: Transction this
     override suspend fun addIncident(
         incident: Incident,
         citizenId: String,
         listIncidentPhotoUri: List<Uri>
-    ): Flow<Response<Void>> =
+    ): Flow<Response<Boolean>> =
         flow {
             if (listIncidentPhotoUri.isEmpty()) {
                 emit(Response.Error("Please provide a photo of the incident!"))
@@ -37,12 +37,18 @@ class CitizenRequestRepositoryImpl @Inject constructor(
 
             try {
                 emit(Response.Loading)
-                listIncidentPhotoUri.forEach { _ -> incident.photos.add(Photo()) }
 
                 val result =
-                    usersRef.document(citizenId).collection(USER_REQUESTS_INCIDENTS_COL).document()
-                        .set(incident).await()
-                emit(Response.Success(result))
+                    usersRef.document(citizenId).collection(USER_REQUESTS_INCIDENTS_COL)
+                        .add(incident)
+                        .await()
+
+                photoRepository.saveIncidentPhotos(
+                    listIncidentPhotoUri = listIncidentPhotoUri,
+                    incidentId = result.id,
+                    citizenId = citizenId
+                )
+                emit(Response.Success(true))
             } catch (exception: Exception) {
                 Log.d(TAG, "addIncident: An error has occurred: ${exception.message}")
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))

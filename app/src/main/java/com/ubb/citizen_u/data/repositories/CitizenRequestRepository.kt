@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CitizenRequestRepository {
 
-    suspend fun addIncident(incident: Incident, citizenId: String, listIncidentPhotoUri: List<Uri>): Flow<Response<Void?>>
+    suspend fun addIncident(incident: Incident, citizenId: String, listIncidentPhotoUri: List<Uri>): Flow<Response<Boolean>>
 }

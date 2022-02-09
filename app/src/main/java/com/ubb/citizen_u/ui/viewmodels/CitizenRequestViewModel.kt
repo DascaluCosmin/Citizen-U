@@ -22,11 +22,11 @@ class CitizenRequestViewModel @Inject constructor(
     private val citizenRequestUseCase: CitizenRequestUseCase
 ) : ViewModel() {
 
-    private val _addReportIncidentState: MutableSharedFlow<Response<Void?>> = MutableSharedFlow(
+    private val _addReportIncidentState: MutableSharedFlow<Response<Boolean>> = MutableSharedFlow(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
-    val addReportIncidentState: SharedFlow<Response<Void?>> = _addReportIncidentState
+    val addReportIncidentState: SharedFlow<Response<Boolean>> = _addReportIncidentState
 
     private val listIncidentPhotoUri = mutableListOf<Uri>()
 

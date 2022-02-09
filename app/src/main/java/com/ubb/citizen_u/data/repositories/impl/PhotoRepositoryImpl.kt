@@ -56,11 +56,11 @@ class PhotoRepositoryImpl @Inject constructor(
         citizenId: String
     ): Boolean {
         val pathToCitizenIncidentReportsFolder =
-            "$FIREBASE_STORAGE_INCIDENT_REPORTS_IMAGES/$citizenId"
-        val incidentReportsReference =
-            firebaseStorage.getReference(pathToCitizenIncidentReportsFolder)
+            "$FIREBASE_STORAGE_INCIDENT_REPORTS_IMAGES/$citizenId/$incidentId"
         listIncidentPhotoUri.forEach { uri ->
-            val result = incidentReportsReference.putFile(uri).await()
+            val result =
+                firebaseStorage.getReference("$pathToCitizenIncidentReportsFolder/${uri.lastPathSegment}")
+                    .putFile(uri).await()
             if (!result.task.isSuccessful) {
                 return false
             }
