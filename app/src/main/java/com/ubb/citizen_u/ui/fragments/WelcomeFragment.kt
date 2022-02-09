@@ -18,7 +18,10 @@ import com.ubb.citizen_u.databinding.FragmentWelcomeBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.fragments.dialog.ResetPasswordDialogFragment
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
-import com.ubb.citizen_u.util.*
+import com.ubb.citizen_u.util.AuthenticationConstants
+import com.ubb.citizen_u.util.ValidationConstants
+import com.ubb.citizen_u.util.fadeIn
+import com.ubb.citizen_u.util.fadeOut
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -108,17 +111,21 @@ class WelcomeFragment : Fragment() {
                         TAG,
                         "collectCurrentUserState: Error at fetching the current user: ${it.message}"
                     )
+                    binding.splashLayout.fadeOut()
+                    binding.mainLayout.fadeIn()
                 }
                 Response.Loading -> {
-                    // TODO: fix this, the layout is shown for a second before logging the user
                     Log.d(TAG, "collectCurrentUserState: Fetching current user")
                 }
                 is Response.Success -> {
-                    Log.d(
-                        TAG,
-                        "collectCurrentUserState: Successfully collected user with id ${it.data!!.id}"
-                    )
-                    navigateToUserProfile(it.data.id)
+                    if (it.data != null) {
+                        Log.d(TAG, "collectCurrentUserState: The ${it.data.id} is connected")
+                        navigateToUserProfile(it.data.id)
+                    } else {
+                        Log.d(TAG, "collectCurrentUserState: There is no connected user")
+                        binding.splashLayout.fadeOut()
+                        binding.mainLayout.fadeIn()
+                    }
                 }
             }
         }

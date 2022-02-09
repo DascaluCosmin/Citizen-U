@@ -11,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collect
@@ -74,6 +75,7 @@ class AuthenticationViewModel @Inject constructor(
         Log.d(TAG, "getCurrentUser: Getting current user...")
         viewModelScope.launch(Dispatchers.IO) {
             authenticationUseCases.getCurrentUserUseCase().collect {
+                delay(1000L)
                 _currentUserState.tryEmit(it)
 
                 // Here I did not use resetReplyCache because the first call to getCurrentUser()
