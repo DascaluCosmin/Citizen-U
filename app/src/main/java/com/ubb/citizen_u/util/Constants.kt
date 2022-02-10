@@ -6,6 +6,8 @@ object ValidationConstants {
     const val INVALID_FIRST_NAME_ERROR_MESSAGE = "Please enter a valid first name!"
     const val INVALID_LAST_NAME_ERROR_MESSAGE = "Please enter a valid last name!"
     const val INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE = "Please describe the incident!"
+    const val INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE =
+        "Please provide at least one photo of the incident!"
 }
 
 object AuthenticationConstants {

@@ -17,24 +17,6 @@ class PhotoRepositoryImpl @Inject constructor(
         private const val FIREBASE_STORAGE_INCIDENT_REPORTS_IMAGES = "images/incident_reports"
     }
 
-    //                FirebaseStorage.getInstance().getReference("images/incident_reports/${photoFile.name}")
-//                    .putFile(Uri.fromFile(photoFile))
-//                    .addOnCompleteListener { task ->
-//                        if (task.isSuccessful) {
-//                            Toast.makeText(
-//                                requireContext(),
-//                                "The report incident has been sent successfully",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        } else {
-//                            Log.e(
-//                                TAG,
-//                                "FirebaseStorage: An error has occurred: ${task.result?.error?.message}",
-//                            )
-//                            toastErrorMessage()
-//                        }
-//                    }
-
     override suspend fun getMainEventPhotoStorageReference(
         eventId: String,
         photoId: String

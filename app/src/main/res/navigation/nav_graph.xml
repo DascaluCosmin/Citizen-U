@@ -63,12 +63,12 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="email"
-            app:argType="string"
-            android:defaultValue="undefined" />
+            android:defaultValue="undefined"
+            app:argType="string" />
         <argument
             android:name="password"
-            app:argType="string"
-            android:defaultValue="undefined" />
+            android:defaultValue="undefined"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/eventsListFragment"
@@ -83,7 +83,7 @@
         android:id="@+id/eventDetailsFragment"
         android:name="com.ubb.citizen_u.ui.fragments.events.PublicEventDetailsFragment"
         android:label="@string/event_details_fragment_label"
-        tools:layout="@layout/fragment_public_event_details" >
+        tools:layout="@layout/fragment_public_event_details">
         <argument
             android:name="eventId"
             app:argType="string" />
@@ -95,12 +95,46 @@
         tools:layout="@layout/fragment_council_meet_events_list" />
     <fragment
         android:id="@+id/reportIncidentFragment"
-        android:name="com.ubb.citizen_u.ui.fragments.reports.ReportIncidentFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.reports.ReportIncidentDetailsFragment"
         android:label="fragment_report_incident"
-        tools:layout="@layout/fragment_report_incident" >
+        tools:layout="@layout/fragment_report_incident_details">
         <argument
             android:name="citizenId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_reportIncidentFragment_to_reportIncidentPhotoFragment"
+            app:destination="@id/reportIncidentPhotoFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/reportIncidentPhotoFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.reports.ReportIncidentPhotoFragment"
+        android:label="fragment_report_incident_photo"
+        tools:layout="@layout/fragment_report_incident_photo">
+        <argument
+            android:name="incidentDescription"
+            app:argType="string" />
+        <argument
+            android:name="citizenId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_reportIncidentPhotoFragment_to_reportIncidentMapFragment"
+            app:destination="@id/reportIncidentMapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportIncidentMapFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.reports.ReportIncidentMapFragment"
+        android:label="fragment_report_incident_map"
+        tools:layout="@layout/fragment_report_incident_map">
+        <argument
+            android:name="incidentDescription"
+            app:argType="string" />
+        <argument
+            android:name="citizenId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_reportIncidentMapFragment_to_signedInMockupFragment"
+            app:destination="@id/signedInMockupFragment"
+            app:popUpTo="@id/signedInMockupFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

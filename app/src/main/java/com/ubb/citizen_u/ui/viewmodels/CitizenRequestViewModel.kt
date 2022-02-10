@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CitizenRequestViewModel @Inject constructor(
-    private val citizenRequestUseCase: CitizenRequestUseCase
+    private val citizenRequestUseCase: CitizenRequestUseCase,
 ) : ViewModel() {
 
     private val _addReportIncidentState: MutableSharedFlow<Response<Boolean>> = MutableSharedFlow(
@@ -34,6 +34,9 @@ class CitizenRequestViewModel @Inject constructor(
         listIncidentPhotoUri.add(uri)
     }
 
+    fun getIncidentPhotos() =
+        listIncidentPhotoUri
+
     @ExperimentalCoroutinesApi
     fun reportIncident(description: String, citizenId: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -45,6 +48,9 @@ class CitizenRequestViewModel @Inject constructor(
                 citizenId = citizenId,
                 listIncidentPhotoUri = listIncidentPhotoUri,
             ).collect {
+                if (it is Response.Success) {
+                    listIncidentPhotoUri.clear()
+                }
                 _addReportIncidentState.tryEmit(it)
                 _addReportIncidentState.resetReplayCache()
             }

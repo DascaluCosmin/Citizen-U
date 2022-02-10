@@ -50,7 +50,10 @@
     <string name="council_meet_events_list_principal_textview">Council Meet Briefings</string>
     <string name="report_incident_text">Report Incident</string>
     <string name="send_report_button_text">Send Report</string>
+    <string name="report_incident_next_button">Next</string>
     <string name="take_photo_button_text">Take photo</string>
-    <string name="incident_description_hint">Incident Description</string>
+    <string name="take_another_photo_button_text">Take another photo</string>
+    <string name="incident_description_hint">Please provide a description…</string>
+    <string name="incident_photo_hint">Please take a picture of the incident…</string>
 
 </resources>

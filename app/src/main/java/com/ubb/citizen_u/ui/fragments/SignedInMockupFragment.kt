@@ -55,7 +55,7 @@ class SignedInMockupFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSignedInMockupBinding.inflate(inflater, container, false)
 
@@ -152,6 +152,10 @@ class SignedInMockupFragment : Fragment() {
             )
         findNavController().navigate(action)
     }
+}
+
+fun Fragment.toastMessage(message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
 
 fun Fragment.toastErrorMessage(errorMessage: String = DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN) {
