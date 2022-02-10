@@ -8,6 +8,7 @@ abstract class CitizenRequest(
     @DocumentId var id: String = "",
     var description: String? = null,
     var sentDate: Date? = null,
+    var status: RequestStatus = RequestStatus.SENT
 ) {
 
     override fun toString(): String {
@@ -29,4 +30,8 @@ class Incident(
     override fun hashCode(): Int {
         return javaClass.hashCode()
     }
+}
+
+enum class RequestStatus {
+    SENT, UNDER_REVIEW, IN_PROGRESS, COMPLETED, REJECTED,
 }
