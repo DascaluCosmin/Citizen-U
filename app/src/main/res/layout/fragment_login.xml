@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_welcome"
-    tools:context=".ui.fragments.WelcomeFragment">
+    tools:context=".ui.fragments.LoginFragment">
 
     <data>
 
         <variable
-            name="welcomeFragment"
-            type="com.ubb.citizen_u.ui.fragments.WelcomeFragment" />
+            name="loginFragment"
+            type="com.ubb.citizen_u.ui.fragments.LoginFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,7 +73,7 @@
                 android:id="@+id/sign_in_button"
                 android:layout_width="@dimen/width_views"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> welcomeFragment.signIn()}"
+                android:onClick="@{() -> loginFragment.signIn()}"
                 android:text="@string/welcome_sign_in_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +85,7 @@
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="@dimen/width_views"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> welcomeFragment.register()}"
+                android:onClick="@{() -> loginFragment.register()}"
                 android:text="@string/welcome_register_button"
                 app:layout_constraintStart_toStartOf="@id/sign_in_button"
                 app:layout_constraintTop_toBottomOf="@id/sign_in_button" />
@@ -119,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/generic_margin_between_element"
-                android:onClick="@{() -> welcomeFragment.resetPassword()}"
+                android:onClick="@{() -> loginFragment.resetPassword()}"
                 android:text="@string/welcome_reset_password_textview"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@id/register_button"

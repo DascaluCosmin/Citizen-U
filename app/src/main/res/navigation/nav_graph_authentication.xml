@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.LoginFragment"
+        android:label="@string/welcome_fragment_label"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.RegisterFragment"
+        android:label="@string/multistep_register_fragment_label"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_identityInformationFragment"
+            app:destination="@id/identityInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/identityInformationFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.registration.IdentityInformationFragment"
+        android:label="@string/multistep_register_identity_information_label"
+        tools:layout="@layout/fragment_identity_information">
+        <action
+            android:id="@+id/action_identityInformationFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="email"
+            android:defaultValue="undefined"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            android:defaultValue="undefined"
+            app:argType="string" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.ubb.citizen_u.ui.MainActivity"
+        android:label="@string/main_activity_label"
+        tools:layout="@layout/activity_main" >
+        <argument
+            android:name="citizenId"
+            app:argType="string" />
+    </activity>
+</navigation>

@@ -2,6 +2,8 @@
     <!-- Application -->
     <string name="app_name">Citizen-U</string>
     <string name="action_settings">Settings</string>
+    <string name="authentication_activity_label">Authentication Activity</string>
+    <string name="main_activity_label">Main Activity</string>
 
     <!-- Generics -->
     <string name="generic_email_hint">Email</string>
@@ -31,23 +33,31 @@
 
     <!-- Signed In -->
     <string name="signed_in_fragment_label">Signed In</string>
-    <string name="signed_in_mockup_your_account_textview">Welcome</string>
-    <string name="signed_in_mockup_your_account_textview_params">Welcome, %s</string>
-    <string name="signed_in_mockup_your_account_textview_tools">Welcome, Cosmin</string>
-    <string name="signed_in_mockup_logout_button">Sign Out</string>
+    <string name="signed_in_your_account_textview">Welcome</string>
+    <string name="signed_in_your_account_textview_params">Welcome, %s</string>
+    <string name="signed_in_your_account_textview_tools">Welcome, Cosmin</string>
+    <string name="signed_in_logout_button">Sign Out</string>
     <string name="generic_undefined_value">undefined</string>
-    <string name="signed_in_mockup_view_public_events_button">View Public Events</string>
-    <string name="signed_in_mockup_view_council_meet_events_button">View Council Meet Events Briefings</string>
+    <string name="signed_in_view_public_events_button">View Public Events</string>
+    <string name="signed_in_view_council_meet_events_button">View Council Meet Events Briefings</string>
 
     <!-- Events -->
+    <!--region Public Events-->
     <!-- TODO: Decide whether or not to use the principal textview, since we have the label in the App Bar -->
-    <string name="events_list_fragment_label">Events</string>
-    <string name="event_details_fragment_label">Events</string>
+    <string name="public_events_list_fragment_label">Public Events</string>
+    <string name="public_event_details_fragment_label">Public Event Details</string>
     <string name="events_list_principal_textview">Upcoming Events</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--endregion-->
+
+    <!-- region Council Meet Events -->
+    <string name="council_meet_events_list_fragment_label">Council Meet Events</string>
+    <string name="council_meet_event_details_fragment_label">Council Meet Event Details</string>
     <string name="event_headline_tools_text">The general budget of Cluj-Napoca municipality this year is worth 434,484,383 euros, an increase of 1.13% compared to last year.</string>
     <string name="council_meet_events_list_principal_textview">Council Meet Briefings</string>
+    <!-- endregion -->
+
+    <!-- Report Incident -->
+    <string name="report_incident_fragment_label">Report Incident</string>
     <string name="report_incident_text">Report Incident</string>
     <string name="send_report_button_text">Send Report</string>
     <string name="report_incident_next_button">Next</string>

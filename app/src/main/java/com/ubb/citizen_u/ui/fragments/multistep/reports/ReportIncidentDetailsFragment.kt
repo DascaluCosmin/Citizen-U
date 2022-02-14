@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.databinding.FragmentReportIncidentDetailsBinding
-import com.ubb.citizen_u.ui.fragments.toastErrorMessage
+import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi

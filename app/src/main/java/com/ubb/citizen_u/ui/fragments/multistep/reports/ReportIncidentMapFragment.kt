@@ -21,8 +21,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentReportIncidentMapBinding
 import com.ubb.citizen_u.domain.model.Response
-import com.ubb.citizen_u.ui.fragments.toastErrorMessage
-import com.ubb.citizen_u.ui.fragments.toastMessage
+import com.ubb.citizen_u.ui.util.toastErrorMessage
+import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_REPORT_INCIDENT
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -108,8 +108,8 @@ class ReportIncidentMapFragment : Fragment() {
 
     private fun goToUserProfile() {
         val action =
-            ReportIncidentMapFragmentDirections.actionReportIncidentMapFragmentToSignedInMockupFragment(
-                connectedUserId = args.citizenId
+            ReportIncidentMapFragmentDirections.actionReportIncidentMapFragmentToSignedInFragment(
+                citizenId = args.citizenId
             )
         findNavController().navigate(action)
     }

@@ -20,7 +20,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentReportIncidentPhotoBinding
-import com.ubb.citizen_u.ui.fragments.toastErrorMessage
+import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
 import java.io.File

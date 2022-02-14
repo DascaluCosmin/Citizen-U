@@ -17,22 +17,14 @@
         <ImageView
             android:id="@+id/event_image"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/event_details_image_height"
-            android:scaleType="fitXY"
+            android:layout_height="0dp"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
             android:src="@drawable/event_photo3_sample"
+            app:layout_constraintBottom_toBottomOf="@id/horizontal_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/rounded_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_rounded_layout_event_details"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/event_image" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/vertical_guideline"
@@ -46,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.28" />
+            app:layout_constraintGuide_percent="0.3" />
 
         <TextView
             android:id="@+id/event_title"
@@ -143,7 +135,6 @@
             app:layout_constraintStart_toEndOf="@id/address_imageview"
             app:layout_constraintTop_toTopOf="@id/address_imageview"
             tools:text="Cluj Arena" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
