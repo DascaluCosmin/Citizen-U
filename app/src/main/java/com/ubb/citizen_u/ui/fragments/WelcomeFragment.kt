@@ -17,6 +17,7 @@ import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentWelcomeBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.fragments.dialog.ResetPasswordDialogFragment
+import com.ubb.citizen_u.ui.util.DrawerLocker
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.util.AuthenticationConstants
 import com.ubb.citizen_u.util.ValidationConstants
@@ -44,7 +45,7 @@ class WelcomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
 
@@ -67,6 +68,13 @@ class WelcomeFragment : Fragment() {
             }
         }
         authenticationViewModel.getCurrentUser()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // Can't be put in onCreate because drawer is not initialized yet
+        (activity as DrawerLocker).setDrawerLocked(true)
     }
 
     private suspend fun collectSignInState() {
@@ -170,6 +178,7 @@ class WelcomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        (activity as DrawerLocker).setDrawerLocked(false)
         _binding = null
     }
 

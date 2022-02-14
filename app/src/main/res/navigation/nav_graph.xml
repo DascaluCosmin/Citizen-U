@@ -31,7 +31,7 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signedInMockupFragment_to_eventsListFragment"
-            app:destination="@id/eventsListFragment" />
+            app:destination="@id/publicEventsListFragment" />
         <argument
             android:name="connectedUserId"
             app:argType="string" />
@@ -71,7 +71,7 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/eventsListFragment"
+        android:id="@+id/publicEventsListFragment"
         android:name="com.ubb.citizen_u.ui.fragments.events.PublicEventsListFragment"
         android:label="@string/public_events_list_fragment_label"
         tools:layout="@layout/fragment_public_events_list">

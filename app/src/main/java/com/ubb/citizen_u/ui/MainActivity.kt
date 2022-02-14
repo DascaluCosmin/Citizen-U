@@ -10,10 +10,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.ActivityMainBinding
+import com.ubb.citizen_u.ui.util.DrawerLocker
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DrawerLocker {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var drawerLayout: DrawerLayout
@@ -60,5 +61,14 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragment)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    // TODO [TECH DEBT]: Switch to Login Activity + Main Activity (Logged In Activity)
+    // TODO: Prohibit for Register as well
+    // Workaround to prohibit Drawer on Login Fragment
+    override fun setDrawerLocked(isEnabled: Boolean) {
+        drawerLayout.setDrawerLockMode(
+            if (isEnabled) DrawerLayout.LOCK_MODE_LOCKED_CLOSED else DrawerLayout.LOCK_MODE_UNLOCKED
+        )
     }
 }
