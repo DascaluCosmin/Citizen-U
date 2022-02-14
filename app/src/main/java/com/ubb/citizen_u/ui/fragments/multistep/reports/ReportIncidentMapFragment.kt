@@ -24,6 +24,7 @@ import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
+import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_REPORT_INCIDENT
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -36,6 +37,7 @@ class ReportIncidentMapFragment : Fragment() {
         private const val TAG = "ReportIncidentMapFragment"
     }
 
+    private val citizenViewModel: CitizenViewModel by activityViewModels()
     private val citizenRequestViewModel: CitizenRequestViewModel by activityViewModels()
     private val args: ReportIncidentMapFragmentArgs by navArgs()
 
@@ -109,7 +111,7 @@ class ReportIncidentMapFragment : Fragment() {
     private fun goToUserProfile() {
         val action =
             ReportIncidentMapFragmentDirections.actionReportIncidentMapFragmentToSignedInFragment(
-                citizenId = args.citizenId
+                citizenId = citizenViewModel.citizenId
             )
         findNavController().navigate(action)
     }
@@ -118,7 +120,7 @@ class ReportIncidentMapFragment : Fragment() {
         Log.d(TAG, "sendIncidentReport: Sending incident report...")
         citizenRequestViewModel.reportIncident(
             description = args.incidentDescription,
-            citizenId = args.citizenId
+            citizenId = citizenViewModel.citizenId
         )
     }
 

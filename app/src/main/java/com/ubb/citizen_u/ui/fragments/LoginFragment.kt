@@ -17,7 +17,6 @@ import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentLoginBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.fragments.dialog.ResetPasswordDialogFragment
-import com.ubb.citizen_u.ui.util.DrawerLocker
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.util.AuthenticationConstants
 import com.ubb.citizen_u.util.ValidationConstants

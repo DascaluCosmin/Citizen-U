@@ -145,10 +145,6 @@ class SignedInFragment : Fragment() {
     }
 
     fun goToReportIncident() {
-        val action =
-            SignedInFragmentDirections.actionSignedInFragmentToReportIncidentFragment(
-                citizenId = args.citizenId
-            )
-        findNavController().navigate(action)
+        findNavController().navigate(R.id.action_signedInFragment_to_reportIncidentFragment)
     }
 }

@@ -1,6 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.ubb.citizen_u.ui.AuthenticationActivity">
+    tools:context="com.ubb.citizen_u.ui.MainActivity">
+
+    <item
+        android:id="@+id/signedInFragment"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/signed_in_fragment_label" />
 
     <item
         android:id="@+id/publicEventsListFragment"

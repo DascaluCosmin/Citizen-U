@@ -17,12 +17,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CitizenViewModel @Inject constructor(
-    private val citizenUseCases: CitizenUseCases
+    private val citizenUseCases: CitizenUseCases,
 ) : ViewModel() {
 
     companion object {
         private const val TAG = "UBB-CitizenViewModel"
     }
+
+    lateinit var citizenId: String
 
     private val _getCitizenState = MutableSharedFlow<Response<Citizen?>>(
         replay = 1,
@@ -30,10 +32,12 @@ class CitizenViewModel @Inject constructor(
     )
     val getCitizenState: SharedFlow<Response<Citizen?>> get() = _getCitizenState
 
-    fun getCitizen(userId: String) {
-        Log.d(TAG, "getCitizen: Getting citizen with id $userId")
+    fun getCitizen(citizenId: String) {
+        Log.d(TAG, "getCitizen: Getting citizen with id $citizenId")
+        this.citizenId = citizenId
+
         viewModelScope.launch(Dispatchers.IO) {
-            citizenUseCases.getCitizenUseCase(userId).collect {
+            citizenUseCases.getCitizenUseCase(citizenId).collect {
                 _getCitizenState.tryEmit(it)
             }
         }
