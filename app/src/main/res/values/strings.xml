@@ -40,14 +40,22 @@
     <string name="signed_in_mockup_view_council_meet_events_button">View Council Meet Events Briefings</string>
 
     <!-- Events -->
+    <!--region Public Events-->
     <!-- TODO: Decide whether or not to use the principal textview, since we have the label in the App Bar -->
-    <string name="events_list_fragment_label">Events</string>
-    <string name="event_details_fragment_label">Events</string>
+    <string name="public_events_list_fragment_label">Public Events</string>
+    <string name="public_event_details_fragment_label">Public Event Details</string>
     <string name="events_list_principal_textview">Upcoming Events</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--endregion-->
+
+    <!-- region Council Meet Events -->
+    <string name="council_meet_events_list_fragment_label">Council Meet Events</string>
+    <string name="council_meet_event_details_fragment_label">Council Meet Event Details</string>
     <string name="event_headline_tools_text">The general budget of Cluj-Napoca municipality this year is worth 434,484,383 euros, an increase of 1.13% compared to last year.</string>
     <string name="council_meet_events_list_principal_textview">Council Meet Briefings</string>
+    <!-- endregion -->
+
+    <!-- Report Incident -->
+    <string name="report_incident_fragment_label">Report Incident</string>
     <string name="report_incident_text">Report Incident</string>
     <string name="send_report_button_text">Send Report</string>
     <string name="report_incident_next_button">Next</string>

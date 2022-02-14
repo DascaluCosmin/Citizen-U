@@ -73,7 +73,7 @@
     <fragment
         android:id="@+id/eventsListFragment"
         android:name="com.ubb.citizen_u.ui.fragments.events.PublicEventsListFragment"
-        android:label="@string/events_list_fragment_label"
+        android:label="@string/public_events_list_fragment_label"
         tools:layout="@layout/fragment_public_events_list">
         <action
             android:id="@+id/action_eventsListFragment_to_eventDetailsFragment"
@@ -82,7 +82,7 @@
     <fragment
         android:id="@+id/eventDetailsFragment"
         android:name="com.ubb.citizen_u.ui.fragments.events.PublicEventDetailsFragment"
-        android:label="@string/event_details_fragment_label"
+        android:label="@string/public_event_details_fragment_label"
         tools:layout="@layout/fragment_public_event_details">
         <argument
             android:name="eventId"
@@ -91,12 +91,12 @@
     <fragment
         android:id="@+id/councilMeetEventsListFragment"
         android:name="com.ubb.citizen_u.ui.fragments.events.CouncilMeetEventsListFragment"
-        android:label="fragment_council_meet_events_list"
+        android:label="@string/council_meet_events_list_fragment_label"
         tools:layout="@layout/fragment_council_meet_events_list" />
     <fragment
         android:id="@+id/reportIncidentFragment"
         android:name="com.ubb.citizen_u.ui.fragments.multistep.reports.ReportIncidentDetailsFragment"
-        android:label="fragment_report_incident"
+        android:label="@string/report_incident_fragment_label"
         tools:layout="@layout/fragment_report_incident_details">
         <argument
             android:name="citizenId"
@@ -108,7 +108,7 @@
     <fragment
         android:id="@+id/reportIncidentPhotoFragment"
         android:name="com.ubb.citizen_u.ui.fragments.multistep.reports.ReportIncidentPhotoFragment"
-        android:label="fragment_report_incident_photo"
+        android:label="@string/report_incident_fragment_label"
         tools:layout="@layout/fragment_report_incident_photo">
         <argument
             android:name="incidentDescription"
@@ -123,7 +123,7 @@
     <fragment
         android:id="@+id/reportIncidentMapFragment"
         android:name="com.ubb.citizen_u.ui.fragments.multistep.reports.ReportIncidentMapFragment"
-        android:label="fragment_report_incident_map"
+        android:label="@string/report_incident_fragment_label"
         tools:layout="@layout/fragment_report_incident_map">
         <argument
             android:name="incidentDescription"

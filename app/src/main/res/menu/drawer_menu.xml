@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ubb.citizen_u.ui.MainActivity">
+
+    <item
+        android:id="@+id/publicEventsListFragment"
+        android:title="@string/public_events_list_fragment_label" />
+
+    <item
+        android:id="@+id/councilMeetEventsListFragment"
+        android:title="@string/council_meet_events_list_fragment_label" />
+
+    <item
+        android:id="@+id/reportIncidentFragment"
+        android:title="@string/report_incident_fragment_label" />
+</menu>
