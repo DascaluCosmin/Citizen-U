@@ -124,7 +124,6 @@ class ReportIncidentPhotoFragment : Fragment() {
                 val action =
                     ReportIncidentPhotoFragmentDirections.actionReportIncidentPhotoFragmentToReportIncidentMapFragment(
                         incidentDescription = args.incidentDescription,
-                        citizenId = args.citizenId
                     )
                 findNavController().navigate(action)
             }

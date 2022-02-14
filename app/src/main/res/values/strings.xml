@@ -32,7 +32,7 @@
     <string name="multistep_register_identity_information_textview">Identity Information</string>
 
     <!-- Signed In -->
-    <string name="signed_in_fragment_label">Signed In</string>
+    <string name="signed_in_fragment_label">Home</string>
     <string name="signed_in_your_account_textview">Welcome</string>
     <string name="signed_in_your_account_textview_params">Welcome, %s</string>
     <string name="signed_in_your_account_textview_tools">Welcome, Cosmin</string>
