@@ -5,21 +5,27 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.ActivityMainBinding
-import com.ubb.citizen_u.ui.util.DrawerLocker
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), DrawerLocker {
+class MainActivity : AppCompatActivity() {
+
+    companion object {
+        private const val CITIZEN_ID_ARG_KEY = "citizenId"
+    }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+    private val args: MainActivityArgs by navArgs()
 
     /**
      *  Uncomment in order to show App Bar
@@ -29,30 +35,31 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        setSupportActionBar(binding.toolbar)
+        // setSupportActionBar(binding.toolbar)
 
-        navController = findNavController(R.id.fragment)
+        navController =
+            (supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment).navController
+
+        val bundle = Bundle()
+        bundle.putString(CITIZEN_ID_ARG_KEY, args.citizenId)
+        navController.setGraph(R.navigation.nav_graph_main, bundle)
+
         drawerLayout = binding.drawerLayout
         binding.navigationView.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+//         setupActionBarWithNavController(navController, appBarConfiguration)
 //        supportActionBar?.hide()
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.menu_main, menu)
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.drawer_menu, menu)
 //        return true
 //    }
-//
+
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
 //        return when (item.itemId) {
-//            R.id.action_settings -> true
 //            else -> super.onOptionsItemSelected(item)
 //        }
 //    }
@@ -60,15 +67,6 @@ class MainActivity : AppCompatActivity(), DrawerLocker {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.fragment)
         return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
-
-    // TODO [TECH DEBT]: Switch to Login Activity + Main Activity (Logged In Activity)
-    // TODO: Prohibit for Register as well
-    // Workaround to prohibit Drawer on Login Fragment
-    override fun setDrawerLocked(isEnabled: Boolean) {
-        drawerLayout.setDrawerLockMode(
-            if (isEnabled) DrawerLayout.LOCK_MODE_LOCKED_CLOSED else DrawerLayout.LOCK_MODE_UNLOCKED
-        )
+                || super.onNavigateUp()
     }
 }

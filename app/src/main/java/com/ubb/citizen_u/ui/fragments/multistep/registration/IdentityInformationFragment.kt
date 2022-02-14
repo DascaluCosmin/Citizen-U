@@ -80,7 +80,7 @@ class IdentityInformationFragment : Fragment() {
                                 AuthenticationConstants.SUCCESSFUL_REGISTER_MESSAGE,
                                 Toast.LENGTH_SHORT
                             ).show()
-                            findNavController().navigate(R.id.action_identityInformationFragment_to_welcomeFragment)
+                            findNavController().navigate(R.id.action_identityInformationFragment_to_loginFragment)
                         }
                     }
                 }

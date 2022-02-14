@@ -2,14 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_signed_in_mockup"
-    tools:context=".ui.fragments.SignedInMockupFragment">
+    android:id="@+id/layout_signed_in"
+    tools:context=".ui.fragments.SignedInFragment">
 
     <data>
 
         <variable
-            name="signedInMockupFragment"
-            type="com.ubb.citizen_u.ui.fragments.SignedInMockupFragment" />
+            name="signedInFragment"
+            type="com.ubb.citizen_u.ui.fragments.SignedInFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,19 +40,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/principal_text_view_margin_top"
-                android:text="@string/signed_in_mockup_your_account_textview"
+                android:text="@string/signed_in_your_account_textview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/signed_in_mockup_your_account_textview_tools" />
+                tools:text="@string/signed_in_your_account_textview_tools" />
 
             <Button
                 android:id="@+id/view_public_events_button"
                 android:layout_width="@dimen/width_views"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/generic_margin_between_element"
-                android:onClick="@{() -> signedInMockupFragment.viewPublicEventsList()}"
-                android:text="@string/signed_in_mockup_view_public_events_button"
+                android:onClick="@{() -> signedInFragment.viewPublicEventsList()}"
+                android:text="@string/signed_in_view_public_events_button"
                 app:layout_constraintEnd_toEndOf="@id/welcome_textview"
                 app:layout_constraintStart_toStartOf="@id/welcome_textview"
                 app:layout_constraintTop_toBottomOf="@id/welcome_textview" />
@@ -62,8 +62,8 @@
                 android:layout_width="@dimen/width_views"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/generic_margin_between_element"
-                android:onClick="@{() -> signedInMockupFragment.viewCouncilMeetEventsList()}"
-                android:text="@string/signed_in_mockup_view_council_meet_events_button"
+                android:onClick="@{() -> signedInFragment.viewCouncilMeetEventsList()}"
+                android:text="@string/signed_in_view_council_meet_events_button"
                 app:layout_constraintEnd_toEndOf="@id/welcome_textview"
                 app:layout_constraintStart_toStartOf="@id/welcome_textview"
                 app:layout_constraintTop_toBottomOf="@id/view_public_events_button" />
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/generic_margin_between_element"
-                android:onClick="@{() -> signedInMockupFragment.goToReportIncident()}"
+                android:onClick="@{() -> signedInFragment.goToReportIncident()}"
                 android:text="@string/report_incident_text"
                 app:layout_constraintEnd_toEndOf="@id/welcome_textview"
                 app:layout_constraintStart_toStartOf="@id/welcome_textview"
@@ -85,8 +85,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="40dp"
-                android:onClick="@{() -> signedInMockupFragment.signOut()}"
-                android:text="@string/signed_in_mockup_logout_button"
+                android:onClick="@{() -> signedInFragment.signOut()}"
+                android:text="@string/signed_in_logout_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

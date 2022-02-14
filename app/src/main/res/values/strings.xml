@@ -2,6 +2,8 @@
     <!-- Application -->
     <string name="app_name">Citizen-U</string>
     <string name="action_settings">Settings</string>
+    <string name="authentication_activity_label">Authentication Activity</string>
+    <string name="main_activity_label">Main Activity</string>
 
     <!-- Generics -->
     <string name="generic_email_hint">Email</string>
@@ -31,13 +33,13 @@
 
     <!-- Signed In -->
     <string name="signed_in_fragment_label">Signed In</string>
-    <string name="signed_in_mockup_your_account_textview">Welcome</string>
-    <string name="signed_in_mockup_your_account_textview_params">Welcome, %s</string>
-    <string name="signed_in_mockup_your_account_textview_tools">Welcome, Cosmin</string>
-    <string name="signed_in_mockup_logout_button">Sign Out</string>
+    <string name="signed_in_your_account_textview">Welcome</string>
+    <string name="signed_in_your_account_textview_params">Welcome, %s</string>
+    <string name="signed_in_your_account_textview_tools">Welcome, Cosmin</string>
+    <string name="signed_in_logout_button">Sign Out</string>
     <string name="generic_undefined_value">undefined</string>
-    <string name="signed_in_mockup_view_public_events_button">View Public Events</string>
-    <string name="signed_in_mockup_view_council_meet_events_button">View Council Meet Events Briefings</string>
+    <string name="signed_in_view_public_events_button">View Public Events</string>
+    <string name="signed_in_view_council_meet_events_button">View Council Meet Events Briefings</string>
 
     <!-- Events -->
     <!--region Public Events-->

@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.R
-import com.ubb.citizen_u.databinding.FragmentWelcomeBinding
+import com.ubb.citizen_u.databinding.FragmentLoginBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.fragments.dialog.ResetPasswordDialogFragment
 import com.ubb.citizen_u.ui.util.DrawerLocker
@@ -30,13 +30,13 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class WelcomeFragment : Fragment() {
+class LoginFragment : Fragment() {
 
     companion object {
-        const val TAG = "UBB-WelcomeFragment"
+        const val TAG = "UBB-LoginFragment"
     }
 
-    private var _binding: FragmentWelcomeBinding? = null
+    private var _binding: FragmentLoginBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
@@ -47,10 +47,10 @@ class WelcomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.apply {
-            welcomeFragment = this@WelcomeFragment
+            loginFragment = this@LoginFragment
         }
         return binding.root
     }
@@ -68,13 +68,6 @@ class WelcomeFragment : Fragment() {
             }
         }
         authenticationViewModel.getCurrentUser()
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        // Can't be put in onCreate because drawer is not initialized yet
-        (activity as DrawerLocker).setDrawerLocked(true)
     }
 
     private suspend fun collectSignInState() {
@@ -162,8 +155,8 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun navigateToUserProfile(userId: String) {
-        val action = WelcomeFragmentDirections.actionWelcomeFragmentToSignedInMockupFragment(
-            connectedUserId = userId
+        val action = LoginFragmentDirections.actionLoginFragmentToMainActivity(
+            citizenId = userId
         )
         findNavController().navigate(action)
     }
@@ -178,7 +171,6 @@ class WelcomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        (activity as DrawerLocker).setDrawerLocked(false)
         _binding = null
     }
 
@@ -215,7 +207,7 @@ class WelcomeFragment : Fragment() {
     }
 
     fun register() {
-        findNavController().navigate(R.id.action_welcomeFragment_to_registerFragment)
+        findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
     }
 
     fun resetPassword() {

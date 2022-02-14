@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentPublicEventsListBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.adapters.PublicEventsAdapter
-import com.ubb.citizen_u.ui.fragments.toastErrorMessage
+import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ class PublicEventsListFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentPublicEventsListBinding.inflate(inflater, container, false)
         return binding.root

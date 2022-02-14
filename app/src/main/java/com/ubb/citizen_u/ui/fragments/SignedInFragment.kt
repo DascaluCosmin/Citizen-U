@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -15,11 +14,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
-import com.ubb.citizen_u.databinding.FragmentSignedInMockupBinding
+import com.ubb.citizen_u.databinding.FragmentSignedInBinding
 import com.ubb.citizen_u.domain.model.Response
+import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
-import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -27,20 +26,20 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class SignedInMockupFragment : Fragment() {
+class SignedInFragment : Fragment() {
 
     companion object {
-        const val TAG = "UBB-SignedInMockupFragment"
+        const val TAG = "UBB-SignedInFragment"
     }
 
     private val authenticationViewModel: AuthenticationViewModel by activityViewModels()
     private val citizenViewModel: CitizenViewModel by activityViewModels()
 
-    private var _binding: FragmentSignedInMockupBinding? = null
+    private var _binding: FragmentSignedInBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
-    private val args: SignedInMockupFragmentArgs by navArgs()
+    private val args: SignedInFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,10 +56,10 @@ class SignedInMockupFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentSignedInMockupBinding.inflate(inflater, container, false)
+        _binding = FragmentSignedInBinding.inflate(inflater, container, false)
 
         binding.apply {
-            signedInMockupFragment = this@SignedInMockupFragment
+            signedInFragment = this@SignedInFragment
         }
 
         return binding.root
@@ -78,7 +77,7 @@ class SignedInMockupFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        citizenViewModel.getCitizen(args.connectedUserId)
+        citizenViewModel.getCitizen(args.citizenId)
     }
 
     private suspend fun collectCitizenState() {
@@ -111,7 +110,7 @@ class SignedInMockupFragment : Fragment() {
                         mainProgressbar.visibility = View.GONE
 
                         welcomeTextview.text = getString(
-                            R.string.signed_in_mockup_your_account_textview_params,
+                            R.string.signed_in_your_account_textview_params,
                             it.data.firstName
                         )
                     }
@@ -134,30 +133,22 @@ class SignedInMockupFragment : Fragment() {
      */
     fun signOut() {
         authenticationViewModel.signOut()
-        findNavController().navigate(R.id.action_signedInMockupFragment_to_welcomeFragment)
+        findNavController().navigate(R.id.action_SignedInFragment_to_authenticationActivity)
     }
 
     fun viewPublicEventsList() {
-        findNavController().navigate(R.id.action_signedInMockupFragment_to_eventsListFragment)
+        findNavController().navigate(R.id.action_signedInFragment_to_eventsListFragment)
     }
 
     fun viewCouncilMeetEventsList() {
-        findNavController().navigate(R.id.action_signedInMockupFragment_to_councilMeetEventsListFragment)
+        findNavController().navigate(R.id.action_signedInFragment_to_councilMeetEventsListFragment)
     }
 
     fun goToReportIncident() {
         val action =
-            SignedInMockupFragmentDirections.actionSignedInMockupFragmentToReportIncidentFragment(
-                citizenId = args.connectedUserId
+            SignedInFragmentDirections.actionSignedInFragmentToReportIncidentFragment(
+                citizenId = args.citizenId
             )
         findNavController().navigate(action)
     }
-}
-
-fun Fragment.toastMessage(message: String) {
-    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-}
-
-fun Fragment.toastErrorMessage(errorMessage: String = DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN) {
-    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
 }

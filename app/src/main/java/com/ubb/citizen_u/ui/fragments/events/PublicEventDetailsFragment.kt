@@ -11,11 +11,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import com.ubb.citizen_u.data.model.events.Event
 import com.ubb.citizen_u.data.model.Photo
+import com.ubb.citizen_u.data.model.events.Event
 import com.ubb.citizen_u.databinding.FragmentPublicEventDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
-import com.ubb.citizen_u.ui.fragments.toastErrorMessage
+import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.glide.ImageFiller
@@ -39,7 +39,7 @@ class PublicEventDetailsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentPublicEventDetailsBinding.inflate(inflater, container, false)
         return binding.root
