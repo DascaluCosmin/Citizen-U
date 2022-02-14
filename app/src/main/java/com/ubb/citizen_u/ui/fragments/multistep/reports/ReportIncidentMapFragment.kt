@@ -2,6 +2,8 @@ package com.ubb.citizen_u.ui.fragments.multistep.reports
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,15 +28,18 @@ import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_REPORT_INCIDENT
+import com.ubb.citizen_u.util.LocationConstants.FAILED_ADDRESS_COMPUTING
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.*
 
 @ExperimentalCoroutinesApi
 class ReportIncidentMapFragment : Fragment() {
 
     companion object {
         private const val TAG = "ReportIncidentMapFragment"
+        private const val ZOOM_WEIGHT = 15.0f
     }
 
     private val citizenViewModel: CitizenViewModel by activityViewModels()
@@ -60,14 +65,37 @@ class ReportIncidentMapFragment : Fragment() {
                 googleMap.isMyLocationEnabled = true
             }
             googleMap.setOnMapClickListener { latLng ->
+                val latitude = latLng.latitude
+                val longitude = latLng.longitude
 
                 val markerOptions = MarkerOptions()
                 markerOptions.position(latLng)
                 markerOptions.title("${latLng.latitude} : ${latLng.longitude}")
 
+                // Reverse Geo-Coding
+                val geocoder = Geocoder(requireContext(), Locale.getDefault())
+                try {
+                    val addressList: List<Address> =
+                        geocoder.getFromLocation(latitude, longitude, 1)
+                    if (!addressList.isNullOrEmpty()) {
+                        val reversedGeocodedAddress = addressList.first()
+                        val firstAddressLine = reversedGeocodedAddress.getAddressLine(0)
+                        if (!firstAddressLine.isNullOrEmpty()) {
+                            markerOptions.title(firstAddressLine)
+                            citizenRequestViewModel.incidentAddress = firstAddressLine
+                        }
+                    }
+                } catch (exception: Exception) {
+                    Log.e(TAG, "onCreateView: Error at doing reverse geo-coding")
+                    toastErrorMessage(FAILED_ADDRESS_COMPUTING)
+                }
+
                 googleMap.clear()
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f))
-                googleMap.addMarker(markerOptions)
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, ZOOM_WEIGHT))
+                googleMap.addMarker(markerOptions)?.run {
+                    // Make sure the marker title is displayed without needing to click it
+                    showInfoWindow()
+                }
             }
         }
 

@@ -50,7 +50,7 @@ class ReportIncidentPhotoFragment : Fragment() {
                             "Photo File Path is ${photoFile.absoluteFile}"
                 )
                 setImage(photoFile.absolutePath)
-                citizenRequestViewModel.saveIncidentPhoto(Uri.fromFile(photoFile))
+                citizenRequestViewModel.addIncidentPhoto(Uri.fromFile(photoFile))
             }
         }
 

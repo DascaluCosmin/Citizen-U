@@ -22,15 +22,17 @@ class CitizenRequestViewModel @Inject constructor(
     private val citizenRequestUseCase: CitizenRequestUseCase,
 ) : ViewModel() {
 
+    private val listIncidentPhotoUri = mutableListOf<Uri>()
+
     private val _addReportIncidentState: MutableSharedFlow<Response<Boolean>> = MutableSharedFlow(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
     val addReportIncidentState: SharedFlow<Response<Boolean>> = _addReportIncidentState
 
-    private val listIncidentPhotoUri = mutableListOf<Uri>()
+    var incidentAddress: String = ""
 
-    fun saveIncidentPhoto(uri: Uri) {
+    fun addIncidentPhoto(uri: Uri) {
         listIncidentPhotoUri.add(uri)
     }
 
@@ -43,7 +45,8 @@ class CitizenRequestViewModel @Inject constructor(
             citizenRequestUseCase.reportIncidentUseCase(
                 incident = Incident(
                     description = description,
-                    sentDate = Date()
+                    sentDate = Date(),
+                    address = incidentAddress,
                 ),
                 citizenId = citizenId,
                 listIncidentPhotoUri = listIncidentPhotoUri,

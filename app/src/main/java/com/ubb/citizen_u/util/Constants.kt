@@ -37,6 +37,10 @@ object CitizenRequestConstants {
     // endregion
 }
 
+object LocationConstants {
+    const val FAILED_ADDRESS_COMPUTING = "The address cannot be determined at the moment!"
+}
+
 object DatabaseConstants {
     const val USERS_COL = "users"
     const val USER_REQUESTS_INCIDENTS_COL = "request_incidents"

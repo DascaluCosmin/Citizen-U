@@ -23,7 +23,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         private const val TAG = "CitizenRequestRepositoryImpl"
     }
 
-    // TODO: Transction this
+    // TODO: Transaction this
     override suspend fun addIncident(
         incident: Incident,
         citizenId: String,
