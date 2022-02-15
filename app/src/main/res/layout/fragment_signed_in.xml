@@ -78,17 +78,6 @@
                 app:layout_constraintEnd_toEndOf="@id/welcome_textview"
                 app:layout_constraintStart_toStartOf="@id/welcome_textview"
                 app:layout_constraintTop_toBottomOf="@id/view_council_meet_events_button" />
-
-            <Button
-                android:id="@+id/logout_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="40dp"
-                android:onClick="@{() -> signedInFragment.signOut()}"
-                android:text="@string/signed_in_logout_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

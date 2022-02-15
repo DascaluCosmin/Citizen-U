@@ -2,6 +2,7 @@ package com.ubb.citizen_u.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -13,8 +14,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.ActivityMainBinding
+import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
+
+    private val authenticationViewModel: AuthenticationViewModel by viewModels()
     private val args: MainActivityArgs by navArgs()
 
     /**
@@ -50,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
+        overrideNavigationDrawerItems()
 //         setupActionBarWithNavController(navController, appBarConfiguration)
 //        supportActionBar?.hide()
     }
@@ -65,14 +72,20 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 
+    private fun overrideNavigationDrawerItems() {
+        binding.navigationView.menu.findItem(R.id.loginFragment).setOnMenuItemClickListener {
+            authenticationViewModel.signOut()
+
+            // TODO: This doesn't work as expected for Screens other than Home (has to be pressed twice)
+            super.onBackPressed()
+            true
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.fragment)
         return navController.navigateUp(appBarConfiguration)
                 || super.onNavigateUp()
-    }
-
-    fun onBackPressedForSignOut() {
-        super.onBackPressed()
     }
 
     override fun onBackPressed() {
