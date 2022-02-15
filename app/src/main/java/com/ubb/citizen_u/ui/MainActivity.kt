@@ -1,5 +1,6 @@
 package com.ubb.citizen_u.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -68,5 +69,20 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragment)
         return navController.navigateUp(appBarConfiguration)
                 || super.onNavigateUp()
+    }
+
+    fun onBackPressedForSignOut() {
+        super.onBackPressed()
+    }
+
+    override fun onBackPressed() {
+        if (navController.currentDestination?.id == navController.currentDestination?.parent?.startDestinationId) {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_HOME)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        } else {
+            super.onBackPressed()
+        }
     }
 }
