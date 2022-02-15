@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -16,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentSignedInBinding
 import com.ubb.citizen_u.domain.model.Response
+import com.ubb.citizen_u.ui.MainActivity
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
@@ -40,17 +40,6 @@ class SignedInFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
     private val args: SignedInFragmentArgs by navArgs()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val backButtonCallBack = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                requireActivity().finish()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, backButtonCallBack)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -133,7 +122,9 @@ class SignedInFragment : Fragment() {
      */
     fun signOut() {
         authenticationViewModel.signOut()
-        findNavController().navigate(R.id.action_SignedInFragment_to_authenticationActivity)
+
+        // Workaround for Nav Component shortcoming
+        (requireActivity() as MainActivity).onBackPressedForSignOut()
     }
 
     fun viewPublicEventsList() {

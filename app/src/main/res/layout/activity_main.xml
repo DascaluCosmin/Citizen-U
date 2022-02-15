@@ -37,7 +37,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_signed_in" />
+        app:navGraph="@navigation/nav_graph_main" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
