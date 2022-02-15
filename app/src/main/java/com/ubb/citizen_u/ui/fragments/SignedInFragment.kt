@@ -15,9 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentSignedInBinding
 import com.ubb.citizen_u.domain.model.Response
-import com.ubb.citizen_u.ui.MainActivity
 import com.ubb.citizen_u.ui.util.toastErrorMessage
-import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -32,7 +30,6 @@ class SignedInFragment : Fragment() {
         const val TAG = "UBB-SignedInFragment"
     }
 
-    private val authenticationViewModel: AuthenticationViewModel by activityViewModels()
     private val citizenViewModel: CitizenViewModel by activityViewModels()
 
     private var _binding: FragmentSignedInBinding? = null
@@ -111,20 +108,6 @@ class SignedInFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    /**
-     * TODO: Improve the signOut. Scenarios:
-     * - The apps closes unexpectedly.
-     *      - If you call signOut on the onStop callback, watch for Configuration Changes, e.g. Device Rotation
-     * - The User uses the Home button. Question: what happens then?
-     * - The User presses the Back button. - DONE
-     */
-    fun signOut() {
-        authenticationViewModel.signOut()
-
-        // Workaround for Nav Component shortcoming
-        (requireActivity() as MainActivity).onBackPressedForSignOut()
     }
 
     fun viewPublicEventsList() {
