@@ -8,7 +8,7 @@ import com.ubb.citizen_u.util.glide.ImageFiller
 
 class PublicEventViewHolder(
     private val eventsListItemBinding: PublicEventsListItemBinding,
-    private val eventsDetailsOnClickCallBack: (PublicEvent) -> Unit
+    private val eventsDetailsOnClickCallBack: (PublicEvent) -> Unit,
 ) : RecyclerView.ViewHolder(eventsListItemBinding.root) {
 
     fun bind(publicEvent: PublicEvent) {

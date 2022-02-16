@@ -39,6 +39,8 @@ class EventViewModel @Inject constructor(
     )
     val getPublicEventDetailsState: SharedFlow<Response<PublicEvent?>>
         get() = _getPublicEventDetailsState
+
+    var currentPublicEventDetails: PublicEvent? = null
     // endregion
 
     // region Council Meet Events
@@ -66,6 +68,9 @@ class EventViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             eventUseCases.getPublicEventDetailsUseCase(eventId).collect {
                 _getPublicEventDetailsState.tryEmit(it)
+                if (it is Response.Success) {
+                    currentPublicEventDetails = it.data
+                }
             }
         }
     }
