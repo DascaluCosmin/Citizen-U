@@ -49,7 +49,6 @@ class ReportIncidentPhotoFragment : Fragment() {
                     "photoIncidentResultLauncher: The incident report photo was taken successfully. " +
                             "Photo File Path is ${photoFile.absoluteFile}"
                 )
-                setImage(photoFile.absolutePath)
                 citizenRequestViewModel.addIncidentPhoto(Uri.fromFile(photoFile))
             }
         }
@@ -58,8 +57,15 @@ class ReportIncidentPhotoFragment : Fragment() {
         val imageBitmap = BitmapFactory.decodeFile(path)
         binding.apply {
             reportIncidentImageview.setImageBitmap(imageBitmap)
-            reportIncidentPhotoHint.visibility = View.GONE
-            takePhotoButton.text = getString(R.string.take_another_photo_button_text)
+            if (path.isNullOrEmpty()) {
+                removeIncidentPhotoButton.visibility = View.GONE
+                reportIncidentPhotoHint.visibility = View.VISIBLE
+                takePhotoButton.text = getString(R.string.take_photo_button_text)
+            } else {
+                removeIncidentPhotoButton.visibility = View.VISIBLE
+                reportIncidentPhotoHint.visibility = View.GONE
+                takePhotoButton.text = getString(R.string.take_another_photo_button_text)
+            }
         }
     }
 
@@ -83,14 +89,9 @@ class ReportIncidentPhotoFragment : Fragment() {
         binding.apply {
             reportIncidentPhotoFragment = this@ReportIncidentPhotoFragment
         }
-    }
 
-    override fun onStart() {
-        super.onStart()
-
-        val currentIncidentPhotos = citizenRequestViewModel.getIncidentPhotos()
-        if (currentIncidentPhotos.isNotEmpty()) {
-            setImage(currentIncidentPhotos[0].path)
+        citizenRequestViewModel.listIncidentPhotoUriLiveData.observe(viewLifecycleOwner) {
+            setImage(it.lastOrNull()?.path)
         }
     }
 
@@ -114,10 +115,15 @@ class ReportIncidentPhotoFragment : Fragment() {
         }
     }
 
+    fun removeLatestPhoto() {
+        Log.d(TAG, "removeLatestPhoto: Removing latest photo...")
+        citizenRequestViewModel.removeLatestPhoto()
+    }
+
     fun goNext() {
         Log.d(TAG, "goNext: Going next in multistep report incident...")
         when {
-            citizenRequestViewModel.getIncidentPhotos().isEmpty() -> toastErrorMessage(
+            citizenRequestViewModel.listIncidentPhotoUriLiveData.value.isNullOrEmpty() -> toastErrorMessage(
                 INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
             )
             else -> {
