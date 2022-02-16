@@ -9,7 +9,7 @@ abstract class Event(
     var title: String? = null,
     var category: String? = null,
     var content: String? = null,
-    var photos: MutableList<Photo?> = mutableListOf()
+    var photos: MutableList<Photo?> = mutableListOf(),
 ) {
 
     override fun toString(): String {
@@ -22,6 +22,7 @@ data class PublicEvent(
     var endDate: Date? = null,
     var address: String? = null,
     var location: String? = null,
+    var websiteUrl: String? = null,
 ) : Event() {
 
     override fun equals(other: Any?): Boolean {
@@ -34,6 +35,7 @@ data class PublicEvent(
         if (endDate != other.endDate) return false
         if (address != other.address) return false
         if (location != other.location) return false
+        if (websiteUrl != other.websiteUrl) return false
 
         return true
     }
@@ -43,17 +45,18 @@ data class PublicEvent(
         result = 31 * result + (endDate?.hashCode() ?: 0)
         result = 31 * result + (address?.hashCode() ?: 0)
         result = 31 * result + (location?.hashCode() ?: 0)
+        result = 31 * result + (websiteUrl?.hashCode() ?: 0)
         return result
     }
 
     override fun toString(): String {
-        return "${super.toString()}, Location = $location, Address = $address"
+        return "${super.toString()}, Location = $location, Address = $address, websiteUrl: $websiteUrl"
     }
 }
 
 data class CouncilMeetEvent(
     var publicationDate: Date? = null,
-    var headline: String? = null
+    var headline: String? = null,
 ) : Event() {
 
     override fun equals(other: Any?): Boolean {

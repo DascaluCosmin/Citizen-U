@@ -1,5 +1,7 @@
 package com.ubb.citizen_u.ui.fragments.events
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,6 +30,7 @@ class PublicEventDetailsFragment : Fragment() {
 
     companion object {
         private const val TAG = "UBB-PublicEventDetailsFragment"
+        private const val DEFAULT_GOOGLE_SEARCH_SITE = "http://www.google.com/search?q="
     }
 
     private var _binding: FragmentPublicEventDetailsBinding? = null
@@ -47,6 +50,10 @@ class PublicEventDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
+            publicEventDetailsFragment = this@PublicEventDetailsFragment
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -107,5 +114,27 @@ class PublicEventDetailsFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         eventViewModel.getPublicEventDetails(args.eventId)
+    }
+
+    fun goToEventOnlinePage() {
+        Log.d(TAG, "goToEventOnlinePage: Going to event online page...")
+
+        eventViewModel.currentPublicEventDetails?.let {
+            try {
+                val onlineEventIntent = Intent(Intent.ACTION_VIEW)
+                val url = if (!it.websiteUrl.isNullOrEmpty()) {
+                    it.websiteUrl!!
+                } else {
+                    "$DEFAULT_GOOGLE_SEARCH_SITE${it.title}"
+                }
+                onlineEventIntent.data = Uri.parse(url)
+                startActivity(onlineEventIntent)
+            } catch (exception: Exception) {
+                Log.e(
+                    TAG,
+                    "goToEventOnlinePage: Error at starting Open Event Website activity for event ${it.id}, url: ${it.websiteUrl}: $exception",
+                )
+            }
+        }
     }
 }
