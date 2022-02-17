@@ -1,6 +1,8 @@
 package com.ubb.citizen_u.ui.viewmodels
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
@@ -22,7 +24,9 @@ class CitizenRequestViewModel @Inject constructor(
     private val citizenRequestUseCase: CitizenRequestUseCase,
 ) : ViewModel() {
 
-    private val listIncidentPhotoUri = mutableListOf<Uri>()
+    private val listIncidentPhotoUri: MutableList<Uri> = mutableListOf()
+    private val _listIncidentPhotoUriLiveData = MutableLiveData<MutableList<Uri>>()
+    val listIncidentPhotoUriLiveData: LiveData<MutableList<Uri>> = _listIncidentPhotoUriLiveData
 
     private val _addReportIncidentState: MutableSharedFlow<Response<Boolean>> = MutableSharedFlow(
         replay = 1,
@@ -34,13 +38,17 @@ class CitizenRequestViewModel @Inject constructor(
 
     fun addIncidentPhoto(uri: Uri) {
         listIncidentPhotoUri.add(uri)
+        _listIncidentPhotoUriLiveData.value = listIncidentPhotoUri
     }
 
-    fun getIncidentPhotos() =
-        listIncidentPhotoUri
+    fun removeLatestPhoto() {
+        listIncidentPhotoUri.removeLast()
+        _listIncidentPhotoUriLiveData.value = listIncidentPhotoUri
+    }
 
     @ExperimentalCoroutinesApi
     fun reportIncident(description: String, citizenId: String) {
+        // TODO: Validate Address
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.reportIncidentUseCase(
                 incident = Incident(
@@ -50,11 +58,11 @@ class CitizenRequestViewModel @Inject constructor(
                 ),
                 citizenId = citizenId,
                 listIncidentPhotoUri = listIncidentPhotoUri,
-            ).collect {
-                if (it is Response.Success) {
+            ).collect { response ->
+                if (response is Response.Success) {
                     listIncidentPhotoUri.clear()
                 }
-                _addReportIncidentState.tryEmit(it)
+                _addReportIncidentState.tryEmit(response)
                 _addReportIncidentState.resetReplayCache()
             }
         }
