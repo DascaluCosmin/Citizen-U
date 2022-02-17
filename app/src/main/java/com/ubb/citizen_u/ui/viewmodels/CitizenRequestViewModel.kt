@@ -48,6 +48,7 @@ class CitizenRequestViewModel @Inject constructor(
 
     @ExperimentalCoroutinesApi
     fun reportIncident(description: String, citizenId: String) {
+        // TODO: Validate Address
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.reportIncidentUseCase(
                 incident = Incident(

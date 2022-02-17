@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentReportIncidentPhotoBinding
+import com.ubb.citizen_u.ui.util.getRotatedBitmap
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
@@ -56,7 +57,7 @@ class ReportIncidentPhotoFragment : Fragment() {
     private fun setImage(path: String?) {
         val imageBitmap = BitmapFactory.decodeFile(path)
         binding.apply {
-            reportIncidentImageview.setImageBitmap(imageBitmap)
+            reportIncidentImageview.setImageBitmap(getRotatedBitmap(path, imageBitmap))
             if (path.isNullOrEmpty()) {
                 removeIncidentPhotoButton.visibility = View.GONE
                 reportIncidentPhotoHint.visibility = View.VISIBLE
@@ -123,9 +124,12 @@ class ReportIncidentPhotoFragment : Fragment() {
     fun goNext() {
         Log.d(TAG, "goNext: Going next in multistep report incident...")
         when {
-            citizenRequestViewModel.listIncidentPhotoUriLiveData.value.isNullOrEmpty() -> toastErrorMessage(
-                INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
-            )
+            citizenRequestViewModel.listIncidentPhotoUriLiveData.value.isNullOrEmpty() -> {
+                Log.d(TAG, "goNext: There are no incident photos")
+                toastErrorMessage(
+                    INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
+                )
+            }
             else -> {
                 val action =
                     ReportIncidentPhotoFragmentDirections.actionReportIncidentPhotoFragmentToReportIncidentMapFragment(
