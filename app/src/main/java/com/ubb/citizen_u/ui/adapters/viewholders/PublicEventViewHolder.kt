@@ -31,7 +31,6 @@ class PublicEventViewHolder(
                     }
                 }
             }
-
             eventCard.setOnClickListener {
                 eventsDetailsOnClickCallBack(publicEvent)
             }

@@ -56,3 +56,5 @@ const val DEFAULT_ERROR_MESSAGE = "An unexpected error has occurred"
 const val DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN =
     "An unexpected error has occurred! Please try again!"
 const val DEFAULT_DATE_ERROR_MESSAGE = "UNKNOWN DATE"
+
+const val APP_SHARED_PREFERENCE = "ApplicationSharedPreference"

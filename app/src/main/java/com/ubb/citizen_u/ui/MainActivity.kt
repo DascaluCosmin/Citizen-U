@@ -1,5 +1,6 @@
 package com.ubb.citizen_u.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -55,6 +56,9 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+
+        val sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString("key", "aaa").apply()
 
         overrideNavigationDrawerItems()
 //         setupActionBarWithNavController(navController, appBarConfiguration)
