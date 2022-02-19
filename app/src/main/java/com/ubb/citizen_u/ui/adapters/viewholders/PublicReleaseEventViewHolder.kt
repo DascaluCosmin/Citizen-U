@@ -2,18 +2,18 @@ package com.ubb.citizen_u.ui.adapters.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.ubb.citizen_u.data.model.events.CouncilMeetEvent
-import com.ubb.citizen_u.databinding.CouncilMeetEventsListItemBinding
+import com.ubb.citizen_u.data.model.events.PublicReleaseEvent
+import com.ubb.citizen_u.databinding.PublicReleaseEventsListItemBinding
 import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.glide.ImageFiller
 
-class CouncilMeetEventViewHolder(
+class PublicReleaseEventViewHolder(
     private val language: String,
-    private val binding: CouncilMeetEventsListItemBinding,
-    private val eventDetailsOnClickCallBack: (CouncilMeetEvent) -> Unit
+    private val binding: PublicReleaseEventsListItemBinding,
+    private val eventDetailsOnClickCallBack: (PublicReleaseEvent) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(event: CouncilMeetEvent) {
+    fun bind(event: PublicReleaseEvent) {
         binding.apply {
             eventCategory.text = event.category[language]
             eventHeadline.text = event.headline[language]

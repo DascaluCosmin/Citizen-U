@@ -39,7 +39,7 @@
     <string name="signed_in_logout_button">Sign Out</string>
     <string name="generic_undefined_value" translatable="false">undefined</string>
     <string name="signed_in_view_public_events_button">View public events</string>
-    <string name="signed_in_view_council_meet_events_button">View public releases</string>
+    <string name="signed_in_view_public_release_events_button">View public releases</string>
 
     <!-- Events -->
     <!--region Public Events-->
@@ -49,11 +49,11 @@
     <string name="events_list_principal_textview">Upcoming events</string>
     <!--endregion-->
 
-    <!-- region Council Meet Events -->
-    <string name="council_meet_events_list_fragment_label">Public Releases</string>
-    <string name="council_meet_event_details_fragment_label" translatable="false">Public Releases Details</string>
+    <!-- region Public Release Events -->
+    <string name="public_release_events_list_fragment_label">Public Releases</string>
+    <string name="public_release_event_details_fragment_label" translatable="false">Public Releases Details</string>
     <string name="event_headline_tools_text" translatable="false">The general budget of Cluj-Napoca municipality this year is worth 434,484,383 euros, an increase of 1.13% compared to last year.</string>
-    <string name="council_meet_events_list_principal_textview">Public releases</string>
+    <string name="public_release_events_list_principal_textview">Public releases</string>
     <!-- endregion -->
 
     <!-- Report Incident -->

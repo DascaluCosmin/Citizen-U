@@ -38,7 +38,7 @@
     <string name="signed_in_logout_button">Kijelentkezés</string>
     <string name="generic_undefined_value">undefined</string>
     <string name="signed_in_view_public_events_button">Nyilvános események megtekintése</string>
-    <string name="signed_in_view_council_meet_events_button">Nyilvános kiadások megtekintése</string>
+    <string name="signed_in_view_public_release_events_button">Nyilvános kiadások megtekintése</string>
 
     <!-- Events -->
     <!--region Public Events-->
@@ -47,11 +47,11 @@
     <string name="events_list_principal_textview">Közelgő események</string>
     <!--endregion-->
 
-    <!-- region Council Meet Events -->
-    <string name="council_meet_events_list_fragment_label">Kiadások megtekintése</string>
-    <string name="council_meet_event_details_fragment_label">Public Releases Details</string>
+    <!-- region Public Release Events -->
+    <string name="public_release_events_list_fragment_label">Kiadások megtekintése</string>
+    <string name="public_release_event_details_fragment_label">Public Releases Details</string>
     <string name="event_headline_tools_text">The general budget of Cluj-Napoca municipality this year is worth 434,484,383 euros, an increase of 1.13% compared to last year.</string>
-    <string name="council_meet_events_list_principal_textview">Kiadások megtekintése</string>
+    <string name="public_release_events_list_principal_textview">Kiadások megtekintése</string>
     <!-- endregion -->
 
     <!-- Report Incident -->

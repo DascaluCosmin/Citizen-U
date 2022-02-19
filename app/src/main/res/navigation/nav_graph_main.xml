@@ -18,8 +18,8 @@
             android:name="citizenId"
             app:argType="string" />
         <action
-            android:id="@+id/action_signedInFragment_to_councilMeetEventsListFragment"
-            app:destination="@id/councilMeetEventsListFragment" />
+            android:id="@+id/action_signedInFragment_to_publicReleaseEventsListFragment"
+            app:destination="@id/publicReleaseEventsListFragment" />
         <action
             android:id="@+id/action_signedInFragment_to_reportIncidentFragment"
             app:destination="@id/reportIncidentFragment" />
@@ -50,10 +50,10 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/councilMeetEventsListFragment"
-        android:name="com.ubb.citizen_u.ui.fragments.events.CouncilMeetEventsListFragment"
-        android:label="@string/council_meet_events_list_fragment_label"
-        tools:layout="@layout/fragment_council_meet_events_list" />
+        android:id="@+id/publicReleaseEventsListFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.events.PublicReleaseEventsListFragment"
+        android:label="@string/public_release_events_list_fragment_label"
+        tools:layout="@layout/fragment_public_release_events_list" />
     <fragment
         android:id="@+id/reportIncidentFragment"
         android:name="com.ubb.citizen_u.ui.fragments.multistep.reports.ReportIncidentDetailsFragment"

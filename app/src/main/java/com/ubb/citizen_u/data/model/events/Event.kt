@@ -58,7 +58,7 @@ data class PublicEvent(
     }
 }
 
-data class CouncilMeetEvent(
+data class PublicReleaseEvent(
     var publicationDate: Date? = null,
     var headline: Map<String, String> = mapOf(),
 ) : Event() {
@@ -67,7 +67,7 @@ data class CouncilMeetEvent(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as CouncilMeetEvent
+        other as PublicReleaseEvent
 
         if (publicationDate != other.publicationDate) return false
         if (headline != other.headline) return false

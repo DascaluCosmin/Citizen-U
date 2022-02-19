@@ -5,7 +5,7 @@ data class EventUseCases(
     val getAllPublicEventsOrderedByDateUseCase: GetAllPublicEventsOrderedByDateUseCase,
     val getPublicEventDetailsUseCase: GetPublicEventDetailsUseCase,
 
-    val getAllCouncilMeetEventsUseCase: GetAllCouncilMeetEventsUseCase,
-    val getAllCouncilMeetEventsOrderedByUseCase: GetAllCouncilMeetEventsOrderedByDateUseCase,
+    val getAllPublicReleaseEvents: GetAllPublicReleaseEvents,
+    val getAllPublicReleaseEventsOrderedByUseCase: GetAllPublicReleaseEventsOrderedByDateUseCase,
 ) {
 }

@@ -1,6 +1,6 @@
 package com.ubb.citizen_u.data.repositories
 
-import com.ubb.citizen_u.data.model.events.CouncilMeetEvent
+import com.ubb.citizen_u.data.model.events.PublicReleaseEvent
 import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.domain.model.Response
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,7 @@ interface EventRepository {
 
     suspend fun getPublicEventDetails(eventId: String): Flow<Response<PublicEvent?>>
 
-    suspend fun getAllCouncilMeetEvents(): Flow<Response<List<CouncilMeetEvent?>>>
+    suspend fun getAllPublicReleaseEvents(): Flow<Response<List<PublicReleaseEvent?>>>
 
-    suspend fun getAllCouncilMeetEventsOrderedByDate(): Flow<Response<List<CouncilMeetEvent?>>>
+    suspend fun getAllPublicReleaseEventsOrderedByDate(): Flow<Response<List<PublicReleaseEvent?>>>
 }
