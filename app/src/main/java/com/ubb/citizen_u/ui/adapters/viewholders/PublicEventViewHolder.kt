@@ -14,6 +14,7 @@ class PublicEventViewHolder(
 
     fun bind(publicEvent: PublicEvent) {
         eventsListItemBinding.apply {
+            // TODO: In case of null, maybe use DEFAULT_LANGUAGE or translation API.
             eventItemTitle.text = publicEvent.title[language]
             eventItemAddress.text = publicEvent.address[language]
             eventItemCategory.text = publicEvent.category[language]

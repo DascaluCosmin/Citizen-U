@@ -7,17 +7,14 @@ import java.util.*
 
 abstract class Event(
     @DocumentId var id: String = "",
-    var oldTitle: String? = null,
-    var title: Map<String, String> = mapOf(), // TODO: Change this
-    var oldCategory: String? = null,
-    var category: Map<String, String> = mapOf(), // TODO: Change this
-    var content: String? = null,
-    var contentMap: Map<String, String> = mapOf(), // TODO: Change this
+    var title: Map<String, String> = mapOf(),
+    var category: Map<String, String> = mapOf(),
+    var content: Map<String, String> = mapOf(),
     var photos: MutableList<Photo?> = mutableListOf(),
 ) {
 
     override fun toString(): String {
-        return "ID = $id, Title = $oldTitle"
+        return "ID = $id, Title = $title"
     }
 }
 
@@ -63,7 +60,7 @@ data class PublicEvent(
 
 data class CouncilMeetEvent(
     var publicationDate: Date? = null,
-    var headline: String? = null,
+    var headline: Map<String, String> = mapOf(),
 ) : Event() {
 
     override fun equals(other: Any?): Boolean {
@@ -80,11 +77,13 @@ data class CouncilMeetEvent(
 
     override fun hashCode(): Int {
         var result = publicationDate?.hashCode() ?: 0
-        result = 31 * result + (headline?.hashCode() ?: 0)
+        result = 31 * result + headline.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "${super.toString()}, Publication Date = $publicationDate, Headline = $headline"
+        return "${super.toString()}, " +
+                "Publication Date = $publicationDate, " +
+                "Headline = ${headline[DEFAULT_LANGUAGE]}"
     }
 }

@@ -39,7 +39,7 @@ class PublicEventsAdapter(
 
     class EventsDiffCallBack : DiffUtil.ItemCallback<PublicEvent>() {
         override fun areItemsTheSame(oldItem: PublicEvent, newItem: PublicEvent): Boolean {
-            return oldItem.oldTitle == newItem.oldTitle
+            return oldItem.title == newItem.title
         }
 
         override fun areContentsTheSame(oldItem: PublicEvent, newItem: PublicEvent): Boolean {

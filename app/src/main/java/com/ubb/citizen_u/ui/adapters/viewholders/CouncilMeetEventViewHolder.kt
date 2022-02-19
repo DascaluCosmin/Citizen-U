@@ -8,15 +8,16 @@ import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.glide.ImageFiller
 
 class CouncilMeetEventViewHolder(
+    private val language: String,
     private val binding: CouncilMeetEventsListItemBinding,
     private val eventDetailsOnClickCallBack: (CouncilMeetEvent) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(event: CouncilMeetEvent) {
         binding.apply {
-            eventCategory.text = event.oldCategory
-            eventHeadline.text = event.headline
-            eventTitle.text = event.oldTitle
+            eventCategory.text = event.category[language]
+            eventHeadline.text = event.headline[language]
+            eventTitle.text = event.title[language]
 
             event.publicationDate?.let {
                 eventPublicationDate.text = DateFormatter.toEventFormat(it)

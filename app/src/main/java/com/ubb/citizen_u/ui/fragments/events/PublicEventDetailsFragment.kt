@@ -89,7 +89,7 @@ class PublicEventDetailsFragment : Fragment() {
                         val language = settingsPreferences
                             .getString(LANGUAGE_SETTINGS_KEY, DEFAULT_LANGUAGE) ?: DEFAULT_LANGUAGE
 
-                        binding.eventTitle.text = it.data.oldTitle
+                        binding.eventTitle.text = it.data.title[language]
                         binding.eventLocation.text = it.data.location
                         binding.eventAddress.text = it.data.address[language]
 
@@ -135,7 +135,7 @@ class PublicEventDetailsFragment : Fragment() {
                 val url = if (!it.websiteUrl.isNullOrEmpty()) {
                     it.websiteUrl!!
                 } else {
-                    "$DEFAULT_GOOGLE_SEARCH_SITE${it.oldTitle}"
+                    "$DEFAULT_GOOGLE_SEARCH_SITE${it.title}"
                 }
                 onlineEventIntent.data = Uri.parse(url)
                 startActivity(onlineEventIntent)
