@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Application -->
+    <string name="app_name">Citizen-U</string>
+    <string name="authentication_activity_label">Authentication Activity</string>
+    <string name="main_activity_label">Main Activity</string>
+
+    <!-- Generics -->
+    <string name="generic_email_hint">Email</string>
+    <string name="generic_password_hint">Parola</string>
+    <string name="generic_firstname_hint">Prenume</string>
+    <string name="generic_lastname_hint">Nume de familie</string>
+    <string name="date_separator_label">-</string>
+
+    <!-- Welcome Fragment -->
+    <string name="welcome_fragment_label">Welcome</string>
+    <string name="welcome_sign_in_button">Autentifică-te</string>
+    <string name="welcome_sign_in_textview">Primăria Cluj-Napoca</string>
+    <string name="welcome_register_button">Înregistrează-te</string>
+
+    <!-- Reset Password -->
+    <string name="welcome_reset_password_textview">Ai uitat parola?</string>
+    <string name="reset_password_dialog_positive_button">Trimite email de resetare a parolei</string>
+
+    <!-- Multistep Registration -->
+    <string name="multistep_register_create_account_textview">Creează un cont</string>
+    <string name="multistep_register_next_button">Următorul pas</string>
+    <string name="multistep_register_fragment_label">Create Account</string>
+    <string name="multistep_register_create_account_button">Creează un cont</string>
+
+    <string name="multistep_register_identity_information_label">Identity Information</string>
+    <string name="multistep_register_identity_information_textview">Informații personale</string>
+
+    <!-- Signed In -->
+    <string name="signed_in_fragment_label">Acasă</string>
+    <string name="signed_in_your_account_textview">Welcome</string>
+    <string name="signed_in_your_account_textview_params">Bine ai venit, %s</string>
+    <string name="signed_in_your_account_textview_tools">Welcome, Cosmin</string>
+    <string name="signed_in_logout_button">Ieși din cont</string>
+    <string name="generic_undefined_value">undefined</string>
+    <string name="signed_in_view_public_events_button">Vizualizează evenimente publice</string>
+    <string name="signed_in_view_council_meet_events_button">Vezi comunicate publice</string>
+
+    <!-- Events -->
+    <!--region Public Events-->
+    <string name="public_events_list_fragment_label">Evenimente publice</string>
+    <string name="public_event_details_fragment_label">Public Event Details</string>
+    <string name="events_list_principal_textview">Evenimente viitoare</string>
+    <!--endregion-->
+
+    <!-- region Council Meet Events -->
+    <string name="council_meet_events_list_fragment_label">Comunicate publice</string>
+    <string name="council_meet_event_details_fragment_label">Public Releases Details</string>
+    <string name="event_headline_tools_text">The general budget of Cluj-Napoca municipality this year is worth 434,484,383 euros, an increase of 1.13% compared to last year.</string>
+    <string name="council_meet_events_list_principal_textview">Comunicate publice</string>
+    <!-- endregion -->
+
+    <!-- Report Incident -->
+    <string name="report_incident_fragment_label">Raportează incident</string>
+    <string name="report_incident_text">Raportează incident</string>
+    <string name="send_report_button_text">Trimite raport</string>
+    <string name="generic_next_button">Următorul pas</string>
+    <string name="take_photo_button_text">Fă o poză</string>
+    <string name="take_another_photo_button_text">Mai fă o poză</string>
+    <string name="incident_description_hint">Te rog să introduci o descriere…</string>
+    <string name="incident_photo_hint">Te rog să fotografiezi incidentul…</string>
+
+    <!-- Preference Titles -->
+    <string name="language_header">Limbă</string>
+
+    <!-- Language Preferences -->
+    <string name="language_title">Limba curentă</string>
+
+    <!--Settings -->
+    <string name="settings_fragment_label">Setări</string>
+    <string name="settings_notifications_summary_on_text">Nu vei mai primi notificări</string>
+    <string name="settings_notification_summary_off_text">Vei primi toate notificările</string>
+    <string name="settings_notifications_title">Dezactivează notificările</string>
+    <string name="settings_notifications_category_title">Notificări</string>
+</resources>

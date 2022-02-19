@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/principal_text_view_quarter_margin_top"
             android:onClick="@{() -> reportIncidentPhotoFragment.goNext()}"
-            android:text="@string/report_incident_next_button"
+            android:text="@string/generic_next_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/take_photo_button" />
