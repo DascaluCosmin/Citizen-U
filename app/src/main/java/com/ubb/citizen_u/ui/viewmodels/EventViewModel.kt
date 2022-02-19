@@ -3,8 +3,8 @@ package com.ubb.citizen_u.ui.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ubb.citizen_u.data.model.events.CouncilMeetEvent
 import com.ubb.citizen_u.data.model.events.PublicEvent
+import com.ubb.citizen_u.data.model.events.PublicReleaseEvent
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.events.EventUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,14 +43,14 @@ class EventViewModel @Inject constructor(
     var currentPublicEventDetails: PublicEvent? = null
     // endregion
 
-    // region Council Meet Events
-    private val _getAllCouncilMeetEventsState =
-        MutableSharedFlow<Response<List<CouncilMeetEvent?>>>(
+    // region Public Release Events
+    private val _getAllPublicReleaseEventsState =
+        MutableSharedFlow<Response<List<PublicReleaseEvent?>>>(
             replay = 1,
             onBufferOverflow = BufferOverflow.DROP_OLDEST
         )
-    val getAllCouncilMeetEventsState: SharedFlow<Response<List<CouncilMeetEvent?>>>
-        get() = _getAllCouncilMeetEventsState
+    val getAllPublicReleaseEventsState: SharedFlow<Response<List<PublicReleaseEvent?>>>
+        get() = _getAllPublicReleaseEventsState
 
     // endregion
 
@@ -75,14 +75,14 @@ class EventViewModel @Inject constructor(
         }
     }
 
-    fun getAllCouncilMeetEventsOrderedByDate() {
+    fun getAllPublicReleaseEventsOrderedByDate() {
         Log.d(
             TAG,
-            "getAllCouncilMeetEventsOrderedByDate: Getting all council events ordered by date..."
+            "getAllPublicReleaseEventsOrderedByDate: Getting all public releases ordered by date..."
         )
         viewModelScope.launch(Dispatchers.IO) {
-            eventUseCases.getAllCouncilMeetEventsOrderedByUseCase().collect {
-                _getAllCouncilMeetEventsState.tryEmit(it)
+            eventUseCases.getAllPublicReleaseEventsOrderedByUseCase().collect {
+                _getAllPublicReleaseEventsState.tryEmit(it)
             }
         }
     }

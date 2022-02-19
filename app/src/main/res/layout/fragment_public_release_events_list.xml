@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.events.CouncilMeetEventsListFragment">
+    tools:context=".ui.fragments.events.PublicReleaseEventsListFragment">
 
     <TextView
-        android:id="@+id/council_meet_events_list_textview"
+        android:id="@+id/public_release_events_list_textview"
         style="@style/TextAppearance.MaterialComponents.Headline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/principal_text_view_quarter_margin_top"
-        android:text="@string/council_meet_events_list_principal_textview"
+        android:text="@string/public_release_events_list_principal_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,8 +24,8 @@
         android:layout_margin="@dimen/generic_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/council_meet_events_list_textview"
-        tools:listitem="@layout/council_meet_events_list_item" />
+        app:layout_constraintTop_toBottomOf="@id/public_release_events_list_textview"
+        tools:listitem="@layout/public_release_events_list_item" />
 
     <ProgressBar
         android:id="@+id/main_progressbar"

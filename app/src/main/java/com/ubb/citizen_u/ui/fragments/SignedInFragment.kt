@@ -120,8 +120,8 @@ class SignedInFragment : Fragment() {
         findNavController().navigate(R.id.action_signedInFragment_to_eventsListFragment)
     }
 
-    fun viewCouncilMeetEventsList() {
-        findNavController().navigate(R.id.action_signedInFragment_to_councilMeetEventsListFragment)
+    fun viewPublicReleaseEventsList() {
+        findNavController().navigate(R.id.action_signedInFragment_to_publicReleaseEventsListFragment)
     }
 
     fun goToReportIncident() {

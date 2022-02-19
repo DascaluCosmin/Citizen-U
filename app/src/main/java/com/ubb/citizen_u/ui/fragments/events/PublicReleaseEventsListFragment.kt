@@ -10,34 +10,34 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.ubb.citizen_u.databinding.FragmentCouncilMeetEventsListBinding
+import com.ubb.citizen_u.databinding.FragmentPublicReleaseEventsListBinding
 import com.ubb.citizen_u.domain.model.Response
-import com.ubb.citizen_u.ui.adapters.CouncilMeetEventsAdapter
+import com.ubb.citizen_u.ui.adapters.PublicReleaseEventAdapter
 import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class CouncilMeetEventsListFragment : Fragment() {
+class PublicReleaseEventsListFragment : Fragment() {
 
     companion object {
-        private const val TAG = "UBB-CouncilMeetEventsListFragment"
+        private const val TAG = "UBB-PublicReleaseEventsListFragment"
     }
 
-    private var _binding: FragmentCouncilMeetEventsListBinding? = null
+    private var _binding: FragmentPublicReleaseEventsListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: CouncilMeetEventsAdapter
+    private lateinit var adapter: PublicReleaseEventAdapter
 
     private val eventViewModel: EventViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         loadLocale()
-        _binding = FragmentCouncilMeetEventsListBinding.inflate(
+        _binding = FragmentPublicReleaseEventsListBinding.inflate(
             inflater,
             container,
             false
@@ -48,8 +48,8 @@ class CouncilMeetEventsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = CouncilMeetEventsAdapter {
-            Log.d(TAG, "onViewCreated: Clicked on council meet ${it.id}")
+        adapter = PublicReleaseEventAdapter {
+            Log.d(TAG, "onViewCreated: Clicked on public release event ${it.id}")
         }
 
         binding.apply {
@@ -59,31 +59,31 @@ class CouncilMeetEventsListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
-                    collectGetAllCouncilMeetEventsState()
+                    collectGetAllPublicReleaseEventsState()
                 }
             }
         }
     }
 
-    private suspend fun collectGetAllCouncilMeetEventsState() {
-        eventViewModel.getAllCouncilMeetEventsState.collect {
+    private suspend fun collectGetAllPublicReleaseEventsState() {
+        eventViewModel.getAllPublicReleaseEventsState.collect {
             when (it) {
                 is Response.Error -> {
                     Log.d(
                         TAG,
-                        "collectGetAllCouncilMeetEventsState: Collecting response $it. An error has occurred ${it.message}"
+                        "collectGetAllPublicReleaseEventsState: Collecting response $it. An error has occurred ${it.message}"
                     )
                     binding.mainProgressbar.visibility = View.GONE
                     toastErrorMessage()
                 }
                 Response.Loading -> {
-                    Log.d(TAG, "collectGetAllCouncilMeetEventsState: Collecting response $it")
+                    Log.d(TAG, "collectGetAllPublicReleaseEventsState: Collecting response $it")
                     binding.mainProgressbar.visibility = View.VISIBLE
                 }
                 is Response.Success -> {
                     Log.d(
                         TAG,
-                        "collectGetAllCouncilMeetEventsState: Successfully collected ${it.data.size} council meet events"
+                        "collectGetAllPublicReleaseEventsState: Successfully collected ${it.data.size} public release events"
                     )
                     binding.mainProgressbar.visibility = View.GONE
                     adapter.submitList(it.data)
@@ -94,6 +94,6 @@ class CouncilMeetEventsListFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        eventViewModel.getAllCouncilMeetEventsOrderedByDate()
+        eventViewModel.getAllPublicReleaseEventsOrderedByDate()
     }
 }

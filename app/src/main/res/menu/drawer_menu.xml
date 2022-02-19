@@ -12,15 +12,18 @@
     <group android:id="@+id/eventsGroup">
         <item
             android:id="@+id/publicEventsListFragment"
+            android:icon="@drawable/ic_baseline_event_24"
             android:title="@string/public_events_list_fragment_label" />
         <item
-            android:id="@+id/councilMeetEventsListFragment"
-            android:title="@string/council_meet_events_list_fragment_label" />
+            android:id="@+id/publicReleaseEventsListFragment"
+            android:icon="@drawable/ic_outline_new_releases_24"
+            android:title="@string/public_release_events_list_fragment_label" />
     </group>
 
     <group android:id="@+id/citizenRequestsGroup">
         <item
             android:id="@+id/reportIncidentFragment"
+            android:icon="@drawable/ic_outline_report_24"
             android:title="@string/report_incident_fragment_label" />
     </group>
 

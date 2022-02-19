@@ -2,7 +2,7 @@ package com.ubb.citizen_u.data.repositories.impl
 
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
-import com.ubb.citizen_u.data.model.events.CouncilMeetEvent
+import com.ubb.citizen_u.data.model.events.PublicReleaseEvent
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.data.repositories.PhotoRepository
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class EventRepositoryImpl @Inject constructor(
     private val publicEventsRef: CollectionReference,
-    private val councilMeetEventsRef: CollectionReference,
+    private val publicReleaseEventsRef: CollectionReference,
     private val photoRepository: PhotoRepository
 ) : EventRepository {
 
@@ -70,27 +70,27 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getAllCouncilMeetEvents(): Flow<Response<List<CouncilMeetEvent?>>> =
+    override suspend fun getAllPublicReleaseEvents(): Flow<Response<List<PublicReleaseEvent?>>> =
         flow {
             try {
                 emit(Response.Loading)
 
-                val councilMeetEvents = getAllCouncilMeetEventsList()
-                emit(Response.Success(councilMeetEvents))
+                val publicReleaseEvents = getAllPublicReleaseEventsList()
+                emit(Response.Success(publicReleaseEvents))
             } catch (exception: Exception) {
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
             }
         }
 
-    override suspend fun getAllCouncilMeetEventsOrderedByDate(): Flow<Response<List<CouncilMeetEvent?>>> =
+    override suspend fun getAllPublicReleaseEventsOrderedByDate(): Flow<Response<List<PublicReleaseEvent?>>> =
         flow {
             try {
                 emit(Response.Loading)
 
-                val sortedCouncilMeetEvents = getAllCouncilMeetEventsList().sortedBy {
+                val sortedPublicReleaseEvents = getAllPublicReleaseEventsList().sortedBy {
                     it?.publicationDate
                 }
-//                sortedCouncilMeetEvents.forEach {
+//                sortedPublicReleaseEvents.forEach {
 //                    it?.photos?.apply {
 //                        if (size > 0) {
 //                            val firstPhotoId = this[0]?.id
@@ -103,7 +103,7 @@ class EventRepositoryImpl @Inject constructor(
 //                        }
 //                    }
 //                }
-                emit(Response.Success(sortedCouncilMeetEvents))
+                emit(Response.Success(sortedPublicReleaseEvents))
             } catch (exception: Exception) {
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
 
@@ -121,10 +121,10 @@ class EventRepositoryImpl @Inject constructor(
         }
     }
 
-    private suspend fun getAllCouncilMeetEventsList(): List<CouncilMeetEvent?> {
-        val eventsSnapshot = councilMeetEventsRef.get().await()
+    private suspend fun getAllPublicReleaseEventsList(): List<PublicReleaseEvent?> {
+        val eventsSnapshot = publicReleaseEventsRef.get().await()
         return eventsSnapshot.documents.map {
-            it.toObject(CouncilMeetEvent::class.java)?.apply {
+            it.toObject(PublicReleaseEvent::class.java)?.apply {
                 photos = getEventPhotos(it).apply {
                     setFirstEventPhotoStorageReference(it, this)
                 }

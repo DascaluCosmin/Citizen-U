@@ -8,8 +8,8 @@ import com.ubb.citizen_u.data.repositories.PhotoRepository
 import com.ubb.citizen_u.data.repositories.impl.EventRepositoryImpl
 import com.ubb.citizen_u.data.repositories.impl.PhotoRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.events.*
-import com.ubb.citizen_u.util.DatabaseConstants.COUNCIL_MEET_EVENTS_COL
 import com.ubb.citizen_u.util.DatabaseConstants.PUBLIC_EVENTS_COL
+import com.ubb.citizen_u.util.DatabaseConstants.PUBLIC_RELEASE_EVENTS_COL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,12 +25,12 @@ object EventModule {
     @Singleton
     fun providesEventRepository(
         @Named(PUBLIC_EVENTS_COL) publicEventsRef: CollectionReference,
-        @Named(COUNCIL_MEET_EVENTS_COL) councilEventsRef: CollectionReference,
-        photoRepository: PhotoRepository
+        @Named(PUBLIC_RELEASE_EVENTS_COL) publicReleaseEventsRef: CollectionReference,
+        photoRepository: PhotoRepository,
     ): EventRepository =
         EventRepositoryImpl(
             publicEventsRef = publicEventsRef,
-            councilMeetEventsRef = councilEventsRef,
+            publicReleaseEventsRef = publicReleaseEventsRef,
             photoRepository = photoRepository
         )
 
@@ -50,8 +50,8 @@ object EventModule {
                 eventRepository
             ),
             getPublicEventDetailsUseCase = GetPublicEventDetailsUseCase(eventRepository),
-            getAllCouncilMeetEventsUseCase = GetAllCouncilMeetEventsUseCase(eventRepository),
-            getAllCouncilMeetEventsOrderedByUseCase = GetAllCouncilMeetEventsOrderedByDateUseCase(
+            getAllPublicReleaseEvents = GetAllPublicReleaseEvents(eventRepository),
+            getAllPublicReleaseEventsOrderedByUseCase = GetAllPublicReleaseEventsOrderedByDateUseCase(
                 eventRepository
             )
         )
@@ -64,7 +64,7 @@ object EventModule {
 
     @Provides
     @Singleton
-    @Named(COUNCIL_MEET_EVENTS_COL)
-    fun providesCouncilMeetEventsRef(firebaseFirestore: FirebaseFirestore) =
-        firebaseFirestore.collection(COUNCIL_MEET_EVENTS_COL)
+    @Named(PUBLIC_RELEASE_EVENTS_COL)
+    fun providesPublicReleaseEventsRef(firebaseFirestore: FirebaseFirestore) =
+        firebaseFirestore.collection(PUBLIC_RELEASE_EVENTS_COL)
 }
