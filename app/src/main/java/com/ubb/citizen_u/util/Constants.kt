@@ -50,11 +50,21 @@ object DatabaseConstants {
     const val UNDEFINED_DOC = "undefined"
 }
 
+object SettingsConstants {
+    //region Settings Keys
+    const val LANGUAGE_SETTINGS_KEY = "language"
+    const val NOTIFICATIONS_SETTINGS_KEY = "notifications"
+    //endregion
+
+    //region Settings Default Values
+    const val DEFAULT_LANGUAGE = "en"
+    const val DEFAULT_NOTIFICATIONS = false
+    //endregion
+}
+
 const val UNDEFINED = "undefined"
 
 const val DEFAULT_ERROR_MESSAGE = "An unexpected error has occurred"
 const val DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN =
     "An unexpected error has occurred! Please try again!"
 const val DEFAULT_DATE_ERROR_MESSAGE = "UNKNOWN DATE"
-
-const val APP_SHARED_PREFERENCE = "ApplicationSharedPreference"

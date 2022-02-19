@@ -33,7 +33,7 @@ class CouncilMeetEventsAdapter(
             oldItem: CouncilMeetEvent,
             newItem: CouncilMeetEvent
         ): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.oldTitle == newItem.oldTitle
         }
 
         override fun areContentsTheSame(

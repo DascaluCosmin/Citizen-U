@@ -2,25 +2,29 @@ package com.ubb.citizen_u.data.model.events
 
 import com.google.firebase.firestore.DocumentId
 import com.ubb.citizen_u.data.model.Photo
+import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
 import java.util.*
 
 abstract class Event(
     @DocumentId var id: String = "",
-    var title: String? = null,
-    var category: String? = null,
+    var oldTitle: String? = null,
+    var title: Map<String, String> = mapOf(), // TODO: Change this
+    var oldCategory: String? = null,
+    var category: Map<String, String> = mapOf(), // TODO: Change this
     var content: String? = null,
+    var contentMap: Map<String, String> = mapOf(), // TODO: Change this
     var photos: MutableList<Photo?> = mutableListOf(),
 ) {
 
     override fun toString(): String {
-        return "ID = $id, Title = $title"
+        return "ID = $id, Title = $oldTitle"
     }
 }
 
 data class PublicEvent(
     var startDate: Date? = null,
     var endDate: Date? = null,
-    var address: String? = null,
+    var address: Map<String, String> = mapOf(),
     var location: String? = null,
     var websiteUrl: String? = null,
 ) : Event() {
@@ -43,14 +47,17 @@ data class PublicEvent(
     override fun hashCode(): Int {
         var result = startDate?.hashCode() ?: 0
         result = 31 * result + (endDate?.hashCode() ?: 0)
-        result = 31 * result + (address?.hashCode() ?: 0)
+        result = 31 * result + address.hashCode()
         result = 31 * result + (location?.hashCode() ?: 0)
         result = 31 * result + (websiteUrl?.hashCode() ?: 0)
         return result
     }
 
     override fun toString(): String {
-        return "${super.toString()}, Location = $location, Address = $address, websiteUrl: $websiteUrl"
+        return "${super.toString()}, " +
+                "Location = $location, " +
+                "Address = ${address[DEFAULT_LANGUAGE]}, " +
+                "websiteUrl: $websiteUrl"
     }
 }
 

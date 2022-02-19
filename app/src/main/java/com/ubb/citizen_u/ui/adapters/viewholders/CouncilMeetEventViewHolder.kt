@@ -14,9 +14,9 @@ class CouncilMeetEventViewHolder(
 
     fun bind(event: CouncilMeetEvent) {
         binding.apply {
-            eventCategory.text = event.category
+            eventCategory.text = event.oldCategory
             eventHeadline.text = event.headline
-            eventTitle.text = event.title
+            eventTitle.text = event.oldTitle
 
             event.publicationDate?.let {
                 eventPublicationDate.text = DateFormatter.toEventFormat(it)
