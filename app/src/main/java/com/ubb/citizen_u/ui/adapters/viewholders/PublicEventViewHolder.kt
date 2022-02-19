@@ -7,15 +7,17 @@ import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.glide.ImageFiller
 
 class PublicEventViewHolder(
+    private val language: String,
     private val eventsListItemBinding: PublicEventsListItemBinding,
     private val eventsDetailsOnClickCallBack: (PublicEvent) -> Unit,
 ) : RecyclerView.ViewHolder(eventsListItemBinding.root) {
 
     fun bind(publicEvent: PublicEvent) {
         eventsListItemBinding.apply {
-            eventItemTitle.text = publicEvent.title
-            eventItemAddress.text = publicEvent.address
-            eventItemCategory.text = publicEvent.category
+            // TODO: In case of null, maybe use DEFAULT_LANGUAGE or translation API.
+            eventItemTitle.text = publicEvent.title[language]
+            eventItemAddress.text = publicEvent.address[language]
+            eventItemCategory.text = publicEvent.category[language]
 
             publicEvent.startDate?.let {
                 eventItemStartDate.text = DateFormatter.toEventFormat(it)

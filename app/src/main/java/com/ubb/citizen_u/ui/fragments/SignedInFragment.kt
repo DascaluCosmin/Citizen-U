@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentSignedInBinding
 import com.ubb.citizen_u.domain.model.Response
+import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +43,7 @@ class SignedInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        loadLocale()
         _binding = FragmentSignedInBinding.inflate(inflater, container, false)
 
         binding.apply {
@@ -59,6 +61,10 @@ class SignedInFragment : Fragment() {
                 launch { collectCitizenState() }
             }
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     override fun onStart() {

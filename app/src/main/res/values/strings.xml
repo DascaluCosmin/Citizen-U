@@ -1,21 +1,21 @@
 <resources>
     <!-- Application -->
-    <string name="app_name">Citizen-U</string>
-    <string name="action_settings">Settings</string>
-    <string name="authentication_activity_label">Authentication Activity</string>
-    <string name="main_activity_label">Main Activity</string>
+    <string name="app_name" translatable="false">Citizen-U</string>
+    <string name="authentication_activity_label" translatable="false">Authentication Activity</string>
+    <string name="main_activity_label" translatable="false">Main Activity</string>
 
     <!-- Generics -->
-    <string name="generic_email_hint">Email</string>
+    <string name="generic_email_hint" translatable="false">Email</string>
     <string name="generic_password_hint">Password</string>
     <string name="generic_firstname_hint">First Name</string>
     <string name="generic_lastname_hint">Last Name</string>
-    <string name="date_separator_label">-</string>
+    <string name="date_separator_label" translatable="false">-</string>
+    <string name="generic_next_button">Next</string>
 
     <!-- Welcome Fragment -->
-    <string name="welcome_fragment_label">Welcome</string>
+    <string name="welcome_fragment_label" translatable="false">Welcome</string>
     <string name="welcome_sign_in_button">Sign In</string>
-    <string name="welcome_sign_in_textview">Primăria Cluj-Napoca</string>
+    <string name="welcome_sign_in_textview">Cluj-Napoca City Hall</string>
     <string name="welcome_register_button">Register</string>
 
     <!-- Reset Password -->
@@ -25,45 +25,57 @@
     <!-- Multistep Registration -->
     <string name="multistep_register_create_account_textview">Create Account</string>
     <string name="multistep_register_next_button">Next</string>
-    <string name="multistep_register_fragment_label">Create Account</string>
+    <string name="multistep_register_fragment_label" translatable="false">Create Account</string>
     <string name="multistep_register_create_account_button">Create Account</string>
 
-    <string name="multistep_register_identity_information_label">Identity Information</string>
-    <string name="multistep_register_identity_information_textview">Identity Information</string>
+    <string name="multistep_register_identity_information_label" translatable="false">Identity Information</string>
+    <string name="multistep_register_identity_information_textview">Personal information</string>
 
     <!-- Signed In -->
     <string name="signed_in_fragment_label">Home</string>
-    <string name="signed_in_your_account_textview">Welcome</string>
+    <string name="signed_in_your_account_textview" translatable="false">Welcome</string>
     <string name="signed_in_your_account_textview_params">Welcome, %s</string>
-    <string name="signed_in_your_account_textview_tools">Welcome, Cosmin</string>
+    <string name="signed_in_your_account_textview_tools" translatable="false">Welcome, Cosmin</string>
     <string name="signed_in_logout_button">Sign Out</string>
-    <string name="generic_undefined_value">undefined</string>
-    <string name="signed_in_view_public_events_button">View Public Events</string>
-    <string name="signed_in_view_council_meet_events_button">View Council Meet Events Briefings</string>
+    <string name="generic_undefined_value" translatable="false">undefined</string>
+    <string name="signed_in_view_public_events_button">View public events</string>
+    <string name="signed_in_view_council_meet_events_button">View public releases</string>
 
     <!-- Events -->
     <!--region Public Events-->
     <!-- TODO: Decide whether or not to use the principal textview, since we have the label in the App Bar -->
     <string name="public_events_list_fragment_label">Public Events</string>
-    <string name="public_event_details_fragment_label">Public Event Details</string>
-    <string name="events_list_principal_textview">Upcoming Events</string>
+    <string name="public_event_details_fragment_label" translatable="false">Public Event Details</string>
+    <string name="events_list_principal_textview">Upcoming events</string>
     <!--endregion-->
 
     <!-- region Council Meet Events -->
-    <string name="council_meet_events_list_fragment_label">Council Meet Events</string>
-    <string name="council_meet_event_details_fragment_label">Council Meet Event Details</string>
-    <string name="event_headline_tools_text">The general budget of Cluj-Napoca municipality this year is worth 434,484,383 euros, an increase of 1.13% compared to last year.</string>
-    <string name="council_meet_events_list_principal_textview">Council Meet Briefings</string>
+    <string name="council_meet_events_list_fragment_label">Public Releases</string>
+    <string name="council_meet_event_details_fragment_label" translatable="false">Public Releases Details</string>
+    <string name="event_headline_tools_text" translatable="false">The general budget of Cluj-Napoca municipality this year is worth 434,484,383 euros, an increase of 1.13% compared to last year.</string>
+    <string name="council_meet_events_list_principal_textview">Public releases</string>
     <!-- endregion -->
 
     <!-- Report Incident -->
     <string name="report_incident_fragment_label">Report Incident</string>
-    <string name="report_incident_text">Report Incident</string>
-    <string name="send_report_button_text">Send Report</string>
-    <string name="report_incident_next_button">Next</string>
-    <string name="take_photo_button_text">Take photo</string>
+    <string name="report_incident_text">Report incident</string>
+    <string name="send_report_button_text">Send report</string>
+    <string name="take_photo_button_text">Take a photo</string>
     <string name="take_another_photo_button_text">Take another photo</string>
     <string name="incident_description_hint">Please provide a description…</string>
     <string name="incident_photo_hint">Please take a picture of the incident…</string>
+
+    <!-- Preference Titles -->
+    <string name="language_header">Language</string>
+
+    <!-- Language Preferences -->
+    <string name="language_title">Current language</string>
+
+    <!--Settings -->
+    <string name="settings_fragment_label" translatable="false">Settings</string>
+    <string name="settings_notifications_summary_on_text">You will no longer receive notifications</string>
+    <string name="settings_notification_summary_off_text">You will receive all notifications</string>
+    <string name="settings_notifications_title">Disable notifications</string>
+    <string name="settings_notifications_category_title">Notifications</string>
 
 </resources>

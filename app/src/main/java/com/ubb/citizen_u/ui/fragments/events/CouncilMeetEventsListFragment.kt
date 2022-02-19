@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.ubb.citizen_u.databinding.FragmentCouncilMeetEventsListBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.adapters.CouncilMeetEventsAdapter
+import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import kotlinx.coroutines.flow.collect
@@ -35,6 +36,7 @@ class CouncilMeetEventsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        loadLocale()
         _binding = FragmentCouncilMeetEventsListBinding.inflate(
             inflater,
             container,

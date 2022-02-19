@@ -8,10 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentRegisterBinding
-import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
+import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.util.ValidationConstants
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,6 +33,8 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        loadLocale()
+
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         binding.apply {

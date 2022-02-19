@@ -1,11 +1,15 @@
 package com.ubb.citizen_u.ui.util
 
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Matrix
-import android.media.ExifInterface
 import android.widget.Toast
+import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN
+import com.ubb.citizen_u.util.SettingsConstants
+import java.util.*
 
 fun Fragment.toastMessage(message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -13,6 +17,25 @@ fun Fragment.toastMessage(message: String) {
 
 fun Fragment.toastErrorMessage(errorMessage: String = DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN) {
     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+}
+
+@Suppress("DEPRECATION")
+fun Fragment.loadLocale() {
+    val settingsPreferences = PreferenceManager
+        .getDefaultSharedPreferences(requireContext())
+    val language = settingsPreferences
+        .getString(SettingsConstants.LANGUAGE_SETTINGS_KEY,
+            SettingsConstants.DEFAULT_LANGUAGE) ?: SettingsConstants.DEFAULT_LANGUAGE
+
+
+    val locale = Locale(language)
+    val configuration = Configuration()
+
+    configuration.setLocale(locale)
+    resources.updateConfiguration(
+        configuration,
+        resources.displayMetrics
+    )
 }
 
 fun getRotatedBitmap(path: String?, sourceBitmap: Bitmap?): Bitmap? {

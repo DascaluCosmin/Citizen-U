@@ -1,6 +1,7 @@
 package com.ubb.citizen_u.ui.fragments.events
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import androidx.preference.PreferenceManager
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.events.Event
 import com.ubb.citizen_u.databinding.FragmentPublicEventDetailsBinding
@@ -20,6 +22,8 @@ import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import com.ubb.citizen_u.util.DateFormatter
+import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
+import com.ubb.citizen_u.util.SettingsConstants.LANGUAGE_SETTINGS_KEY
 import com.ubb.citizen_u.util.glide.ImageFiller
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -33,11 +37,12 @@ class PublicEventDetailsFragment : Fragment() {
         private const val DEFAULT_GOOGLE_SEARCH_SITE = "http://www.google.com/search?q="
     }
 
+    private lateinit var settingsPreferences: SharedPreferences
+
     private var _binding: FragmentPublicEventDetailsBinding? = null
     private val binding get() = _binding!!
 
     private val eventViewModel: EventViewModel by activityViewModels()
-
     private val args: PublicEventDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -60,6 +65,8 @@ class PublicEventDetailsFragment : Fragment() {
                 launch { collectGetPublicEventDetailsState() }
             }
         }
+
+        settingsPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
     }
 
     private suspend fun collectGetPublicEventDetailsState() {
@@ -79,9 +86,12 @@ class PublicEventDetailsFragment : Fragment() {
                     binding.eventDetails.visibility = View.VISIBLE
 
                     if (it.data != null) {
-                        binding.eventTitle.text = it.data.title
+                        val language = settingsPreferences
+                            .getString(LANGUAGE_SETTINGS_KEY, DEFAULT_LANGUAGE) ?: DEFAULT_LANGUAGE
+
+                        binding.eventTitle.text = it.data.title[language]
                         binding.eventLocation.text = it.data.location
-                        binding.eventAddress.text = it.data.address
+                        binding.eventAddress.text = it.data.address[language]
 
                         val randomEventPhoto = chooseRandomEventPhoto(it.data)
                         ImageFiller.fill(

@@ -2,25 +2,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ubb.citizen_u.ui.MainActivity">
 
-    <item
-        android:id="@+id/signedInFragment"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/signed_in_fragment_label" />
+    <group android:id="@+id/homeGroup">
+        <item
+            android:id="@+id/signedInFragment"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/signed_in_fragment_label" />
+    </group>
 
-    <item
-        android:id="@+id/publicEventsListFragment"
-        android:title="@string/public_events_list_fragment_label" />
+    <group android:id="@+id/eventsGroup">
+        <item
+            android:id="@+id/publicEventsListFragment"
+            android:title="@string/public_events_list_fragment_label" />
+        <item
+            android:id="@+id/councilMeetEventsListFragment"
+            android:title="@string/council_meet_events_list_fragment_label" />
+    </group>
 
-    <item
-        android:id="@+id/councilMeetEventsListFragment"
-        android:title="@string/council_meet_events_list_fragment_label" />
+    <group android:id="@+id/citizenRequestsGroup">
+        <item
+            android:id="@+id/reportIncidentFragment"
+            android:title="@string/report_incident_fragment_label" />
+    </group>
 
-    <item
-        android:id="@+id/reportIncidentFragment"
-        android:title="@string/report_incident_fragment_label" />
+    <group android:id="@+id/settingsGroup">
+        <item
+            android:id="@id/settingsFragment"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="@string/settings_fragment_label" />
+    </group>
 
-    <item
-        android:id="@+id/loginFragment"
-        android:icon="@drawable/ic_baseline_logout_24"
-        android:title="@string/signed_in_logout_button" />
+    <group android:id="@+id/loginGroup">
+        <item
+            android:id="@+id/loginFragment"
+            android:icon="@drawable/ic_baseline_logout_24"
+            android:title="@string/signed_in_logout_button" />
+    </group>
 </menu>
