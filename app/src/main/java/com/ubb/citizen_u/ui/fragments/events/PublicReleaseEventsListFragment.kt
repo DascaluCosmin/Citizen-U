@@ -36,7 +36,6 @@ class PublicReleaseEventsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        loadLocale()
         _binding = FragmentPublicReleaseEventsListBinding.inflate(
             inflater,
             container,

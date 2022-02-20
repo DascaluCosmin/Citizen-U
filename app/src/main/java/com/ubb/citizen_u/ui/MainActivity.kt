@@ -1,6 +1,5 @@
 package com.ubb.citizen_u.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -40,6 +39,7 @@ class MainActivity : AppCompatActivity() {
      *  Uncomment in order to show App Bar
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+        loadLocale()
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             (supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment).navController
 
         val bundle = Bundle()
+
         bundle.putString(CITIZEN_ID_ARG_KEY, args.citizenId)
         navController.setGraph(R.navigation.nav_graph_main, bundle)
 
@@ -57,9 +58,6 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-
-        val sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        sharedPreferences.edit().putString("key", "aaa").apply()
 
         overrideNavigationDrawerItems()
 //         setupActionBarWithNavController(navController, appBarConfiguration)

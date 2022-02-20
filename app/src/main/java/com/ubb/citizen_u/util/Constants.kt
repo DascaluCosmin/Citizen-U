@@ -62,6 +62,14 @@ object SettingsConstants {
     //endregion
 }
 
+object NotificationsConstants {
+    const val CHANNEL_ID = "NotificationsChannelId"
+    const val CHANNEL_NAME = "NotificationsChannel"
+    const val CHANNEL_DESCRIPTION = "Citizen-U Periodic Events Notifications"
+
+    const val NOTIFICATION_ID = 1
+}
+
 const val UNDEFINED = "undefined"
 
 const val DEFAULT_ERROR_MESSAGE = "An unexpected error has occurred"

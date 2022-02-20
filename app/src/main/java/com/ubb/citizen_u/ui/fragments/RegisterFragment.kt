@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentRegisterBinding
-import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.util.ValidationConstants
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,10 +30,8 @@ class RegisterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        loadLocale()
-
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         binding.apply {

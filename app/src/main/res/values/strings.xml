@@ -78,4 +78,6 @@
     <string name="settings_notifications_title">Disable notifications</string>
     <string name="settings_notifications_category_title">Notifications</string>
 
+    <!-- Constants -->
+    <string name="city_hall_name">Cluj-Napoca City Hall</string>
 </resources>

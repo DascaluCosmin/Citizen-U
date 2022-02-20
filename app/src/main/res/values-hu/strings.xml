@@ -31,7 +31,7 @@
     <string name="multistep_register_identity_information_textview">Személyes adat</string>
 
     <!-- Signed In -->
-    <string name="signed_in_fragment_label">" Itthon"</string>
+    <string name="signed_in_fragment_label">Itthon</string>
     <string name="signed_in_your_account_textview">Welcome</string>
     <string name="signed_in_your_account_textview_params">Üdvözöljük, %s</string>
     <string name="signed_in_your_account_textview_tools">Welcome, Cosmin</string>
@@ -77,4 +77,6 @@
     <string name="settings_notifications_title">Értesítések letiltása</string>
     <string name="settings_notifications_category_title">Értesítések</string>
 
+    <!-- Constants -->
+    <string name="city_hall_name">Kolozsvár Városháza</string>
 </resources>

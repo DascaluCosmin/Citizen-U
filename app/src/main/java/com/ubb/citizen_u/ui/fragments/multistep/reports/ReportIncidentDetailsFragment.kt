@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentReportIncidentDetailsBinding
-import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +30,6 @@ class ReportIncidentDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        loadLocale()
         _binding = FragmentReportIncidentDetailsBinding.inflate(
             inflater,
             container,

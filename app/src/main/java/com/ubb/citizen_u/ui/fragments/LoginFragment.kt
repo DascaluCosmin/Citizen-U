@@ -48,7 +48,6 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         loadLocale()
-
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.apply {

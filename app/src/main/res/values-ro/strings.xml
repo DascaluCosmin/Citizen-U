@@ -71,10 +71,13 @@
     <!-- Language Preferences -->
     <string name="language_title">Limba curentă</string>
 
-    <!--Settings -->
+    <!-- Settings -->
     <string name="settings_fragment_label">Setări</string>
     <string name="settings_notifications_summary_on_text">Nu vei mai primi notificări</string>
     <string name="settings_notification_summary_off_text">Vei primi toate notificările</string>
     <string name="settings_notifications_title">Dezactivează notificările</string>
     <string name="settings_notifications_category_title">Notificări</string>
+
+    <!-- Constants -->
+    <string name="city_hall_name">Primăria Cluj-Napoca</string>
 </resources>
