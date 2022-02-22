@@ -70,12 +70,18 @@
     <!-- Language Preferences -->
     <string name="language_title">Jelenlegi nyelv</string>
 
-    <!--Settings -->
-    <string name="settings_fragment_label">Beállítások</string>
+    <!--region Settings -->
+    <string name="settings_fragment_label" translatable="false">Beállítások</string>
     <string name="settings_notifications_summary_on_text">A továbbiakban nem kap értesítéseket</string>
     <string name="settings_notification_summary_off_text">Minden értesítést megkap</string>
     <string name="settings_notifications_title">Értesítések letiltása</string>
     <string name="settings_notifications_category_title">Értesítések</string>
+
+    <!-- Arrays values -->
+    <string name="english_language_label">Angol</string>
+    <string name="romanian_language_label">Román</string>
+    <string name="hungarian_language_label">Magyar</string>
+    <!--endregion-->
 
     <!-- Constants -->
     <string name="city_hall_name">Kolozsvár Városháza</string>

@@ -68,6 +68,7 @@ object NotificationsConstants {
     const val CHANNEL_DESCRIPTION = "Citizen-U Periodic Events Notifications"
 
     const val NOTIFICATION_ID = 1
+    const val NOTIFICATION_WORKER_TAG = "NotificationWork"
 }
 
 const val UNDEFINED = "undefined"
