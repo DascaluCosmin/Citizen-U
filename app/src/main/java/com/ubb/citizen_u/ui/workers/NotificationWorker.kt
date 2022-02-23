@@ -49,7 +49,7 @@ class NotificationWorker(
             .setContentTitle(applicationContext.getString(R.string.city_hall_name))
             .setContentText("Test Text")
             .setContentIntent(pendingIntent)
-            .setSmallIcon(R.drawable.logo_bg_free)
+            .setSmallIcon(R.drawable.town_hall_ic)
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()

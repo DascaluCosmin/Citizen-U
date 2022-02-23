@@ -72,9 +72,9 @@
 
     <!--region Settings -->
     <string name="settings_fragment_label" translatable="false">Beállítások</string>
-    <string name="settings_notifications_summary_on_text">A továbbiakban nem kap értesítéseket</string>
-    <string name="settings_notification_summary_off_text">Minden értesítést megkap</string>
-    <string name="settings_notifications_title">Értesítések letiltása</string>
+    <string name="settings_notifications_summary_off_text">Most már nem kap értesítést</string>
+    <string name="settings_notification_summary_on_text">Most minden értesítést megkap</string>
+    <string name="settings_notifications_title">Értesítések engedélyezése</string>
     <string name="settings_notifications_category_title">Értesítések</string>
 
     <!-- Arrays values -->

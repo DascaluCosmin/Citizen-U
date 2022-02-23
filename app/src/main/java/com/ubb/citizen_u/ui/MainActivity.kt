@@ -2,7 +2,6 @@ package com.ubb.citizen_u.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -13,21 +12,12 @@ import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.ActivityMainBinding
-import com.ubb.citizen_u.ui.fragments.SignedInFragment
 import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
-import com.ubb.citizen_u.ui.workers.NotificationWorker
-import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_WORKER_TAG
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import java.util.*
-import java.util.concurrent.TimeUnit
-import kotlin.time.Duration.Companion.milliseconds
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -35,9 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val CITIZEN_ID_ARG_KEY = "citizenId"
-        private const val DAILY_NOTIFICATION_HOUR = 22
     }
-
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var drawerLayout: DrawerLayout
@@ -72,7 +60,6 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
         overrideNavigationDrawerItems()
-        startPeriodicNotificationWork()
 //         setupActionBarWithNavController(navController, appBarConfiguration)
 //        supportActionBar?.hide()
     }
@@ -113,42 +100,5 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
-    }
-
-    private fun startPeriodicNotificationWork() {
-        val delay = computeDelayInMinutes()
-        Log.d(SignedInFragment.TAG,
-            "startPeriodicNotificationWork: Starting periodic notification work, to be executed in $delay minutes...")
-        val notificationWork = PeriodicWorkRequest.Builder(
-            NotificationWorker::class.java,
-            1,
-            TimeUnit.DAYS,
-        )
-            .setInitialDelay(delay, TimeUnit.MINUTES)
-            .build()
-
-        WorkManager.getInstance(this).cancelAllWork()
-        WorkManager.getInstance(this)
-            .enqueueUniquePeriodicWork(
-                NOTIFICATION_WORKER_TAG,
-                ExistingPeriodicWorkPolicy.KEEP,
-                notificationWork
-            )
-    }
-
-    private fun computeDelayInMinutes(): Long {
-        val dailyNotificationHourCalendar = Calendar.getInstance()
-        dailyNotificationHourCalendar.set(Calendar.HOUR_OF_DAY, 20)
-        dailyNotificationHourCalendar.set(Calendar.MINUTE, 30)
-        dailyNotificationHourCalendar.set(Calendar.SECOND, 0)
-
-        val now = Calendar.getInstance()
-        var delta = (dailyNotificationHourCalendar.timeInMillis - now.timeInMillis)
-            .milliseconds
-            .inWholeMinutes
-        if (delta < 0) {
-            delta += TimeUnit.DAYS.toMinutes(1)
-        }
-        return delta
     }
 }

@@ -73,9 +73,9 @@
 
     <!--region Settings -->
     <string name="settings_fragment_label" translatable="false">Settings</string>
-    <string name="settings_notifications_summary_on_text">You will no longer receive notifications</string>
-    <string name="settings_notification_summary_off_text">You will receive all notifications</string>
-    <string name="settings_notifications_title">Disable notifications</string>
+    <string name="settings_notifications_summary_off_text">Now you do not receive any notifications</string>
+    <string name="settings_notification_summary_on_text">Now you receive all notifications</string>
+    <string name="settings_notifications_title">Enable notifications</string>
     <string name="settings_notifications_category_title">Notifications</string>
 
     <!-- Arrays values -->

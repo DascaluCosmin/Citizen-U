@@ -73,9 +73,9 @@
 
     <!--region Settings -->
     <string name="settings_fragment_label" translatable="false">Setări</string>
-    <string name="settings_notifications_summary_on_text">Nu vei mai primi notificări</string>
-    <string name="settings_notification_summary_off_text">Vei primi toate notificările</string>
-    <string name="settings_notifications_title">Dezactivează notificările</string>
+    <string name="settings_notifications_summary_off_text">Acum nu primiți nicio notificare</string>
+    <string name="settings_notification_summary_on_text">Acum primiți toate notificările</string>
+    <string name="settings_notifications_title">Activează notificările</string>
     <string name="settings_notifications_category_title">Notificări</string>
 
     <!-- Arrays values -->
