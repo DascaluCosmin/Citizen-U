@@ -87,7 +87,7 @@ class EventRepositoryImpl @Inject constructor(
             try {
                 emit(Response.Loading)
 
-                val sortedPublicReleaseEvents = getAllPublicReleaseEventsList().sortedBy {
+                val sortedPublicReleaseEvents = getAllPublicReleaseEventsList().sortedByDescending {
                     it?.publicationDate
                 }
 //                sortedPublicReleaseEvents.forEach {
