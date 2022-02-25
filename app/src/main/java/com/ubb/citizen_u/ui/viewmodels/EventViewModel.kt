@@ -3,6 +3,7 @@ package com.ubb.citizen_u.ui.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ubb.citizen_u.data.model.events.PeriodicEvent
 import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.data.model.events.PublicReleaseEvent
 import com.ubb.citizen_u.domain.model.Response
@@ -51,8 +52,16 @@ class EventViewModel @Inject constructor(
         )
     val getAllPublicReleaseEventsState: SharedFlow<Response<List<PublicReleaseEvent?>>>
         get() = _getAllPublicReleaseEventsState
-
     // endregion
+
+    //region Periodic Events
+    private val _getAllPeriodicEventsState = MutableSharedFlow<Response<List<PeriodicEvent?>>>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val getAllPeriodicEventsState: SharedFlow<Response<List<PeriodicEvent?>>>
+        get() = _getAllPeriodicEventsState
+    //endregion
 
     fun getAllPublicEventsOrderedByDate() {
         Log.d(TAG, "getAllEventsOrderedByDate: Getting all public events ordered by date...")
@@ -64,7 +73,7 @@ class EventViewModel @Inject constructor(
     }
 
     fun getPublicEventDetails(eventId: String) {
-        Log.d(TAG, "getPublicEventDetails: Getting details for public event $eventId")
+        Log.d(TAG, "getPublicEventDetails: Getting details for public event $eventId...")
         viewModelScope.launch(Dispatchers.IO) {
             eventUseCases.getPublicEventDetailsUseCase(eventId).collect {
                 _getPublicEventDetailsState.tryEmit(it)
@@ -83,6 +92,15 @@ class EventViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             eventUseCases.getAllPublicReleaseEventsOrderedByUseCase().collect {
                 _getAllPublicReleaseEventsState.tryEmit(it)
+            }
+        }
+    }
+
+    fun getAllPeriodicEvents() {
+        Log.d(TAG, "getPeriodicEvents: Getting all periodic events...")
+        viewModelScope.launch(Dispatchers.IO) {
+            eventUseCases.getAllPeriodicEventsUseCase().collect {
+                _getAllPeriodicEventsState.tryEmit(it)
             }
         }
     }

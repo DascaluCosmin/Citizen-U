@@ -68,7 +68,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             REPEAT_INTERVAL_VALUE_UNIT,
             TimeUnit.HOURS
         )
-            .setInitialDelay(delay, TimeUnit.MINUTES)
+            .setInitialDelay(5, TimeUnit.SECONDS)
             .build()
 
         workManager.enqueueUniquePeriodicWork(

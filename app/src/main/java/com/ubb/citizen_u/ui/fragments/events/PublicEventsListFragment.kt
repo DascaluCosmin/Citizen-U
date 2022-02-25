@@ -60,6 +60,7 @@ class PublicEventsListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { collectGetAllPublicEventsState() }
+                launch { collectGetAllPeriodicEventsState() }
             }
         }
     }
@@ -67,6 +68,7 @@ class PublicEventsListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         eventViewModel.getAllPublicEventsOrderedByDate()
+        eventViewModel.getAllPeriodicEvents()
     }
 
     private suspend fun collectGetAllPublicEventsState() {
@@ -91,6 +93,25 @@ class PublicEventsListFragment : Fragment() {
                         "collectGetAllPublicEventsState: Successfully collected ${it.data.size} public events "
                     )
                     adapter.submitList(it.data)
+                }
+            }
+        }
+    }
+
+    private suspend fun collectGetAllPeriodicEventsState() {
+        eventViewModel.getAllPeriodicEventsState.collect {
+            when (it) {
+                Response.Loading -> {
+                    Log.d(TAG, "collectGetAllPeriodicEventsState: Collecting response $it")
+                    binding.mainProgressbar.visibility = View.VISIBLE
+                }
+                is Response.Error -> {
+                    binding.mainProgressbar.visibility = View.GONE
+                    toastErrorMessage()
+                }
+                is Response.Success -> {
+                    Log.d(TAG, "collectGetAllPeriodicEventsState: Successfully collected ${it.data.size} periodic events")
+                    binding.mainProgressbar.visibility = View.GONE
                 }
             }
         }

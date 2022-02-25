@@ -56,6 +56,10 @@
     <string name="public_release_events_list_principal_textview">Public releases</string>
     <!-- endregion -->
 
+    <!-- region Periodic Events -->
+    <string name="periodic_event_generic_title" translatable="false">Recurrent Event</string>
+    <!-- endregion -->
+
     <!-- Report Incident -->
     <string name="report_incident_fragment_label">Report Incident</string>
     <string name="report_incident_text">Report incident</string>

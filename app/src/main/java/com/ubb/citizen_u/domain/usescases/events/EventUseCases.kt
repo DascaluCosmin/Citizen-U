@@ -7,5 +7,7 @@ data class EventUseCases(
 
     val getAllPublicReleaseEvents: GetAllPublicReleaseEvents,
     val getAllPublicReleaseEventsOrderedByUseCase: GetAllPublicReleaseEventsOrderedByDateUseCase,
+
+    val getAllPeriodicEventsUseCase: GetAllPeriodicEventsUseCase,
 ) {
 }

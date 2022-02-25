@@ -2,11 +2,12 @@ package com.ubb.citizen_u.data.repositories.impl
 
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
-import com.ubb.citizen_u.data.model.events.PublicReleaseEvent
 import com.ubb.citizen_u.data.model.Photo
+import com.ubb.citizen_u.data.model.events.PeriodicEvent
 import com.ubb.citizen_u.data.model.events.PublicEvent
-import com.ubb.citizen_u.data.repositories.PhotoRepository
+import com.ubb.citizen_u.data.model.events.PublicReleaseEvent
 import com.ubb.citizen_u.data.repositories.EventRepository
+import com.ubb.citizen_u.data.repositories.PhotoRepository
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.DatabaseConstants.EVENTS_PHOTOS_COL
@@ -18,7 +19,7 @@ import javax.inject.Inject
 class EventRepositoryImpl @Inject constructor(
     private val publicEventsRef: CollectionReference,
     private val publicReleaseEventsRef: CollectionReference,
-    private val photoRepository: PhotoRepository
+    private val photoRepository: PhotoRepository,
 ) : EventRepository {
 
     override suspend fun getAllPublicEvents(): Flow<Response<List<PublicEvent?>>> =
@@ -82,11 +83,22 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getAllPublicReleaseEventsOrderedByDate(): Flow<Response<List<PublicReleaseEvent?>>> =
+    override suspend fun getAllPeriodicEvents(): Flow<Response<List<PeriodicEvent?>>> =
         flow {
             try {
                 emit(Response.Loading)
 
+                val periodicEvents = getAllPeriodicEventsList().filterNotNull()
+                emit(Response.Success(periodicEvents))
+            } catch (exception: Exception) {
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    override suspend fun getAllPublicReleaseEventsOrderedByDate(): Flow<Response<List<PublicReleaseEvent?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
                 val sortedPublicReleaseEvents = getAllPublicReleaseEventsList().sortedByDescending {
                     it?.publicationDate
                 }
@@ -110,12 +122,29 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
+
     private suspend fun getAllPublicEventsList(): List<PublicEvent?> {
         val eventsSnapshot = publicEventsRef.get().await()
         return eventsSnapshot.documents.map {
             it.toObject(PublicEvent::class.java)?.apply {
                 photos = getEventPhotos(it).apply {
                     setFirstEventPhotoStorageReference(it, this)
+                }
+            }
+        }
+    }
+
+    private suspend fun getAllPeriodicEventsList(): List<PeriodicEvent?> {
+        val eventsSnapshot = publicReleaseEventsRef.get().await()
+        return eventsSnapshot.documents.map {
+            val periodicEvent = it.toObject(PeriodicEvent::class.java)
+            if (periodicEvent?.frequency == null) {
+                null
+            } else {
+                periodicEvent.apply {
+                    photos = getEventPhotos(it).apply {
+                        setFirstEventPhotoStorageReference(it, this)
+                    }
                 }
             }
         }
@@ -135,7 +164,7 @@ class EventRepositoryImpl @Inject constructor(
 
     // TODO: These two have to be refactored and moved to EventPhotoRepository
     private suspend fun setFirstEventPhotoStorageReference(
-        eventsDocSnapshot: DocumentSnapshot, photos: MutableList<Photo?>
+        eventsDocSnapshot: DocumentSnapshot, photos: MutableList<Photo?>,
     ) {
         if (photos.size > 0) {
             val firstPhotoId = photos[0]?.id

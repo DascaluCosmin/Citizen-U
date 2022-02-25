@@ -14,16 +14,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import androidx.preference.PreferenceManager
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.events.Event
 import com.ubb.citizen_u.databinding.FragmentPublicEventDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
+import com.ubb.citizen_u.ui.util.getCurrentLanguage
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import com.ubb.citizen_u.util.DateFormatter
-import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
-import com.ubb.citizen_u.util.SettingsConstants.LANGUAGE_SETTINGS_KEY
 import com.ubb.citizen_u.util.glide.ImageFiller
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -65,8 +63,6 @@ class PublicEventDetailsFragment : Fragment() {
                 launch { collectGetPublicEventDetailsState() }
             }
         }
-
-        settingsPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
     }
 
     private suspend fun collectGetPublicEventDetailsState() {
@@ -86,8 +82,7 @@ class PublicEventDetailsFragment : Fragment() {
                     binding.eventDetails.visibility = View.VISIBLE
 
                     if (it.data != null) {
-                        val language = settingsPreferences
-                            .getString(LANGUAGE_SETTINGS_KEY, DEFAULT_LANGUAGE) ?: DEFAULT_LANGUAGE
+                        val language = requireContext().getCurrentLanguage()
 
                         binding.eventTitle.text = it.data.title[language]
                         binding.eventLocation.text = it.data.location

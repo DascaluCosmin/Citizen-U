@@ -119,7 +119,7 @@ data class PeriodicEvent(
     override fun toString(): String {
         return "${super.toString()}, " +
                 "Frequency = $frequency, " +
-                "Happening Day = $happeningDay" +
+                "Happening Day = $happeningDay, " +
                 "Happening Month = $happeningMonth"
     }
 }
