@@ -69,6 +69,13 @@ object NotificationsConstants {
 
     const val NOTIFICATION_ID = 1
     const val NOTIFICATION_WORKER_TAG = "NotificationWork"
+
+    const val NOTIFICATION_PERIODIC_EVENT_ID_KEY = "notificationPeriodicEventId"
+}
+
+object CalendarConstants {
+    const val LAST_MONTH_OF_YEAR = "DECEMBER"
+    const val UNKNOWN = "UNKNOWN_DATE"
 }
 
 const val UNDEFINED = "undefined"
@@ -77,3 +84,4 @@ const val DEFAULT_ERROR_MESSAGE = "An unexpected error has occurred"
 const val DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN =
     "An unexpected error has occurred! Please try again!"
 const val DEFAULT_DATE_ERROR_MESSAGE = "UNKNOWN DATE"
+const val UNKNOWN = "UNKNOWN"

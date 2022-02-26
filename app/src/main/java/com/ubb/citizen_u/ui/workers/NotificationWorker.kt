@@ -21,14 +21,16 @@ import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.events.EventUseCases
 import com.ubb.citizen_u.ui.AuthenticationActivity
 import com.ubb.citizen_u.ui.util.getCurrentLanguage
-import com.ubb.citizen_u.ui.util.getDay
-import com.ubb.citizen_u.ui.util.loadLocale
+import com.ubb.citizen_u.ui.util.getDayOfWeek
+import com.ubb.citizen_u.ui.util.getMonth
+import com.ubb.citizen_u.util.CalendarConstants
 import com.ubb.citizen_u.util.NotificationsConstants
 import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
 import java.util.*
+
 
 @HiltWorker
 class NotificationWorker @AssistedInject constructor(
@@ -45,45 +47,59 @@ class NotificationWorker @AssistedInject constructor(
         eventUseCases.getAllPeriodicEventsUseCase().collect {
             when (it) {
                 Response.Loading -> {
-                    Log.d(TAG, "collectGetAllPeriodicEventsState: Collecting response $it")
+                    Log.d(TAG, "doWork: Collecting response $it")
                 }
                 is Response.Error -> {
                     Log.e(TAG,
-                        "collectGetAllPeriodicEventsState: Error at collecting the periodic events: ${it.message}")
+                        "doWork: Error at collecting the periodic events: ${it.message}")
                 }
                 is Response.Success -> {
                     Log.d(TAG,
-                        "collectGetAllPeriodicEventsState: Successfully collected ${it.data.size} periodic events")
+                        "doWork: Successfully collected ${it.data.size} periodic events")
+
+                    var numberOfEmittedEvents = 0
                     it.data
+                        .filterNotNull()
                         .filter(this::shouldEmitPeriodicEventNotification)
-                        .forEach(this::emitPeriodicEventNotification)
+                        .forEach { periodicEvent ->
+                            numberOfEmittedEvents++
+                            emitPeriodicEventNotification(periodicEvent)
+                        }
+                    Log.i(TAG,
+                        "doWork: Today $numberOfEmittedEvents periodic event notifications have been emitted")
                 }
             }
         }
         return Result.success()
     }
 
-    private fun shouldEmitPeriodicEventNotification(periodicEvent: PeriodicEvent?): Boolean {
+    private fun shouldEmitPeriodicEventNotification(periodicEvent: PeriodicEvent): Boolean {
         val now = Calendar.getInstance()
-        return when (periodicEvent?.frequency) {
+        val currentDay = now.get(Calendar.DAY_OF_MONTH)
+        val notificationDaysForMonthFrequency = listOf(1, 21)
+        val notificationDaysForAnnuallyFrequency = listOf(1, 15, 27)
+
+        return when (periodicEvent.frequency) {
             PeriodicEventFrequency.WEEKLY -> {
-                now.getDay() == periodicEvent.happeningDay.toString()
+                now.getDayOfWeek() == periodicEvent.happeningDay.toString()
             }
             PeriodicEventFrequency.MONTHLY -> {
-                false
+                now.getMonth() == periodicEvent.happeningMonth.toString() &&
+                        currentDay in notificationDaysForMonthFrequency
             }
             PeriodicEventFrequency.ANNUALLY -> {
-                false
+                now.getMonth() == CalendarConstants.LAST_MONTH_OF_YEAR &&
+                        currentDay in notificationDaysForAnnuallyFrequency
             }
             null -> false
         }
     }
 
     @SuppressLint("ObsoleteSdkInt")
-    private fun emitPeriodicEventNotification(periodicEvent: PeriodicEvent?) {
+    private fun emitPeriodicEventNotification(periodicEvent: PeriodicEvent) {
         Log.d(TAG,
             "emitPeriodicEventNotification: Emitting notification for periodic event ${
-                periodicEvent?.title?.get(DEFAULT_LANGUAGE)
+                periodicEvent.title[DEFAULT_LANGUAGE]
             }")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
@@ -100,12 +116,14 @@ class NotificationWorker @AssistedInject constructor(
         }
 
         val intent = Intent(applicationContext, AuthenticationActivity::class.java)
+//        intent.putExtra(NOTIFICATION_PERIODIC_EVENT_ID_KEY, periodicEvent.id)
+
         val pendingIntent = TaskStackBuilder.create(applicationContext).run {
             addNextIntentWithParentStack(intent)
             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        val eventTitle = periodicEvent?.title?.get(applicationContext.getCurrentLanguage())
+        val eventTitle = periodicEvent.title[applicationContext.getCurrentLanguage()]
             ?: applicationContext.getString(R.string.periodic_event_generic_title)
         val notification = NotificationCompat.Builder(applicationContext,
             NotificationsConstants.CHANNEL_ID)
