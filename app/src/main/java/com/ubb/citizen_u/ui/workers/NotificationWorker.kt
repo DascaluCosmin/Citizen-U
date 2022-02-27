@@ -25,6 +25,7 @@ import com.ubb.citizen_u.ui.util.getDayOfWeek
 import com.ubb.citizen_u.ui.util.getMonth
 import com.ubb.citizen_u.util.CalendarConstants
 import com.ubb.citizen_u.util.NotificationsConstants
+import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PERIODIC_EVENT_ID_KEY
 import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -116,7 +117,7 @@ class NotificationWorker @AssistedInject constructor(
         }
 
         val intent = Intent(applicationContext, AuthenticationActivity::class.java)
-//        intent.putExtra(NOTIFICATION_PERIODIC_EVENT_ID_KEY, periodicEvent.id)
+        intent.putExtra(NOTIFICATION_PERIODIC_EVENT_ID_KEY, periodicEvent.id)
 
         val pendingIntent = TaskStackBuilder.create(applicationContext).run {
             addNextIntentWithParentStack(intent)

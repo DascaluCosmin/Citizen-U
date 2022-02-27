@@ -33,12 +33,12 @@
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            tools:node="remove">
-        </provider>
+            tools:node="remove" />
 
         <activity
             android:name=".ui.MainActivity"
             android:exported="false"
+            android:parentActivityName=".ui.AuthenticationActivity"
             android:theme="@style/Theme.CitizenU.NoActionBar" />
 
         <activity

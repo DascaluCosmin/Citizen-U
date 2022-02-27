@@ -70,7 +70,7 @@ object NotificationsConstants {
     const val NOTIFICATION_ID = 1
     const val NOTIFICATION_WORKER_TAG = "NotificationWork"
 
-    const val NOTIFICATION_PERIODIC_EVENT_ID_KEY = "notificationPeriodicEventId"
+    const val NOTIFICATION_PERIODIC_EVENT_ID_KEY = "periodicEventDetailsId"
 }
 
 object CalendarConstants {

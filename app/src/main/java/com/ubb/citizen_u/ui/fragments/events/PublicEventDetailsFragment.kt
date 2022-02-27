@@ -1,7 +1,6 @@
 package com.ubb.citizen_u.ui.fragments.events
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,8 +13,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import com.ubb.citizen_u.data.model.Photo
-import com.ubb.citizen_u.data.model.events.Event
 import com.ubb.citizen_u.databinding.FragmentPublicEventDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.getCurrentLanguage
@@ -25,7 +22,6 @@ import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.glide.ImageFiller
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.*
 
 
 class PublicEventDetailsFragment : Fragment() {
@@ -34,8 +30,6 @@ class PublicEventDetailsFragment : Fragment() {
         private const val TAG = "UBB-PublicEventDetailsFragment"
         private const val DEFAULT_GOOGLE_SEARCH_SITE = "http://www.google.com/search?q="
     }
-
-    private lateinit var settingsPreferences: SharedPreferences
 
     private var _binding: FragmentPublicEventDetailsBinding? = null
     private val binding get() = _binding!!
@@ -88,7 +82,7 @@ class PublicEventDetailsFragment : Fragment() {
                         binding.eventLocation.text = it.data.location
                         binding.eventAddress.text = it.data.address[language]
 
-                        val randomEventPhoto = chooseRandomEventPhoto(it.data)
+                        val randomEventPhoto = it.data.chooseRandomEventPhoto()
                         ImageFiller.fill(
                             requireContext(),
                             binding.eventImage,
@@ -109,11 +103,6 @@ class PublicEventDetailsFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun chooseRandomEventPhoto(event: Event): Photo? {
-        val randomIndex = Random().nextInt(event.photos.size)
-        return event.photos[randomIndex]
     }
 
     override fun onStart() {

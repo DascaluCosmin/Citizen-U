@@ -139,7 +139,8 @@ class ReportIncidentMapFragment : Fragment() {
     private fun goToUserProfile() {
         val action =
             ReportIncidentMapFragmentDirections.actionReportIncidentMapFragmentToSignedInFragment(
-                citizenId = citizenViewModel.citizenId
+                citizenId = citizenViewModel.citizenId,
+                periodicEventDetailsId = null
             )
         findNavController().navigate(action)
     }

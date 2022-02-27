@@ -16,6 +16,11 @@ abstract class Event(
     override fun toString(): String {
         return "ID = $id, Title = $title"
     }
+
+    fun chooseRandomEventPhoto(): Photo? {
+        val randomIndex = Random().nextInt(photos.size)
+        return photos[randomIndex]
+    }
 }
 
 data class PublicEvent(

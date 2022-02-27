@@ -54,6 +54,19 @@ class SignedInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        shouldGoToPeriodicEventDetails()?.let {
+            /**
+            TODO: Note that currently this is susceptible to a bug
+            due to the fact that upon logout -> login, the args might be still non-null.
+             */
+            Log.d(TAG, "onViewCreated: The current periodic event id is $it")
+            val action =
+                SignedInFragmentDirections.actionSignedInFragmentToPublicReleaseEventDetailsFragment(
+                    publicReleaseEventId = it
+                )
+            findNavController().navigate(action)
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { collectCitizenState() }
@@ -120,5 +133,9 @@ class SignedInFragment : Fragment() {
 
     fun goToReportIncident() {
         findNavController().navigate(R.id.action_signedInFragment_to_reportIncidentFragment)
+    }
+
+    private fun shouldGoToPeriodicEventDetails(): String? {
+        return args.periodicEventDetailsId
     }
 }

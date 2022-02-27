@@ -16,6 +16,7 @@ import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.ActivityMainBinding
 import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
+import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PERIODIC_EVENT_ID_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -24,6 +25,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     companion object {
+        private const val TAG = "UBB-MainActivity"
         private const val CITIZEN_ID_ARG_KEY = "citizenId"
     }
 
@@ -50,8 +52,8 @@ class MainActivity : AppCompatActivity() {
             (supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment).navController
 
         val bundle = Bundle()
-
         bundle.putString(CITIZEN_ID_ARG_KEY, args.citizenId)
+        bundle.putString(NOTIFICATION_PERIODIC_EVENT_ID_KEY, args.periodicEventDetailsId)
         navController.setGraph(R.navigation.nav_graph_main, bundle)
 
         drawerLayout = binding.drawerLayout
