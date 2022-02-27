@@ -15,9 +15,10 @@ import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentSignedInBinding
 import com.ubb.citizen_u.domain.model.Response
-import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
+import com.ubb.citizen_u.ui.viewmodels.EventViewModel
+import com.ubb.citizen_u.ui.workers.NotificationWorker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -32,6 +33,7 @@ class SignedInFragment : Fragment() {
     }
 
     private val citizenViewModel: CitizenViewModel by activityViewModels()
+    private val eventViewModel: EventViewModel by activityViewModels()
 
     private var _binding: FragmentSignedInBinding? = null
 
@@ -43,7 +45,6 @@ class SignedInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        loadLocale()
         _binding = FragmentSignedInBinding.inflate(inflater, container, false)
 
         binding.apply {
@@ -63,13 +64,20 @@ class SignedInFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onStart() {
         super.onStart()
         citizenViewModel.getCitizen(args.citizenId)
+
+        shouldGoToPeriodicEventDetails()?.let {
+            Log.d(TAG, "onViewCreated: Navigating to the current periodic event: $it")
+
+            eventViewModel.openCurrentPeriodicReleaseEventState()
+            val action =
+                SignedInFragmentDirections.actionSignedInFragmentToPublicReleaseEventDetailsFragment(
+                    publicReleaseEventDetailsId = it
+                )
+            findNavController().navigate(action)
+        }
     }
 
     private suspend fun collectCitizenState() {
@@ -126,5 +134,13 @@ class SignedInFragment : Fragment() {
 
     fun goToReportIncident() {
         findNavController().navigate(R.id.action_signedInFragment_to_reportIncidentFragment)
+    }
+
+    private fun shouldGoToPeriodicEventDetails(): String? {
+        if (eventViewModel.getCurrentPeriodicEventNotificationState() != NotificationWorker.PeriodicEventNotificationState.UNKNOWN) {
+            // Workaround in order to reset the periodicEvent when coming back from the Details Screen
+            return null
+        }
+        return args.periodicEventDetailsId
     }
 }

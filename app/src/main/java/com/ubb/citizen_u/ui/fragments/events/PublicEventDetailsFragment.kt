@@ -1,7 +1,6 @@
 package com.ubb.citizen_u.ui.fragments.events
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,20 +13,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import androidx.preference.PreferenceManager
-import com.ubb.citizen_u.data.model.Photo
-import com.ubb.citizen_u.data.model.events.Event
 import com.ubb.citizen_u.databinding.FragmentPublicEventDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
+import com.ubb.citizen_u.ui.util.getCurrentLanguage
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import com.ubb.citizen_u.util.DateFormatter
-import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
-import com.ubb.citizen_u.util.SettingsConstants.LANGUAGE_SETTINGS_KEY
 import com.ubb.citizen_u.util.glide.ImageFiller
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.*
 
 
 class PublicEventDetailsFragment : Fragment() {
@@ -36,8 +30,6 @@ class PublicEventDetailsFragment : Fragment() {
         private const val TAG = "UBB-PublicEventDetailsFragment"
         private const val DEFAULT_GOOGLE_SEARCH_SITE = "http://www.google.com/search?q="
     }
-
-    private lateinit var settingsPreferences: SharedPreferences
 
     private var _binding: FragmentPublicEventDetailsBinding? = null
     private val binding get() = _binding!!
@@ -65,35 +57,34 @@ class PublicEventDetailsFragment : Fragment() {
                 launch { collectGetPublicEventDetailsState() }
             }
         }
-
-        settingsPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
     }
 
     private suspend fun collectGetPublicEventDetailsState() {
         eventViewModel.getPublicEventDetailsState.collect {
             Log.d(TAG, "collectGetPublicEventDetailsState: Collecting response $it")
             when (it) {
-                is Response.Error -> {
-                    binding.mainProgressbar.visibility = View.GONE
-                    toastErrorMessage()
-                }
                 Response.Loading -> {
                     binding.mainProgressbar.visibility = View.VISIBLE
                     binding.eventDetails.visibility = View.GONE
+                }
+                is Response.Error -> {
+                    Log.e(TAG,
+                        "collectGetPublicEventDetailsState: Error at collecting public event: ${it.message}")
+                    binding.mainProgressbar.visibility = View.GONE
+                    toastErrorMessage()
                 }
                 is Response.Success -> {
                     binding.mainProgressbar.visibility = View.GONE
                     binding.eventDetails.visibility = View.VISIBLE
 
                     if (it.data != null) {
-                        val language = settingsPreferences
-                            .getString(LANGUAGE_SETTINGS_KEY, DEFAULT_LANGUAGE) ?: DEFAULT_LANGUAGE
+                        val language = requireContext().getCurrentLanguage()
 
                         binding.eventTitle.text = it.data.title[language]
                         binding.eventLocation.text = it.data.location
                         binding.eventAddress.text = it.data.address[language]
 
-                        val randomEventPhoto = chooseRandomEventPhoto(it.data)
+                        val randomEventPhoto = it.data.chooseRandomEventPhoto()
                         ImageFiller.fill(
                             requireContext(),
                             binding.eventImage,
@@ -114,11 +105,6 @@ class PublicEventDetailsFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun chooseRandomEventPhoto(event: Event): Photo? {
-        val randomIndex = Random().nextInt(event.photos.size)
-        return event.photos[randomIndex]
     }
 
     override fun onStart() {

@@ -71,10 +71,19 @@
     <!-- Language Preferences -->
     <string name="language_title">Limba curentă</string>
 
-    <!--Settings -->
-    <string name="settings_fragment_label">Setări</string>
-    <string name="settings_notifications_summary_on_text">Nu vei mai primi notificări</string>
-    <string name="settings_notification_summary_off_text">Vei primi toate notificările</string>
-    <string name="settings_notifications_title">Dezactivează notificările</string>
+    <!--region Settings -->
+    <string name="settings_fragment_label" translatable="false">Setări</string>
+    <string name="settings_notifications_summary_off_text">Acum nu primiți nicio notificare</string>
+    <string name="settings_notification_summary_on_text">Acum primiți toate notificările</string>
+    <string name="settings_notifications_title">Activează notificările</string>
     <string name="settings_notifications_category_title">Notificări</string>
+
+    <!-- Arrays values -->
+    <string name="english_language_label">Engleză</string>
+    <string name="romanian_language_label">Română</string>
+    <string name="hungarian_language_label">Maghiară</string>
+    <!--endregion-->
+
+    <!-- Constants -->
+    <string name="city_hall_name">Primăria Cluj-Napoca</string>
 </resources>

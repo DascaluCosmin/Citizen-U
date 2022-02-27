@@ -14,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentPublicEventsListBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.adapters.PublicEventsAdapter
-import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import kotlinx.coroutines.flow.collect
@@ -36,9 +35,8 @@ class PublicEventsListFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        loadLocale()
         _binding = FragmentPublicEventsListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -62,6 +60,7 @@ class PublicEventsListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { collectGetAllPublicEventsState() }
+                launch { collectGetAllPeriodicEventsState() }
             }
         }
     }
@@ -69,6 +68,7 @@ class PublicEventsListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         eventViewModel.getAllPublicEventsOrderedByDate()
+        eventViewModel.getAllPeriodicEvents()
     }
 
     private suspend fun collectGetAllPublicEventsState() {
@@ -93,6 +93,25 @@ class PublicEventsListFragment : Fragment() {
                         "collectGetAllPublicEventsState: Successfully collected ${it.data.size} public events "
                     )
                     adapter.submitList(it.data)
+                }
+            }
+        }
+    }
+
+    private suspend fun collectGetAllPeriodicEventsState() {
+        eventViewModel.getAllPeriodicEventsState.collect {
+            when (it) {
+                Response.Loading -> {
+                    Log.d(TAG, "collectGetAllPeriodicEventsState: Collecting response $it")
+                    binding.mainProgressbar.visibility = View.VISIBLE
+                }
+                is Response.Error -> {
+                    binding.mainProgressbar.visibility = View.GONE
+                    toastErrorMessage()
+                }
+                is Response.Success -> {
+                    Log.d(TAG, "collectGetAllPeriodicEventsState: Successfully collected ${it.data.size} periodic events")
+                    binding.mainProgressbar.visibility = View.GONE
                 }
             }
         }

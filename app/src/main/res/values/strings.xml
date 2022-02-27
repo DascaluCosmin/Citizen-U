@@ -56,6 +56,10 @@
     <string name="public_release_events_list_principal_textview">Public releases</string>
     <!-- endregion -->
 
+    <!-- region Periodic Events -->
+    <string name="periodic_event_generic_title" translatable="false">Recurrent Event</string>
+    <!-- endregion -->
+
     <!-- Report Incident -->
     <string name="report_incident_fragment_label">Report Incident</string>
     <string name="report_incident_text">Report incident</string>
@@ -71,11 +75,19 @@
     <!-- Language Preferences -->
     <string name="language_title">Current language</string>
 
-    <!--Settings -->
+    <!--region Settings -->
     <string name="settings_fragment_label" translatable="false">Settings</string>
-    <string name="settings_notifications_summary_on_text">You will no longer receive notifications</string>
-    <string name="settings_notification_summary_off_text">You will receive all notifications</string>
-    <string name="settings_notifications_title">Disable notifications</string>
+    <string name="settings_notifications_summary_off_text">Now you do not receive any notifications</string>
+    <string name="settings_notification_summary_on_text">Now you receive all notifications</string>
+    <string name="settings_notifications_title">Enable notifications</string>
     <string name="settings_notifications_category_title">Notifications</string>
 
+    <!-- Arrays values -->
+    <string name="english_language_label">English</string>
+    <string name="romanian_language_label">Romanian</string>
+    <string name="hungarian_language_label">Hungarian</string>
+    <!--endregion-->
+
+    <!-- Constants -->
+    <string name="city_hall_name">Cluj-Napoca City Hall</string>
 </resources>

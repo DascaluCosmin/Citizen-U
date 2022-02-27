@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_public_release_event_details"
+    tools:context=".ui.fragments.events.PublicReleaseEventDetailsFragment">
+
+    <data>
+
+        <variable
+            name="publicReleaseEventDetailsFragment"
+            type="com.ubb.citizen_u.ui.fragments.events.PublicReleaseEventDetailsFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/public_release_event_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/event_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:importantForAccessibility="no"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@id/horizontal_guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/public_release_photo_sample" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vertical_start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/horizontal_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.3" />
+
+            <TextView
+                android:id="@+id/event_title"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/generic_margin"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@id/vertical_end_guideline"
+                app:layout_constraintStart_toStartOf="@id/vertical_start_guideline"
+                app:layout_constraintTop_toTopOf="@id/horizontal_guideline"
+                tools:text="Green Friday" />
+
+            <ImageView
+                android:id="@id/calendar_imageview"
+                android:layout_width="@dimen/event_details_icons_dimension"
+                android:layout_height="@dimen/event_details_icons_dimension"
+                android:layout_marginTop="@dimen/generic_margin"
+                android:src="@drawable/ic_baseline_calendar_month_24"
+                app:layout_constraintStart_toStartOf="@id/vertical_start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/event_title" />
+
+            <TextView
+                android:id="@id/event_publication_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/events_margin_between_imageview_content"
+                android:textColor="@color/grey"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@id/calendar_imageview"
+                app:layout_constraintStart_toEndOf="@id/calendar_imageview"
+                app:layout_constraintTop_toTopOf="@id/calendar_imageview"
+                tools:text="@tools:sample/date/ddmmyy" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vertical_end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.9" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/main_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

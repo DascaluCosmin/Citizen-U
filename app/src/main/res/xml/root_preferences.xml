@@ -19,8 +19,8 @@
         app:title="@string/settings_notifications_category_title">
         <SwitchPreference
             app:key="notifications"
-            app:summaryOff="@string/settings_notification_summary_off_text"
-            app:summaryOn="@string/settings_notifications_summary_on_text"
+            app:summaryOff="@string/settings_notifications_summary_off_text"
+            app:summaryOn="@string/settings_notification_summary_on_text"
             app:title="@string/settings_notifications_title" />
     </PreferenceCategory>
 </PreferenceScreen>

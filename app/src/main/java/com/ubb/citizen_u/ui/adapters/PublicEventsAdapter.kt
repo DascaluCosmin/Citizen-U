@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.databinding.PublicEventsListItemBinding
 import com.ubb.citizen_u.ui.adapters.viewholders.PublicEventViewHolder
+import com.ubb.citizen_u.ui.util.getCurrentLanguage
 import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
 import com.ubb.citizen_u.util.SettingsConstants.LANGUAGE_SETTINGS_KEY
 
@@ -16,13 +17,8 @@ class PublicEventsAdapter(
     private val eventDetailsOnClickCallBack: (PublicEvent) -> Unit,
 ) : ListAdapter<PublicEvent, RecyclerView.ViewHolder>(EventsDiffCallBack()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val settingsPreferences = PreferenceManager
-            .getDefaultSharedPreferences(parent.context)
-        val language = settingsPreferences
-            .getString(LANGUAGE_SETTINGS_KEY, DEFAULT_LANGUAGE) ?: DEFAULT_LANGUAGE
-
         return PublicEventViewHolder(
-            language = language,
+            language = parent.context.getCurrentLanguage(),
             eventsListItemBinding = PublicEventsListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,

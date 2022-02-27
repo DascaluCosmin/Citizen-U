@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentLoginBinding
 import com.ubb.citizen_u.domain.model.Response
@@ -42,13 +43,13 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val authenticationViewModel: AuthenticationViewModel by activityViewModels()
+    private val args: LoginFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         loadLocale()
-
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.apply {
@@ -158,7 +159,8 @@ class LoginFragment : Fragment() {
 
     private fun navigateToUserProfile(userId: String) {
         val action = LoginFragmentDirections.actionLoginFragmentToMainActivity(
-            citizenId = userId
+            citizenId = userId,
+            periodicEventDetailsId = args.periodicEventDetailsId
         )
         findNavController().navigate(action)
     }

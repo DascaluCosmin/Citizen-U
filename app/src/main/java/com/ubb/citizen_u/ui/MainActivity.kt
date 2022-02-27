@@ -1,6 +1,5 @@
 package com.ubb.citizen_u.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -17,6 +16,8 @@ import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.ActivityMainBinding
 import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
+import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY
+import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PUBLIC_RELEASE_EVENT_ID_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -25,6 +26,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     companion object {
+        private const val TAG = "UBB-MainActivity"
         private const val CITIZEN_ID_ARG_KEY = "citizenId"
     }
 
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
      *  Uncomment in order to show App Bar
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+        loadLocale()
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -51,15 +54,13 @@ class MainActivity : AppCompatActivity() {
 
         val bundle = Bundle()
         bundle.putString(CITIZEN_ID_ARG_KEY, args.citizenId)
+        bundle.putString(NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY, args.periodicEventDetailsId)
         navController.setGraph(R.navigation.nav_graph_main, bundle)
 
         drawerLayout = binding.drawerLayout
         binding.navigationView.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-
-        val sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        sharedPreferences.edit().putString("key", "aaa").apply()
 
         overrideNavigationDrawerItems()
 //         setupActionBarWithNavController(navController, appBarConfiguration)

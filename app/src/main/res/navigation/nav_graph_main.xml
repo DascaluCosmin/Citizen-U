@@ -29,6 +29,14 @@
         <action
             android:id="@+id/action_signedInFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <argument
+            android:name="periodicEventDetailsId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_signedInFragment_to_publicReleaseEventDetailsFragment"
+            app:destination="@id/publicReleaseEventDetailsFragment" />
     </fragment>
 
     <fragment
@@ -53,7 +61,11 @@
         android:id="@+id/publicReleaseEventsListFragment"
         android:name="com.ubb.citizen_u.ui.fragments.events.PublicReleaseEventsListFragment"
         android:label="@string/public_release_events_list_fragment_label"
-        tools:layout="@layout/fragment_public_release_events_list" />
+        tools:layout="@layout/fragment_public_release_events_list" >
+        <action
+            android:id="@+id/action_publicReleaseEventsListFragment_to_publicReleaseEventDetailsFragment"
+            app:destination="@id/publicReleaseEventDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reportIncidentFragment"
         android:name="com.ubb.citizen_u.ui.fragments.multistep.reports.ReportIncidentDetailsFragment"
@@ -100,4 +112,13 @@
         android:id="@+id/settingsFragment"
         android:name="com.ubb.citizen_u.ui.fragments.SettingsFragment"
         android:label="@string/settings_fragment_label" />
+    <fragment
+        android:id="@+id/publicReleaseEventDetailsFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.events.PublicReleaseEventDetailsFragment"
+        android:label="fragment_public_release_event_details"
+        tools:layout="@layout/fragment_public_release_event_details">
+        <argument
+            android:name="publicReleaseEventDetailsId"
+            app:argType="string" />
+    </fragment>
 </navigation>

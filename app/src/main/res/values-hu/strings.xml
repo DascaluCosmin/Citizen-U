@@ -31,7 +31,7 @@
     <string name="multistep_register_identity_information_textview">Személyes adat</string>
 
     <!-- Signed In -->
-    <string name="signed_in_fragment_label">" Itthon"</string>
+    <string name="signed_in_fragment_label">Itthon</string>
     <string name="signed_in_your_account_textview">Welcome</string>
     <string name="signed_in_your_account_textview_params">Üdvözöljük, %s</string>
     <string name="signed_in_your_account_textview_tools">Welcome, Cosmin</string>
@@ -70,11 +70,19 @@
     <!-- Language Preferences -->
     <string name="language_title">Jelenlegi nyelv</string>
 
-    <!--Settings -->
-    <string name="settings_fragment_label">Beállítások</string>
-    <string name="settings_notifications_summary_on_text">A továbbiakban nem kap értesítéseket</string>
-    <string name="settings_notification_summary_off_text">Minden értesítést megkap</string>
-    <string name="settings_notifications_title">Értesítések letiltása</string>
+    <!--region Settings -->
+    <string name="settings_fragment_label" translatable="false">Beállítások</string>
+    <string name="settings_notifications_summary_off_text">Most már nem kap értesítést</string>
+    <string name="settings_notification_summary_on_text">Most minden értesítést megkap</string>
+    <string name="settings_notifications_title">Értesítések engedélyezése</string>
     <string name="settings_notifications_category_title">Értesítések</string>
 
+    <!-- Arrays values -->
+    <string name="english_language_label">Angol</string>
+    <string name="romanian_language_label">Román</string>
+    <string name="hungarian_language_label">Magyar</string>
+    <!--endregion-->
+
+    <!-- Constants -->
+    <string name="city_hall_name">Kolozsvár Városháza</string>
 </resources>

@@ -1,9 +1,9 @@
 <resources>
     <!-- Language Preference -->
     <string-array name="language_entries">
-        <item>English (EN)</item>
-        <item>Romanian (RO)</item>
-        <item>Hungarian (HU)</item>
+        <item>@string/english_language_label</item>
+        <item>@string/romanian_language_label</item>
+        <item>@string/hungarian_language_label</item>
     </string-array>
 
     <string-array name="language_values">

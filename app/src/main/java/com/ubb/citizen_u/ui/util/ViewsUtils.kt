@@ -1,5 +1,6 @@
 package com.ubb.citizen_u.ui.util
 
+import android.app.Activity
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Matrix
@@ -23,6 +24,25 @@ fun Fragment.toastErrorMessage(errorMessage: String = DEFAULT_ERROR_MESSAGE_PLEA
 fun Fragment.loadLocale() {
     val settingsPreferences = PreferenceManager
         .getDefaultSharedPreferences(requireContext())
+    val language = settingsPreferences
+        .getString(SettingsConstants.LANGUAGE_SETTINGS_KEY,
+            SettingsConstants.DEFAULT_LANGUAGE) ?: SettingsConstants.DEFAULT_LANGUAGE
+
+
+    val locale = Locale(language)
+    val configuration = Configuration()
+
+    configuration.setLocale(locale)
+    resources.updateConfiguration(
+        configuration,
+        resources.displayMetrics
+    )
+}
+
+@Suppress("DEPRECATION")
+fun Activity.loadLocale() {
+    val settingsPreferences = PreferenceManager
+        .getDefaultSharedPreferences(this)
     val language = settingsPreferences
         .getString(SettingsConstants.LANGUAGE_SETTINGS_KEY,
             SettingsConstants.DEFAULT_LANGUAGE) ?: SettingsConstants.DEFAULT_LANGUAGE
