@@ -17,6 +17,8 @@ import com.ubb.citizen_u.databinding.FragmentSignedInBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
+import com.ubb.citizen_u.ui.viewmodels.EventViewModel
+import com.ubb.citizen_u.ui.workers.NotificationWorker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -31,6 +33,7 @@ class SignedInFragment : Fragment() {
     }
 
     private val citizenViewModel: CitizenViewModel by activityViewModels()
+    private val eventViewModel: EventViewModel by activityViewModels()
 
     private var _binding: FragmentSignedInBinding? = null
 
@@ -54,19 +57,6 @@ class SignedInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        shouldGoToPeriodicEventDetails()?.let {
-            /**
-            TODO: Note that currently this is susceptible to a bug
-            due to the fact that upon logout -> login, the args might be still non-null.
-             */
-            Log.d(TAG, "onViewCreated: The current periodic event id is $it")
-            val action =
-                SignedInFragmentDirections.actionSignedInFragmentToPublicReleaseEventDetailsFragment(
-                    publicReleaseEventId = it
-                )
-            findNavController().navigate(action)
-        }
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { collectCitizenState() }
@@ -77,6 +67,17 @@ class SignedInFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         citizenViewModel.getCitizen(args.citizenId)
+
+        shouldGoToPeriodicEventDetails()?.let {
+            Log.d(TAG, "onViewCreated: Navigating to the current periodic event: $it")
+
+            eventViewModel.openCurrentPeriodicReleaseEventState()
+            val action =
+                SignedInFragmentDirections.actionSignedInFragmentToPublicReleaseEventDetailsFragment(
+                    publicReleaseEventDetailsId = it
+                )
+            findNavController().navigate(action)
+        }
     }
 
     private suspend fun collectCitizenState() {
@@ -136,6 +137,10 @@ class SignedInFragment : Fragment() {
     }
 
     private fun shouldGoToPeriodicEventDetails(): String? {
+        if (eventViewModel.getCurrentPeriodicEventNotificationState() != NotificationWorker.PeriodicEventNotificationState.UNKNOWN) {
+            // Workaround in order to reset the periodicEvent when coming back from the Details Screen
+            return null
+        }
         return args.periodicEventDetailsId
     }
 }

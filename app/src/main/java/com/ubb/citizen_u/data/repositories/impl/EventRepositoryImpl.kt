@@ -48,7 +48,7 @@ class EventRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getPublicEventDetails(eventId: String): Flow<Response<PublicEvent?>> =
+    override suspend fun getPublicEvent(eventId: String): Flow<Response<PublicEvent?>> =
         flow {
             try {
                 emit(Response.Loading)
@@ -59,8 +59,10 @@ class EventRepositoryImpl @Inject constructor(
                 event?.photos = getEventPhotos(eventSnapshot)
                 photoRepository.getAllEventPhotos(eventId).forEach { storageReference ->
                     event?.photos?.forEach { photo ->
-                        if (photo != null && storageReference.path.contains(photo.id)) {
-                            photo.storageReference = storageReference
+                        photo?.apply {
+                            if (storageReference.path.contains(id)) {
+                                this.storageReference = storageReference
+                            }
                         }
                     }
                 }
@@ -119,6 +121,30 @@ class EventRepositoryImpl @Inject constructor(
             } catch (exception: Exception) {
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
 
+            }
+        }
+
+    override suspend fun getPublicReleaseEvent(eventId: String): Flow<Response<PublicReleaseEvent?>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val eventSnapshot = publicReleaseEventsRef.document(eventId).get().await()
+                val event = eventSnapshot.toObject(PublicReleaseEvent::class.java)
+
+                event?.photos = getEventPhotos(eventSnapshot)
+                photoRepository.getAllEventPhotos(eventId).forEach { storageReference ->
+                    event?.photos?.forEach { photo ->
+                        photo?.apply {
+                            if (storageReference.path.contains(id)) {
+                                this.storageReference = storageReference
+                            }
+                        }
+                    }
+                }
+                emit(Response.Success(event))
+            } catch (exception: Exception) {
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
             }
         }
 

@@ -8,6 +8,7 @@ import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.data.model.events.PublicReleaseEvent
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.events.EventUseCases
+import com.ubb.citizen_u.ui.workers.NotificationWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
@@ -52,6 +53,17 @@ class EventViewModel @Inject constructor(
         )
     val getAllPublicReleaseEventsState: SharedFlow<Response<List<PublicReleaseEvent?>>>
         get() = _getAllPublicReleaseEventsState
+
+    private val _getPublicReleaseEventDetailsState =
+        MutableSharedFlow<Response<PublicReleaseEvent?>>(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val getPublicReleaseEventDetailsState: SharedFlow<Response<PublicReleaseEvent?>>
+        get() = _getPublicReleaseEventDetailsState
+
+    private var currentPeriodicEventNotificationState =
+        NotificationWorker.PeriodicEventNotificationState.UNKNOWN
     // endregion
 
     //region Periodic Events
@@ -96,6 +108,16 @@ class EventViewModel @Inject constructor(
         }
     }
 
+    fun getPublicReleaseEventDetails(eventId: String) {
+        Log.d(TAG,
+            "getPublicReleaseEventDetails: Getting details for public release event $eventId...")
+        viewModelScope.launch(Dispatchers.IO) {
+            eventUseCases.getPublicReleaseDetailsUseCase(eventId).collect {
+                _getPublicReleaseEventDetailsState.tryEmit(it)
+            }
+        }
+    }
+
     fun getAllPeriodicEvents() {
         Log.d(TAG, "getPeriodicEvents: Getting all periodic events...")
         viewModelScope.launch(Dispatchers.IO) {
@@ -103,5 +125,19 @@ class EventViewModel @Inject constructor(
                 _getAllPeriodicEventsState.tryEmit(it)
             }
         }
+    }
+
+    fun getCurrentPeriodicEventNotificationState(): NotificationWorker.PeriodicEventNotificationState {
+        return currentPeriodicEventNotificationState
+    }
+
+    fun openCurrentPeriodicReleaseEventState() {
+        currentPeriodicEventNotificationState =
+            NotificationWorker.PeriodicEventNotificationState.OPENED
+    }
+
+    fun consumeCurrentPeriodicReleaseEventState() {
+        currentPeriodicEventNotificationState =
+            NotificationWorker.PeriodicEventNotificationState.CONSUMED
     }
 }

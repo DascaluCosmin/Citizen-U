@@ -18,6 +18,9 @@ abstract class Event(
     }
 
     fun chooseRandomEventPhoto(): Photo? {
+        if (photos.isEmpty()) {
+            return null
+        }
         val randomIndex = Random().nextInt(photos.size)
         return photos[randomIndex]
     }
@@ -128,7 +131,6 @@ data class PeriodicEvent(
                 "Happening Month = $happeningMonth"
     }
 }
-
 
 enum class PeriodicEventFrequency {
     WEEKLY, MONTHLY, ANNUALLY

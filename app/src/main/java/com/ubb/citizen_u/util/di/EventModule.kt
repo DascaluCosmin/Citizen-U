@@ -54,7 +54,8 @@ object EventModule {
             getAllPublicReleaseEventsOrderedByUseCase = GetAllPublicReleaseEventsOrderedByDateUseCase(
                 eventRepository
             ),
-            getAllPeriodicEventsUseCase = GetAllPeriodicEventsUseCase(eventRepository)
+            getAllPeriodicEventsUseCase = GetAllPeriodicEventsUseCase(eventRepository),
+            getPublicReleaseDetailsUseCase = GetPublicReleaseEventDetailsUseCase(eventRepository)
         )
 
     @Provides

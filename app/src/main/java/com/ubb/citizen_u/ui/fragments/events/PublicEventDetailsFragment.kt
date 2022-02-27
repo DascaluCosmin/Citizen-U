@@ -63,13 +63,15 @@ class PublicEventDetailsFragment : Fragment() {
         eventViewModel.getPublicEventDetailsState.collect {
             Log.d(TAG, "collectGetPublicEventDetailsState: Collecting response $it")
             when (it) {
-                is Response.Error -> {
-                    binding.mainProgressbar.visibility = View.GONE
-                    toastErrorMessage()
-                }
                 Response.Loading -> {
                     binding.mainProgressbar.visibility = View.VISIBLE
                     binding.eventDetails.visibility = View.GONE
+                }
+                is Response.Error -> {
+                    Log.e(TAG,
+                        "collectGetPublicEventDetailsState: Error at collecting public event: ${it.message}")
+                    binding.mainProgressbar.visibility = View.GONE
+                    toastErrorMessage()
                 }
                 is Response.Success -> {
                     binding.mainProgressbar.visibility = View.GONE

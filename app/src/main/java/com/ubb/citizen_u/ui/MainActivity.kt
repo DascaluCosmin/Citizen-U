@@ -16,7 +16,8 @@ import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.ActivityMainBinding
 import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
-import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PERIODIC_EVENT_ID_KEY
+import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY
+import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PUBLIC_RELEASE_EVENT_ID_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         val bundle = Bundle()
         bundle.putString(CITIZEN_ID_ARG_KEY, args.citizenId)
-        bundle.putString(NOTIFICATION_PERIODIC_EVENT_ID_KEY, args.periodicEventDetailsId)
+        bundle.putString(NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY, args.periodicEventDetailsId)
         navController.setGraph(R.navigation.nav_graph_main, bundle)
 
         drawerLayout = binding.drawerLayout

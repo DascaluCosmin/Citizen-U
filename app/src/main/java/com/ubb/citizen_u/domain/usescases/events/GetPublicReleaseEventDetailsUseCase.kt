@@ -3,9 +3,10 @@ package com.ubb.citizen_u.domain.usescases.events
 import com.ubb.citizen_u.data.repositories.EventRepository
 import javax.inject.Inject
 
-class GetPublicEventDetailsUseCase @Inject constructor(
+class GetPublicReleaseEventDetailsUseCase @Inject constructor(
     private val eventRepository: EventRepository
 ) {
+
     suspend operator fun invoke(eventId: String) =
-        eventRepository.getPublicEvent(eventId)
+        eventRepository.getPublicReleaseEvent(eventId)
 }

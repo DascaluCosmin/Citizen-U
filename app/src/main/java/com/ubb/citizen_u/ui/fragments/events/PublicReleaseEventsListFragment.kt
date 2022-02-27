@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentPublicReleaseEventsListBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.adapters.PublicReleaseEventAdapter
@@ -47,7 +48,11 @@ class PublicReleaseEventsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = PublicReleaseEventAdapter {
-            Log.d(TAG, "onViewCreated: Clicked on public release event ${it.id}")
+            val action =
+                PublicReleaseEventsListFragmentDirections.actionPublicReleaseEventsListFragmentToPublicReleaseEventDetailsFragment(
+                    publicReleaseEventDetailsId = it.id
+                )
+            findNavController().navigate(action)
         }
 
         binding.apply {
