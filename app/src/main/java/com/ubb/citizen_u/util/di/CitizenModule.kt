@@ -10,6 +10,7 @@ import com.ubb.citizen_u.data.repositories.impl.CitizenRequestRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.citizens.CitizenUseCases
 import com.ubb.citizen_u.domain.usescases.citizens.GetCitizenUseCase
 import com.ubb.citizen_u.domain.usescases.citizens.requests.CitizenRequestUseCase
+import com.ubb.citizen_u.domain.usescases.citizens.requests.GetCitizenReportedIncidents
 import com.ubb.citizen_u.domain.usescases.citizens.requests.ReportIncidentUseCase
 import com.ubb.citizen_u.util.DatabaseConstants.USERS_COL
 import dagger.Module
@@ -26,7 +27,7 @@ object CitizenModule {
     @Provides
     @Singleton
     fun providesCitizenRepository(
-        @Named(USERS_COL) usersRef: CollectionReference
+        @Named(USERS_COL) usersRef: CollectionReference,
     ): CitizenRepository =
         CitizenRepositoryImpl(
             usersRef = usersRef
@@ -54,7 +55,8 @@ object CitizenModule {
     @Singleton
     fun providesCitizenRequestUseCase(citizenRequestRepository: CitizenRequestRepository) =
         CitizenRequestUseCase(
-            reportIncidentUseCase = ReportIncidentUseCase(citizenRequestRepository)
+            reportIncidentUseCase = ReportIncidentUseCase(citizenRequestRepository),
+            getCitizenReportedIncidents = GetCitizenReportedIncidents(citizenRequestRepository)
         )
 
     @Provides

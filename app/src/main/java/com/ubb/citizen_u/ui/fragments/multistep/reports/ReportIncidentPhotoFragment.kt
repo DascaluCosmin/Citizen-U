@@ -23,6 +23,7 @@ import com.ubb.citizen_u.databinding.FragmentReportIncidentPhotoBinding
 import com.ubb.citizen_u.ui.util.getRotatedBitmap
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
+import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
 import java.io.File
 
@@ -36,6 +37,7 @@ class ReportIncidentPhotoFragment : Fragment() {
     }
 
     private val citizenRequestViewModel: CitizenRequestViewModel by activityViewModels()
+    private val citizenViewModel: CitizenViewModel by activityViewModels()
     private val args: ReportIncidentPhotoFragmentArgs by navArgs()
 
     private var _binding: FragmentReportIncidentPhotoBinding? = null
@@ -94,6 +96,11 @@ class ReportIncidentPhotoFragment : Fragment() {
         citizenRequestViewModel.listIncidentPhotoUriLiveData.observe(viewLifecycleOwner) {
             setImage(it.lastOrNull()?.path)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        citizenRequestViewModel.getCitizenReportedIncidents(citizenViewModel.citizenId)
     }
 
     fun takePhoto() {

@@ -90,4 +90,6 @@
 
     <!-- Constants -->
     <string name="city_hall_name">Cluj-Napoca City Hall</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

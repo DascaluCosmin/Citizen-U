@@ -1,6 +1,7 @@
 package com.ubb.citizen_u.data.model.citizens.requests
 
 import com.google.firebase.firestore.DocumentId
+import com.ubb.citizen_u.data.model.Photo
 import java.util.*
 
 // TODO: properties - title?
@@ -9,6 +10,7 @@ abstract class CitizenRequest(
     var description: String? = null,
     var sentDate: Date? = null,
     var status: RequestStatus = RequestStatus.SENT,
+    var photos: MutableList<Photo?> = mutableListOf(),
 ) {
 
     override fun toString(): String {
@@ -17,7 +19,7 @@ abstract class CitizenRequest(
 }
 
 class Incident(
-    description: String?,
+    description: String? = null,
     sentDate: Date? = null,
     val address: String? = null,
 ) : CitizenRequest(description = description, sentDate = sentDate) {

@@ -8,4 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface CitizenRequestRepository {
 
     suspend fun addIncident(incident: Incident, citizenId: String, listIncidentPhotoUri: List<Uri>): Flow<Response<Boolean>>
+
+    suspend fun getAllIncidents(citizenId: String): Flow<Response<List<Incident?>>>
 }
