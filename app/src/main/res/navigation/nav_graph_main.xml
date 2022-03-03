@@ -61,7 +61,7 @@
         android:id="@+id/publicReleaseEventsListFragment"
         android:name="com.ubb.citizen_u.ui.fragments.events.PublicReleaseEventsListFragment"
         android:label="@string/public_release_events_list_fragment_label"
-        tools:layout="@layout/fragment_public_release_events_list" >
+        tools:layout="@layout/fragment_public_release_events_list">
         <action
             android:id="@+id/action_publicReleaseEventsListFragment_to_publicReleaseEventDetailsFragment"
             app:destination="@id/publicReleaseEventDetailsFragment" />
@@ -125,17 +125,32 @@
         android:id="@+id/citizenReportedIncidentsTransitionFragment"
         android:name="com.ubb.citizen_u.ui.fragments.reports.transitions.CitizenReportedIncidentsTransitionFragment"
         android:label="fragment_citizen_reported_incidents_transition"
-        tools:layout="@layout/fragment_citizen_reported_incidents_transition" >
+        tools:layout="@layout/fragment_citizen_reported_incidents_transition">
         <action
             android:id="@+id/action_citizenReportedIncidentsTransitionFragment_to_reportedIncidentsListFragment"
             app:destination="@+id/reportedIncidentsListFragment"
             app:popUpTo="@id/citizenReportedIncidentsTransitionFragment"
-            app:popUpToInclusive="true"
-            />
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/reportedIncidentsListFragment"
         android:name="com.ubb.citizen_u.ui.fragments.reports.ReportedIncidentsListFragment"
         android:label="fragment_reported_incidents_list"
-        tools:layout="@layout/fragment_reported_incidents_list" />
+        tools:layout="@layout/fragment_reported_incidents_list">
+        <argument
+            android:name="forCurrentCitizen"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/otherCitizensReportedIncidentsTransitionFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.reports.transitions.OtherCitizensReportedIncidentsTransitionFragment"
+        android:label="fragment_other_citizens_reported_incidents_transition"
+        tools:layout="@layout/fragment_other_citizens_reported_incidents_transition">
+        <action
+            android:id="@+id/action_otherCitizensReportedIncidentsTransitionFragment_to_reportedIncidentsListFragment"
+            app:destination="@id/reportedIncidentsListFragment"
+            app:popUpTo="@id/otherCitizensReportedIncidentsTransitionFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

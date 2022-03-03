@@ -56,6 +56,8 @@
 
     <!-- Report Incident -->
     <string name="report_incident_fragment_label">Jelentse az esetet</string>
+    <string name="citizen_reported_incidents_list_fragment_label">A bejelentett események</string>
+    <string name="other_citizens_reported_incidents_list_fragment_label">Mások incidensekről számoltak be</string>
     <string name="report_incident_text">Jelentse az esetet</string>
     <string name="send_report_button_text">Jelentés küldése</string>
     <string name="generic_next_button">Következő</string>

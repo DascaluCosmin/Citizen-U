@@ -62,6 +62,8 @@
 
     <!-- Report Incident -->
     <string name="report_incident_fragment_label">Report Incident</string>
+    <string name="citizen_reported_incidents_list_fragment_label">Your reported incidents</string>
+    <string name="other_citizens_reported_incidents_list_fragment_label">Others reported incidents</string>
     <string name="report_incident_text">Report incident</string>
     <string name="send_report_button_text">Send report</string>
     <string name="take_photo_button_text">Take a photo</string>
@@ -90,6 +92,4 @@
 
     <!-- Constants -->
     <string name="city_hall_name">Cluj-Napoca City Hall</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

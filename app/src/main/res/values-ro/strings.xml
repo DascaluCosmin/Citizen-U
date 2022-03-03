@@ -57,6 +57,8 @@
 
     <!-- Report Incident -->
     <string name="report_incident_fragment_label">Raportează incident</string>
+    <string name="citizen_reported_incidents_list_fragment_label">Incidentele raportate de tine</string>
+    <string name="other_citizens_reported_incidents_list_fragment_label">Incidentele raportate de alții</string>
     <string name="report_incident_text">Raportează incident</string>
     <string name="send_report_button_text">Trimite raport</string>
     <string name="generic_next_button">Următorul pas</string>

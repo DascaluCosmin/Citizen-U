@@ -39,12 +39,21 @@ class CitizenRequestViewModel @Inject constructor(
     )
     val addReportIncidentState: SharedFlow<Response<Boolean>> = _addReportIncidentState
 
-    private val _getCitizenReportedIncidents: MutableSharedFlow<Response<List<Incident?>>> =
+    private val _getCitizenReportedIncidentsState: MutableSharedFlow<Response<List<Incident?>>> =
         MutableSharedFlow(
             replay = 1,
             onBufferOverflow = BufferOverflow.DROP_OLDEST
         )
-    val getCitizenReportedIncidents: SharedFlow<Response<List<Incident?>>> = _getCitizenReportedIncidents
+    val getCitizenReportedIncidentsState: SharedFlow<Response<List<Incident?>>> =
+        _getCitizenReportedIncidentsState
+
+    private val _getOthersReportedIncidentsState: MutableSharedFlow<Response<List<Incident?>>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val getOthersReportedIncidentsState: SharedFlow<Response<List<Incident?>>> =
+        _getOthersReportedIncidentsState
 
     var incidentAddress: String = ""
 
@@ -86,7 +95,17 @@ class CitizenRequestViewModel @Inject constructor(
             "Getting the reported incidents by citizen $citizenId...")
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.getCitizenReportedIncidents(citizenId).collect {
-                _getCitizenReportedIncidents.tryEmit(it)
+                _getCitizenReportedIncidentsState.tryEmit(it)
+            }
+        }
+    }
+
+    fun getOthersReportedIncidents(currentCitizenId: String) {
+        Log.d(TAG,
+            "Getting the reported incidents by others, the current citizen is $currentCitizenId...")
+        viewModelScope.launch(Dispatchers.IO) {
+            citizenRequestUseCase.getOthersReportedIncidents(currentCitizenId).collect {
+                _getOthersReportedIncidentsState.tryEmit(it)
             }
         }
     }

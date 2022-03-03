@@ -2,7 +2,6 @@ package com.ubb.citizen_u.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +9,6 @@ import com.ubb.citizen_u.data.model.events.PublicEvent
 import com.ubb.citizen_u.databinding.PublicEventsListItemBinding
 import com.ubb.citizen_u.ui.adapters.viewholders.PublicEventViewHolder
 import com.ubb.citizen_u.ui.util.getCurrentLanguage
-import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
-import com.ubb.citizen_u.util.SettingsConstants.LANGUAGE_SETTINGS_KEY
 
 class PublicEventsAdapter(
     private val eventDetailsOnClickCallBack: (PublicEvent) -> Unit,

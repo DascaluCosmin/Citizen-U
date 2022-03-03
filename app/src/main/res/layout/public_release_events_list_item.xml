@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/event_image"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/events_list_image_height"
+            android:layout_height="@dimen/list_image_height"
             android:importantForAccessibility="no"
             android:scaleType="centerCrop"
             android:visibility="gone"

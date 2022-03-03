@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentOtherCitizensReportedIncidentsTransitionBinding
 
-class OtherCitizensReportedIncidentsTransition : Fragment() {
+class OtherCitizensReportedIncidentsTransitionFragment : Fragment() {
 
     private var _binding: FragmentOtherCitizensReportedIncidentsTransitionBinding? = null
-    private val binding: FragmentOtherCitizensReportedIncidentsTransitionBinding = _binding!!
+    private val binding: FragmentOtherCitizensReportedIncidentsTransitionBinding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,5 +25,11 @@ class OtherCitizensReportedIncidentsTransition : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        val action =
+            OtherCitizensReportedIncidentsTransitionFragmentDirections
+                .actionOtherCitizensReportedIncidentsTransitionFragmentToReportedIncidentsListFragment(
+                    forCurrentCitizen = false
+                )
+        findNavController().navigate(action)
     }
 }

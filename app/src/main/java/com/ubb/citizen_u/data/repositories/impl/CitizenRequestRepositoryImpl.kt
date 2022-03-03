@@ -68,6 +68,28 @@ class CitizenRequestRepositoryImpl @Inject constructor(
             }
         }
 
+    override suspend fun getAllIncidentsOfOthers(currentCitizenId: String): Flow<Response<List<Incident?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val incidents = getAllIncidentsOfOthersList(currentCitizenId)
+                emit(Response.Success(incidents))
+            } catch (exception: Exception) {
+                Log.d(TAG, "getAllIncidentsOfOthers: An error has occurred: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    private suspend fun getAllIncidentsOfOthersList(currentCitizenId: String): List<Incident?> {
+        val incidentsSnapshot = usersRef.get().await()
+        return incidentsSnapshot.documents.map {
+            it.toObject(Incident::class.java)?.apply {
+
+            }
+        }.filterNot { incident -> incident?.id == currentCitizenId }
+    }
+
     private suspend fun getAllIncidentsList(citizenId: String): List<Incident?> {
         val incidentSnapshot =
             usersRef.document(citizenId).collection(USER_REQUESTS_INCIDENTS_COL).get().await()
