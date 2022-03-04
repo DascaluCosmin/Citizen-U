@@ -82,12 +82,12 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         }
 
     private suspend fun getAllIncidentsOfOthersList(currentCitizenId: String): List<Incident?> {
-        val incidentsSnapshot = usersRef.get().await()
-        return incidentsSnapshot.documents.map {
-            it.toObject(Incident::class.java)?.apply {
-
-            }
-        }.filterNot { incident -> incident?.id == currentCitizenId }
+        val usersSnapshot = usersRef.get().await()
+        return usersSnapshot.documents
+            .filterNot { it.id == currentCitizenId }
+            .map {
+                getAllIncidentsList(it.id)
+            }.flatten()
     }
 
     private suspend fun getAllIncidentsList(citizenId: String): List<Incident?> {

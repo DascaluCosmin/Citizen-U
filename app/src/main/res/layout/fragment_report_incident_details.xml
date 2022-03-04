@@ -29,19 +29,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/report_incident_headline_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/generic_edittext_height"
+            android:layout_marginHorizontal="@dimen/generic_margin"
+            android:layout_marginTop="@dimen/generic_margin"
+            android:hint="@string/incident_headline_hint"
+            app:layout_constraintEnd_toEndOf="@id/report_incident_textview"
+            app:layout_constraintStart_toStartOf="@id/report_incident_textview"
+            app:layout_constraintTop_toBottomOf="@id/report_incident_textview">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/report_incident_description_edittext"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/generic_margin"
-            android:layout_marginTop="@dimen/generic_margin"
-            android:layout_marginBottom="@dimen/generic_margin_between_element"
+            android:layout_marginVertical="@dimen/generic_margin_between_element"
             android:hint="@string/incident_description_hint"
             app:layout_constraintBottom_toTopOf="@id/next_report_button"
             app:layout_constraintEnd_toEndOf="@id/report_incident_textview"
             app:layout_constraintStart_toStartOf="@+id/report_incident_textview"
-            app:layout_constraintTop_toBottomOf="@id/report_incident_textview">
+            app:layout_constraintTop_toBottomOf="@id/report_incident_headline_edittext">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

@@ -129,10 +129,10 @@ class ReportIncidentPhotoFragment : Fragment() {
     }
 
     fun goNext() {
-        Log.d(TAG, "goNext: Going next in multistep report incident...")
+        Log.d(TAG, "Going next in multistep report incident...")
         when {
             citizenRequestViewModel.listIncidentPhotoUriLiveData.value.isNullOrEmpty() -> {
-                Log.d(TAG, "goNext: There are no incident photos")
+                Log.d(TAG, "There are no incident photos")
                 toastErrorMessage(
                     INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
                 )
@@ -141,6 +141,7 @@ class ReportIncidentPhotoFragment : Fragment() {
                 val action =
                     ReportIncidentPhotoFragmentDirections.actionReportIncidentPhotoFragmentToReportIncidentMapFragment(
                         incidentDescription = args.incidentDescription,
+                        incidentHeadline = args.incidentHeadline,
                     )
                 findNavController().navigate(action)
             }

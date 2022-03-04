@@ -68,13 +68,14 @@ class CitizenRequestViewModel @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun reportIncident(description: String, citizenId: String) {
+    fun reportIncident(description: String, headline: String, citizenId: String) {
         // TODO: Validate Address
         Log.d(TAG, "Adding incident for citizen $citizenId...")
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.reportIncidentUseCase(
                 incident = Incident(
                     description = description,
+                    headline = headline,
                     sentDate = Date(),
                     address = incidentAddress,
                 ),

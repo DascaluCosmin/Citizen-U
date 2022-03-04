@@ -86,6 +86,9 @@
         <action
             android:id="@+id/action_reportIncidentPhotoFragment_to_reportIncidentMapFragment"
             app:destination="@id/reportIncidentMapFragment" />
+        <argument
+            android:name="incidentHeadline"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/reportIncidentMapFragment"
@@ -100,6 +103,9 @@
             app:destination="@id/signedInFragment"
             app:popUpTo="@id/signedInFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="incidentHeadline"
+            app:argType="string" />
     </fragment>
     <activity
         android:id="@+id/authenticationActivity"

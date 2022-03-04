@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentReportIncidentDetailsBinding
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE
+import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -47,13 +48,20 @@ class ReportIncidentDetailsFragment : Fragment() {
     }
 
     fun goNext() {
-        Log.d(TAG, "goNext: Going next in multistep report incident...")
+        Log.d(TAG, "Going next in multistep report incident...")
         val description =
             binding.reportIncidentDescriptionEdittext.editText?.text.toString()
+                .trim { it <= ' ' }
+        val headline =
+            binding.reportIncidentHeadlineEdittext.editText?.text.toString()
                 .trim { it <= ' ' }
         when {
             TextUtils.isEmpty(description) -> toastErrorMessage(
                 INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE
+            )
+
+            TextUtils.isEmpty(headline) -> toastErrorMessage(
+                INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE
             )
 
             else -> {
@@ -61,6 +69,7 @@ class ReportIncidentDetailsFragment : Fragment() {
                     ReportIncidentDetailsFragmentDirections
                         .actionReportIncidentFragmentToReportIncidentPhotoFragment(
                             incidentDescription = description,
+                            incidentHeadline = headline
                         )
                 findNavController().navigate(action)
             }

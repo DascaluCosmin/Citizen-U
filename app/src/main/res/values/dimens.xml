@@ -6,6 +6,8 @@
     <dimen name="generic_margin_half">8dp</dimen>
     <dimen name="width_views">280dp</dimen>
     <dimen name="generic_margin_between_dates_separator">8dp</dimen>
+    <dimen name="generic_edittext_height">40dp</dimen>
+    <dimen name="generic_principal_text_view_size">30sp</dimen>
 
     <!-- Media -->
     <dimen name="logo_width">120dp</dimen>
@@ -21,8 +23,8 @@
     <!-- Events -->
     <dimen name="list_image_height">200dp</dimen>
     <dimen name="event_details_image_height">250dp</dimen>
-    <dimen name="events_list_margin_between_items">8dp</dimen>
-    <dimen name="event_date_dimension">20sp</dimen>
+    <dimen name="generic_list_margin_between_items">8dp</dimen>
+    <dimen name="generic_date_dimension">20sp</dimen>
     <dimen name="event_text_dimension">20sp</dimen>
     <dimen name="event_details_icons_dimension">32dp</dimen>
     <dimen name="events_margin_between_imageview_content">8dp</dimen>
