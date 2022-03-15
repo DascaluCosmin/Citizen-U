@@ -57,12 +57,15 @@
 
     <!-- Report Incident -->
     <string name="report_incident_fragment_label">Raportează incident</string>
+    <string name="citizen_reported_incidents_list_fragment_label">Incidentele raportate de tine</string>
+    <string name="other_citizens_reported_incidents_list_fragment_label">Incidentele raportate de alții</string>
     <string name="report_incident_text">Raportează incident</string>
     <string name="send_report_button_text">Trimite raport</string>
     <string name="generic_next_button">Următorul pas</string>
     <string name="take_photo_button_text">Fă o poză</string>
     <string name="take_another_photo_button_text">Mai fă o poză</string>
     <string name="incident_description_hint">Te rog să introduci o descriere…</string>
+    <string name="incident_headline_hint">Te rog să introduci un scurt titlu…</string>
     <string name="incident_photo_hint">Te rog să fotografiezi incidentul…</string>
 
     <!-- Preference Titles -->

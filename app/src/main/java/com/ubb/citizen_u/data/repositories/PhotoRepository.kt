@@ -2,6 +2,7 @@ package com.ubb.citizen_u.data.repositories
 
 import android.net.Uri
 import com.google.firebase.storage.StorageReference
+import com.ubb.citizen_u.data.model.Photo
 
 interface PhotoRepository {
 
@@ -11,6 +12,8 @@ interface PhotoRepository {
     ): StorageReference
 
     suspend fun getAllEventPhotos(eventId: String): List<StorageReference>
+
+    suspend fun getAllIncidentPhotos(citizenId: String, incidentId: String): MutableList<Photo?>
 
     suspend fun saveIncidentPhotos(
         listIncidentPhotoUri: List<Uri>,

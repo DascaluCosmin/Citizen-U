@@ -79,7 +79,7 @@ class PublicEventsListFragment : Fragment() {
                     binding.mainProgressbar.visibility = View.VISIBLE
                 }
                 is Response.Error -> {
-                    Log.d(
+                    Log.e(
                         TAG,
                         "collectGetAllPublicEventsState: Collecting response $it. An error has occurred ${it.message}"
                     )

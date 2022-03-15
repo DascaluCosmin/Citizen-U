@@ -27,7 +27,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
     override suspend fun addIncident(
         incident: Incident,
         citizenId: String,
-        listIncidentPhotoUri: List<Uri>
+        listIncidentPhotoUri: List<Uri>,
     ): Flow<Response<Boolean>> =
         flow {
             if (listIncidentPhotoUri.isEmpty()) {
@@ -54,4 +54,49 @@ class CitizenRequestRepositoryImpl @Inject constructor(
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
             }
         }
+
+    override suspend fun getAllIncidents(citizenId: String): Flow<Response<List<Incident?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val incidents = getAllIncidentsList(citizenId)
+                emit(Response.Success(incidents))
+            } catch (exception: Exception) {
+                Log.d(TAG, "getAllIncidentsOfCitizen: An error has occurred: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    override suspend fun getAllIncidentsOfOthers(currentCitizenId: String): Flow<Response<List<Incident?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val incidents = getAllIncidentsOfOthersList(currentCitizenId)
+                emit(Response.Success(incidents))
+            } catch (exception: Exception) {
+                Log.d(TAG, "getAllIncidentsOfOthers: An error has occurred: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    private suspend fun getAllIncidentsOfOthersList(currentCitizenId: String): List<Incident?> {
+        val usersSnapshot = usersRef.get().await()
+        return usersSnapshot.documents
+            .filterNot { it.id == currentCitizenId }
+            .map {
+                getAllIncidentsList(it.id)
+            }.flatten()
+    }
+
+    private suspend fun getAllIncidentsList(citizenId: String): List<Incident?> {
+        val incidentSnapshot =
+            usersRef.document(citizenId).collection(USER_REQUESTS_INCIDENTS_COL).get().await()
+        return incidentSnapshot.documents.map {
+            it.toObject(Incident::class.java)?.apply {
+                photos = photoRepository.getAllIncidentPhotos(citizenId, incidentId = id)
+            }
+        }
+    }
 }

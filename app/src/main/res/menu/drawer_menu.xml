@@ -25,6 +25,15 @@
             android:id="@+id/reportIncidentFragment"
             android:icon="@drawable/ic_outline_report_24"
             android:title="@string/report_incident_fragment_label" />
+
+        <item
+            android:id="@+id/citizenReportedIncidentsTransitionFragment"
+            android:title="@string/citizen_reported_incidents_list_fragment_label" />
+
+        <item
+            android:id="@+id/otherCitizensReportedIncidentsTransitionFragment"
+            android:title="@string/other_citizens_reported_incidents_list_fragment_label"
+            />
     </group>
 
     <group android:id="@+id/settingsGroup">

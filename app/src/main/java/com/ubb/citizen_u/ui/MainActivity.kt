@@ -17,7 +17,6 @@ import com.ubb.citizen_u.databinding.ActivityMainBinding
 import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY
-import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PUBLIC_RELEASE_EVENT_ID_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 

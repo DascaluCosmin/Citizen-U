@@ -149,6 +149,7 @@ class ReportIncidentMapFragment : Fragment() {
         Log.d(TAG, "sendIncidentReport: Sending incident report...")
         citizenRequestViewModel.reportIncident(
             description = args.incidentDescription,
+            headline = args.incidentHeadline,
             citizenId = citizenViewModel.citizenId
         )
     }

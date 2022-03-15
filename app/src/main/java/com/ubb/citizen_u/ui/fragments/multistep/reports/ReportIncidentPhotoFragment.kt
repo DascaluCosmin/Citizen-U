@@ -23,6 +23,7 @@ import com.ubb.citizen_u.databinding.FragmentReportIncidentPhotoBinding
 import com.ubb.citizen_u.ui.util.getRotatedBitmap
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
+import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
 import java.io.File
 
@@ -36,6 +37,7 @@ class ReportIncidentPhotoFragment : Fragment() {
     }
 
     private val citizenRequestViewModel: CitizenRequestViewModel by activityViewModels()
+    private val citizenViewModel: CitizenViewModel by activityViewModels()
     private val args: ReportIncidentPhotoFragmentArgs by navArgs()
 
     private var _binding: FragmentReportIncidentPhotoBinding? = null
@@ -96,6 +98,11 @@ class ReportIncidentPhotoFragment : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        citizenRequestViewModel.getCitizenReportedIncidents(citizenViewModel.citizenId)
+    }
+
     fun takePhoto() {
         Log.d(TAG, "takePhoto: Taking incident photo...")
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -122,10 +129,10 @@ class ReportIncidentPhotoFragment : Fragment() {
     }
 
     fun goNext() {
-        Log.d(TAG, "goNext: Going next in multistep report incident...")
+        Log.d(TAG, "Going next in multistep report incident...")
         when {
             citizenRequestViewModel.listIncidentPhotoUriLiveData.value.isNullOrEmpty() -> {
-                Log.d(TAG, "goNext: There are no incident photos")
+                Log.d(TAG, "There are no incident photos")
                 toastErrorMessage(
                     INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
                 )
@@ -134,6 +141,7 @@ class ReportIncidentPhotoFragment : Fragment() {
                 val action =
                     ReportIncidentPhotoFragmentDirections.actionReportIncidentPhotoFragmentToReportIncidentMapFragment(
                         incidentDescription = args.incidentDescription,
+                        incidentHeadline = args.incidentHeadline,
                     )
                 findNavController().navigate(action)
             }

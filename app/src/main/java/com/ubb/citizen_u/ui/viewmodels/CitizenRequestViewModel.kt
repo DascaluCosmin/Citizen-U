@@ -1,6 +1,7 @@
 package com.ubb.citizen_u.ui.viewmodels
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,6 +25,10 @@ class CitizenRequestViewModel @Inject constructor(
     private val citizenRequestUseCase: CitizenRequestUseCase,
 ) : ViewModel() {
 
+    companion object {
+        private const val TAG = "UBB-CitizenRequestViewModel"
+    }
+
     private val listIncidentPhotoUri: MutableList<Uri> = mutableListOf()
     private val _listIncidentPhotoUriLiveData = MutableLiveData<MutableList<Uri>>()
     val listIncidentPhotoUriLiveData: LiveData<MutableList<Uri>> = _listIncidentPhotoUriLiveData
@@ -33,6 +38,22 @@ class CitizenRequestViewModel @Inject constructor(
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
     val addReportIncidentState: SharedFlow<Response<Boolean>> = _addReportIncidentState
+
+    private val _getCitizenReportedIncidentsState: MutableSharedFlow<Response<List<Incident?>>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val getCitizenReportedIncidentsState: SharedFlow<Response<List<Incident?>>> =
+        _getCitizenReportedIncidentsState
+
+    private val _getOthersReportedIncidentsState: MutableSharedFlow<Response<List<Incident?>>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val getOthersReportedIncidentsState: SharedFlow<Response<List<Incident?>>> =
+        _getOthersReportedIncidentsState
 
     var incidentAddress: String = ""
 
@@ -47,12 +68,14 @@ class CitizenRequestViewModel @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun reportIncident(description: String, citizenId: String) {
+    fun reportIncident(description: String, headline: String, citizenId: String) {
         // TODO: Validate Address
+        Log.d(TAG, "Adding incident for citizen $citizenId...")
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.reportIncidentUseCase(
                 incident = Incident(
                     description = description,
+                    headline = headline,
                     sentDate = Date(),
                     address = incidentAddress,
                 ),
@@ -64,6 +87,26 @@ class CitizenRequestViewModel @Inject constructor(
                 }
                 _addReportIncidentState.tryEmit(response)
                 _addReportIncidentState.resetReplayCache()
+            }
+        }
+    }
+
+    fun getCitizenReportedIncidents(citizenId: String) {
+        Log.d(TAG,
+            "Getting the reported incidents by citizen $citizenId...")
+        viewModelScope.launch(Dispatchers.IO) {
+            citizenRequestUseCase.getCitizenReportedIncidents(citizenId).collect {
+                _getCitizenReportedIncidentsState.tryEmit(it)
+            }
+        }
+    }
+
+    fun getOthersReportedIncidents(currentCitizenId: String) {
+        Log.d(TAG,
+            "Getting the reported incidents by others, the current citizen is $currentCitizenId...")
+        viewModelScope.launch(Dispatchers.IO) {
+            citizenRequestUseCase.getOthersReportedIncidents(currentCitizenId).collect {
+                _getOthersReportedIncidentsState.tryEmit(it)
             }
         }
     }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reported_incident_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/cardview_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/reported_incident_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_image_height"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/reported_incident_headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/generic_list_margin_between_items"
+            android:textSize="@dimen/reported_incident_item_text_dimension"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
+            app:layout_constraintStart_toStartOf="@id/reported_incident_image"
+            app:layout_constraintTop_toBottomOf="@id/reported_incident_image"
+            tools:text="Tree is down on the avenue Saint Joseph" />
+
+        <TextView
+            android:id="@+id/reported_incident_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/generic_list_margin_between_items"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/vertical_guideline"
+            app:layout_constraintStart_toStartOf="@id/reported_incident_headline"
+            app:layout_constraintTop_toBottomOf="@id/reported_incident_headline"
+            tools:text="Saint Joseph Street, Michigan" />
+
+        <TextView
+            android:id="@+id/reported_incident_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/generic_list_margin_between_items"
+            android:layout_marginTop="@dimen/generic_margin"
+            android:textSize="@dimen/reported_incident_item_text_dimension"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/reported_incident_headline"
+            app:layout_constraintEnd_toEndOf="@id/reported_incident_image"
+            tools:text="SENT" />
+
+        <TextView
+            android:id="@+id/reported_incident_send_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/generic_date_dimension"
+            app:layout_constraintBottom_toBottomOf="@id/reported_incident_address"
+            app:layout_constraintEnd_toEndOf="@id/reported_incident_status"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

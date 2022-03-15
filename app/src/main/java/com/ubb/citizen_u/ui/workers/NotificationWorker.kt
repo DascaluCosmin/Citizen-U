@@ -16,7 +16,6 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.data.model.events.PeriodicEvent
-import com.ubb.citizen_u.data.model.events.PeriodicEventFrequency
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.events.EventUseCases
 import com.ubb.citizen_u.ui.AuthenticationActivity
@@ -85,14 +84,14 @@ class NotificationWorker @AssistedInject constructor(
         val notificationDaysForAnnuallyFrequency = listOf(1, 15, 27)
 
         return when (periodicEvent.frequency) {
-            PeriodicEventFrequency.WEEKLY -> {
+            PeriodicEvent.PeriodicEventFrequency.WEEKLY -> {
                 now.getDayOfWeek() == periodicEvent.happeningDay.toString()
             }
-            PeriodicEventFrequency.MONTHLY -> {
+            PeriodicEvent.PeriodicEventFrequency.MONTHLY -> {
                 now.getMonth() == periodicEvent.happeningMonth.toString() &&
                         currentDay in notificationDaysForMonthFrequency
             }
-            PeriodicEventFrequency.ANNUALLY -> {
+            PeriodicEvent.PeriodicEventFrequency.ANNUALLY -> {
                 now.getMonth() == CalendarConstants.LAST_MONTH_OF_YEAR &&
                         currentDay in notificationDaysForAnnuallyFrequency
             }

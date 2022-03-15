@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/event_image"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/events_list_image_height"
+            android:layout_height="@dimen/list_image_height"
             android:importantForAccessibility="no"
             android:scaleType="centerCrop"
             android:visibility="gone"
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/generic_margin"
-            android:layout_marginTop="@dimen/events_list_margin_between_items"
+            android:layout_marginTop="@dimen/generic_list_margin_between_items"
             app:layout_constraintStart_toStartOf="@id/event_category"
             app:layout_constraintTop_toBottomOf="@id/event_category"
             tools:text="The draft budget of the municipality for the year 2022" />
