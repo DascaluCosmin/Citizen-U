@@ -147,6 +147,9 @@
             android:name="forCurrentCitizen"
             android:defaultValue="false"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_reportedIncidentsListFragment_to_reportedIncidentDetailsFragment"
+            app:destination="@id/reportedIncidentDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/otherCitizensReportedIncidentsTransitionFragment"
@@ -158,5 +161,17 @@
             app:destination="@id/reportedIncidentsListFragment"
             app:popUpTo="@id/otherCitizensReportedIncidentsTransitionFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportedIncidentDetailsFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.reports.ReportedIncidentDetailsFragment"
+        android:label="fragment_reported_incident_details"
+        tools:layout="@layout/fragment_reported_incident_details" >
+        <argument
+            android:name="incidentId"
+            app:argType="string" />
+        <argument
+            android:name="citizenId"
+            app:argType="string" />
     </fragment>
 </navigation>

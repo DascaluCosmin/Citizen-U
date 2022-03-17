@@ -39,6 +39,13 @@ class CitizenRequestViewModel @Inject constructor(
     )
     val addReportIncidentState: SharedFlow<Response<Boolean>> = _addReportIncidentState
 
+    private val _getReportedIncidentState: MutableSharedFlow<Response<Incident?>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val getReportedIncidentState: SharedFlow<Response<Incident?>> = _getReportedIncidentState
+
     private val _getCitizenReportedIncidentsState: MutableSharedFlow<Response<List<Incident?>>> =
         MutableSharedFlow(
             replay = 1,
@@ -56,6 +63,7 @@ class CitizenRequestViewModel @Inject constructor(
         _getOthersReportedIncidentsState
 
     var incidentAddress: String = ""
+    var currentSelectedIncident: Incident? = null
 
     fun addIncidentPhoto(uri: Uri) {
         listIncidentPhotoUri.add(uri)
@@ -87,6 +95,20 @@ class CitizenRequestViewModel @Inject constructor(
                 }
                 _addReportIncidentState.tryEmit(response)
                 _addReportIncidentState.resetReplayCache()
+            }
+        }
+    }
+
+    fun getReportedIncident(citizenId: String, incidentId: String) {
+        Log.d(TAG,
+            "getReportedIncident: Getting the $incidentId reported incident by $citizenId...")
+        viewModelScope.launch(Dispatchers.IO) {
+            citizenRequestUseCase.getReportedIncident(citizenId, incidentId).collect {
+                if (it is Response.Success) {
+                    currentSelectedIncident = it.data
+                }
+
+                _getReportedIncidentState.tryEmit(it)
             }
         }
     }

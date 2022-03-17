@@ -49,6 +49,7 @@ object DatabaseConstants {
     const val PUBLIC_EVENTS_COL = "events"
     const val PUBLIC_RELEASE_EVENTS_COL = "council_events"
     const val EVENTS_PHOTOS_COL = "photos"
+    const val INCIDENTS_COMMENTS_COL = "comments"
     const val UNDEFINED_DOC = "undefined"
 }
 

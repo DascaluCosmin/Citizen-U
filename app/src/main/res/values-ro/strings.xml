@@ -11,6 +11,11 @@
     <string name="generic_firstname_hint">Prenume</string>
     <string name="generic_lastname_hint">Nume de familie</string>
     <string name="date_separator_label">-</string>
+    <string name="generic_description_label">Descriere</string>
+    <string name="generic_address_label">Adresa</string>
+    <string name="generic_posted_on_label">Postată în data de</string>
+    <string name="status">Status</string>
+    <string name="generic_next_button">Următorul pas</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label">Welcome</string>
@@ -61,12 +66,12 @@
     <string name="other_citizens_reported_incidents_list_fragment_label">Incidentele raportate de alții</string>
     <string name="report_incident_text">Raportează incident</string>
     <string name="send_report_button_text">Trimite raport</string>
-    <string name="generic_next_button">Următorul pas</string>
     <string name="take_photo_button_text">Fă o poză</string>
     <string name="take_another_photo_button_text">Mai fă o poză</string>
     <string name="incident_description_hint">Te rog să introduci o descriere…</string>
     <string name="incident_headline_hint">Te rog să introduci un scurt titlu…</string>
     <string name="incident_photo_hint">Te rog să fotografiezi incidentul…</string>
+    <string name="add_comment_hint">Adaugă un nou comentariu</string>
 
     <!-- Preference Titles -->
     <string name="language_header">Limbă</string>

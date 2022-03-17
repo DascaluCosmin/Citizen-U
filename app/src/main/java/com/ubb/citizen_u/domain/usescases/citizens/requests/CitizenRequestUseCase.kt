@@ -4,5 +4,6 @@ data class CitizenRequestUseCase(
     val reportIncidentUseCase: ReportIncidentUseCase,
     val getCitizenReportedIncidents: GetCitizenReportedIncidents,
     val getOthersReportedIncidents: GetOthersReportedIncidents,
+    val getReportedIncident: GetReportedIncident,
 ) {
 }
