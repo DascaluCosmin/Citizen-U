@@ -14,7 +14,9 @@
     <string name="generic_description_label">Descriere</string>
     <string name="generic_address_label">Adresa</string>
     <string name="generic_posted_on_label">Postată în data de</string>
-    <string name="status">Status</string>
+    <string name="generic_posted_by">Postat de către</string>
+    <string name="generic_status_label">Status</string>
+    <string name="generic_other_citizens_comments_label">Păreri ale altor cetățeni</string>
     <string name="generic_next_button">Următorul pas</string>
 
     <!-- Welcome Fragment -->
@@ -72,6 +74,8 @@
     <string name="incident_headline_hint">Te rog să introduci un scurt titlu…</string>
     <string name="incident_photo_hint">Te rog să fotografiezi incidentul…</string>
     <string name="add_comment_hint">Adaugă un nou comentariu</string>
+    <string name="add_comment_button_text">Adaugă un comentariu</string>
+
 
     <!-- Preference Titles -->
     <string name="language_header">Limbă</string>

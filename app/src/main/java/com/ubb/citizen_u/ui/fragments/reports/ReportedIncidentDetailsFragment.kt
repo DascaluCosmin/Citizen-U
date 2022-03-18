@@ -1,6 +1,7 @@
 package com.ubb.citizen_u.ui.fragments.reports
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,20 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import com.ubb.citizen_u.data.model.citizens.requests.Comment
 import com.ubb.citizen_u.databinding.FragmentReportedIncidentDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
+import com.ubb.citizen_u.ui.util.toastErrorMessage
+import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
+import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
+import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_ADD_COMMENT_TO_INCIDENT
+import com.ubb.citizen_u.util.DateFormatter
+import com.ubb.citizen_u.util.ValidationConstants.INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE
+import com.ubb.citizen_u.util.glide.ImageFiller
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.*
 
 class ReportedIncidentDetailsFragment : Fragment() {
 
@@ -27,6 +37,7 @@ class ReportedIncidentDetailsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val citizenRequestViewModel: CitizenRequestViewModel by activityViewModels()
+    private val citizenViewModel: CitizenViewModel by activityViewModels()
     private val args: ReportedIncidentDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -47,6 +58,28 @@ class ReportedIncidentDetailsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { collectGetReportedIncidentState() }
+                launch { collectAddCommentToIncidentState() }
+            }
+        }
+    }
+
+    private suspend fun collectAddCommentToIncidentState() {
+        citizenRequestViewModel.addCommentToIncidentState.collect {
+            Log.d(TAG, "collectAddCommentToIncidentState: Collecting response $it")
+            when (it) {
+                Response.Loading -> {
+                    binding.mainProgressbar.visibility = View.VISIBLE
+                }
+                is Response.Error -> {
+                    binding.mainProgressbar.visibility = View.GONE
+                    toastErrorMessage()
+                }
+                is Response.Success -> {
+                    binding.mainProgressbar.visibility = View.GONE
+
+                    binding.addIncidentCommentTextfield.editText?.text?.clear()
+                    toastMessage(SUCCESSFUL_ADD_COMMENT_TO_INCIDENT)
+                }
             }
         }
     }
@@ -69,6 +102,47 @@ class ReportedIncidentDetailsFragment : Fragment() {
                     binding.mainProgressbar.visibility = View.GONE
                     binding.reportedIncidentImage.visibility = View.VISIBLE
                     binding.reportedIncidentDetails.visibility = View.VISIBLE
+
+                    it.data?.run {
+                        binding.reportedIncidentHeadline.text = headline
+                        binding.reportedIncidentDescription.text = description
+                        binding.reportedIncidentAddress.text = address
+                        binding.reportedIncidentPostedBy.text = citizen?.getFullName()
+                        binding.reportedIncidentStatus.text = status.toString().uppercase()
+
+                        sentDate?.let { sentDate ->
+                            binding.reportedIncidentPostedOn.text =
+                                DateFormatter.toEventFormat(sentDate)
+                        }
+
+                        // TODO: Image carousel to be implemented
+                        photos.let { incidentPhotos ->
+                            if (incidentPhotos.isNotEmpty()) {
+                                incidentPhotos[0]?.let { incidentPhoto ->
+                                    ImageFiller.fill(
+                                        requireContext(),
+                                        binding.reportedIncidentImage,
+                                        incidentPhoto
+                                    )
+                                }
+                            }
+                        }
+
+                        if (citizen?.id == citizenViewModel.currentCitizen.id) {
+                            binding.addIncidentCommentTextfield.visibility = View.GONE
+                            binding.addCommentButton.visibility = View.GONE
+                        }
+
+                        if (!comments.isNullOrEmpty()) {
+                            binding.incidentCommentLayout.visibility = View.VISIBLE
+                            binding.reportedIncidentCommentsLabel.visibility = View.VISIBLE
+
+                            binding.incidentCommentText.text = comments[0]?.text
+                        } else {
+                            binding.incidentCommentLayout.visibility = View.GONE
+                            binding.reportedIncidentCommentsLabel.visibility = View.GONE
+                        }
+                    }
                 }
             }
         }
@@ -80,5 +154,27 @@ class ReportedIncidentDetailsFragment : Fragment() {
             citizenId = args.citizenId,
             incidentId = args.incidentId
         )
+    }
+
+    fun addIncidentComment() {
+        val commentText =
+            binding.addIncidentCommentTextfield.editText?.text.toString().trim { it <= ' ' }
+        when {
+            TextUtils.isEmpty(commentText) -> {
+                toastMessage(INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE)
+            }
+
+            else -> {
+                val currentCitizen = citizenViewModel.currentCitizen
+                val comment = Comment(
+                    text = commentText,
+                    postedOn = Date(),
+                    userFirstName = currentCitizen.firstName,
+                    userLastName = currentCitizen.lastName,
+                    userId = currentCitizen.id,
+                )
+                citizenRequestViewModel.addCommentToCurrentIncident(comment)
+            }
+        }
     }
 }

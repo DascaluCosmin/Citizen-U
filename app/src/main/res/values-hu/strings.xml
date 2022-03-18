@@ -13,9 +13,10 @@
     <string name="generic_description_label">Leírás</string>
     <string name="generic_address_label">Cím</string>
     <string name="generic_posted_on_label">Közzétett</string>
-    <string name="status">Állapot</string>
+    <string name="generic_posted_by">Általa megosztva</string>
+    <string name="generic_status_label">Állapot</string>
+    <string name="generic_other_citizens_comments_label">Más állampolgárok véleménye</string>
     <string name="generic_next_button">Következő</string>
-
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label" translatable="false">Welcome</string>
@@ -72,6 +73,7 @@
     <string name="incident_headline_hint">Kérjük, adjon meg egy rövid címet…</string>
     <string name="incident_photo_hint">Kérem, készítsen egy képet az esetről…</string>
     <string name="add_comment_hint">Új megjegyzés hozzáadása</string>
+    <string name="add_comment_button_text">Megjegyzés hozzáadása</string>
 
     <!-- Preference Titles -->
     <string name="language_header">Nyelv</string>

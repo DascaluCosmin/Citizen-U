@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ubb.citizen_u.data.model.citizens.requests.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.citizens.requests.CitizenRequestUseCase
@@ -39,6 +40,7 @@ class CitizenRequestViewModel @Inject constructor(
     )
     val addReportIncidentState: SharedFlow<Response<Boolean>> = _addReportIncidentState
 
+    //region Incident Getters
     private val _getReportedIncidentState: MutableSharedFlow<Response<Incident?>> =
         MutableSharedFlow(
             replay = 1,
@@ -61,6 +63,14 @@ class CitizenRequestViewModel @Inject constructor(
         )
     val getOthersReportedIncidentsState: SharedFlow<Response<List<Incident?>>> =
         _getOthersReportedIncidentsState
+    //endregion
+
+    private val _addCommentToIncidentState: MutableSharedFlow<Response<Boolean>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val addCommentToIncidentState: SharedFlow<Response<Boolean>> = _addCommentToIncidentState
 
     var incidentAddress: String = ""
     var currentSelectedIncident: Incident? = null
@@ -129,6 +139,18 @@ class CitizenRequestViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.getOthersReportedIncidents(currentCitizenId).collect {
                 _getOthersReportedIncidentsState.tryEmit(it)
+            }
+        }
+    }
+
+    fun addCommentToCurrentIncident(comment: Comment) {
+        Log.d(TAG,
+            "addCommentToCurrentIncident: Adding comment ${comment.text} to incident ${currentSelectedIncident?.id}...")
+        viewModelScope.launch(Dispatchers.IO) {
+            currentSelectedIncident?.let { incident ->
+                citizenRequestUseCase.addCommentToIncident(incident, comment).collect {
+                    _addCommentToIncidentState.tryEmit(it)
+                }
             }
         }
     }

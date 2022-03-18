@@ -112,6 +112,17 @@ class CitizenRequestRepositoryImpl @Inject constructor(
     ): Flow<Response<Boolean>> = flow {
         try {
             emit(Response.Loading)
+            if (incident.citizen == null) {
+                emit(Response.Error(DEFAULT_ERROR_MESSAGE))
+                return@flow
+            }
+
+            usersRef.document(incident.citizen!!.id)
+                .collection(USER_REQUESTS_INCIDENTS_COL)
+                .document(incident.id)
+                .collection(INCIDENTS_COMMENTS_COL)
+                .add(comment)
+                .await()
 
             emit(Response.Success(true))
         } catch (exception: Exception) {

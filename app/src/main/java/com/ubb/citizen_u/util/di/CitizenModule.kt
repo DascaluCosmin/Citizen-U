@@ -58,7 +58,8 @@ object CitizenModule {
             reportIncidentUseCase = ReportIncidentUseCase(citizenRequestRepository),
             getCitizenReportedIncidents = GetCitizenReportedIncidents(citizenRequestRepository),
             getOthersReportedIncidents = GetOthersReportedIncidents(citizenRequestRepository),
-            getReportedIncident = GetReportedIncident(citizenRequestRepository)
+            getReportedIncident = GetReportedIncident(citizenRequestRepository),
+            addCommentToIncident = AddCommentToIncident(citizenRequestRepository),
         )
 
     @Provides

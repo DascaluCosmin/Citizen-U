@@ -26,6 +26,10 @@ class CitizenViewModel @Inject constructor(
 
     lateinit var citizenId: String
 
+    private var _currentCitizen: Citizen? = null
+    val currentCitizen: Citizen
+        get() = _currentCitizen!!
+
     private val _getCitizenState = MutableSharedFlow<Response<Citizen?>>(
         replay = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
@@ -38,6 +42,10 @@ class CitizenViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO) {
             citizenUseCases.getCitizenUseCase(citizenId).collect {
+                if (it is Response.Success) {
+                    _currentCitizen = it.data
+                }
+
                 _getCitizenState.tryEmit(it)
             }
         }

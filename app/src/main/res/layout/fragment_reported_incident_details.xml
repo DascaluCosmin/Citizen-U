@@ -119,6 +119,26 @@
                     tools:text="Strada Fierului 2-26" />
 
                 <TextView
+                    android:id="@+id/reported_incident_posted_by"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reported_incident_posted_by_label"
+                    tools:text="John Doe" />
+
+                <TextView
+                    android:id="@+id/reported_incident_posted_by_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:text="@string/generic_posted_by"
+                    android:textColor="@color/primaryColor"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reported_incident_address" />
+
+                <TextView
                     android:id="@+id/reported_incident_posted_on_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,7 +147,7 @@
                     android:textColor="@color/primaryColor"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reported_incident_address" />
+                    app:layout_constraintTop_toBottomOf="@id/reported_incident_posted_by" />
 
                 <TextView
                     android:id="@+id/reported_incident_posted_on"
@@ -143,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_margin"
-                    android:text="@string/status"
+                    android:text="@string/generic_status_label"
                     android:textColor="@color/primaryColor"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -158,6 +178,35 @@
                     app:layout_constraintTop_toBottomOf="@id/reported_incident_status_label"
                     tools:text="SENT" />
 
+                <TextView
+                    android:id="@+id/reported_incident_comments_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:text="@string/generic_other_citizens_comments_label"
+                    android:textColor="@color/primaryColor"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reported_incident_status" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/incident_comment_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reported_incident_comments_label">
+
+                    <TextView
+                        android:id="@+id/incident_comment_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="The pipeline is very old and should be replaced immediately!" />
+
+                </com.google.android.material.card.MaterialCardView>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/add_incident_comment_textfield"
                     android:layout_width="match_parent"
@@ -166,7 +215,7 @@
                     android:hint="@string/add_comment_hint"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reported_incident_status">
+                    app:layout_constraintTop_toBottomOf="@id/incident_comment_layout">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -176,6 +225,16 @@
                         android:lines="4"
                         android:scrollbars="vertical" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/add_comment_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:onClick="@{() -> reportedIncidentDetailsFragment.addIncidentComment()}"
+                    android:text="@string/add_comment_button_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_incident_comment_textfield" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

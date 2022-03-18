@@ -5,5 +5,5 @@ data class CitizenRequestUseCase(
     val getCitizenReportedIncidents: GetCitizenReportedIncidents,
     val getOthersReportedIncidents: GetOthersReportedIncidents,
     val getReportedIncident: GetReportedIncident,
-) {
-}
+    val addCommentToIncident: AddCommentToIncident,
+)
