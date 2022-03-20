@@ -20,7 +20,7 @@ class PublicReleaseEventViewHolder(
             eventTitle.text = event.title[language]
 
             event.publicationDate?.let {
-                eventPublicationDate.text = DateFormatter.toEventFormat(it)
+                eventPublicationDate.text = DateFormatter.format(it)
             }
 
             if (event.photos.size > 0) {

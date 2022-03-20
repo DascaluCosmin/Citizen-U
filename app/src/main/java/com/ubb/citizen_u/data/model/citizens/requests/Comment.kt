@@ -12,6 +12,10 @@ data class Comment(
     var userId: String? = null,
 ) {
 
+    fun getUserFullName(): String {
+        return "$userFirstName $userLastName"
+    }
+
     override fun toString(): String {
         return "ID = $id, Posted on = $postedOn by $userFirstName $userLastName (id: $userId), text = $text"
     }

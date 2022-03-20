@@ -94,7 +94,7 @@ class PublicReleaseEventDetailsFragment : Fragment() {
 
                         it.data.publicationDate?.let { publicationDate ->
                             binding.eventPublicationDate.text =
-                                DateFormatter.toEventFormat(publicationDate)
+                                DateFormatter.format(publicationDate)
                         }
                     } else {
                         toastErrorMessage()

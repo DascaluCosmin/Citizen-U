@@ -33,14 +33,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
+            app:layout_constraintGuide_percent="0.05" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/end_vertical_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9" />
+            app:layout_constraintGuide_percent="0.95" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/horizontal_guideline"
@@ -197,13 +197,66 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/reported_incident_comments_label">
 
-                    <TextView
-                        android:id="@+id/incident_comment_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="The pipeline is very old and should be replaced immediately!" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/incident_comment_posted_by"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/generic_margin_half"
+                            android:textColor="@color/primaryColor"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Cosmin Dascalu" />
+
+                        <TextView
+                            android:id="@+id/incident_comment_posted_on"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/generic_margin_half"
+                            android:textColor="@color/primaryColor"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="@tools:sample/date/ddmmyy" />
+
+                        <TextView
+                            android:id="@+id/incident_comment_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/generic_margin_half"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/incident_comment_posted_by"
+                            tools:text="The pipeline is very old and should be replaced immediately!" />
+
+                        <ImageButton
+                            android:id="@+id/previous_report_comment_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:onClick="@{() -> reportedIncidentDetailsFragment.getPreviousCommentToIncident()}"
+                            android:scaleType="fitEnd"
+                            android:src="@drawable/ic_baseline_navigate_before_24"
+                            app:layout_constraintEnd_toStartOf="@id/next_report_comment_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/incident_comment_text" />
+
+                        <ImageButton
+                            android:id="@+id/next_report_comment_button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/generic_margin"
+                            android:background="@null"
+                            android:onClick="@{() -> reportedIncidentDetailsFragment.getNextCommentToIncident()}"
+                            android:scaleType="fitStart"
+                            android:src="@drawable/ic_baseline_navigate_next_24"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/previous_report_comment_button"
+                            app:layout_constraintTop_toBottomOf="@id/incident_comment_text" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 </com.google.android.material.card.MaterialCardView>
 

@@ -117,9 +117,10 @@ class ReportedIncidentDetailsFragment : Fragment() {
 
                         sentDate?.let { sentDate ->
                             binding.reportedIncidentPostedOn.text =
-                                DateFormatter.toEventFormat(sentDate)
+                                DateFormatter.format(sentDate)
                         }
 
+                        // TODO: Solve bug
                         imageCarouselRunnable = Runnable {
                             Log.d(TAG, "Image Carousel running...")
                             ImageFiller.fill(requireContext(),
@@ -132,19 +133,6 @@ class ReportedIncidentDetailsFragment : Fragment() {
                         handler.postDelayed(imageCarouselRunnable,
                             0L) // The first image should be displayed immediately
 
-                        // TODO: Image carousel to be implemented
-//                        photos.let { incidentPhotos ->
-//                            if (incidentPhotos.isNotEmpty()) {
-//                                incidentPhotos[0]?.let { incidentPhoto ->
-//                                    ImageFiller.fill(
-//                                        requireContext(),
-//                                        binding.reportedIncidentImage,
-//                                        incidentPhoto
-//                                    )
-//                                }
-//                            }
-//                        }
-
                         if (citizen?.id == citizenViewModel.currentCitizen.id) {
                             binding.addIncidentCommentTextfield.visibility = View.GONE
                             binding.addCommentButton.visibility = View.GONE
@@ -154,7 +142,7 @@ class ReportedIncidentDetailsFragment : Fragment() {
                             binding.incidentCommentLayout.visibility = View.VISIBLE
                             binding.reportedIncidentCommentsLabel.visibility = View.VISIBLE
 
-                            binding.incidentCommentText.text = comments[0]?.text
+                            showCurrentCommentToIncident(comments[0])
                         } else {
                             binding.incidentCommentLayout.visibility = View.GONE
                             binding.reportedIncidentCommentsLabel.visibility = View.GONE
@@ -196,6 +184,25 @@ class ReportedIncidentDetailsFragment : Fragment() {
                     userId = currentCitizen.id,
                 )
                 citizenRequestViewModel.addCommentToCurrentIncident(comment)
+            }
+        }
+    }
+
+    fun getPreviousCommentToIncident() {
+        showCurrentCommentToIncident(citizenRequestViewModel.getPreviousIncidentComment())
+    }
+
+    fun getNextCommentToIncident() {
+        showCurrentCommentToIncident(citizenRequestViewModel.getNextIncidentComment())
+    }
+
+    private fun showCurrentCommentToIncident(comment: Comment?) {
+        comment?.let {
+            binding.incidentCommentText.text = comment.text
+            binding.incidentCommentPostedBy.text = comment.getUserFullName()
+            comment.postedOn?.let { postedOn ->
+                binding.incidentCommentPostedOn.text =
+                    DateFormatter.format(postedOn)
             }
         }
     }

@@ -77,6 +77,7 @@ class CitizenRequestViewModel @Inject constructor(
 
     var currentSelectedIncident: Incident? = null
     var currentSelectedIncidentPhotoIndex = 0
+    var currentSelectedIncidentCommentIndex = 0
 
     fun addIncidentPhoto(uri: Uri) {
         listIncidentPhotoUri.add(uri)
@@ -94,6 +95,26 @@ class CitizenRequestViewModel @Inject constructor(
                 currentSelectedIncidentPhotoIndex = 0
             }
             return it[currentSelectedIncidentPhotoIndex++]
+        }
+        return null
+    }
+
+    fun getNextIncidentComment(): Comment? {
+        currentSelectedIncident?.comments?.let {
+            if (currentSelectedIncidentCommentIndex >= it.size) {
+                currentSelectedIncidentCommentIndex = 0
+            }
+            return it[currentSelectedIncidentCommentIndex++]
+        }
+        return null
+    }
+
+    fun getPreviousIncidentComment(): Comment? {
+        currentSelectedIncident?.comments?.let {
+            if (currentSelectedIncidentCommentIndex == -1) {
+                currentSelectedIncidentCommentIndex = it.size - 1
+            }
+            return it[currentSelectedIncidentCommentIndex--]
         }
         return null
     }

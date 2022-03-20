@@ -20,10 +20,10 @@ class PublicEventViewHolder(
             eventItemCategory.text = publicEvent.category[language]
 
             publicEvent.startDate?.let {
-                eventItemStartDate.text = DateFormatter.toEventFormat(it)
+                eventItemStartDate.text = DateFormatter.format(it)
             }
             publicEvent.endDate?.let {
-                eventItemEndDate.text = DateFormatter.toEventFormat(it)
+                eventItemEndDate.text = DateFormatter.format(it)
             }
 
             publicEvent.photos.let { eventPhotos ->

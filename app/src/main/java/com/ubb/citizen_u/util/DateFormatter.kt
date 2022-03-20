@@ -10,7 +10,7 @@ object DateFormatter {
 
     private val EVENT_FORMATTER = SimpleDateFormat("dd/MM/yy", Locale.ENGLISH)
 
-    fun toEventFormat(date: Date): String {
+    fun format(date: Date): String {
         return try {
             val calendar = Calendar.getInstance()
             calendar.time = date
@@ -19,7 +19,7 @@ object DateFormatter {
         } catch (exception: Exception) {
             Log.d(
                 TAG,
-                "toEventFormat: An error has occurred while formatting the date to event format ${exception.message}"
+                "An error has occurred while formatting the date: ${exception.message}"
             )
             DEFAULT_DATE_ERROR_MESSAGE
         }
