@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 @HiltViewModel
 class CitizenRequestViewModel @Inject constructor(
     private val citizenRequestUseCase: CitizenRequestUseCase,
@@ -66,12 +67,12 @@ class CitizenRequestViewModel @Inject constructor(
         _getOthersReportedIncidentsState
     //endregion
 
-    private val _addCommentToIncidentState: MutableSharedFlow<Response<Boolean>> =
+    private val _addCommentToIncidentState: MutableSharedFlow<Response<Incident>> =
         MutableSharedFlow(
             replay = 1,
             onBufferOverflow = BufferOverflow.DROP_OLDEST
         )
-    val addCommentToIncidentState: SharedFlow<Response<Boolean>> = _addCommentToIncidentState
+    val addCommentToIncidentState: SharedFlow<Response<Incident>> = _addCommentToIncidentState
 
     var incidentAddress: String = ""
 
@@ -99,22 +100,26 @@ class CitizenRequestViewModel @Inject constructor(
         return null
     }
 
+    @Synchronized
     fun getNextIncidentComment(): Comment? {
         currentSelectedIncident?.comments?.let {
+            val comment = it[currentSelectedIncidentCommentIndex++]
             if (currentSelectedIncidentCommentIndex >= it.size) {
                 currentSelectedIncidentCommentIndex = 0
             }
-            return it[currentSelectedIncidentCommentIndex++]
+            return comment
         }
         return null
     }
 
+    @Synchronized
     fun getPreviousIncidentComment(): Comment? {
         currentSelectedIncident?.comments?.let {
+            val comment = it[currentSelectedIncidentCommentIndex--]
             if (currentSelectedIncidentCommentIndex == -1) {
                 currentSelectedIncidentCommentIndex = it.size - 1
             }
-            return it[currentSelectedIncidentCommentIndex--]
+            return comment
         }
         return null
     }
@@ -183,7 +188,26 @@ class CitizenRequestViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             currentSelectedIncident?.let { incident ->
                 citizenRequestUseCase.addCommentToIncident(incident, comment).collect {
-                    _addCommentToIncidentState.tryEmit(it)
+                    if (it is Response.Success) {
+                        currentSelectedIncident?.comments?.run {
+                            add(comment)
+                            currentSelectedIncidentCommentIndex = size - 1
+                        }
+                    }
+
+                    when (it) { // Mapping from Response<Boolean> to Response<Incident>
+                        Response.Loading -> {
+                            _addCommentToIncidentState.tryEmit(Response.Loading)
+                        }
+                        is Response.Error -> {
+                            _addCommentToIncidentState.tryEmit(Response.Error(it.message))
+                        }
+                        is Response.Success -> {
+                            _addCommentToIncidentState.tryEmit(Response.Success(
+                                currentSelectedIncident!!))
+                        }
+                    }
+                    _addCommentToIncidentState.resetReplayCache()
                 }
             }
         }

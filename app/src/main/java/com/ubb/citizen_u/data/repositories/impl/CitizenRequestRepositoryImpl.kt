@@ -72,7 +72,10 @@ class CitizenRequestRepositoryImpl @Inject constructor(
                 val incidentSnapshot = usersRef.document(citizenId)
                     .collection(USER_REQUESTS_INCIDENTS_COL)
                     .document(incidentId).get().await()
-                val incident = getIncident(incidentSnapshot, citizenId)
+                val incident = getIncident(
+                    incidentDocSnapshot = incidentSnapshot,
+                    citizenId = citizenId,
+                    shouldContainComments = true)
                 emit(Response.Success(incident))
             } catch (exception: Exception) {
                 Log.d(TAG, "getIncident: An error as occurred: ${exception.message}")
@@ -144,17 +147,23 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         val incidentSnapshot =
             usersRef.document(citizenId).collection(USER_REQUESTS_INCIDENTS_COL).get().await()
         return incidentSnapshot.documents.map {
-            getIncident(incidentDocSnapshot = it, citizenId)
+            getIncident(
+                incidentDocSnapshot = it,
+                citizenId = citizenId,
+                shouldContainComments = false)
         }
     }
 
     private suspend fun getIncident(
         incidentDocSnapshot: DocumentSnapshot,
         citizenId: String,
+        shouldContainComments: Boolean,
     ): Incident? {
         return incidentDocSnapshot.toObject(Incident::class.java)?.apply {
             photos = photoRepository.getAllIncidentPhotos(citizenId, incidentId = id)
-            comments = getIncidentComments(incidentDocSnapshot = incidentDocSnapshot)
+            if (shouldContainComments) {
+                comments = getIncidentComments(incidentDocSnapshot = incidentDocSnapshot)
+            }
 
             citizenRepository.getCitizen(citizenId).collect { citizenResponse ->
                 if (citizenResponse is Response.Success) {

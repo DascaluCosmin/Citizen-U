@@ -25,10 +25,12 @@ import com.ubb.citizen_u.util.ConfigurationConstants.IMAGE_CAROUSEL_NUMBER_OF_SE
 import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
+@ExperimentalCoroutinesApi
 class ReportedIncidentDetailsFragment : Fragment() {
 
     companion object {
@@ -84,6 +86,7 @@ class ReportedIncidentDetailsFragment : Fragment() {
 
                     binding.addIncidentCommentTextfield.editText?.text?.clear()
                     toastMessage(SUCCESSFUL_ADD_COMMENT_TO_INCIDENT)
+                    getCurrentComment(it.data.comments)
                 }
             }
         }
@@ -120,14 +123,16 @@ class ReportedIncidentDetailsFragment : Fragment() {
                                 DateFormatter.format(sentDate)
                         }
 
-                        // TODO: Solve bug
                         imageCarouselRunnable = Runnable {
                             Log.d(TAG, "Image Carousel running...")
                             ImageFiller.fill(requireContext(),
                                 binding.reportedIncidentImage,
                                 citizenRequestViewModel.getNextIncidentPhoto())
-                            handler.postDelayed(imageCarouselRunnable,
-                                IMAGE_CAROUSEL_NUMBER_OF_SECONDS)
+
+                            if (photos.size > 1) {
+                                handler.postDelayed(imageCarouselRunnable,
+                                    IMAGE_CAROUSEL_NUMBER_OF_SECONDS)
+                            }
                         }
 
                         handler.postDelayed(imageCarouselRunnable,
@@ -138,18 +143,30 @@ class ReportedIncidentDetailsFragment : Fragment() {
                             binding.addCommentButton.visibility = View.GONE
                         }
 
-                        if (!comments.isNullOrEmpty()) {
-                            binding.incidentCommentLayout.visibility = View.VISIBLE
-                            binding.reportedIncidentCommentsLabel.visibility = View.VISIBLE
-
-                            showCurrentCommentToIncident(comments[0])
-                        } else {
-                            binding.incidentCommentLayout.visibility = View.GONE
-                            binding.reportedIncidentCommentsLabel.visibility = View.GONE
-                        }
+                        getCurrentComment(comments)
                     }
                 }
             }
+        }
+    }
+
+    private fun getCurrentComment(comments: List<Comment?>) {
+        if (!comments.isNullOrEmpty()) {
+            binding.incidentCommentLayout.visibility = View.VISIBLE
+            binding.reportedIncidentCommentsLabel.visibility = View.VISIBLE
+
+            if (comments.size == 1) {
+                binding.nextReportCommentButton.visibility = View.GONE
+                binding.previousReportCommentButton.visibility = View.GONE
+            } else {
+                binding.nextReportCommentButton.visibility = View.VISIBLE
+                binding.previousReportCommentButton.visibility = View.VISIBLE
+            }
+
+            getNextCommentToIncident()
+        } else {
+            binding.incidentCommentLayout.visibility = View.GONE
+            binding.reportedIncidentCommentsLabel.visibility = View.GONE
         }
     }
 
