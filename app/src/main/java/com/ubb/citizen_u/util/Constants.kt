@@ -68,6 +68,10 @@ object SettingsConstants {
     //endregion
 }
 
+object ConfigurationConstants {
+    const val IMAGE_CAROUSEL_NUMBER_OF_SECONDS = 3000L
+}
+
 object NotificationsConstants {
     const val CHANNEL_ID = "NotificationsChannelId"
     const val CHANNEL_NAME = "NotificationsChannel"

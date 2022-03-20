@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.requests.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.domain.model.Response
@@ -73,7 +74,9 @@ class CitizenRequestViewModel @Inject constructor(
     val addCommentToIncidentState: SharedFlow<Response<Boolean>> = _addCommentToIncidentState
 
     var incidentAddress: String = ""
+
     var currentSelectedIncident: Incident? = null
+    var currentSelectedIncidentPhotoIndex = 0
 
     fun addIncidentPhoto(uri: Uri) {
         listIncidentPhotoUri.add(uri)
@@ -83,6 +86,16 @@ class CitizenRequestViewModel @Inject constructor(
     fun removeLatestPhoto() {
         listIncidentPhotoUri.removeLast()
         _listIncidentPhotoUriLiveData.value = listIncidentPhotoUri
+    }
+
+    fun getNextIncidentPhoto(): Photo? {
+        currentSelectedIncident?.photos?.let {
+            if (currentSelectedIncidentPhotoIndex >= it.size) {
+                currentSelectedIncidentPhotoIndex = 0
+            }
+            return it[currentSelectedIncidentPhotoIndex++]
+        }
+        return null
     }
 
     @ExperimentalCoroutinesApi

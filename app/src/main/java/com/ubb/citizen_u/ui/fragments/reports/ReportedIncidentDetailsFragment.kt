@@ -1,6 +1,7 @@
 package com.ubb.citizen_u.ui.fragments.reports
 
 import android.os.Bundle
+import android.os.Handler
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_ADD_COMMENT_TO_INCIDENT
+import com.ubb.citizen_u.util.ConfigurationConstants.IMAGE_CAROUSEL_NUMBER_OF_SECONDS
 import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
@@ -33,9 +35,12 @@ class ReportedIncidentDetailsFragment : Fragment() {
         private const val TAG = "UBB-ReportedIncidentDetailsFragment"
     }
 
+    private lateinit var imageCarouselRunnable: Runnable
+
     private var _binding: FragmentReportedIncidentDetailsBinding? = null
     private val binding get() = _binding!!
 
+    private val handler = Handler()
     private val citizenRequestViewModel: CitizenRequestViewModel by activityViewModels()
     private val citizenViewModel: CitizenViewModel by activityViewModels()
     private val args: ReportedIncidentDetailsFragmentArgs by navArgs()
@@ -115,18 +120,30 @@ class ReportedIncidentDetailsFragment : Fragment() {
                                 DateFormatter.toEventFormat(sentDate)
                         }
 
-                        // TODO: Image carousel to be implemented
-                        photos.let { incidentPhotos ->
-                            if (incidentPhotos.isNotEmpty()) {
-                                incidentPhotos[0]?.let { incidentPhoto ->
-                                    ImageFiller.fill(
-                                        requireContext(),
-                                        binding.reportedIncidentImage,
-                                        incidentPhoto
-                                    )
-                                }
-                            }
+                        imageCarouselRunnable = Runnable {
+                            Log.d(TAG, "Image Carousel running...")
+                            ImageFiller.fill(requireContext(),
+                                binding.reportedIncidentImage,
+                                citizenRequestViewModel.getNextIncidentPhoto())
+                            handler.postDelayed(imageCarouselRunnable,
+                                IMAGE_CAROUSEL_NUMBER_OF_SECONDS)
                         }
+
+                        handler.postDelayed(imageCarouselRunnable,
+                            0L) // The first image should be displayed immediately
+
+                        // TODO: Image carousel to be implemented
+//                        photos.let { incidentPhotos ->
+//                            if (incidentPhotos.isNotEmpty()) {
+//                                incidentPhotos[0]?.let { incidentPhoto ->
+//                                    ImageFiller.fill(
+//                                        requireContext(),
+//                                        binding.reportedIncidentImage,
+//                                        incidentPhoto
+//                                    )
+//                                }
+//                            }
+//                        }
 
                         if (citizen?.id == citizenViewModel.currentCitizen.id) {
                             binding.addIncidentCommentTextfield.visibility = View.GONE
@@ -154,6 +171,11 @@ class ReportedIncidentDetailsFragment : Fragment() {
             citizenId = args.citizenId,
             incidentId = args.incidentId
         )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(imageCarouselRunnable)
     }
 
     fun addIncidentComment() {
