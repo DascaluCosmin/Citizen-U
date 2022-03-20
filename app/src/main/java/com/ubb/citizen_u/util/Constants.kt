@@ -10,6 +10,8 @@ object ValidationConstants {
         "Please provide the incident headline!"
     const val INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE =
         "Please provide at least one photo of the incident!"
+    const val INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE =
+        "Please enter the comment!"
 }
 
 object AuthenticationConstants {
@@ -35,6 +37,7 @@ object CitizenRequestConstants {
 
     // region Success
     const val SUCCESSFUL_REPORT_INCIDENT = "The incident has been reported successfully!"
+    const val SUCCESSFUL_ADD_COMMENT_TO_INCIDENT = "The comment has been added successfully!"
 
     // endregion
 }
@@ -49,6 +52,7 @@ object DatabaseConstants {
     const val PUBLIC_EVENTS_COL = "events"
     const val PUBLIC_RELEASE_EVENTS_COL = "council_events"
     const val EVENTS_PHOTOS_COL = "photos"
+    const val INCIDENTS_COMMENTS_COL = "comments"
     const val UNDEFINED_DOC = "undefined"
 }
 
@@ -62,6 +66,10 @@ object SettingsConstants {
     const val DEFAULT_LANGUAGE = "en"
     const val DEFAULT_NOTIFICATIONS = false
     //endregion
+}
+
+object ConfigurationConstants {
+    const val IMAGE_CAROUSEL_NUMBER_OF_SECONDS = 3000L
 }
 
 object NotificationsConstants {

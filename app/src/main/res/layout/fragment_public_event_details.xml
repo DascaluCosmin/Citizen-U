@@ -31,7 +31,7 @@
                 android:importantForAccessibility="no"
                 android:onClick="@{() -> publicEventDetailsFragment.goToEventOnlinePage()}"
                 android:scaleType="centerCrop"
-                android:src="@drawable/event_photo3_sample"
+                tools:src="@drawable/event_photo3_sample"
                 app:layout_constraintBottom_toBottomOf="@id/horizontal_guideline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

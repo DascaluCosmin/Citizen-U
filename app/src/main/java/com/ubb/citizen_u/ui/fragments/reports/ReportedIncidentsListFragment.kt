@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentReportedIncidentsListBinding
@@ -18,9 +19,11 @@ import com.ubb.citizen_u.ui.adapters.ReportedIncidentsAdapter
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class ReportedIncidentsListFragment : Fragment() {
 
     companion object {
@@ -48,7 +51,19 @@ class ReportedIncidentsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = ReportedIncidentsAdapter {
-            Log.d(TAG, "Pressed on reported incident ${it.id}")
+            if (it.citizen == null) {
+                toastErrorMessage()
+                return@ReportedIncidentsAdapter
+            }
+
+            it.citizen?.run {
+                val action = ReportedIncidentsListFragmentDirections
+                    .actionReportedIncidentsListFragmentToReportedIncidentDetailsFragment(
+                        incidentId = it.id,
+                        citizenId = id
+                    )
+                findNavController().navigate(action)
+            }
         }
 
         binding.apply {

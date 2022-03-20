@@ -11,4 +11,8 @@ data class Citizen(
     override fun toString(): String {
         return "ID = $id, name = $firstName $lastName"
     }
+
+    fun getFullName(): String {
+        return "$firstName $lastName"
+    }
 }

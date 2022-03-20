@@ -9,10 +9,7 @@ import com.ubb.citizen_u.data.repositories.impl.CitizenRepositoryImpl
 import com.ubb.citizen_u.data.repositories.impl.CitizenRequestRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.citizens.CitizenUseCases
 import com.ubb.citizen_u.domain.usescases.citizens.GetCitizenUseCase
-import com.ubb.citizen_u.domain.usescases.citizens.requests.CitizenRequestUseCase
-import com.ubb.citizen_u.domain.usescases.citizens.requests.GetCitizenReportedIncidents
-import com.ubb.citizen_u.domain.usescases.citizens.requests.GetOthersReportedIncidents
-import com.ubb.citizen_u.domain.usescases.citizens.requests.ReportIncidentUseCase
+import com.ubb.citizen_u.domain.usescases.citizens.requests.*
 import com.ubb.citizen_u.util.DatabaseConstants.USERS_COL
 import dagger.Module
 import dagger.Provides
@@ -39,10 +36,12 @@ object CitizenModule {
     fun providesCitizenRequestRepository(
         @Named(USERS_COL) usersRef: CollectionReference,
         photoRepository: PhotoRepository,
+        citizenRepository: CitizenRepository,
     ): CitizenRequestRepository =
         CitizenRequestRepositoryImpl(
             usersRef = usersRef,
-            photoRepository = photoRepository
+            photoRepository = photoRepository,
+            citizenRepository = citizenRepository
         )
 
     @Provides
@@ -58,7 +57,9 @@ object CitizenModule {
         CitizenRequestUseCase(
             reportIncidentUseCase = ReportIncidentUseCase(citizenRequestRepository),
             getCitizenReportedIncidents = GetCitizenReportedIncidents(citizenRequestRepository),
-            getOthersReportedIncidents = GetOthersReportedIncidents(citizenRequestRepository)
+            getOthersReportedIncidents = GetOthersReportedIncidents(citizenRequestRepository),
+            getReportedIncident = GetReportedIncident(citizenRequestRepository),
+            addCommentToIncident = AddCommentToIncident(citizenRequestRepository),
         )
 
     @Provides

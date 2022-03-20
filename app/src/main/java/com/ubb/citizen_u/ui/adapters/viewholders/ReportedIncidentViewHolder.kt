@@ -23,7 +23,7 @@ class ReportedIncidentViewHolder(
                 .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
             incident.sentDate?.let {
-                reportedIncidentSendDate.text = DateFormatter.toEventFormat(it)
+                reportedIncidentSendDate.text = DateFormatter.format(it)
             }
 
             incident.photos.let { reportedIncidentPhotos ->

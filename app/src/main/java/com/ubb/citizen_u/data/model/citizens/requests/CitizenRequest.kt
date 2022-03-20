@@ -2,16 +2,19 @@ package com.ubb.citizen_u.data.model.citizens.requests
 
 import com.google.firebase.firestore.DocumentId
 import com.ubb.citizen_u.data.model.Photo
+import com.ubb.citizen_u.data.model.citizens.Citizen
 import java.util.*
 
 // TODO: properties - title?
 abstract class CitizenRequest(
     @DocumentId var id: String = "",
+    var citizen: Citizen? = null,
     var description: String? = null,
     var headline: String? = null,
     var sentDate: Date? = null,
     var status: RequestStatus = RequestStatus.SENT,
     var photos: MutableList<Photo?> = mutableListOf(),
+    var comments: MutableList<Comment?> = mutableListOf(),
 ) {
 
     override fun toString(): String {

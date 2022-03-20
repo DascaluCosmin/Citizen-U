@@ -92,12 +92,12 @@ class PublicEventDetailsFragment : Fragment() {
                         )
                         it.data.startDate?.let { startDate ->
                             binding.eventStartDate.text =
-                                DateFormatter.toEventFormat(startDate)
+                                DateFormatter.format(startDate)
                         }
                         it.data.endDate?.let { endDate ->
                             binding.dateSeparatorLabel.visibility = View.VISIBLE
                             binding.eventEndDate.text =
-                                DateFormatter.toEventFormat(endDate)
+                                DateFormatter.format(endDate)
                         }
                     } else {
                         toastErrorMessage()
