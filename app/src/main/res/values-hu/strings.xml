@@ -17,6 +17,8 @@
     <string name="generic_status_label">Állapot</string>
     <string name="generic_other_citizens_comments_label">Más állampolgárok véleménye</string>
     <string name="generic_next_button">Következő</string>
+    <string name="attachment_title_hint">Cím</string>
+    <string name="attachment_optional_description_hint">Leírás (Választható)</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label" translatable="false">Welcome</string>
@@ -96,6 +98,9 @@
 
     <!-- region Project Proposals -->
     <string name="upload_pdf_button_text">PDF Fájl feltöltés</string>
+    <string name="upload_another_pdf_button_text">Tölts fel egy másik PDF fájlt</string>
+    <string name="upload_photo_button_text">Fénykép feltöltése</string>
+    <string name="upload_another_photo_button_text">Tölts fel másik fotót</string>
     <string name="project_proposal_text">Javaslat egy projektet</string>
     <!-- endregion -->
 

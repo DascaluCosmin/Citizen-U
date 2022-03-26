@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.ubb.citizen_u.databinding.FragmentProjectProposalPdfBinding
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN
+import com.ubb.citizen_u.util.glide.ImageFiller
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,10 +20,16 @@ class ProjectProposalPdfFragment : Fragment() {
 
     companion object {
         const val TAG = "UBB-ProjectProposalPdfFragment"
+        const val PDF_FILE_TYPE = "application/pdf"
+
+        // TODO: This has to be clarified if .jpg is accepted as well
+        const val PHOTO_FILE_TYPE = "image/*"
     }
 
     private var _binding: FragmentProjectProposalPdfBinding? = null
     private val binding: FragmentProjectProposalPdfBinding get() = _binding!!
+
+    private lateinit var currentFileType: String
 
     private val uploadPdfResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -30,7 +37,24 @@ class ProjectProposalPdfFragment : Fragment() {
                 result.data?.let { intent ->
                     val uri = intent.data
                     Log.d(TAG,
-                        "The Pdf file has been upload successfully in the application's memory. Uri = $uri")
+                        "The $currentFileType file type has been upload successfully in the application's memory. Uri = $uri")
+
+                    binding.apply {
+                        uploadFilePlaceholder.visibility = View.GONE
+                        when (currentFileType) {
+                            PDF_FILE_TYPE -> {
+                                projectProposalPdf.fromUri(uri).load()
+                                projectProposalPdf.visibility = View.VISIBLE
+                                projectProposalPhoto.visibility = View.GONE
+                            }
+
+                            PHOTO_FILE_TYPE -> {
+                                ImageFiller.fill(requireContext(), binding.projectProposalPhoto, uri)
+                                projectProposalPhoto.visibility = View.VISIBLE
+                                projectProposalPdf.visibility = View.GONE
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -53,15 +77,25 @@ class ProjectProposalPdfFragment : Fragment() {
     }
 
     fun uploadPdfFile() {
-        Log.d(TAG, "Uploading PDF file...")
-        val intent = Intent()
-        intent.type = "application/pdf"
-        intent.action = Intent.ACTION_GET_CONTENT
+        uploadFile(PDF_FILE_TYPE)
+    }
 
+    fun uploadPhotoFile() {
+        uploadFile(PHOTO_FILE_TYPE)
+    }
+
+    private fun uploadFile(fileType: String) {
+        Log.d(TAG, "uploadFile: Uploading $fileType file...")
+        currentFileType = fileType
+
+        val intent = Intent()
+        intent.type = fileType
+        intent.action = Intent.ACTION_GET_CONTENT
         try {
             uploadPdfResultLauncher.launch(intent)
         } catch (exception: Exception) {
-            Log.e(TAG, "An exception has been thrown: ${exception.message}")
+            Log.e(TAG,
+                "An exception has occurred at uploading the $fileType file: ${exception.message}")
             toastMessage(DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN)
         }
     }

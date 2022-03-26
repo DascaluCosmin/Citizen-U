@@ -17,7 +17,8 @@
     <string name="generic_status_label">Status</string>
     <string name="generic_other_citizens_comments_label">Other citizens opinions</string>
     <string name="generic_next_button">Next</string>
-
+    <string name="attachment_title_hint">Title</string>
+    <string name="attachment_optional_description_hint">Description (Optional)</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label" translatable="false">Welcome</string>
@@ -101,7 +102,10 @@
     <!-- endregion -->
 
     <!-- region Project Proposals -->
-    <string name="upload_pdf_button_text">Upload PDF File</string>
+    <string name="upload_pdf_button_text">Upload PDF file</string>
+    <string name="upload_another_pdf_button_text">Upload another PDF file</string>
+    <string name="upload_photo_button_text">Upload photo</string>
+    <string name="upload_another_photo_button_text">Upload another photo</string>
     <string name="project_proposal_text">Propose a project</string>
     <!-- endregion -->
 
