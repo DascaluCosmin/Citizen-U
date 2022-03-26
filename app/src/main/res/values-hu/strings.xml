@@ -81,7 +81,7 @@
     <!-- Language Preferences -->
     <string name="language_title">Jelenlegi nyelv</string>
 
-    <!--region Settings -->
+    <!-- region Settings -->
     <string name="settings_fragment_label" translatable="false">Beállítások</string>
     <string name="settings_notifications_summary_off_text">Most már nem kap értesítést</string>
     <string name="settings_notification_summary_on_text">Most minden értesítést megkap</string>
@@ -92,7 +92,13 @@
     <string name="english_language_label">Angol</string>
     <string name="romanian_language_label">Román</string>
     <string name="hungarian_language_label">Magyar</string>
-    <!--endregion-->
+    <!-- endregion -->
+
+    <!-- region Project Proposals -->
+    <string name="upload_pdf_button_text">PDF Fájl feltöltés</string>
+    <string name="project_proposal_text">Javaslat egy projektet</string>
+    <!-- endregion -->
+
 
     <!-- Constants -->
     <string name="city_hall_name">Kolozsvár Városháza</string>

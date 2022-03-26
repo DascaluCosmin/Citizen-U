@@ -174,4 +174,9 @@
             android:name="citizenId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/projectProposalPdfFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProjectProposalPdfFragment"
+        android:label="fragment_project_proposal_pdf"
+        tools:layout="@layout/fragment_project_proposal_pdf" />
 </navigation>

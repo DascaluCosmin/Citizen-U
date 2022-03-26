@@ -32,8 +32,13 @@
 
         <item
             android:id="@+id/otherCitizensReportedIncidentsTransitionFragment"
-            android:title="@string/other_citizens_reported_incidents_list_fragment_label"
-            />
+            android:title="@string/other_citizens_reported_incidents_list_fragment_label" />
+    </group>
+
+    <group android:id="@+id/projectProposalGroup">
+        <item
+            android:id="@+id/projectProposalPdfFragment"
+            android:title="@string/project_proposal_text" />
     </group>
 
     <group android:id="@+id/settingsGroup">

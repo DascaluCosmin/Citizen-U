@@ -87,7 +87,7 @@
     <!-- Language Preferences -->
     <string name="language_title">Current language</string>
 
-    <!--region Settings -->
+    <!-- region Settings -->
     <string name="settings_fragment_label" translatable="false">Settings</string>
     <string name="settings_notifications_summary_off_text">Now you do not receive any notifications</string>
     <string name="settings_notification_summary_on_text">Now you receive all notifications</string>
@@ -98,7 +98,12 @@
     <string name="english_language_label">English</string>
     <string name="romanian_language_label">Romanian</string>
     <string name="hungarian_language_label">Hungarian</string>
-    <!--endregion-->
+    <!-- endregion -->
+
+    <!-- region Project Proposals -->
+    <string name="upload_pdf_button_text">Upload PDF File</string>
+    <string name="project_proposal_text">Propose a project</string>
+    <!-- endregion -->
 
     <!-- Constants -->
     <string name="city_hall_name">Cluj-Napoca City Hall</string>
