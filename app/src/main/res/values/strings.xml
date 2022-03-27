@@ -19,6 +19,9 @@
     <string name="generic_next_button">Next</string>
     <string name="attachment_title_hint">Title</string>
     <string name="attachment_optional_description_hint">Description (Optional)</string>
+    <string name="generic_add_button">Add</string>
+    <string name="add_image_button">Add the image</string>
+    <string name="add_pdf_button">Add the PDF file</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label" translatable="false">Welcome</string>

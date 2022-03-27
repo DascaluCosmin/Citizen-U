@@ -44,14 +44,18 @@ class ProjectProposalPdfFragment : Fragment() {
                         when (currentFileType) {
                             PDF_FILE_TYPE -> {
                                 projectProposalPdf.fromUri(uri).load()
-                                projectProposalPdf.visibility = View.VISIBLE
-                                projectProposalPhoto.visibility = View.GONE
+                                imagePanel.visibility = View.GONE
+                                pdfPanel.visibility = View.VISIBLE
                             }
 
                             PHOTO_FILE_TYPE -> {
-                                ImageFiller.fill(requireContext(), binding.projectProposalPhoto, uri)
-                                projectProposalPhoto.visibility = View.VISIBLE
-                                projectProposalPdf.visibility = View.GONE
+                                ImageFiller.fill(
+                                    requireContext(),
+                                    binding.projectProposalPhoto,
+                                    uri
+                                )
+                                imagePanel.visibility = View.VISIBLE
+                                pdfPanel.visibility = View.GONE
                             }
                         }
                     }

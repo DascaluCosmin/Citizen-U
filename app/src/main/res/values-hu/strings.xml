@@ -19,6 +19,9 @@
     <string name="generic_next_button">Következő</string>
     <string name="attachment_title_hint">Cím</string>
     <string name="attachment_optional_description_hint">Leírás (Választható)</string>
+    <string name="generic_add_button">Hozzáadás</string>
+    <string name="add_image_button">Adja hozzá a képet</string>
+    <string name="add_pdf_button">Adja hozzá a PDF fájlt</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label" translatable="false">Welcome</string>

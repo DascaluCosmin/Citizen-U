@@ -20,6 +20,9 @@
     <string name="generic_next_button">Următorul pas</string>
     <string name="attachment_title_hint">Titlu</string>
     <string name="attachment_optional_description_hint">Descriere (Opțional)</string>
+    <string name="generic_add_button">Adaugă</string>
+    <string name="add_image_button">Adaugă imaginea</string>
+    <string name="add_pdf_button">Adaugă fișierul PDF</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label">Welcome</string>
