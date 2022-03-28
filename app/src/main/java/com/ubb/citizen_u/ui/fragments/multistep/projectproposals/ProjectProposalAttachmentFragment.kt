@@ -9,14 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import com.ubb.citizen_u.databinding.FragmentProjectProposalPdfBinding
+import com.ubb.citizen_u.databinding.FragmentProjectProposalAttachmentBinding
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN
 import com.ubb.citizen_u.util.glide.ImageFiller
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProjectProposalPdfFragment : Fragment() {
+class ProjectProposalAttachmentFragment : Fragment() {
 
     companion object {
         const val TAG = "UBB-ProjectProposalPdfFragment"
@@ -26,8 +26,8 @@ class ProjectProposalPdfFragment : Fragment() {
         const val PHOTO_FILE_TYPE = "image/*"
     }
 
-    private var _binding: FragmentProjectProposalPdfBinding? = null
-    private val binding: FragmentProjectProposalPdfBinding get() = _binding!!
+    private var _binding: FragmentProjectProposalAttachmentBinding? = null
+    private val binding: FragmentProjectProposalAttachmentBinding get() = _binding!!
 
     private lateinit var currentFileType: String
 
@@ -67,10 +67,10 @@ class ProjectProposalPdfFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentProjectProposalPdfBinding.inflate(inflater, container, false)
+        _binding = FragmentProjectProposalAttachmentBinding.inflate(inflater, container, false)
 
         binding.apply {
-            projectProposalPdfFragment = this@ProjectProposalPdfFragment
+            projectProposalPdfFragment = this@ProjectProposalAttachmentFragment
         }
         return binding.root
     }

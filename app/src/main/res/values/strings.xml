@@ -105,6 +105,8 @@
     <!-- endregion -->
 
     <!-- region Project Proposals -->
+    <string name="citizen_proposed_projects_list_fragment_label">Your proposed projects</string>
+    <string name="others_citizens_proposed_projects_list_fragment_label">Others proposed projects</string>
     <string name="upload_pdf_button_text">Upload PDF file</string>
     <string name="upload_another_pdf_button_text">Upload another PDF file</string>
     <string name="upload_photo_button_text">Upload photo</string>

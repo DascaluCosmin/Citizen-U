@@ -100,6 +100,8 @@
     <!-- endregion -->
 
     <!-- region Project Proposals -->
+    <string name="citizen_proposed_projects_list_fragment_label">Az Ön által javasolt projekt</string>
+    <string name="others_citizens_proposed_projects_list_fragment_label">Mások által javasolt projekt</string>
     <string name="upload_pdf_button_text">PDF Fájl feltöltés</string>
     <string name="upload_another_pdf_button_text">Tölts fel egy másik PDF fájlt</string>
     <string name="upload_photo_button_text">Fénykép feltöltése</string>

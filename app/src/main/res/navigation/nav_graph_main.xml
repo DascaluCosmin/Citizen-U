@@ -176,7 +176,34 @@
     </fragment>
     <fragment
         android:id="@+id/projectProposalPdfFragment"
-        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProjectProposalPdfFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProjectProposalAttachmentFragment"
         android:label="fragment_project_proposal_pdf"
-        tools:layout="@layout/fragment_project_proposal_pdf" />
+        tools:layout="@layout/fragment_project_proposal_attachment" />
+    <fragment
+        android:id="@+id/otherCitizensProposedProjectsTransitionFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.transitions.OtherCitizensProposedProjectsTransitionFragment"
+        android:label="fragment_other_citizens_proposed_projects_transition"
+        tools:layout="@layout/fragment_other_citizens_proposed_projects_transition" >
+        <action
+            android:id="@+id/action_otherCitizensProposedProjectsTransitionFragment_to_proposedProjectsListFragment"
+            app:destination="@id/proposedProjectsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/citizenProposedProjectsTransitionFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.transitions.CitizenProposedProjectsTransitionFragment"
+        android:label="fragment_citizen_proposed_projects_transition"
+        tools:layout="@layout/fragment_citizen_proposed_projects_transition" >
+        <action
+            android:id="@+id/action_citizenProposedProjectsTransitionFragment_to_proposedProjectsListFragment"
+            app:destination="@id/proposedProjectsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/proposedProjectsListFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProposedProjectsListFragment"
+        android:label="fragment_proposed_projects_list"
+        tools:layout="@layout/fragment_proposed_projects_list" >
+        <argument
+            android:name="forCurrentCitizen"
+            app:argType="boolean" />
+    </fragment>
 </navigation>

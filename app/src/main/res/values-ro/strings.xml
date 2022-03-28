@@ -102,6 +102,8 @@
     <!-- endregion -->
 
     <!-- region Project Proposals -->
+    <string name="citizen_proposed_projects_list_fragment_label">Proiectele propuse de tine</string>
+    <string name="others_citizens_proposed_projects_list_fragment_label">Proiectele propuse de alții</string>
     <string name="upload_pdf_button_text">Încarcă fișier PDF</string>
     <string name="upload_another_pdf_button_text">Încarcă un alt fișier PDF</string>
     <string name="upload_photo_button_text">Încarcă fotografie</string>

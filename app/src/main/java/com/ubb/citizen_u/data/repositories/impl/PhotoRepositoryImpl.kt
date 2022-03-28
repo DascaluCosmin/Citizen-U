@@ -43,7 +43,11 @@ class PhotoRepositoryImpl @Inject constructor(
             "$FIREBASE_STORAGE_INCIDENT_REPORTS_IMAGES/$citizenId/$incidentId/"
         val result = firebaseStorage.reference.child(pathToIncidentPhotosFolder)
             .listAll().await()
-        return result.items.map { Photo(storageReference = it) }.toMutableList()
+        return result.items.map {
+            Photo().apply {
+                storageReference = it
+            }
+        }.toMutableList()
     }
 
     override suspend fun saveIncidentPhotos(

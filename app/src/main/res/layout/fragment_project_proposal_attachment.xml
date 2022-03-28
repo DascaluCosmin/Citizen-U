@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_project_proposal_pdf"
-    tools:context=".ui.fragments.multistep.projectproposals.ProjectProposalPdfFragment">
+    tools:context=".ui.fragments.multistep.projectproposals.ProjectProposalAttachmentFragment">
 
     <data>
 
         <variable
             name="projectProposalPdfFragment"
-            type="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProjectProposalPdfFragment" />
+            type="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProjectProposalAttachmentFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
