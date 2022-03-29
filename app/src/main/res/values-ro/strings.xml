@@ -104,11 +104,16 @@
     <!-- region Project Proposals -->
     <string name="citizen_proposed_projects_list_fragment_label">Proiectele propuse de tine</string>
     <string name="others_citizens_proposed_projects_list_fragment_label">Proiectele propuse de alții</string>
+    <string name="propose_project_text">Propunere de proiect</string>
     <string name="upload_pdf_button_text">Încarcă fișier PDF</string>
     <string name="upload_another_pdf_button_text">Încarcă un alt fișier PDF</string>
     <string name="upload_photo_button_text">Încarcă fotografie</string>
     <string name="upload_another_photo_button_text">Încarcă o altă fotografie</string>
     <string name="project_proposal_text">Propune un proiect</string>
+    <string name="project_title_hint">Titlul proiectului</string>
+    <string name="project_motivation_hint">De ce ar trebui implementat?</string>
+    <string name="project_location_hint">Locația proiectului</string>
+    <string name="project_description_hint">Descrierea proiectului</string>
     <!-- endregion -->
 
     <!-- Constants -->
