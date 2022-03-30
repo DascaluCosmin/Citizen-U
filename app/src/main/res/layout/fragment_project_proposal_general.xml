@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_project_proposal_general"
     tools:context=".ui.fragments.multistep.projectproposals.ProjectProposalGeneralFragment">
 
     <data>
@@ -41,13 +42,32 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/project_category_dropdown"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/project_category_hint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/project_categories_autocomplete_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textIsSelectable="true"
+                        android:inputType="none"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/project_title_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin"
                     android:hint="@string/project_title_hint"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/project_category_dropdown">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -119,6 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/generic_margin"
+                    android:onClick="@{() -> fragmentProjectProposalGeneral.goToAttachmentsDetails()}"
                     android:text="@string/generic_next_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -113,10 +113,19 @@
     <string name="upload_photo_button_text">Upload photo</string>
     <string name="upload_another_photo_button_text">Upload another photo</string>
     <string name="project_proposal_text">Propose a project</string>
+    <string name="project_category_hint">Project Category</string>
     <string name="project_title_hint">Project Title</string>
     <string name="project_motivation_hint">Why should it be implemented?</string>
     <string name="project_location_hint">Project Location</string>
     <string name="project_description_hint">Project Description</string>
+
+    <string-array name="project_categories">
+        <item>Mobility and accessibility</item>
+        <item>Infrastructure</item>
+        <item>Sidewalks and pedestrian areas</item>
+        <item>Public areas design</item>
+        <item>Green spaces and playgrounds</item>
+    </string-array>
     <!-- endregion -->
 
     <!-- Constants -->

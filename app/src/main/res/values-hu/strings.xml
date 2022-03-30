@@ -108,10 +108,19 @@
     <string name="upload_photo_button_text">Fénykép feltöltése</string>
     <string name="upload_another_photo_button_text">Tölts fel másik fotót</string>
     <string name="project_proposal_text">Javaslat egy projektet</string>
+    <string name="project_category_hint">Projekt kategória</string>
     <string name="project_title_hint">Projekt címe</string>
     <string name="project_motivation_hint">Miért kell megvalósítani?</string>
     <string name="project_location_hint">Projekt helyszíne</string>
     <string name="project_description_hint">A projekt leírása</string>
+
+    <string-array name="project_categories">
+        <item>Mobilitás és hozzáférhetőség</item>
+        <item>Infrastruktúra</item>
+        <item>Járdák és gyalogos területek</item>
+        <item>Közterületek tervezése</item>
+        <item>Zöldterületek és játszóterek</item>
+    </string-array>
     <!-- endregion -->
 
 

@@ -110,10 +110,19 @@
     <string name="upload_photo_button_text">Încarcă fotografie</string>
     <string name="upload_another_photo_button_text">Încarcă o altă fotografie</string>
     <string name="project_proposal_text">Propune un proiect</string>
+    <string name="project_category_hint">Categoria proiectului</string>
     <string name="project_title_hint">Titlul proiectului</string>
     <string name="project_motivation_hint">De ce ar trebui implementat?</string>
     <string name="project_location_hint">Locația proiectului</string>
     <string name="project_description_hint">Descrierea proiectului</string>
+
+    <string-array name="project_categories">
+        <item>Mobilitate și accesibilitate</item>
+        <item>Infrastructură</item>
+        <item>Trotuare și zone pietonale</item>
+        <item>Amenajare spații publice</item>
+        <item>Spații verzi și locuri de joacă</item>
+    </string-array>
     <!-- endregion -->
 
     <!-- Constants -->

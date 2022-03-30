@@ -13,7 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import com.ubb.citizen_u.data.model.citizens.requests.Comment
+import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.databinding.FragmentReportedIncidentDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastErrorMessage

@@ -12,6 +12,14 @@ object ValidationConstants {
         "Please provide at least one photo of the incident!"
     const val INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE =
         "Please enter the comment!"
+    const val INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE = "Please choose a category for the project!"
+    const val INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE = "Please enter a title for the project!"
+    const val INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE =
+        "Please enter a motivation for the project!"
+    const val INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE =
+        "Please enter a location for the project!"
+    const val INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE =
+        "Please enter a description for the project!"
 }
 
 object AuthenticationConstants {

@@ -4,7 +4,7 @@ import android.net.Uri
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
-import com.ubb.citizen_u.data.model.citizens.requests.Comment
+import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.data.repositories.CitizenRepository
 import com.ubb.citizen_u.data.repositories.CitizenRequestRepository

@@ -37,7 +37,8 @@
 
     <group android:id="@+id/projectProposalGroup">
         <item
-            android:id="@+id/projectProposalPdfFragment"
+            android:id="@+id/projectProposalGeneralFragment"
+            android:icon="@drawable/ic_project"
             android:title="@string/project_proposal_text" />
 
         <item

@@ -1,7 +1,7 @@
 package com.ubb.citizen_u.data.repositories
 
 import android.net.Uri
-import com.ubb.citizen_u.data.model.citizens.requests.Comment
+import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.domain.model.Response
 import kotlinx.coroutines.flow.Flow

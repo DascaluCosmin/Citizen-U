@@ -1,15 +1,22 @@
 package com.ubb.citizen_u.ui.util
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.app.Activity
+import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.view.View
 import android.widget.Toast
+import androidx.annotation.ArrayRes
+import androidx.annotation.StringRes
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN
 import com.ubb.citizen_u.util.SettingsConstants
+import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
 import java.util.*
 
 fun Fragment.toastMessage(message: String) {
@@ -22,21 +29,44 @@ fun Fragment.toastErrorMessage(errorMessage: String = DEFAULT_ERROR_MESSAGE_PLEA
 
 @Suppress("DEPRECATION")
 fun Fragment.loadLocale() {
-    val settingsPreferences = PreferenceManager
-        .getDefaultSharedPreferences(requireContext())
-    val language = settingsPreferences
-        .getString(SettingsConstants.LANGUAGE_SETTINGS_KEY,
-            SettingsConstants.DEFAULT_LANGUAGE) ?: SettingsConstants.DEFAULT_LANGUAGE
+    val language = getPreferenceLanguage()
+    changeLocale(language)
+}
 
+fun Fragment.getDefaultLocalizedStringResource(@StringRes resourceId: Int): String {
+    val preferenceLanguage = getPreferenceLanguage()
 
+    changeLocale(DEFAULT_LANGUAGE)
+    val resource = resources.getString(resourceId)
+    changeLocale(preferenceLanguage)
+
+    return resource
+}
+
+fun Fragment.getDefaultLocalizedArrayStringResource(@ArrayRes resourceId: Int): Array<String> {
+    val preferenceLanguage = getPreferenceLanguage()
+
+    changeLocale(DEFAULT_LANGUAGE)
+    val resource = resources.getStringArray(resourceId)
+    changeLocale(preferenceLanguage)
+
+    return resource
+}
+
+private fun Fragment.changeLocale(language: String) {
     val locale = Locale(language)
     val configuration = Configuration()
 
     configuration.setLocale(locale)
-    resources.updateConfiguration(
-        configuration,
-        resources.displayMetrics
-    )
+    resources.updateConfiguration(configuration, resources.displayMetrics)
+}
+
+private fun Fragment.getPreferenceLanguage(): String {
+    val settingsPreferences = PreferenceManager
+        .getDefaultSharedPreferences(requireContext())
+    return settingsPreferences
+        .getString(SettingsConstants.LANGUAGE_SETTINGS_KEY,
+            SettingsConstants.DEFAULT_LANGUAGE) ?: SettingsConstants.DEFAULT_LANGUAGE
 }
 
 @Suppress("DEPRECATION")
@@ -80,4 +110,32 @@ fun getRotatedBitmap(path: String?, sourceBitmap: Bitmap?): Bitmap? {
         sourceBitmap.height,
         matrix,
         true)
+}
+
+fun View.fadeOut() {
+    animate()
+        .alpha(0.0f)
+        .setDuration(1000L)
+        .setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                visibility = View.GONE
+            }
+        })
+}
+
+fun View.fadeIn() {
+    apply {
+        alpha = 0.0f
+        visibility = View.VISIBLE
+        animate()
+            .alpha(1.0f)
+            .setDuration(2000L)
+            .setListener(null)
+    }
+}
+
+fun Context.getStringResourceLocalized(locale: Locale?, resourceId: Int): String {
+    val configuration = Configuration(resources.configuration)
+    configuration.setLocale(locale)
+    return createConfigurationContext(configuration).getText(resourceId).toString()
 }
