@@ -66,6 +66,8 @@ object ProjectProposalConstants {
     //region Success
     const val SUCCESSFUL_ADDED_IMAGE = "The image has been added successfully!"
     const val SUCCESSFUL_ADDED_PDF = "The PDF file has been added successfully!"
+
+    const val SUCCESSFUL_PROPOSAL_PROJECT = "The project has been proposed successfully!"
     //endregion
 }
 
@@ -74,8 +76,10 @@ object DatabaseConstants {
     const val USER_REQUESTS_INCIDENTS_COL = "request_incidents"
     const val PUBLIC_EVENTS_COL = "events"
     const val PUBLIC_RELEASE_EVENTS_COL = "council_events"
-    const val EVENTS_PHOTOS_COL = "photos"
-    const val INCIDENTS_COMMENTS_COL = "comments"
+    const val PROPOSED_PROJECTS_COL = "proposed_projects"
+    const val PHOTOS_COL = "photos"
+    const val COMMENTS_COL = "comments"
+    const val DOCUMENTS_COl = "documents"
     const val UNDEFINED_DOC = "undefined"
 }
 
@@ -105,6 +109,10 @@ object NotificationsConstants {
 
     const val NOTIFICATION_PUBLIC_RELEASE_EVENT_ID_KEY = "publicReleaseEventDetailsId"
     const val NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY = "periodicEventDetailsId"
+}
+
+object CitizenConstants {
+    const val CITIZEN_MISSING_ERROR_MESSAGE = "The citizen is missing"
 }
 
 object CalendarConstants {

@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,7 +38,12 @@ class ProjectProposalViewModel @Inject constructor(
 
     fun proposeProject(projectProposal: ProjectProposal) {
         viewModelScope.launch(Dispatchers.IO) {
-            projectProposalUseCases.proposeProjectUseCase(projectProposal)
+            projectProposalUseCases.proposeProjectUseCase(
+                projectProposal,
+                listProposedProjectAttachment)
+                .collect {
+                    _proposeProjectState.tryEmit(it)
+                }
         }
     }
 }

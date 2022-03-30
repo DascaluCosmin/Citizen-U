@@ -12,11 +12,15 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.data.model.Pdf
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.proposals.ProjectProposal
 import com.ubb.citizen_u.databinding.FragmentProjectProposalAttachmentBinding
+import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
@@ -24,6 +28,7 @@ import com.ubb.citizen_u.ui.viewmodels.ProjectProposalViewModel
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN
 import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_ADDED_IMAGE
 import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_ADDED_PDF
+import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_PROPOSAL_PROJECT
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_PDF_URI_TEXT_ERROR_MESSAGE
@@ -31,6 +36,9 @@ import com.ubb.citizen_u.util.glide.ImageFiller
 import com.ubb.citizen_u.util.isNull
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import java.util.*
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -97,6 +105,38 @@ class ProjectProposalAttachmentFragment : Fragment() {
             projectProposalPdfFragment = this@ProjectProposalAttachmentFragment
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch { collectProposeProjectState() }
+            }
+        }
+    }
+
+    private suspend fun collectProposeProjectState() {
+        projectProposalViewModel.proposeProjectState.collect {
+            Log.d(TAG, "collectProposeProjectState: Collecting response $it...")
+            when (it) {
+                Response.Loading -> {
+                    binding.mainProgressbar.visibility = View.VISIBLE
+                }
+                is Response.Error -> {
+                    Log.e(
+                        TAG,
+                        "collectProposeProjectState: An error has occurred at proposing the project: ${it.message}")
+                    binding.mainProgressbar.visibility = View.GONE
+                    toastErrorMessage(DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN)
+                }
+                is Response.Success -> {
+                    binding.mainProgressbar.visibility = View.GONE
+                    toastMessage(SUCCESSFUL_PROPOSAL_PROJECT)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -180,8 +220,12 @@ class ProjectProposalAttachmentFragment : Fragment() {
 
     fun goNext() {
         projectProposalViewModel.proposeProject(ProjectProposal(
-            proposedBy = citizenViewModel.currentCitizen
-        )
-        )
+            proposedBy = citizenViewModel.currentCitizen,
+            proposedOn = Date(),
+            title = args.projectTitle,
+            motivation = args.projectMotivation,
+            description = args.projectDescription,
+            location = args.projectDescription,
+        ))
     }
 }
