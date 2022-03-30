@@ -28,6 +28,8 @@ class ProjectProposalGeneralFragment : Fragment() {
     private var _binding: FragmentProjectProposalGeneralBinding? = null
     private val binding: FragmentProjectProposalGeneralBinding get() = _binding!!
 
+    private var unlocalizedProjectCategory: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -50,7 +52,7 @@ class ProjectProposalGeneralFragment : Fragment() {
             fragmentProjectProposalGeneral = this@ProjectProposalGeneralFragment
             projectCategoriesAutocompleteTextview.setAdapter(categoriesArrayAdapter)
             (projectCategoryDropdown.editText as AutoCompleteTextView).setOnItemClickListener { _, _, position, _ ->
-                val unlocalizedProjectCategory =
+                unlocalizedProjectCategory =
                     getDefaultLocalizedArrayStringResource(R.array.project_categories)[position]
             }
         }
@@ -58,8 +60,6 @@ class ProjectProposalGeneralFragment : Fragment() {
 
     fun goToAttachmentsDetails() {
         binding.run {
-            val projectCategory =
-                projectCategoryDropdown.editText?.text.toString().trim { it <= ' ' }
             val projectTitle = projectTitleEdittext.editText?.text.toString().trim { it <= ' ' }
             val projectMotivation =
                 projectMotivationEdittext.editText?.text.toString().trim { it <= ' ' }
@@ -68,7 +68,7 @@ class ProjectProposalGeneralFragment : Fragment() {
             val projectDescription =
                 projectDescriptionEdittext.editText?.text.toString().trim { it <= ' ' }
             when {
-                TextUtils.isEmpty(projectCategory) -> {
+                TextUtils.isEmpty(unlocalizedProjectCategory) -> {
                     toastErrorMessage(INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE)
                 }
 
@@ -92,7 +92,7 @@ class ProjectProposalGeneralFragment : Fragment() {
                 else -> {
                     val action =
                         ProjectProposalGeneralFragmentDirections.actionProjectProposalGeneralFragmentToProjectProposalPdfFragment(
-                            projectCategory = projectCategory,
+                            projectCategory = unlocalizedProjectCategory,
                             projectTitle = projectTitle,
                             projectMotivation = projectMotivation,
                             projectLocation = projectLocation,

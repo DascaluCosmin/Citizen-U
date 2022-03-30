@@ -12,7 +12,8 @@ object ValidationConstants {
         "Please provide at least one photo of the incident!"
     const val INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE =
         "Please enter the comment!"
-    const val INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE = "Please choose a category for the project!"
+    const val INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE =
+        "Please choose a category for the project!"
     const val INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE = "Please enter a title for the project!"
     const val INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE =
         "Please enter a motivation for the project!"
@@ -20,6 +21,12 @@ object ValidationConstants {
         "Please enter a location for the project!"
     const val INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE =
         "Please enter a description for the project!"
+    const val INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE =
+        "Please enter a title for the file!"
+    const val INVALID_PDF_URI_TEXT_ERROR_MESSAGE =
+        "Please upload a PDF file!"
+    const val INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE =
+        "Please upload an image!"
 }
 
 object AuthenticationConstants {
@@ -52,6 +59,14 @@ object CitizenRequestConstants {
 
 object LocationConstants {
     const val FAILED_ADDRESS_COMPUTING = "The address cannot be determined at the moment!"
+}
+
+object ProjectProposalConstants {
+
+    //region Success
+    const val SUCCESSFUL_ADDED_IMAGE = "The image has been added successfully!"
+    const val SUCCESSFUL_ADDED_PDF = "The PDF file has been added successfully!"
+    //endregion
 }
 
 object DatabaseConstants {
