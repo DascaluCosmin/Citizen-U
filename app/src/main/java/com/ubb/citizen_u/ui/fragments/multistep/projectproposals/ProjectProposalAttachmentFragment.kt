@@ -171,6 +171,8 @@ class ProjectProposalAttachmentFragment : Fragment() {
                         description = attachmentDescription
                         uri = currentFileUri
                     })
+                    pdfTitleEdittext.editText?.text?.clear()
+                    pdfDescriptionEdittext.editText?.text?.clear()
                     toastMessage(SUCCESSFUL_ADDED_PDF)
                 }
             }
@@ -196,6 +198,8 @@ class ProjectProposalAttachmentFragment : Fragment() {
                         description = attachmentDescription
                         uri = currentFileUri
                     })
+                    imageTitleEdittext.editText?.text?.clear()
+                    imageDescriptionEdittext.editText?.text?.clear()
                     toastMessage(SUCCESSFUL_ADDED_IMAGE)
                 }
             }
@@ -222,6 +226,7 @@ class ProjectProposalAttachmentFragment : Fragment() {
         projectProposalViewModel.proposeProject(ProjectProposal(
             proposedBy = citizenViewModel.currentCitizen,
             proposedOn = Date(),
+            category = args.projectCategory,
             title = args.projectTitle,
             motivation = args.projectMotivation,
             description = args.projectDescription,

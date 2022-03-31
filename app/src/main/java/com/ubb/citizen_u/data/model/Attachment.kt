@@ -8,15 +8,22 @@ open class Attachment(
     @DocumentId var id: String = "",
     var name: String? = null,
     var description: String? = null,
-    var storageReference: StorageReference? = null,
-    var uri: Uri? = null,
 ) {
-
     override fun toString(): String {
         return "ID = $id, name = $name, description = $description"
     }
 }
 
-class Photo : Attachment()
+open class AttachmentData(
+    var storageReference: StorageReference? = null,
+    var uri: Uri? = null,
+) : Attachment() {
 
-class Pdf : Attachment()
+    override fun toString(): String {
+        return "${super.toString()}, uri = ${uri?.path}, storage reference = $storageReference"
+    }
+}
+
+class Photo : AttachmentData()
+
+class Pdf : AttachmentData()

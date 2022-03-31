@@ -6,7 +6,7 @@ import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.data.model.citizens.Comment
 import java.util.*
 
-data class ProjectProposal(
+open class ProjectProposal(
     @DocumentId var id: String = "",
     var proposedBy: Citizen? = null,
     var proposedOn: Date? = null,
@@ -16,8 +16,6 @@ data class ProjectProposal(
     var category: String? = null,
     var location: String? = null,
     var numberOfVotes: Int? = 0,
-    var comments: MutableList<Comment?> = mutableListOf(),
-    var attachments: MutableList<Attachment?> = mutableListOf(),
 ) {
 
     override fun toString(): String {
@@ -25,4 +23,22 @@ data class ProjectProposal(
             title = $title, motivation = $motivation, location = $location, 
             $category = $category, number of votes = $numberOfVotes"""
     }
+
+    fun mapToModelClass(): ProjectProposal {
+        return ProjectProposal(
+            proposedBy = this.proposedBy,
+            proposedOn = this.proposedOn,
+            title = this.title,
+            description = this.description,
+            motivation = this.motivation,
+            category = this.category,
+            location = this.location,
+            numberOfVotes = this.numberOfVotes
+        )
+    }
 }
+
+data class ProjectProposalData(
+    var comments: MutableList<Comment?> = mutableListOf(),
+    var attachments: MutableList<Attachment?> = mutableListOf(),
+) : ProjectProposal()

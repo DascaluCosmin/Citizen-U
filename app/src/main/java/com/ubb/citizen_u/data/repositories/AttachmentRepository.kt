@@ -8,5 +8,5 @@ interface AttachmentRepository {
         attachment: Attachment,
         citizenId: String,
         projectProposalId: String,
-    ): Boolean
+    )
 }

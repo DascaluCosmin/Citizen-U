@@ -1,5 +1,6 @@
 package com.ubb.citizen_u.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ubb.citizen_u.data.model.Attachment
@@ -37,13 +38,14 @@ class ProjectProposalViewModel @Inject constructor(
     }
 
     fun proposeProject(projectProposal: ProjectProposal) {
+        Log.d(TAG, "Proposing project $projectProposal...")
         viewModelScope.launch(Dispatchers.IO) {
             projectProposalUseCases.proposeProjectUseCase(
                 projectProposal,
-                listProposedProjectAttachment)
-                .collect {
-                    _proposeProjectState.tryEmit(it)
-                }
+                listProposedProjectAttachment
+            ).collect {
+                _proposeProjectState.tryEmit(it)
+            }
         }
     }
 }

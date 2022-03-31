@@ -127,3 +127,8 @@ const val DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN =
     "An unexpected error has occurred! Please try again!"
 const val DEFAULT_DATE_ERROR_MESSAGE = "UNKNOWN DATE"
 const val UNKNOWN = "UNKNOWN"
+
+object FileExtensions {
+    const val PHOTO_FILE_EXTENSION = ".jpg"
+    const val PDF_FILE_EXTENSION = ".pdf"
+}

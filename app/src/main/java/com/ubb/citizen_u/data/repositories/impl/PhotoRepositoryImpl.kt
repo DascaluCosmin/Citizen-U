@@ -5,6 +5,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.repositories.PhotoRepository
+import com.ubb.citizen_u.util.FileExtensions.PHOTO_FILE_EXTENSION
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -16,7 +17,6 @@ class PhotoRepositoryImpl @Inject constructor(
         private const val TAG = "PhotoRepositoryImpl"
         private const val FIREBASE_STORAGE_EVENTS_IMAGES = "images/events"
         private const val FIREBASE_STORAGE_INCIDENT_REPORTS_IMAGES = "images/incident_reports"
-        private const val PHOTO_FILE_EXTENSION = ".jpg"
     }
 
     override suspend fun getMainEventPhotoStorageReference(

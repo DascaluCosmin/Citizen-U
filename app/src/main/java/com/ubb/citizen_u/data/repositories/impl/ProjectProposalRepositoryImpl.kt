@@ -39,7 +39,7 @@ class ProjectProposalRepositoryImpl @Inject constructor(
 
                 val result = usersRef.document(proposedById)
                     .collection(DatabaseConstants.PROPOSED_PROJECTS_COL)
-                    .add(projectProposal)
+                    .add(projectProposal.mapToModelClass())
                     .await()
 
                 listProposedProjectAttachment.forEach { attachment ->
