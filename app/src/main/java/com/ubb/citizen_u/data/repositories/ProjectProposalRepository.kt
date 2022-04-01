@@ -11,4 +11,9 @@ interface ProjectProposalRepository {
         projectProposal: ProjectProposal,
         listProposedProjectAttachment: List<Attachment>,
     ): Flow<Response<Boolean>>
+
+    suspend fun getProposedProject(
+        citizenId: String,
+        projectProposalId: String,
+    ): Flow<Response<ProjectProposal?>>
 }
