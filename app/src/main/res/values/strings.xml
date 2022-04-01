@@ -112,6 +112,7 @@
     <string name="upload_another_pdf_button_text">Upload another PDF file</string>
     <string name="upload_photo_button_text">Upload photo</string>
     <string name="upload_another_photo_button_text">Upload another photo</string>
+    <string name="propose_project_final_button">Propose the project</string>
     <string name="project_proposal_text">Propose a project</string>
     <string name="project_category_hint">Project Category</string>
     <string name="project_title_hint">Project Title</string>

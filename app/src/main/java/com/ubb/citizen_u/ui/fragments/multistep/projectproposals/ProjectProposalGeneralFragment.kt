@@ -91,7 +91,7 @@ class ProjectProposalGeneralFragment : Fragment() {
 
                 else -> {
                     val action =
-                        ProjectProposalGeneralFragmentDirections.actionProjectProposalGeneralFragmentToProjectProposalPdfFragment(
+                        ProjectProposalGeneralFragmentDirections.actionProjectProposalGeneralFragmentToProjectProposalAttachmentFragment(
                             projectCategory = unlocalizedProjectCategory,
                             projectTitle = projectTitle,
                             projectMotivation = projectMotivation,

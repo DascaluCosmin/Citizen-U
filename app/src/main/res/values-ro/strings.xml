@@ -109,6 +109,7 @@
     <string name="upload_another_pdf_button_text">Încarcă un alt fișier PDF</string>
     <string name="upload_photo_button_text">Încarcă fotografie</string>
     <string name="upload_another_photo_button_text">Încarcă o altă fotografie</string>
+    <string name="propose_project_final_button">Propune proiectul</string>
     <string name="project_proposal_text">Propune un proiect</string>
     <string name="project_category_hint">Categoria proiectului</string>
     <string name="project_title_hint">Titlul proiectului</string>

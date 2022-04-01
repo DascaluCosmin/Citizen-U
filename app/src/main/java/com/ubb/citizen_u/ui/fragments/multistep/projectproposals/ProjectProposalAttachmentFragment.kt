@@ -15,6 +15,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.data.model.Pdf
 import com.ubb.citizen_u.data.model.Photo
@@ -134,6 +135,12 @@ class ProjectProposalAttachmentFragment : Fragment() {
                 is Response.Success -> {
                     binding.mainProgressbar.visibility = View.GONE
                     toastMessage(SUCCESSFUL_PROPOSAL_PROJECT)
+
+                    val action =
+                        ProjectProposalAttachmentFragmentDirections.actionProjectProposalAttachmentFragmentToSignedInFragment(
+                            citizenId = citizenViewModel.citizenId
+                        )
+                    findNavController().navigate(action)
                 }
             }
         }

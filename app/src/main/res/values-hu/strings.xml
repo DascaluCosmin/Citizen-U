@@ -107,6 +107,7 @@
     <string name="upload_another_pdf_button_text">Tölts fel egy másik PDF fájlt</string>
     <string name="upload_photo_button_text">Fénykép feltöltése</string>
     <string name="upload_another_photo_button_text">Tölts fel másik fotót</string>
+    <string name="propose_project_final_button">Javasolja a projektet</string>
     <string name="project_proposal_text">Javaslat egy projektet</string>
     <string name="project_category_hint">Projekt kategória</string>
     <string name="project_title_hint">Projekt címe</string>

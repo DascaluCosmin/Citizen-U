@@ -175,9 +175,9 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/projectProposalPdfFragment"
+        android:id="@+id/projectProposalAttachmentFragment"
         android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProjectProposalAttachmentFragment"
-        android:label="fragment_project_proposal_pdf"
+        android:label="fragment_project_proposal_attachment"
         tools:layout="@layout/fragment_project_proposal_attachment">
         <argument
             android:name="projectCategory"
@@ -194,6 +194,9 @@
         <argument
             android:name="projectDescription"
             app:argType="string" />
+        <action
+            android:id="@+id/action_projectProposalAttachmentFragment_to_signedInFragment"
+            app:destination="@id/signedInFragment" />
     </fragment>
     <fragment
         android:id="@+id/otherCitizensProposedProjectsTransitionFragment"
@@ -228,7 +231,7 @@
         android:label="fragment_project_proposal_general"
         tools:layout="@layout/fragment_project_proposal_general">
         <action
-            android:id="@+id/action_projectProposalGeneralFragment_to_projectProposalPdfFragment"
-            app:destination="@id/projectProposalPdfFragment" />
+            android:id="@+id/action_projectProposalGeneralFragment_to_projectProposalAttachmentFragment"
+            app:destination="@id/projectProposalAttachmentFragment" />
     </fragment>
 </navigation>
