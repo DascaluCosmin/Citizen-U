@@ -3,6 +3,7 @@ package com.ubb.citizen_u.data.model.citizens.requests
 import com.google.firebase.firestore.DocumentId
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.Citizen
+import com.ubb.citizen_u.data.model.citizens.Comment
 import java.util.*
 
 // TODO: properties - title?

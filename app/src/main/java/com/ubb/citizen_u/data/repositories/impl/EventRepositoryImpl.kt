@@ -10,7 +10,7 @@ import com.ubb.citizen_u.data.repositories.EventRepository
 import com.ubb.citizen_u.data.repositories.PhotoRepository
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
-import com.ubb.citizen_u.util.DatabaseConstants.EVENTS_PHOTOS_COL
+import com.ubb.citizen_u.util.DatabaseConstants.PHOTOS_COL
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
@@ -205,7 +205,7 @@ class EventRepositoryImpl @Inject constructor(
 
     private suspend fun getEventPhotos(eventDocSnapshot: DocumentSnapshot): MutableList<Photo?> {
         val eventPhotosSnapshot =
-            eventDocSnapshot.reference.collection(EVENTS_PHOTOS_COL).get().await()
+            eventDocSnapshot.reference.collection(PHOTOS_COL).get().await()
 
         val eventPhotos = eventPhotosSnapshot.documents.map {
             it.toObject(Photo::class.java)

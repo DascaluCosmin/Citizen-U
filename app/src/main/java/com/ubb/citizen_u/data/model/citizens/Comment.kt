@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.data.model.citizens.requests
+package com.ubb.citizen_u.data.model.citizens
 
 import com.google.firebase.firestore.DocumentId
 import java.util.*

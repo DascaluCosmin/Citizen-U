@@ -12,6 +12,21 @@ object ValidationConstants {
         "Please provide at least one photo of the incident!"
     const val INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE =
         "Please enter the comment!"
+    const val INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE =
+        "Please choose a category for the project!"
+    const val INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE = "Please enter a title for the project!"
+    const val INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE =
+        "Please enter a motivation for the project!"
+    const val INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE =
+        "Please enter a location for the project!"
+    const val INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE =
+        "Please enter a description for the project!"
+    const val INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE =
+        "Please enter a title for the file!"
+    const val INVALID_PDF_URI_TEXT_ERROR_MESSAGE =
+        "Please upload a PDF file!"
+    const val INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE =
+        "Please upload an image!"
 }
 
 object AuthenticationConstants {
@@ -46,13 +61,25 @@ object LocationConstants {
     const val FAILED_ADDRESS_COMPUTING = "The address cannot be determined at the moment!"
 }
 
+object ProjectProposalConstants {
+
+    //region Success
+    const val SUCCESSFUL_ADDED_IMAGE = "The image has been added successfully!"
+    const val SUCCESSFUL_ADDED_PDF = "The PDF file has been added successfully!"
+
+    const val SUCCESSFUL_PROPOSAL_PROJECT = "The project has been proposed successfully!"
+    //endregion
+}
+
 object DatabaseConstants {
     const val USERS_COL = "users"
     const val USER_REQUESTS_INCIDENTS_COL = "request_incidents"
     const val PUBLIC_EVENTS_COL = "events"
     const val PUBLIC_RELEASE_EVENTS_COL = "council_events"
-    const val EVENTS_PHOTOS_COL = "photos"
-    const val INCIDENTS_COMMENTS_COL = "comments"
+    const val PROPOSED_PROJECTS_COL = "proposed_projects"
+    const val PHOTOS_COL = "photos"
+    const val COMMENTS_COL = "comments"
+    const val DOCUMENTS_COl = "documents"
     const val UNDEFINED_DOC = "undefined"
 }
 
@@ -84,6 +111,10 @@ object NotificationsConstants {
     const val NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY = "periodicEventDetailsId"
 }
 
+object CitizenConstants {
+    const val CITIZEN_MISSING_ERROR_MESSAGE = "The citizen is missing"
+}
+
 object CalendarConstants {
     const val LAST_MONTH_OF_YEAR = "DECEMBER"
     const val UNKNOWN = "UNKNOWN_DATE"
@@ -96,3 +127,8 @@ const val DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN =
     "An unexpected error has occurred! Please try again!"
 const val DEFAULT_DATE_ERROR_MESSAGE = "UNKNOWN DATE"
 const val UNKNOWN = "UNKNOWN"
+
+object FileExtensions {
+    const val PHOTO_FILE_EXTENSION = ".jpg"
+    const val PDF_FILE_EXTENSION = ".pdf"
+}

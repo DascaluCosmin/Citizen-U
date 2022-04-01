@@ -166,12 +166,72 @@
         android:id="@+id/reportedIncidentDetailsFragment"
         android:name="com.ubb.citizen_u.ui.fragments.reports.ReportedIncidentDetailsFragment"
         android:label="fragment_reported_incident_details"
-        tools:layout="@layout/fragment_reported_incident_details" >
+        tools:layout="@layout/fragment_reported_incident_details">
         <argument
             android:name="incidentId"
             app:argType="string" />
         <argument
             android:name="citizenId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/projectProposalAttachmentFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProjectProposalAttachmentFragment"
+        android:label="fragment_project_proposal_attachment"
+        tools:layout="@layout/fragment_project_proposal_attachment">
+        <argument
+            android:name="projectCategory"
+            app:argType="string" />
+        <argument
+            android:name="projectTitle"
+            app:argType="string" />
+        <argument
+            android:name="projectMotivation"
+            app:argType="string" />
+        <argument
+            android:name="projectLocation"
+            app:argType="string" />
+        <argument
+            android:name="projectDescription"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_projectProposalAttachmentFragment_to_signedInFragment"
+            app:destination="@id/signedInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otherCitizensProposedProjectsTransitionFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.transitions.OtherCitizensProposedProjectsTransitionFragment"
+        android:label="fragment_other_citizens_proposed_projects_transition"
+        tools:layout="@layout/fragment_other_citizens_proposed_projects_transition">
+        <action
+            android:id="@+id/action_otherCitizensProposedProjectsTransitionFragment_to_proposedProjectsListFragment"
+            app:destination="@id/proposedProjectsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/citizenProposedProjectsTransitionFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.transitions.CitizenProposedProjectsTransitionFragment"
+        android:label="fragment_citizen_proposed_projects_transition"
+        tools:layout="@layout/fragment_citizen_proposed_projects_transition">
+        <action
+            android:id="@+id/action_citizenProposedProjectsTransitionFragment_to_proposedProjectsListFragment"
+            app:destination="@id/proposedProjectsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/proposedProjectsListFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProposedProjectsListFragment"
+        android:label="fragment_proposed_projects_list"
+        tools:layout="@layout/fragment_proposed_projects_list">
+        <argument
+            android:name="forCurrentCitizen"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/projectProposalGeneralFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProjectProposalGeneralFragment"
+        android:label="fragment_project_proposal_general"
+        tools:layout="@layout/fragment_project_proposal_general">
+        <action
+            android:id="@+id/action_projectProposalGeneralFragment_to_projectProposalAttachmentFragment"
+            app:destination="@id/projectProposalAttachmentFragment" />
     </fragment>
 </navigation>

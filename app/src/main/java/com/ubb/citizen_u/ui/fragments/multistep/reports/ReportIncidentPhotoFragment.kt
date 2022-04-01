@@ -25,8 +25,10 @@ import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.io.File
 
+@ExperimentalCoroutinesApi
 class ReportIncidentPhotoFragment : Fragment() {
 
     companion object {

@@ -17,6 +17,11 @@
     <string name="generic_status_label">Állapot</string>
     <string name="generic_other_citizens_comments_label">Más állampolgárok véleménye</string>
     <string name="generic_next_button">Következő</string>
+    <string name="attachment_title_hint">Cím</string>
+    <string name="attachment_optional_description_hint">Leírás (Választható)</string>
+    <string name="generic_add_button">Hozzáadás</string>
+    <string name="add_image_button">Adja hozzá a képet</string>
+    <string name="add_pdf_button">Adja hozzá a PDF fájlt</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label" translatable="false">Welcome</string>
@@ -81,7 +86,7 @@
     <!-- Language Preferences -->
     <string name="language_title">Jelenlegi nyelv</string>
 
-    <!--region Settings -->
+    <!-- region Settings -->
     <string name="settings_fragment_label" translatable="false">Beállítások</string>
     <string name="settings_notifications_summary_off_text">Most már nem kap értesítést</string>
     <string name="settings_notification_summary_on_text">Most minden értesítést megkap</string>
@@ -92,7 +97,33 @@
     <string name="english_language_label">Angol</string>
     <string name="romanian_language_label">Román</string>
     <string name="hungarian_language_label">Magyar</string>
-    <!--endregion-->
+    <!-- endregion -->
+
+    <!-- region Project Proposals -->
+    <string name="citizen_proposed_projects_list_fragment_label">Az Ön által javasolt projekt</string>
+    <string name="others_citizens_proposed_projects_list_fragment_label">Mások által javasolt projekt</string>
+    <string name="propose_project_text">Projektjavaslat</string>
+    <string name="upload_pdf_button_text">PDF Fájl feltöltés</string>
+    <string name="upload_another_pdf_button_text">Tölts fel egy másik PDF fájlt</string>
+    <string name="upload_photo_button_text">Fénykép feltöltése</string>
+    <string name="upload_another_photo_button_text">Tölts fel másik fotót</string>
+    <string name="propose_project_final_button">Javasolja a projektet</string>
+    <string name="project_proposal_text">Javaslat egy projektet</string>
+    <string name="project_category_hint">Projekt kategória</string>
+    <string name="project_title_hint">Projekt címe</string>
+    <string name="project_motivation_hint">Miért kell megvalósítani?</string>
+    <string name="project_location_hint">Projekt helyszíne</string>
+    <string name="project_description_hint">A projekt leírása</string>
+
+    <string-array name="project_categories">
+        <item>Mobilitás és hozzáférhetőség</item>
+        <item>Infrastruktúra</item>
+        <item>Járdák és gyalogos területek</item>
+        <item>Közterületek tervezése</item>
+        <item>Zöldterületek és játszóterek</item>
+    </string-array>
+    <!-- endregion -->
+
 
     <!-- Constants -->
     <string name="city_hall_name">Kolozsvár Városháza</string>

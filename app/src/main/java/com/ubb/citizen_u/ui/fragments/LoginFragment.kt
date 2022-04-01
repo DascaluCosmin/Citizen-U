@@ -18,12 +18,12 @@ import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentLoginBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.fragments.dialog.ResetPasswordDialogFragment
+import com.ubb.citizen_u.ui.util.fadeIn
+import com.ubb.citizen_u.ui.util.fadeOut
 import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.util.AuthenticationConstants
 import com.ubb.citizen_u.util.ValidationConstants
-import com.ubb.citizen_u.util.fadeIn
-import com.ubb.citizen_u.util.fadeOut
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect

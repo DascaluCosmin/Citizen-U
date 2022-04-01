@@ -4,14 +4,14 @@ import android.net.Uri
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
-import com.ubb.citizen_u.data.model.citizens.requests.Comment
+import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.data.repositories.CitizenRepository
 import com.ubb.citizen_u.data.repositories.CitizenRequestRepository
 import com.ubb.citizen_u.data.repositories.PhotoRepository
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
-import com.ubb.citizen_u.util.DatabaseConstants.INCIDENTS_COMMENTS_COL
+import com.ubb.citizen_u.util.DatabaseConstants.COMMENTS_COL
 import com.ubb.citizen_u.util.DatabaseConstants.USER_REQUESTS_INCIDENTS_COL
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -26,7 +26,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
 ) : CitizenRequestRepository {
 
     companion object {
-        private const val TAG = "CitizenRequestRepositoryImpl"
+        private const val TAG = "UBB-CitizenRequestRepositoryImpl"
     }
 
     // TODO: Transaction this
@@ -123,7 +123,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
             usersRef.document(incident.citizen!!.id)
                 .collection(USER_REQUESTS_INCIDENTS_COL)
                 .document(incident.id)
-                .collection(INCIDENTS_COMMENTS_COL)
+                .collection(COMMENTS_COL)
                 .add(comment)
                 .await()
 
@@ -175,7 +175,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
 
     private suspend fun getIncidentComments(incidentDocSnapshot: DocumentSnapshot): MutableList<Comment?> {
         val incidentCommentsSnapshot = incidentDocSnapshot.reference
-            .collection(INCIDENTS_COMMENTS_COL).get().await()
+            .collection(COMMENTS_COL).get().await()
         return incidentCommentsSnapshot.documents.map {
             it.toObject(Comment::class.java)
         }.toMutableList()

@@ -18,6 +18,11 @@
     <string name="generic_status_label">Status</string>
     <string name="generic_other_citizens_comments_label">Păreri ale altor cetățeni</string>
     <string name="generic_next_button">Următorul pas</string>
+    <string name="attachment_title_hint">Titlu</string>
+    <string name="attachment_optional_description_hint">Descriere (Opțional)</string>
+    <string name="generic_add_button">Adaugă</string>
+    <string name="add_image_button">Adaugă imaginea</string>
+    <string name="add_pdf_button">Adaugă fișierul PDF</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label">Welcome</string>
@@ -83,7 +88,7 @@
     <!-- Language Preferences -->
     <string name="language_title">Limba curentă</string>
 
-    <!--region Settings -->
+    <!-- region Settings -->
     <string name="settings_fragment_label" translatable="false">Setări</string>
     <string name="settings_notifications_summary_off_text">Acum nu primiți nicio notificare</string>
     <string name="settings_notification_summary_on_text">Acum primiți toate notificările</string>
@@ -94,7 +99,32 @@
     <string name="english_language_label">Engleză</string>
     <string name="romanian_language_label">Română</string>
     <string name="hungarian_language_label">Maghiară</string>
-    <!--endregion-->
+    <!-- endregion -->
+
+    <!-- region Project Proposals -->
+    <string name="citizen_proposed_projects_list_fragment_label">Proiectele propuse de tine</string>
+    <string name="others_citizens_proposed_projects_list_fragment_label">Proiectele propuse de alții</string>
+    <string name="propose_project_text">Propunere de proiect</string>
+    <string name="upload_pdf_button_text">Încarcă fișier PDF</string>
+    <string name="upload_another_pdf_button_text">Încarcă un alt fișier PDF</string>
+    <string name="upload_photo_button_text">Încarcă fotografie</string>
+    <string name="upload_another_photo_button_text">Încarcă o altă fotografie</string>
+    <string name="propose_project_final_button">Propune proiectul</string>
+    <string name="project_proposal_text">Propune un proiect</string>
+    <string name="project_category_hint">Categoria proiectului</string>
+    <string name="project_title_hint">Titlul proiectului</string>
+    <string name="project_motivation_hint">De ce ar trebui implementat?</string>
+    <string name="project_location_hint">Locația proiectului</string>
+    <string name="project_description_hint">Descrierea proiectului</string>
+
+    <string-array name="project_categories">
+        <item>Mobilitate și accesibilitate</item>
+        <item>Infrastructură</item>
+        <item>Trotuare și zone pietonale</item>
+        <item>Amenajare spații publice</item>
+        <item>Spații verzi și locuri de joacă</item>
+    </string-array>
+    <!-- endregion -->
 
     <!-- Constants -->
     <string name="city_hall_name">Primăria Cluj-Napoca</string>

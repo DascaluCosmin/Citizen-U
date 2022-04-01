@@ -2,9 +2,12 @@ package com.ubb.citizen_u.util.di
 
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.ubb.citizen_u.data.repositories.AttachmentRepository
 import com.ubb.citizen_u.data.repositories.CitizenRepository
 import com.ubb.citizen_u.data.repositories.CitizenRequestRepository
 import com.ubb.citizen_u.data.repositories.PhotoRepository
+import com.ubb.citizen_u.data.repositories.impl.AttachmentRepositoryImpl
 import com.ubb.citizen_u.data.repositories.impl.CitizenRepositoryImpl
 import com.ubb.citizen_u.data.repositories.impl.CitizenRequestRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.citizens.CitizenUseCases
@@ -42,6 +45,17 @@ object CitizenModule {
             usersRef = usersRef,
             photoRepository = photoRepository,
             citizenRepository = citizenRepository
+        )
+
+    @Provides
+    @Singleton
+    fun providesAttachmentRepository(
+        @Named(USERS_COL) usersRef: CollectionReference,
+        firebaseStorage: FirebaseStorage,
+    ): AttachmentRepository =
+        AttachmentRepositoryImpl(
+            usersRef = usersRef,
+            firebaseStorage = firebaseStorage
         )
 
     @Provides

@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ubb.citizen_u.data.model.Photo
-import com.ubb.citizen_u.data.model.citizens.requests.Comment
+import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.citizens.requests.CitizenRequestUseCase

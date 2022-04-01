@@ -17,7 +17,11 @@
     <string name="generic_status_label">Status</string>
     <string name="generic_other_citizens_comments_label">Other citizens opinions</string>
     <string name="generic_next_button">Next</string>
-
+    <string name="attachment_title_hint">Title</string>
+    <string name="attachment_optional_description_hint">Description (Optional)</string>
+    <string name="generic_add_button">Add</string>
+    <string name="add_image_button">Add the image</string>
+    <string name="add_pdf_button">Add the PDF file</string>
 
     <!-- Welcome Fragment -->
     <string name="welcome_fragment_label" translatable="false">Welcome</string>
@@ -87,7 +91,7 @@
     <!-- Language Preferences -->
     <string name="language_title">Current language</string>
 
-    <!--region Settings -->
+    <!-- region Settings -->
     <string name="settings_fragment_label" translatable="false">Settings</string>
     <string name="settings_notifications_summary_off_text">Now you do not receive any notifications</string>
     <string name="settings_notification_summary_on_text">Now you receive all notifications</string>
@@ -98,7 +102,32 @@
     <string name="english_language_label">English</string>
     <string name="romanian_language_label">Romanian</string>
     <string name="hungarian_language_label">Hungarian</string>
-    <!--endregion-->
+    <!-- endregion -->
+
+    <!-- region Project Proposals -->
+    <string name="citizen_proposed_projects_list_fragment_label">Your proposed projects</string>
+    <string name="others_citizens_proposed_projects_list_fragment_label">Others proposed projects</string>
+    <string name="propose_project_text">Project Proposal</string>
+    <string name="upload_pdf_button_text">Upload PDF file</string>
+    <string name="upload_another_pdf_button_text">Upload another PDF file</string>
+    <string name="upload_photo_button_text">Upload photo</string>
+    <string name="upload_another_photo_button_text">Upload another photo</string>
+    <string name="propose_project_final_button">Propose the project</string>
+    <string name="project_proposal_text">Propose a project</string>
+    <string name="project_category_hint">Project Category</string>
+    <string name="project_title_hint">Project Title</string>
+    <string name="project_motivation_hint">Why should it be implemented?</string>
+    <string name="project_location_hint">Project Location</string>
+    <string name="project_description_hint">Project Description</string>
+
+    <string-array name="project_categories">
+        <item>Mobility and accessibility</item>
+        <item>Infrastructure</item>
+        <item>Sidewalks and pedestrian areas</item>
+        <item>Public areas design</item>
+        <item>Green spaces and playgrounds</item>
+    </string-array>
+    <!-- endregion -->
 
     <!-- Constants -->
     <string name="city_hall_name">Cluj-Napoca City Hall</string>
