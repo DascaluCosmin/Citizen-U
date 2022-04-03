@@ -2,6 +2,8 @@ package com.ubb.citizen_u.data.repositories.impl
 
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentSnapshot
+import com.ubb.citizen_u.data.Fields
 import com.ubb.citizen_u.data.model.Attachment
 import com.ubb.citizen_u.data.model.citizens.proposals.ProjectProposal
 import com.ubb.citizen_u.data.repositories.AttachmentRepository
@@ -10,6 +12,7 @@ import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.CitizenConstants
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.DatabaseConstants
+import com.ubb.citizen_u.util.DatabaseConstants.PROPOSED_PROJECTS_COL
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
@@ -54,4 +57,37 @@ class ProjectProposalRepositoryImpl @Inject constructor(
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
             }
         }
+
+    override suspend fun getProposedProject(
+        citizenId: String,
+        projectProposalId: String,
+    ): Flow<Response<ProjectProposal?>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val projectProposalSnapshot = usersRef.document(citizenId)
+                    .collection(PROPOSED_PROJECTS_COL).document(projectProposalId).get()
+                    .await()
+
+                val proposedProject = getProposedProject(
+                    projectProposalDocSnapshot = projectProposalSnapshot,
+                    citizenId = citizenId,
+                    fields = Fields.DETAILS
+                )
+
+                emit(Response.Success(proposedProject))
+            } catch (exception: Exception) {
+                Log.e(TAG, "getProposedProject: An error has occurred: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    private suspend fun getProposedProject(
+        projectProposalDocSnapshot: DocumentSnapshot,
+        citizenId: String,
+        fields: Fields,
+    ): ProjectProposal? {
+        return null
+    }
 }
