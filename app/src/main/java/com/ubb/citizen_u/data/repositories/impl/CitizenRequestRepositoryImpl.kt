@@ -6,6 +6,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
+import com.ubb.citizen_u.data.model.citizens.requests.IncidentCategory
 import com.ubb.citizen_u.data.repositories.CitizenRepository
 import com.ubb.citizen_u.data.repositories.CitizenRequestRepository
 import com.ubb.citizen_u.data.repositories.PhotoRepository
@@ -96,6 +97,19 @@ class CitizenRequestRepositoryImpl @Inject constructor(
             }
         }
 
+    override suspend fun getAllIncidents(incidentCategory: IncidentCategory?): Flow<Response<List<Incident?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val incidents = getAllIncidentsList()
+                emit(Response.Success(incidents))
+            } catch (exception: Exception) {
+                Log.d(TAG, "getAllIncidents: An error has occurred: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
     override suspend fun getAllIncidentsOfOthers(currentCitizenId: String): Flow<Response<List<Incident?>>> =
         flow {
             try {
@@ -138,6 +152,14 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         val usersSnapshot = usersRef.get().await()
         return usersSnapshot.documents
             .filterNot { it.id == currentCitizenId }
+            .map {
+                getAllIncidentsList(it.id)
+            }.flatten()
+    }
+
+    private suspend fun getAllIncidentsList(): List<Incident?> {
+        val usersSnapshot = usersRef.get().await()
+        return usersSnapshot.documents
             .map {
                 getAllIncidentsList(it.id)
             }.flatten()

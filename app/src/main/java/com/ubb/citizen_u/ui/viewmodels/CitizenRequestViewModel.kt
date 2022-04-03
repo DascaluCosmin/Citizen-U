@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
+import com.ubb.citizen_u.data.model.citizens.requests.IncidentCategory
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.citizens.requests.CitizenRequestUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -65,6 +66,14 @@ class CitizenRequestViewModel @Inject constructor(
         )
     val getOthersReportedIncidentsState: SharedFlow<Response<List<Incident?>>> =
         _getOthersReportedIncidentsState
+
+    private val _getAllReportedIncidentsState: MutableSharedFlow<Response<List<Incident?>>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val getAllReportedIncidentsState: SharedFlow<Response<List<Incident?>>> =
+        _getAllReportedIncidentsState
     //endregion
 
     private val _addCommentToIncidentState: MutableSharedFlow<Response<Incident>> =
@@ -75,6 +84,8 @@ class CitizenRequestViewModel @Inject constructor(
     val addCommentToIncidentState: SharedFlow<Response<Incident>> = _addCommentToIncidentState
 
     var incidentAddress: String = ""
+    var incidentLongitude: Double = 0.0
+    var incidentLatitude: Double = 0.0
 
     var currentSelectedIncident: Incident? = null
     var currentSelectedIncidentPhotoIndex = 0
@@ -135,6 +146,8 @@ class CitizenRequestViewModel @Inject constructor(
                     headline = headline,
                     sentDate = Date(),
                     address = incidentAddress,
+                    longitude = incidentLongitude,
+                    latitude = incidentLatitude,
                 ),
                 citizenId = citizenId,
                 listIncidentPhotoUri = listIncidentPhotoUri,
@@ -178,6 +191,16 @@ class CitizenRequestViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.getOthersReportedIncidents(currentCitizenId).collect {
                 _getOthersReportedIncidentsState.tryEmit(it)
+            }
+        }
+    }
+
+    fun getAllReportedIncidents(incidentCategory: IncidentCategory? = null) {
+        Log.d(TAG,
+            "getAllReportedIncidents: Getting all reported incidents for category $incidentCategory...")
+        viewModelScope.launch(Dispatchers.IO) {
+            citizenRequestUseCase.getAllReportedIncidents(incidentCategory).collect {
+                _getAllReportedIncidentsState.tryEmit(it)
             }
         }
     }

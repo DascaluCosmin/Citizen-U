@@ -234,4 +234,9 @@
             android:id="@+id/action_projectProposalGeneralFragment_to_projectProposalAttachmentFragment"
             app:destination="@id/projectProposalAttachmentFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/analysisReportedIncidentsFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.reports.AnalysisReportedIncidentsFragment"
+        android:label="fragment_analysis_reported_incidents"
+        tools:layout="@layout/fragment_analysis_reported_incidents" />
 </navigation>

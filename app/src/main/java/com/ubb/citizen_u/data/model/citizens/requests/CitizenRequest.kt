@@ -27,7 +27,10 @@ class Incident(
     description: String? = null,
     headline: String? = null,
     sentDate: Date? = null,
+    val category: IncidentCategory? = null,
     val address: String? = null,
+    val latitude: Double? = null,
+    val longitude: Double? = null,
 ) : CitizenRequest(description = description, headline = headline, sentDate = sentDate) {
 
     override fun equals(other: Any?): Boolean {
@@ -46,10 +49,14 @@ class Incident(
     }
 
     override fun toString(): String {
-        return "${super.toString()}, address = $address"
+        return "${super.toString()}, address = $address, latitude = $latitude, longitude = $longitude"
     }
 }
 
 enum class RequestStatus {
     SENT, UNDER_REVIEW, IN_PROGRESS, COMPLETED, REJECTED,
+}
+
+enum class IncidentCategory {
+    PIPELINE, STREET_HOLE, FALLEN_TREE, UNCUT_GRASS, FALLEN_WIRES,
 }

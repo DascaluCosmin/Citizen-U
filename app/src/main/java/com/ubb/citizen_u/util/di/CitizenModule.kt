@@ -74,6 +74,7 @@ object CitizenModule {
             getOthersReportedIncidents = GetOthersReportedIncidents(citizenRequestRepository),
             getReportedIncident = GetReportedIncident(citizenRequestRepository),
             addCommentToIncident = AddCommentToIncident(citizenRequestRepository),
+            getAllReportedIncidents = GetAllReportedIncidents(citizenRequestRepository),
         )
 
     @Provides

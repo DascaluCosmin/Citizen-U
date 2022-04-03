@@ -83,6 +83,8 @@ class ReportIncidentMapFragment : Fragment() {
                         if (!firstAddressLine.isNullOrEmpty()) {
                             markerOptions.title(firstAddressLine)
                             citizenRequestViewModel.incidentAddress = firstAddressLine
+                            citizenRequestViewModel.incidentLatitude = latitude
+                            citizenRequestViewModel.incidentLongitude = longitude
                         }
                     }
                 } catch (exception: Exception) {
