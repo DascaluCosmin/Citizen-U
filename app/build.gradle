@@ -77,6 +77,11 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
     // endregion
 
+    //region Google Maps Utility
+    implementation 'com.google.maps.android:android-maps-utils:2.3.0'
+    implementation 'com.google.maps.android:maps-utils-ktx:3.4.0'
+    //endregion
+
     // region Firebase
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:29.0.1')

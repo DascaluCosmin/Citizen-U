@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
+import com.ubb.citizen_u.data.Details
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.data.model.citizens.requests.IncidentCategory
@@ -76,7 +77,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
                 val incident = getIncident(
                     incidentDocSnapshot = incidentSnapshot,
                     citizenId = citizenId,
-                    shouldContainComments = true)
+                    listDetails = listOf(Details.PHOTOS, Details.COMMENTS))
                 emit(Response.Success(incident))
             } catch (exception: Exception) {
                 Log.d(TAG, "getIncident: An error as occurred: ${exception.message}")
@@ -89,7 +90,10 @@ class CitizenRequestRepositoryImpl @Inject constructor(
             try {
                 emit(Response.Loading)
 
-                val incidents = getAllIncidentsList(citizenId)
+                val incidents = getAllIncidentsList(
+                    citizenId = citizenId,
+                    listDetails = listOf(Details.PHOTOS)
+                )
                 emit(Response.Success(incidents))
             } catch (exception: Exception) {
                 Log.d(TAG, "getAllIncidentsOfCitizen: An error has occurred: ${exception.message}")
@@ -153,7 +157,10 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         return usersSnapshot.documents
             .filterNot { it.id == currentCitizenId }
             .map {
-                getAllIncidentsList(it.id)
+                getAllIncidentsList(
+                    citizenId = it.id,
+                    listDetails = listOf(Details.PHOTOS)
+                )
             }.flatten()
     }
 
@@ -161,30 +168,39 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         val usersSnapshot = usersRef.get().await()
         return usersSnapshot.documents
             .map {
-                getAllIncidentsList(it.id)
+                getAllIncidentsList(
+                    citizenId = it.id,
+                    listDetails = listOf()
+                )
             }.flatten()
     }
 
-    private suspend fun getAllIncidentsList(citizenId: String): List<Incident?> {
+    private suspend fun getAllIncidentsList(
+        citizenId: String,
+        listDetails: List<Details>,
+    ): List<Incident?> {
         val incidentSnapshot =
             usersRef.document(citizenId).collection(USER_REQUESTS_INCIDENTS_COL).get().await()
         return incidentSnapshot.documents.map {
             getIncident(
                 incidentDocSnapshot = it,
                 citizenId = citizenId,
-                shouldContainComments = false)
+                listDetails = listDetails)
         }
     }
 
     private suspend fun getIncident(
         incidentDocSnapshot: DocumentSnapshot,
         citizenId: String,
-        shouldContainComments: Boolean,
+        listDetails: List<Details>,
     ): Incident? {
         return incidentDocSnapshot.toObject(Incident::class.java)?.apply {
-            photos = photoRepository.getAllIncidentPhotos(citizenId, incidentId = id)
-            if (shouldContainComments) {
+            if (listDetails.contains(Details.COMMENTS)) {
                 comments = getIncidentComments(incidentDocSnapshot = incidentDocSnapshot)
+            }
+
+            if (listDetails.contains(Details.PHOTOS)) {
+                photos = photoRepository.getAllIncidentPhotos(citizenId, incidentId = id)
             }
 
             citizenRepository.getCitizen(citizenId).collect { citizenResponse ->

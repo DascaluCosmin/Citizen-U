@@ -1,4 +1,4 @@
-package com.ubb.citizen_u.ui.fragments.reports
+package com.ubb.citizen_u.ui.fragments.reports.analysis
 
 import android.os.Bundle
 import android.util.Log

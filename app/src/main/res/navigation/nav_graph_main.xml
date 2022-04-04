@@ -236,7 +236,7 @@
     </fragment>
     <fragment
         android:id="@+id/analysisReportedIncidentsFragment"
-        android:name="com.ubb.citizen_u.ui.fragments.reports.AnalysisReportedIncidentsFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.reports.analysis.AnalysisReportedIncidentsFragment"
         android:label="fragment_analysis_reported_incidents"
         tools:layout="@layout/fragment_analysis_reported_incidents" />
 </navigation>

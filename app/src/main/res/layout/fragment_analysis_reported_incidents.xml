@@ -2,18 +2,29 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.fragments.reports.AnalysisReportedIncidentsFragment">
+    tools:context=".ui.fragments.reports.analysis.AnalysisReportedIncidentsFragment">
 
     <data>
 
         <variable
             name="fragmentAnalysisReportedIncidents"
-            type="com.ubb.citizen_u.ui.fragments.reports.AnalysisReportedIncidentsFragment" />
+            type="com.ubb.citizen_u.ui.fragments.reports.analysis.AnalysisReportedIncidentsFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/google_maps_fragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/generic_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/main_progressbar"
