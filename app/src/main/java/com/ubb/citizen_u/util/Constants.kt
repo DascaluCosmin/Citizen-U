@@ -53,8 +53,9 @@ object CitizenRequestConstants {
     // region Success
     const val SUCCESSFUL_REPORT_INCIDENT = "The incident has been reported successfully!"
     const val SUCCESSFUL_ADD_COMMENT_TO_INCIDENT = "The comment has been added successfully!"
-
     // endregion
+
+    const val INCIDENT_GENERIC_HEADLINE = "Incident"
 }
 
 object LocationConstants {
@@ -127,6 +128,8 @@ const val DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN =
     "An unexpected error has occurred! Please try again!"
 const val DEFAULT_DATE_ERROR_MESSAGE = "UNKNOWN DATE"
 const val UNKNOWN = "UNKNOWN"
+
+const val EMPTY_STRING = ""
 
 object FileExtensions {
     const val PHOTO_FILE_EXTENSION = ".jpg"

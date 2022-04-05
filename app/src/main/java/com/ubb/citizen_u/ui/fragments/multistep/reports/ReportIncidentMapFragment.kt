@@ -64,6 +64,7 @@ class ReportIncidentMapFragment : Fragment() {
             ) {
                 googleMap.isMyLocationEnabled = true
             }
+
             googleMap.setOnMapClickListener { latLng ->
                 val latitude = latLng.latitude
                 val longitude = latLng.longitude
