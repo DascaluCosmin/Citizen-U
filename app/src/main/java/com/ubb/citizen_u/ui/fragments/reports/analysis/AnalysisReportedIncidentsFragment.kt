@@ -14,13 +14,13 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.clustering.view.CustomClustererRenderer
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentAnalysisReportedIncidentsBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.util.CitizenRequestConstants
-import com.ubb.citizen_u.util.EMPTY_STRING
 import com.ubb.citizen_u.util.isNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -99,7 +99,7 @@ class AnalysisReportedIncidentsFragment : Fragment() {
                                 longitude = incident.longitude!!,
                                 title = incident.headline
                                     ?: CitizenRequestConstants.INCIDENT_GENERIC_HEADLINE,
-                                snippet = incident.description ?: EMPTY_STRING
+                                snippet = incident.category.toString()
                             )
                         }.toList()
 
@@ -130,6 +130,12 @@ class AnalysisReportedIncidentsFragment : Fragment() {
                         toastMessage("Clicked on cluster with ${it.size} items")
                         false
                     }
+
+                    renderer = CustomClustererRenderer(
+                        context = requireContext(),
+                        mMap = googleMap,
+                        clusterManager = this
+                    )
                 }
             googleMap.setOnCameraIdleListener(clusterManager)
         }
