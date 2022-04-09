@@ -80,6 +80,7 @@
     <string name="incident_headline_hint">Te rog să introduci un scurt titlu…</string>
     <string name="incident_photo_hint">Te rog să fotografiezi incidentul…</string>
     <string name="add_comment_hint">Adaugă un nou comentariu</string>
+    <string name="incident_category_dropdown_hint">Categorie incideent</string>
     <string name="add_comment_button_text">Adaugă un comentariu</string>
 
 

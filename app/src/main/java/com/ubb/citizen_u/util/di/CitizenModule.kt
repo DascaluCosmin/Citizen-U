@@ -13,6 +13,7 @@ import com.ubb.citizen_u.data.repositories.impl.CitizenRequestRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.citizens.CitizenUseCases
 import com.ubb.citizen_u.domain.usescases.citizens.GetCitizenUseCase
 import com.ubb.citizen_u.domain.usescases.citizens.requests.*
+import com.ubb.citizen_u.util.DatabaseConstants.INCIDENTS_CATEGORIES_COL
 import com.ubb.citizen_u.util.DatabaseConstants.USERS_COL
 import dagger.Module
 import dagger.Provides
@@ -38,11 +39,13 @@ object CitizenModule {
     @Singleton
     fun providesCitizenRequestRepository(
         @Named(USERS_COL) usersRef: CollectionReference,
+        @Named(INCIDENTS_CATEGORIES_COL) incidentCategoriesRef: CollectionReference,
         photoRepository: PhotoRepository,
         citizenRepository: CitizenRepository,
     ): CitizenRequestRepository =
         CitizenRequestRepositoryImpl(
             usersRef = usersRef,
+            incidentCategoriesRef = incidentCategoriesRef,
             photoRepository = photoRepository,
             citizenRepository = citizenRepository
         )
@@ -75,6 +78,7 @@ object CitizenModule {
             getReportedIncident = GetReportedIncident(citizenRequestRepository),
             addCommentToIncident = AddCommentToIncident(citizenRequestRepository),
             getAllReportedIncidents = GetAllReportedIncidents(citizenRequestRepository),
+            getAllIncidentCategories = GetAllIncidentCategories(citizenRequestRepository),
         )
 
     @Provides
@@ -82,4 +86,10 @@ object CitizenModule {
     @Named(USERS_COL)
     fun providesUsersRef(firebaseFirestore: FirebaseFirestore) =
         firebaseFirestore.collection(USERS_COL)
+
+    @Provides
+    @Singleton
+    @Named(INCIDENTS_CATEGORIES_COL)
+    fun providesIncidentCategoriesRef(firebaseFirestore: FirebaseFirestore) =
+        firebaseFirestore.collection(INCIDENTS_CATEGORIES_COL)
 }

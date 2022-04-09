@@ -84,6 +84,7 @@
     <string name="incident_headline_hint">Please provide a short headline…</string>
     <string name="incident_photo_hint">Please take a picture of the incident…</string>
     <string name="add_comment_hint">Add a new comment</string>
+    <string name="incident_category_dropdown_hint">Incident Category</string>
     <string name="add_comment_button_text">Add comment</string>
 
     <!-- Preference Titles -->

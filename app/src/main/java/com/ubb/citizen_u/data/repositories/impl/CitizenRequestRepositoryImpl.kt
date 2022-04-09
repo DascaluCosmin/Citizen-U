@@ -7,7 +7,6 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.ubb.citizen_u.data.Details
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
-import com.ubb.citizen_u.data.model.citizens.requests.IncidentCategory
 import com.ubb.citizen_u.data.repositories.CitizenRepository
 import com.ubb.citizen_u.data.repositories.CitizenRequestRepository
 import com.ubb.citizen_u.data.repositories.PhotoRepository
@@ -23,6 +22,7 @@ import javax.inject.Inject
 
 class CitizenRequestRepositoryImpl @Inject constructor(
     private val usersRef: CollectionReference,
+    private val incidentCategoriesRef: CollectionReference,
     private val photoRepository: PhotoRepository,
     private val citizenRepository: CitizenRepository,
 ) : CitizenRequestRepository {
@@ -101,7 +101,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getAllIncidents(incidentCategory: IncidentCategory?): Flow<Response<List<Incident?>>> =
+    override suspend fun getAllIncidentsByCategory(incidentCategory: String?): Flow<Response<List<Incident?>>> =
         flow {
             try {
                 emit(Response.Loading)
@@ -151,6 +151,23 @@ class CitizenRequestRepositoryImpl @Inject constructor(
             emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
         }
     }
+
+    override suspend fun getAllIncidentCategories(): Flow<Response<List<String>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+                val incidentCategoriesSnapshot = incidentCategoriesRef.get().await()
+                val incidentCategories = incidentCategoriesSnapshot.documents
+                    .map {
+                        it.id
+                    }
+                    .toList()
+                emit(Response.Success(incidentCategories))
+            } catch (exception: Exception) {
+                Log.e(TAG, "getAllIncidentCategories: An error has occurred: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
 
     private suspend fun getAllIncidentsOfOthersList(currentCitizenId: String): List<Incident?> {
         val usersSnapshot = usersRef.get().await()

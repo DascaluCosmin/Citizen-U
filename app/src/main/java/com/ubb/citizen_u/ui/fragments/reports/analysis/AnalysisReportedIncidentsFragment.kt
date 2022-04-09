@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -61,6 +62,7 @@ class AnalysisReportedIncidentsFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch { collectAllIncidentCategories() }
                 launch { collectAllReportedIncidents() }
             }
         }
@@ -73,7 +75,42 @@ class AnalysisReportedIncidentsFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        citizenRequestViewModel.getAllReportedIncidents()
+        if (citizenRequestViewModel.listIncidentCategories.isNullOrEmpty()) {
+            citizenRequestViewModel.getAllIncidentCategories()
+        } else {
+            setCategoriesDropdown()
+            citizenRequestViewModel.getAllReportedIncidents()
+        }
+    }
+
+    private suspend fun collectAllIncidentCategories() {
+        citizenRequestViewModel.incidentCategoriesState.collect {
+            Log.d(TAG, "collectAllIncidentCategories: Collecting response $it")
+            when (it) {
+                Response.Loading -> {
+                    binding.mainProgressbar.visibility = View.VISIBLE
+                }
+                is Response.Error -> {
+                    Log.e(TAG, "collectAllIncidentCategories: An error has occurred: ${it.message}")
+                    binding.mainProgressbar.visibility = View.GONE
+                }
+                is Response.Success -> {
+                    binding.mainProgressbar.visibility = View.GONE
+                    setCategoriesDropdown()
+                    citizenRequestViewModel.getAllReportedIncidents()
+                }
+            }
+        }
+    }
+
+    private fun setCategoriesDropdown() {
+        val incidentCategoriesArrayAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.incident_categories_dropdown,
+            citizenRequestViewModel.listIncidentCategories
+        )
+
+        binding.incidentCategoriesAutocompleteView.setAdapter(incidentCategoriesArrayAdapter)
     }
 
     private suspend fun collectAllReportedIncidents() {

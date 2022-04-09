@@ -27,7 +27,7 @@ class Incident(
     description: String? = null,
     headline: String? = null,
     sentDate: Date? = null,
-    val category: IncidentCategory? = null,
+    val category: String? = null,
     val address: String? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
@@ -55,8 +55,4 @@ class Incident(
 
 enum class RequestStatus {
     SENT, UNDER_REVIEW, IN_PROGRESS, COMPLETED, REJECTED,
-}
-
-enum class IncidentCategory {
-    PIPELINE, STREET_HOLE, FALLEN_TREE, UNCUT_GRASS, FALLEN_WIRES,
 }

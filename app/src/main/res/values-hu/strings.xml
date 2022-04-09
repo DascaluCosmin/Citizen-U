@@ -79,6 +79,7 @@
     <string name="incident_headline_hint">Kérjük, adjon meg egy rövid címet…</string>
     <string name="incident_photo_hint">Kérem, készítsen egy képet az esetről…</string>
     <string name="add_comment_hint">Új megjegyzés hozzáadása</string>
+    <string name="incident_category_dropdown_hint">Incidens kategória</string>
     <string name="add_comment_button_text">Megjegyzés hozzáadása</string>
 
     <!-- Preference Titles -->

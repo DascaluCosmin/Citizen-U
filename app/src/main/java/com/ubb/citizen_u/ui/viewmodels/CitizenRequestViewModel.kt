@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
-import com.ubb.citizen_u.data.model.citizens.requests.IncidentCategory
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.citizens.requests.CitizenRequestUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,9 +32,14 @@ class CitizenRequestViewModel @Inject constructor(
         private const val TAG = "UBB-CitizenRequestViewModel"
     }
 
+    private var _listIncidentCategories: List<String> = listOf()
+    val listIncidentCategories: List<String> get() = _listIncidentCategories
+
     private val listIncidentPhotoUri: MutableList<Uri> = mutableListOf()
+
     private val _listIncidentPhotoUriLiveData = MutableLiveData<MutableList<Uri>>()
     val listIncidentPhotoUriLiveData: LiveData<MutableList<Uri>> = _listIncidentPhotoUriLiveData
+
 
     private val _addReportIncidentState: MutableSharedFlow<Response<Boolean>> = MutableSharedFlow(
         replay = 1,
@@ -76,12 +80,23 @@ class CitizenRequestViewModel @Inject constructor(
         _getAllReportedIncidentsState
     //endregion
 
+    //region Comments
     private val _addCommentToIncidentState: MutableSharedFlow<Response<Incident>> =
         MutableSharedFlow(
             replay = 1,
             onBufferOverflow = BufferOverflow.DROP_OLDEST
         )
     val addCommentToIncidentState: SharedFlow<Response<Incident>> = _addCommentToIncidentState
+    //endregion
+
+    //region Incident Categories
+    private val _incidentCategoriesState: MutableSharedFlow<Response<List<String>>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val incidentCategoriesState: SharedFlow<Response<List<String>>> = _incidentCategoriesState
+    //endregion
 
     var incidentAddress: String = ""
     var incidentLongitude: Double = 0.0
@@ -195,12 +210,24 @@ class CitizenRequestViewModel @Inject constructor(
         }
     }
 
-    fun getAllReportedIncidents(incidentCategory: IncidentCategory? = null) {
+    fun getAllReportedIncidents(incidentCategory: String? = null) {
         Log.d(TAG,
             "getAllReportedIncidents: Getting all reported incidents for category $incidentCategory...")
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.getAllReportedIncidents(incidentCategory).collect {
                 _getAllReportedIncidentsState.tryEmit(it)
+            }
+        }
+    }
+
+    fun getAllIncidentCategories() {
+        Log.d(TAG, "getAllIncidentCategories: Getting all incident categories...")
+        viewModelScope.launch(Dispatchers.IO) {
+            citizenRequestUseCase.getAllIncidentCategories().collect {
+                _incidentCategoriesState.tryEmit(it)
+                if (it is Response.Success) {
+                    _listIncidentCategories = it.data
+                }
             }
         }
     }

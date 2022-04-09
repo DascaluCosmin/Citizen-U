@@ -75,6 +75,7 @@ object ProjectProposalConstants {
 object DatabaseConstants {
     const val USERS_COL = "users"
     const val USER_REQUESTS_INCIDENTS_COL = "request_incidents"
+    const val INCIDENTS_CATEGORIES_COL = "reported_incidents_categories"
     const val PUBLIC_EVENTS_COL = "events"
     const val PUBLIC_RELEASE_EVENTS_COL = "council_events"
     const val PROPOSED_PROJECTS_COL = "proposed_projects"
