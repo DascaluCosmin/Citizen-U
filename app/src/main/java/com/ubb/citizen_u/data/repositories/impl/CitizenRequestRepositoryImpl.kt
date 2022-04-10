@@ -34,7 +34,6 @@ class CitizenRequestRepositoryImpl @Inject constructor(
     // TODO: Transaction this
     override suspend fun addIncident(
         incident: Incident,
-        citizenId: String,
         listIncidentPhotoUri: List<Uri>,
     ): Flow<Response<Boolean>> =
         flow {
@@ -42,19 +41,24 @@ class CitizenRequestRepositoryImpl @Inject constructor(
                 emit(Response.Error("Please provide a photo of the incident!"))
                 return@flow
             }
+            if (incident.citizen == null) {
+                emit(Response.Error("The citizen value can't be null!"))
+                return@flow
+            }
 
             try {
                 emit(Response.Loading)
 
+                val citizen = incident.citizen
                 val result =
-                    usersRef.document(citizenId).collection(USER_REQUESTS_INCIDENTS_COL)
+                    usersRef.document(citizen!!.id).collection(USER_REQUESTS_INCIDENTS_COL)
                         .add(incident)
                         .await()
 
                 photoRepository.saveIncidentPhotos(
                     listIncidentPhotoUri = listIncidentPhotoUri,
                     incidentId = result.id,
-                    citizenId = citizenId
+                    citizenId = citizen.id
                 )
                 emit(Response.Success(true))
             } catch (exception: Exception) {

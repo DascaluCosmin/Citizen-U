@@ -153,7 +153,8 @@ class ReportIncidentMapFragment : Fragment() {
         citizenRequestViewModel.reportIncident(
             description = args.incidentDescription,
             headline = args.incidentHeadline,
-            citizenId = citizenViewModel.citizenId
+            citizenId = citizenViewModel.citizenId,
+            citizen = citizenViewModel.currentCitizen
         )
     }
 

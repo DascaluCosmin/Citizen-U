@@ -11,8 +11,7 @@ class ReportIncidentUseCase @Inject constructor(
 
     suspend operator fun invoke(
         incident: Incident,
-        citizenId: String,
         listIncidentPhotoUri: List<Uri>
     ) =
-        citizenRequestRepository.addIncident(incident, citizenId, listIncidentPhotoUri)
+        citizenRequestRepository.addIncident(incident, listIncidentPhotoUri)
 }

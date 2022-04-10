@@ -1,6 +1,7 @@
 package com.ubb.citizen_u.data.repositories.impl
 
 import android.net.Uri
+import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.ubb.citizen_u.data.model.Photo
@@ -62,6 +63,7 @@ class PhotoRepositoryImpl @Inject constructor(
                 firebaseStorage.getReference("$pathToCitizenIncidentReportsFolder/${uri.lastPathSegment}")
                     .putFile(uri).await()
             if (!result.task.isSuccessful) {
+                Log.e(TAG, "saveIncidentPhotos: ${result.task.exception?.message}")
                 return false
             }
         }

@@ -27,11 +27,17 @@ class Incident(
     description: String? = null,
     headline: String? = null,
     sentDate: Date? = null,
+    citizen: Citizen? = null,
     val category: String? = null,
     val address: String? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
-) : CitizenRequest(description = description, headline = headline, sentDate = sentDate) {
+) : CitizenRequest(
+    citizen = citizen,
+    description = description,
+    headline = headline,
+    sentDate = sentDate
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

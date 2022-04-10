@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ubb.citizen_u.data.model.Photo
+import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.domain.model.Response
@@ -151,12 +152,13 @@ class CitizenRequestViewModel @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun reportIncident(description: String, headline: String, citizenId: String) {
+    fun reportIncident(description: String, headline: String, citizenId: String, citizen: Citizen) {
         // TODO: Validate Address
         Log.d(TAG, "Adding incident for citizen $citizenId...")
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.reportIncidentUseCase(
                 incident = Incident(
+                    citizen = citizen,
                     description = description,
                     headline = headline,
                     sentDate = Date(),
@@ -164,7 +166,6 @@ class CitizenRequestViewModel @Inject constructor(
                     longitude = incidentLongitude,
                     latitude = incidentLatitude,
                 ),
-                citizenId = citizenId,
                 listIncidentPhotoUri = listIncidentPhotoUri,
             ).collect { response ->
                 if (response is Response.Success) {

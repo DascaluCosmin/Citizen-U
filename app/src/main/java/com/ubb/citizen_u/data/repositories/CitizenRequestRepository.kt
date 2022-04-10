@@ -10,7 +10,6 @@ interface CitizenRequestRepository {
 
     suspend fun addIncident(
         incident: Incident,
-        citizenId: String,
         listIncidentPhotoUri: List<Uri>,
     ): Flow<Response<Boolean>>
 
