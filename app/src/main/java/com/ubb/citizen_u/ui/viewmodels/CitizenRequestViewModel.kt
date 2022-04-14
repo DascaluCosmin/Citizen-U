@@ -1,6 +1,5 @@
 package com.ubb.citizen_u.ui.viewmodels
 
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +11,7 @@ import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.citizens.requests.CitizenRequestUseCase
+import com.ubb.citizen_u.ui.model.PhotoWithSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -36,10 +36,13 @@ class CitizenRequestViewModel @Inject constructor(
     private var _listIncidentCategories: List<String> = listOf()
     val listIncidentCategories: List<String> get() = _listIncidentCategories
 
-    private val listIncidentPhotoUri: MutableList<Uri> = mutableListOf()
+    private val addedIncidentPhotos: MutableList<Photo> = mutableListOf()
+    private val listIncidentPhotosWithSource: MutableList<PhotoWithSource> = mutableListOf()
 
-    private val _listIncidentPhotoUriLiveData = MutableLiveData<MutableList<Uri>>()
-    val listIncidentPhotoUriLiveData: LiveData<MutableList<Uri>> = _listIncidentPhotoUriLiveData
+    private val _listIncidentPhotoWithSourceLiveData =
+        MutableLiveData<MutableList<PhotoWithSource>>()
+    val listIncidentPhotoWithSourceLiveData: LiveData<MutableList<PhotoWithSource>> =
+        _listIncidentPhotoWithSourceLiveData
 
 
     private val _addReportIncidentState: MutableSharedFlow<Response<Boolean>> = MutableSharedFlow(
@@ -107,14 +110,17 @@ class CitizenRequestViewModel @Inject constructor(
     var currentSelectedIncidentPhotoIndex = 0
     var currentSelectedIncidentCommentIndex = 0
 
-    fun addIncidentPhoto(uri: Uri) {
-        listIncidentPhotoUri.add(uri)
-        _listIncidentPhotoUriLiveData.value = listIncidentPhotoUri
+    fun addIncidentPhoto(photoWithSource: PhotoWithSource) {
+        listIncidentPhotosWithSource.add(photoWithSource)
+        _listIncidentPhotoWithSourceLiveData.postValue(listIncidentPhotosWithSource)
+
+        addedIncidentPhotos.add(photoWithSource.photo)
     }
 
     fun removeLatestPhoto() {
-        listIncidentPhotoUri.removeLast()
-        _listIncidentPhotoUriLiveData.value = listIncidentPhotoUri
+        listIncidentPhotosWithSource.removeLast()
+        addedIncidentPhotos.removeLast()
+        _listIncidentPhotoWithSourceLiveData.value = listIncidentPhotosWithSource
     }
 
     fun getNextIncidentPhoto(): Photo? {
@@ -156,6 +162,8 @@ class CitizenRequestViewModel @Inject constructor(
         // TODO: Validate Address
         Log.d(TAG, "Adding incident for citizen $citizenId...")
         viewModelScope.launch(Dispatchers.IO) {
+            val listIncidentPhoto = listIncidentPhotosWithSource.map { it.photo }.toList()
+
             citizenRequestUseCase.reportIncidentUseCase(
                 incident = Incident(
                     citizen = citizen,
@@ -166,10 +174,10 @@ class CitizenRequestViewModel @Inject constructor(
                     longitude = incidentLongitude,
                     latitude = incidentLatitude,
                 ),
-                listIncidentPhotoUri = listIncidentPhotoUri,
+                listIncidentPhotos = listIncidentPhoto,
             ).collect { response ->
                 if (response is Response.Success) {
-                    listIncidentPhotoUri.clear()
+                    listIncidentPhotosWithSource.clear()
                 }
                 _addReportIncidentState.tryEmit(response)
                 _addReportIncidentState.resetReplayCache()

@@ -1,10 +1,10 @@
 package com.ubb.citizen_u.data.repositories.impl
 
-import android.net.Uri
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.ubb.citizen_u.data.Details
+import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.data.repositories.CitizenRepository
@@ -34,10 +34,10 @@ class CitizenRequestRepositoryImpl @Inject constructor(
     // TODO: Transaction this
     override suspend fun addIncident(
         incident: Incident,
-        listIncidentPhotoUri: List<Uri>,
+        listIncidentPhotos: List<Photo>,
     ): Flow<Response<Boolean>> =
         flow {
-            if (listIncidentPhotoUri.isEmpty()) {
+            if (listIncidentPhotos.isEmpty()) {
                 emit(Response.Error("Please provide a photo of the incident!"))
                 return@flow
             }
@@ -55,6 +55,8 @@ class CitizenRequestRepositoryImpl @Inject constructor(
                         .add(incident)
                         .await()
 
+                val listIncidentPhotoUri =
+                    listIncidentPhotos.mapNotNull { it.uri }.toList()
                 photoRepository.saveIncidentPhotos(
                     listIncidentPhotoUri = listIncidentPhotoUri,
                     incidentId = result.id,

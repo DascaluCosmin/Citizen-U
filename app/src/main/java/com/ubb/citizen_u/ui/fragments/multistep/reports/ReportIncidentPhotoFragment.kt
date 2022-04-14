@@ -14,21 +14,36 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeler
 import com.ubb.citizen_u.R
+import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.databinding.FragmentReportIncidentPhotoBinding
+import com.ubb.citizen_u.ui.model.PhotoWithSource
+import com.ubb.citizen_u.ui.model.Source
 import com.ubb.citizen_u.ui.util.getRotatedBitmap
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
+import com.ubb.citizen_u.util.CitizenRequestConstants.DEFAULT_INCIDENT_CATEGORY
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
+import com.ubb.citizen_u.util.glide.ImageFiller
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.io.File
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class ReportIncidentPhotoFragment : Fragment() {
 
     companion object {
@@ -36,7 +51,12 @@ class ReportIncidentPhotoFragment : Fragment() {
         private const val PHOTO_FILENAME = "reportIncidentPhoto"
         private const val FILE_PROVIDER_AUTHORITY =
             "com.ubb.citizen_u.ui.fragments.multistep.reports.fileprovider"
+
+        private const val PHOTO_FILE_TYPE = "image/*"
     }
+
+    @Inject
+    lateinit var labeler: ImageLabeler
 
     private val citizenRequestViewModel: CitizenRequestViewModel by activityViewModels()
     private val citizenViewModel: CitizenViewModel by activityViewModels()
@@ -47,14 +67,43 @@ class ReportIncidentPhotoFragment : Fragment() {
 
     private lateinit var photoFile: File
     private val photoIncidentResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                Log.d(
-                    TAG,
-                    "photoIncidentResultLauncher: The incident report photo was taken successfully. " +
-                            "Photo File Path is ${photoFile.absoluteFile}"
-                )
-                citizenRequestViewModel.addIncidentPhoto(Uri.fromFile(photoFile))
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            lifecycleScope.launch(Dispatchers.IO) {
+                if (result.resultCode == Activity.RESULT_OK) {
+                    Log.d(
+                        TAG,
+                        "The incident report photo was taken successfully. Photo File Path is ${photoFile.absoluteFile}"
+                    )
+                    val predictedCategory = getPredictedCategoryForPhoto(photoFile.toUri())
+
+                    citizenRequestViewModel.addIncidentPhoto(PhotoWithSource(
+                        photo = Photo(
+                            category = predictedCategory,
+                            uri = Uri.fromFile(photoFile)
+                        ),
+                        source = Source.CAMERA
+                    ))
+                }
+            }
+        }
+    private val uploadPhotoIncidentResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            lifecycleScope.launch(Dispatchers.IO) {
+                if (result.resultCode == Activity.RESULT_OK) {
+                    result.data?.data?.let { uri ->
+                        Log.d(TAG, "The incident report photo has been uploaded successfully")
+                        val predictedCategory = getPredictedCategoryForPhoto(uri)
+
+                        Log.d(TAG, "The predicted category for the image is: $predictedCategory")
+                        citizenRequestViewModel.addIncidentPhoto(PhotoWithSource(
+                            photo = Photo(
+                                category = predictedCategory,
+                                uri = uri,
+                            ),
+                            source = Source.UPLOAD
+                        ))
+                    }
+                }
             }
         }
 
@@ -72,6 +121,11 @@ class ReportIncidentPhotoFragment : Fragment() {
                 takePhotoButton.text = getString(R.string.take_another_photo_button_text)
             }
         }
+    }
+
+    private suspend fun getPredictedCategoryForPhoto(uri: Uri): String {
+        val labels = labeler.process(InputImage.fromFilePath(requireContext(), uri)).await()
+        return if (labels.isEmpty()) DEFAULT_INCIDENT_CATEGORY else labels[0].text
     }
 
     private fun getPhotoFile(): File {
@@ -95,18 +149,49 @@ class ReportIncidentPhotoFragment : Fragment() {
             reportIncidentPhotoFragment = this@ReportIncidentPhotoFragment
         }
 
-        citizenRequestViewModel.listIncidentPhotoUriLiveData.observe(viewLifecycleOwner) {
-            setImage(it.lastOrNull()?.path)
+        citizenRequestViewModel.listIncidentPhotoWithSourceLiveData.observe(viewLifecycleOwner) { list ->
+            val lastElement = list.lastOrNull()
+            if (lastElement != null) {
+                setImage(lastElement)
+            } else {
+                binding.apply {
+                    reportIncidentImageview.setImageBitmap(BitmapFactory.decodeFile(null))
+                    removeIncidentPhotoButton.visibility = View.GONE
+                    reportIncidentPhotoHint.visibility = View.VISIBLE
+                    takePhotoButton.text = getString(R.string.take_photo_button_text)
+                }
+            }
+
+            list.lastOrNull()?.let { mostRecentPhoto ->
+                setImage(mostRecentPhoto)
+            }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        citizenRequestViewModel.getCitizenReportedIncidents(citizenViewModel.citizenId)
+    private fun setImage(photoWithSource: PhotoWithSource) {
+        binding.apply {
+            removeIncidentPhotoButton.visibility = View.VISIBLE
+            reportIncidentPhotoHint.visibility = View.GONE
+            takePhotoButton.text = getString(R.string.take_another_photo_button_text)
+        }
+
+        val photoUri = photoWithSource.photo.uri
+        when (photoWithSource.source) {
+            Source.UPLOAD -> ImageFiller.fill(
+                requireContext(),
+                binding.reportIncidentImageview,
+                photoUri
+            )
+            Source.CAMERA -> {
+                val path = photoUri!!.path
+                val imageBitmap = BitmapFactory.decodeFile(path)
+                binding.reportIncidentImageview.setImageBitmap(getRotatedBitmap(path, imageBitmap))
+            }
+        }
     }
 
     fun takePhoto() {
-        Log.d(TAG, "takePhoto: Taking incident photo...")
+        Log.d(TAG, "Taking incident photo...")
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
         photoFile = getPhotoFile()
@@ -125,6 +210,20 @@ class ReportIncidentPhotoFragment : Fragment() {
         }
     }
 
+    fun uploadPhoto() {
+        Log.d(TAG, "Uploading incident photo...")
+
+        val intent = Intent()
+        intent.type = PHOTO_FILE_TYPE
+        intent.action = Intent.ACTION_GET_CONTENT
+        try {
+            uploadPhotoIncidentResultLauncher.launch(intent)
+        } catch (exception: Exception) {
+            Log.e(TAG, "Error at uploading incident photo: ${exception.message}")
+            toastErrorMessage()
+        }
+    }
+
     fun removeLatestPhoto() {
         Log.d(TAG, "removeLatestPhoto: Removing latest photo...")
         citizenRequestViewModel.removeLatestPhoto()
@@ -133,7 +232,7 @@ class ReportIncidentPhotoFragment : Fragment() {
     fun goNext() {
         Log.d(TAG, "Going next in multistep report incident...")
         when {
-            citizenRequestViewModel.listIncidentPhotoUriLiveData.value.isNullOrEmpty() -> {
+            citizenRequestViewModel.listIncidentPhotoWithSourceLiveData.value.isNullOrEmpty() -> {
                 Log.d(TAG, "There are no incident photos")
                 toastErrorMessage(
                     INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE

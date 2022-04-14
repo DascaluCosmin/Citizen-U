@@ -56,6 +56,11 @@ object CitizenRequestConstants {
     // endregion
 
     const val INCIDENT_GENERIC_HEADLINE = "Incident"
+    const val DEFAULT_INCIDENT_CATEGORY = "other"
+
+    // region Errors
+    const val ERROR_IMAGE_NOT_LOADED = "The image could not have been loaded!"
+    // endregion
 }
 
 object LocationConstants {

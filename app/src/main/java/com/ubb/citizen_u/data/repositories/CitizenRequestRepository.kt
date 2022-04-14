@@ -1,6 +1,6 @@
 package com.ubb.citizen_u.data.repositories
 
-import android.net.Uri
+import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.domain.model.Response
@@ -10,7 +10,7 @@ interface CitizenRequestRepository {
 
     suspend fun addIncident(
         incident: Incident,
-        listIncidentPhotoUri: List<Uri>,
+        listIncidentPhotos: List<Photo>,
     ): Flow<Response<Boolean>>
 
     suspend fun getIncident(citizenId: String, incidentId: String): Flow<Response<Incident?>>

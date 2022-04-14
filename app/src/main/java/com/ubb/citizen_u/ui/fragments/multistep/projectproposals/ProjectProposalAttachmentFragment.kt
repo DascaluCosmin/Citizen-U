@@ -46,11 +46,11 @@ import java.util.*
 class ProjectProposalAttachmentFragment : Fragment() {
 
     companion object {
-        const val TAG = "UBB-ProjectProposalPdfFragment"
-        const val PDF_FILE_TYPE = "application/pdf"
+        private const val TAG = "UBB-ProjectProposalPdfFragment"
+        private const val PDF_FILE_TYPE = "application/pdf"
 
         // TODO: This has to be clarified if .jpg is accepted as well
-        const val PHOTO_FILE_TYPE = "image/*"
+        private const val PHOTO_FILE_TYPE = "image/*"
     }
 
     private var _binding: FragmentProjectProposalAttachmentBinding? = null
@@ -63,7 +63,7 @@ class ProjectProposalAttachmentFragment : Fragment() {
     private lateinit var currentFileType: String
     private var currentFileUri: Uri? = null
 
-    private val uploadPdfResultLauncher =
+    private val uploadFileResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 result.data?.let { intent ->
@@ -221,11 +221,11 @@ class ProjectProposalAttachmentFragment : Fragment() {
         intent.type = fileType
         intent.action = Intent.ACTION_GET_CONTENT
         try {
-            uploadPdfResultLauncher.launch(intent)
+            uploadFileResultLauncher.launch(intent)
         } catch (exception: Exception) {
             Log.e(TAG,
                 "An exception has occurred at uploading the $fileType file: ${exception.message}")
-            toastMessage(DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN)
+            toastErrorMessage()
         }
     }
 
