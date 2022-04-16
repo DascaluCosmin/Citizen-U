@@ -28,15 +28,17 @@ class Incident(
     headline: String? = null,
     sentDate: Date? = null,
     citizen: Citizen? = null,
-    val category: String? = null,
-    val address: String? = null,
-    val latitude: Double? = null,
-    val longitude: Double? = null,
+    photos: MutableList<Photo?> = mutableListOf(),
+    var category: String? = null,
+    var address: String? = null,
+    var latitude: Double? = null,
+    var longitude: Double? = null,
 ) : CitizenRequest(
     citizen = citizen,
     description = description,
     headline = headline,
-    sentDate = sentDate
+    sentDate = sentDate,
+    photos = photos
 ) {
 
     override fun equals(other: Any?): Boolean {

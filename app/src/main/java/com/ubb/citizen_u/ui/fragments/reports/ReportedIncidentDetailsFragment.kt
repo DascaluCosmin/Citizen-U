@@ -113,6 +113,11 @@ class ReportedIncidentDetailsFragment : Fragment() {
 
                     it.data?.run {
                         binding.reportedIncidentHeadline.text = headline
+                        binding.reportedIncidentCategory.text = category
+                            ?.replace('_', ' ')
+                            ?.replaceFirstChar { character ->
+                                character.uppercase()
+                            }
                         binding.reportedIncidentDescription.text = description
                         binding.reportedIncidentAddress.text = address
                         binding.reportedIncidentPostedBy.text = citizen?.getFullName()

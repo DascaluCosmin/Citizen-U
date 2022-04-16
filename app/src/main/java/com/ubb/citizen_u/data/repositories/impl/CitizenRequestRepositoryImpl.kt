@@ -11,6 +11,7 @@ import com.ubb.citizen_u.data.repositories.CitizenRepository
 import com.ubb.citizen_u.data.repositories.CitizenRequestRepository
 import com.ubb.citizen_u.data.repositories.PhotoRepository
 import com.ubb.citizen_u.domain.model.Response
+import com.ubb.citizen_u.util.CitizenRequestConstants.DEFAULT_INCIDENT_CATEGORY
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.DatabaseConstants.COMMENTS_COL
 import com.ubb.citizen_u.util.DatabaseConstants.USER_REQUESTS_INCIDENTS_COL
@@ -48,6 +49,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
 
             try {
                 emit(Response.Loading)
+                incident.category = getIncidentOverallCategory(listIncidentPhotos)
 
                 val citizen = incident.citizen
                 val result =
@@ -68,6 +70,30 @@ class CitizenRequestRepositoryImpl @Inject constructor(
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
             }
         }
+
+    private fun getIncidentOverallCategory(listIncidentPhotos: List<Photo>): String? {
+        val photosGroupedByCategory = listIncidentPhotos.groupBy { it.category }
+
+        var mostPredictedCategory: String? = ""
+        var numberAppearancesMostPredictedCategory = 0
+        photosGroupedByCategory.forEach {
+            if (it.value.size > numberAppearancesMostPredictedCategory) {
+                mostPredictedCategory = it.key
+                numberAppearancesMostPredictedCategory = 1
+            } else if (it.value.size == numberAppearancesMostPredictedCategory) {
+                numberAppearancesMostPredictedCategory++
+            }
+        }
+
+        var isAmbiguousPredictedCategoryFlag = -1
+        photosGroupedByCategory.values.forEach {
+            if (it.size == numberAppearancesMostPredictedCategory) {
+                isAmbiguousPredictedCategoryFlag++
+            }
+        }
+
+        return if (isAmbiguousPredictedCategoryFlag == 0) mostPredictedCategory else DEFAULT_INCIDENT_CATEGORY
+    }
 
     override suspend fun getIncident(
         citizenId: String,

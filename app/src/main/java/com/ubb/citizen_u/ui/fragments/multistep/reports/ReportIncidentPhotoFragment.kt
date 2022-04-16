@@ -175,7 +175,7 @@ class ReportIncidentPhotoFragment : Fragment() {
             takePhotoButton.text = getString(R.string.take_another_photo_button_text)
         }
 
-        val photoUri = photoWithSource.photo.uri
+        val photoUri = photoWithSource.photo?.uri
         when (photoWithSource.source) {
             Source.UPLOAD -> ImageFiller.fill(
                 requireContext(),

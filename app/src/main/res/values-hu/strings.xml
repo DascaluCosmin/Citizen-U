@@ -10,6 +10,7 @@
     <string name="generic_firstname_hint">Keresztnév</string>
     <string name="generic_lastname_hint">Vezetéknév</string>
     <string name="date_separator_label" translatable="false">-</string>
+    <string name="generic_category_label">Kategória</string>
     <string name="generic_description_label">Leírás</string>
     <string name="generic_address_label">Cím</string>
     <string name="generic_posted_on_label">Közzétett</string>

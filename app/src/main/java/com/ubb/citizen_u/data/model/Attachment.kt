@@ -2,6 +2,7 @@ package com.ubb.citizen_u.data.model
 
 import android.net.Uri
 import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.Exclude
 import com.google.firebase.storage.StorageReference
 
 open class Attachment(
@@ -18,7 +19,7 @@ open class Attachment(
 open class AttachmentData(
     category: String? = null,
     var storageReference: StorageReference? = null,
-    var uri: Uri? = null,
+    @get:Exclude var uri: Uri? = null,
 ) : Attachment(category = category) {
 
     override fun toString(): String {

@@ -114,7 +114,7 @@ class CitizenRequestViewModel @Inject constructor(
         listIncidentPhotosWithSource.add(photoWithSource)
         _listIncidentPhotoWithSourceLiveData.postValue(listIncidentPhotosWithSource)
 
-        addedIncidentPhotos.add(photoWithSource.photo)
+        addedIncidentPhotos.add(photoWithSource.photo!!)
     }
 
     fun removeLatestPhoto() {
@@ -173,8 +173,9 @@ class CitizenRequestViewModel @Inject constructor(
                     address = incidentAddress,
                     longitude = incidentLongitude,
                     latitude = incidentLatitude,
+                    photos = listIncidentPhoto.toMutableList()
                 ),
-                listIncidentPhotos = listIncidentPhoto,
+                listIncidentPhotos = listIncidentPhoto.filterNotNull(),
             ).collect { response ->
                 if (response is Response.Success) {
                     listIncidentPhotosWithSource.clear()

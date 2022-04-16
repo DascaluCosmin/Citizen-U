@@ -11,6 +11,7 @@
     <string name="generic_firstname_hint">Prenume</string>
     <string name="generic_lastname_hint">Nume de familie</string>
     <string name="date_separator_label">-</string>
+    <string name="generic_category_label">Categorie</string>
     <string name="generic_description_label">Descriere</string>
     <string name="generic_address_label">Adresa</string>
     <string name="generic_posted_on_label">Postat în data de</string>
