@@ -114,7 +114,6 @@ class ReportedIncidentDetailsFragment : Fragment() {
                     it.data?.run {
                         binding.reportedIncidentHeadline.text = headline
                         binding.reportedIncidentCategory.text = category
-                            ?.replace('_', ' ')
                             ?.replaceFirstChar { character ->
                                 character.uppercase()
                             }

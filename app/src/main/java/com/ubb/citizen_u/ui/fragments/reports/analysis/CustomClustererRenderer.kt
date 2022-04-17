@@ -51,6 +51,7 @@ import com.google.maps.android.geometry.Point
 import com.google.maps.android.projection.SphericalMercatorProjection
 import com.google.maps.android.ui.IconGenerator
 import com.google.maps.android.ui.SquareTextView
+import com.ubb.citizen_u.ui.fragments.reports.analysis.IncidentClusterMarker
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executor
@@ -110,7 +111,9 @@ class CustomClustererRenderer<T : ClusterItem?>(
     /**
      * If cluster size is less than this size, display individual markers.
      */
-    var minClusterSize = 4
+
+    // TODO: Hmm, should be 1?
+    var minClusterSize = 2
 
     /**
      * The currently displayed set of clusters.
@@ -198,27 +201,7 @@ class CustomClustererRenderer<T : ClusterItem?>(
 
     protected fun getColor(clusterSize: Int, cluster: Cluster<T>): Int {
         val clusterItem = cluster.items.iterator().next()
-//        val clusterCategory = clusterItem?.snippet
-        val clusterCategory = clusterItem?.title.toString()
-//        if (clusterCategory == IncidentCategory.FALLEN_TREE.toString()) {
-//            return Color.parseColor("#333333")
-//        } else {
-//            return Color.parseColor("#B153A5")
-//        }
-
-        if (clusterCategory.contains("Tower")) {
-            return Color.parseColor("#333333")
-        } else {
-            return Color.parseColor("#B153A5")
-        }
-
-//        val hueRange = 220f
-//        val sizeRange = 300f
-//        val size = Math.min(clusterSize.toFloat(), sizeRange)
-//        val hue = (sizeRange - size) * (sizeRange - size) / (sizeRange * sizeRange) * hueRange
-//        return Color.HSVToColor(floatArrayOf(
-//            hue, 1f, .6f
-//        ))
+        return Color.parseColor((clusterItem as IncidentClusterMarker).getColor())
     }
 
     protected fun getClusterText(bucket: Int): String {
@@ -956,12 +939,18 @@ class CustomClustererRenderer<T : ClusterItem?>(
                     var marker = mMarkerCache[item]
                     var markerWithPosition: MarkerWithPosition
                     if (marker == null) {
-                        val markerOptions = MarkerOptions()
+                        val hsl = FloatArray(3)
+                        val color = (item as IncidentClusterMarker).getColor()
+                        Color.colorToHSV(Color.parseColor(color), hsl)
+
+                        val markerOptions =
+                            MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(hsl[0]))
                         if (animateFrom != null) {
                             markerOptions.position(animateFrom)
                         } else {
                             markerOptions.position(item!!.position)
                         }
+
                         onBeforeClusterItemRendered(item, markerOptions)
                         marker = mClusterManager.markerCollection.addMarker(markerOptions)
                         markerWithPosition = MarkerWithPosition(marker)

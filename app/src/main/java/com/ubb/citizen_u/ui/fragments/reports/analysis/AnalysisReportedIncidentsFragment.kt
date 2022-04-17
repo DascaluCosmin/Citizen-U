@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -17,14 +18,20 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.CustomClustererRenderer
 import com.ubb.citizen_u.R
+import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.databinding.FragmentAnalysisReportedIncidentsBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.util.CitizenRequestConstants
+import com.ubb.citizen_u.util.CitizenRequestConstants.DEFAULT_INCIDENT_CATEGORY
+import com.ubb.citizen_u.util.TownHallConstants.TOWN_HALL_LATITUDE_COORDINATE
+import com.ubb.citizen_u.util.TownHallConstants.TOWN_HALL_LONGITUDE_COORDINATE
+import com.ubb.citizen_u.util.TownHallConstants.ZOOM_WEIGHT
 import com.ubb.citizen_u.util.isNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
@@ -32,9 +39,6 @@ class AnalysisReportedIncidentsFragment : Fragment() {
 
     companion object {
         private const val TAG = "UBB-AnalysisReportedIncidentsFragment"
-        private const val TOWN_HALL_LATITUDE_COORDINATE = 46.7687418
-        private const val TOWN_HALL_LONGITUDE_COORDINATE = 23.5876332
-        private const val ZOOM_WEIGHT = 14.0f
     }
 
     private lateinit var clusterManager: ClusterManager<IncidentClusterMarker>
@@ -58,6 +62,17 @@ class AnalysisReportedIncidentsFragment : Fragment() {
 
         binding.apply {
             fragmentAnalysisReportedIncidents = this@AnalysisReportedIncidentsFragment
+
+            (incidentCategoriesDropdown.editText as AutoCompleteTextView).setOnItemClickListener { _, _, position, _ ->
+                val category = citizenRequestViewModel.listIncidentCategories[position]
+                Log.d(TAG, "Selected the $category category")
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val reportedIncidents =
+                        citizenRequestViewModel.getAllReportedIncidentsState.first()
+                    consumeReportedIncidentsResponse(reportedIncidents, category)
+                }
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -115,40 +130,53 @@ class AnalysisReportedIncidentsFragment : Fragment() {
 
     private suspend fun collectAllReportedIncidents() {
         citizenRequestViewModel.getAllReportedIncidentsState.collect {
-            Log.d(TAG, "collectAllReportedIncidents: Collecting response $it")
-            when (it) {
-                Response.Loading -> {
-                    binding.mainProgressbar.visibility = View.VISIBLE
-                }
-                is Response.Error -> {
-                    Log.e(TAG, "collectAllReportedIncidents: An error has occurred: ${it.message}")
-                    binding.mainProgressbar.visibility = View.GONE
-                }
-                is Response.Success -> {
-                    binding.mainProgressbar.visibility = View.GONE
-                    val markerItems = it.data.filterNotNull()
-                        .filterNot { incident ->
-                            incident.latitude.isNull() || incident.longitude.isNull()
-                        }
-                        .map { incident ->
-                            IncidentClusterMarker(
-                                latitude = incident.latitude!!,
-                                longitude = incident.longitude!!,
-                                title = incident.headline
-                                    ?: CitizenRequestConstants.INCIDENT_GENERIC_HEADLINE,
-                                snippet = incident.category.toString()
-                            )
-                        }.toList()
+            consumeReportedIncidentsResponse(it)
+        }
+    }
 
-                    clusterManager.addItems(markerItems)
-                    clusterManager.cluster()
-                }
+    private fun consumeReportedIncidentsResponse(
+        it: Response<List<Incident?>>,
+        category: String? = DEFAULT_INCIDENT_CATEGORY,
+    ) {
+        Log.d(TAG, "collectAllReportedIncidents: Collecting response $it")
+        when (it) {
+            Response.Loading -> {
+                binding.mainProgressbar.visibility = View.VISIBLE
+            }
+            is Response.Error -> {
+                Log.e(TAG, "collectAllReportedIncidents: An error has occurred: ${it.message}")
+                binding.mainProgressbar.visibility = View.GONE
+            }
+            is Response.Success -> {
+                binding.mainProgressbar.visibility = View.GONE
+                val markerItems = it.data.asSequence()
+                    .filterNotNull()
+                    .filter { it.category == category }
+                    .filterNot { incident ->
+                        incident.latitude.isNull() || incident.longitude.isNull()
+                    }
+                    .map { incident ->
+                        IncidentClusterMarker(
+                            latitude = incident.latitude!!,
+                            longitude = incident.longitude!!,
+                            title = incident.headline
+                                ?: CitizenRequestConstants.INCIDENT_GENERIC_HEADLINE,
+                            category = incident.category.toString()
+                        )
+                    }.toList()
+
+                setUpCluster()
+
+                clusterManager.algorithm.maxDistanceBetweenClusteredItems = 30
+                clusterManager.addItems(markerItems)
+                clusterManager.cluster()
             }
         }
     }
 
     private fun setUpCluster() {
         supportMapFragment.getMapAsync { googleMap ->
+            googleMap.clear()
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                 LatLng(
                     TOWN_HALL_LATITUDE_COORDINATE,
@@ -159,11 +187,15 @@ class AnalysisReportedIncidentsFragment : Fragment() {
             clusterManager = ClusterManager<IncidentClusterMarker>(requireContext(), googleMap)
                 .apply {
                     setOnClusterItemClickListener {
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLng(it.position))
+
                         toastMessage("Clicked on item ${it.title}")
                         false
                     }
 
                     setOnClusterClickListener {
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLng(it.position))
+
                         toastMessage("Clicked on cluster with ${it.size} items")
                         false
                     }

@@ -127,6 +127,12 @@ object CalendarConstants {
     const val UNKNOWN = "UNKNOWN_DATE"
 }
 
+object TownHallConstants {
+    const val TOWN_HALL_LATITUDE_COORDINATE = 46.7687418
+    const val TOWN_HALL_LONGITUDE_COORDINATE = 23.5876332
+    const val ZOOM_WEIGHT = 14.0f
+}
+
 const val UNDEFINED = "undefined"
 
 const val DEFAULT_ERROR_MESSAGE = "An unexpected error has occurred"

@@ -7,7 +7,7 @@ class IncidentClusterMarker(
     latitude: Double,
     longitude: Double,
     private val title: String,
-    private val snippet: String,
+    private val category: String,
 ) : ClusterItem {
 
     private val position: LatLng = LatLng(latitude, longitude)
@@ -16,11 +16,22 @@ class IncidentClusterMarker(
         return position
     }
 
-    override fun getTitle(): String? {
+    override fun getTitle(): String {
         return title
     }
 
-    override fun getSnippet(): String? {
-        return snippet
+    override fun getSnippet(): String {
+        return category
+    }
+
+    fun getColor(): String {
+        return when (category) {
+            "broken pavement" -> "#9494B8"
+            "weeds" -> "#009900"
+            "garbage" -> "#FF8000"
+            "pot holes" -> "#1A8CFF"
+            "other" -> "#FF0000"
+            else -> "#FF0000"
+        }
     }
 }

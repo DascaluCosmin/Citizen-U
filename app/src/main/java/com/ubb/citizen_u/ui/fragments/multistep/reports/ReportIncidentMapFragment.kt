@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentReportIncidentMapBinding
@@ -29,6 +30,8 @@ import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_REPORT_INCIDENT
 import com.ubb.citizen_u.util.LocationConstants.FAILED_ADDRESS_COMPUTING
+import com.ubb.citizen_u.util.TownHallConstants.TOWN_HALL_LATITUDE_COORDINATE
+import com.ubb.citizen_u.util.TownHallConstants.TOWN_HALL_LONGITUDE_COORDINATE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -64,6 +67,13 @@ class ReportIncidentMapFragment : Fragment() {
             ) {
                 googleMap.isMyLocationEnabled = true
             }
+
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                LatLng(
+                    TOWN_HALL_LATITUDE_COORDINATE,
+                    TOWN_HALL_LONGITUDE_COORDINATE
+                ), ZOOM_WEIGHT
+            ))
 
             googleMap.setOnMapClickListener { latLng ->
                 val latitude = latLng.latitude

@@ -68,6 +68,7 @@ class AuthenticationViewModel @Inject constructor(
             authenticationUseCases.signOutUseCase()
 
             // TODO: Probably you have to rest the _currentUserState
+            _currentUserState.resetReplayCache()
         }
     }
 

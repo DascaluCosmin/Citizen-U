@@ -49,8 +49,9 @@ class CitizenRequestRepositoryImpl @Inject constructor(
 
             try {
                 emit(Response.Loading)
-                incident.category = getIncidentOverallCategory(listIncidentPhotos)
 
+                incident.category = getIncidentOverallCategory(listIncidentPhotos)
+                    ?.replace('_', ' ')
                 val citizen = incident.citizen
                 val result =
                     usersRef.document(citizen!!.id).collection(USER_REQUESTS_INCIDENTS_COL)
