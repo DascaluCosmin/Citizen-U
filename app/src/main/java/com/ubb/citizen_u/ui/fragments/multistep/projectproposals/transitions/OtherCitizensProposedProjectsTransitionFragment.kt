@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.ubb.citizen_u.databinding.FragmentOtherCitizensProposedProjectsTransitionBinding
 
 class OtherCitizensProposedProjectsTransitionFragment : Fragment() {
@@ -26,5 +27,19 @@ class OtherCitizensProposedProjectsTransitionFragment : Fragment() {
             false
         )
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val action = OtherCitizensProposedProjectsTransitionFragmentDirections
+            .actionOtherCitizensProposedProjectsTransitionFragmentToProposedProjectsListFragment(
+                forCurrentCitizen = false
+            )
+        findNavController().navigate(action)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

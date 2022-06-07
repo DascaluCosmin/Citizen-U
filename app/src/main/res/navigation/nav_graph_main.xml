@@ -224,6 +224,9 @@
         <argument
             android:name="forCurrentCitizen"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_proposedProjectsListFragment_to_proposedProjectsDetailsFragment"
+            app:destination="@id/proposedProjectsDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/projectProposalGeneralFragment"
@@ -239,4 +242,16 @@
         android:name="com.ubb.citizen_u.ui.fragments.reports.analysis.AnalysisReportedIncidentsFragment"
         android:label="fragment_analysis_reported_incidents"
         tools:layout="@layout/fragment_analysis_reported_incidents" />
+    <fragment
+        android:id="@+id/proposedProjectsDetailsFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProposedProjectsDetailsFragment"
+        android:label="fragment_proposed_projects_details"
+        tools:layout="@layout/fragment_proposed_projects_details" >
+        <argument
+            android:name="citizenId"
+            app:argType="string" />
+        <argument
+            android:name="projectProposalId"
+            app:argType="string" />
+    </fragment>
 </navigation>

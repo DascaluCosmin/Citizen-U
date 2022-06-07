@@ -3,10 +3,13 @@ package com.ubb.citizen_u.data.repositories.impl
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
-import com.ubb.citizen_u.data.Fields
+import com.ubb.citizen_u.data.Details
 import com.ubb.citizen_u.data.model.Attachment
 import com.ubb.citizen_u.data.model.citizens.proposals.ProjectProposal
+import com.ubb.citizen_u.data.model.citizens.proposals.ProjectProposalData
 import com.ubb.citizen_u.data.repositories.AttachmentRepository
+import com.ubb.citizen_u.data.repositories.CitizenRepository
+import com.ubb.citizen_u.data.repositories.PhotoRepository
 import com.ubb.citizen_u.data.repositories.ProjectProposalRepository
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.CitizenConstants
@@ -14,6 +17,7 @@ import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.DatabaseConstants
 import com.ubb.citizen_u.util.DatabaseConstants.PROPOSED_PROJECTS_COL
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -21,6 +25,8 @@ import javax.inject.Inject
 class ProjectProposalRepositoryImpl @Inject constructor(
     private val usersRef: CollectionReference,
     private val attachmentRepository: AttachmentRepository,
+    private val citizenRepository: CitizenRepository,
+    private val photoRepository: PhotoRepository,
 ) : ProjectProposalRepository {
 
     companion object {
@@ -74,7 +80,7 @@ class ProjectProposalRepositoryImpl @Inject constructor(
                 val proposedProject = getProposedProject(
                     projectProposalDocSnapshot = projectProposalSnapshot,
                     citizenId = citizenId,
-                    fields = Fields.DETAILS
+                    listDetails = listOf(Details.PHOTOS, Details.COMMENTS, Details.DOCUMENTS)
                 )
 
                 emit(Response.Success(proposedProject))
@@ -84,11 +90,79 @@ class ProjectProposalRepositoryImpl @Inject constructor(
             }
         }
 
+    override suspend fun getAllProposedProjects(citizenId: String): Flow<Response<List<ProjectProposalData?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val projectProposals = getAllProjectProposals(
+                    citizenId = citizenId,
+                    listDetails = listOf(Details.PHOTOS)
+                )
+
+                emit(Response.Success(projectProposals))
+            } catch (exception: Exception) {
+                Log.e(TAG, "getAllProposedProject: An error has occurred: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    override suspend fun getAllProposedProjectsOfOthers(currentCitizenId: String): Flow<Response<List<ProjectProposalData?>>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                val proposedProjects = getAllProposedProjectsOfOthersList(currentCitizenId)
+                emit(Response.Success(proposedProjects))
+            } catch (exception: Exception) {
+                Log.e(TAG,
+                    "getAllProposedProjectsOfOthers: An error has occurred: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    private suspend fun getAllProjectProposals(
+        citizenId: String,
+        listDetails: List<Details>,
+    ): List<ProjectProposalData?> {
+        val projectSnapshot =
+            usersRef.document(citizenId).collection(PROPOSED_PROJECTS_COL).get().await()
+        return projectSnapshot.documents.map {
+            getProposedProject(
+                projectProposalDocSnapshot = it,
+                citizenId = citizenId,
+                listDetails = listDetails
+            )
+        }
+    }
+
+    private suspend fun getAllProposedProjectsOfOthersList(currentCitizenId: String): List<ProjectProposalData?> {
+        val usersSnapshot = usersRef.get().await()
+        return usersSnapshot.documents
+            .filterNot { it.id == currentCitizenId }
+            .map {
+                getAllProjectProposals(
+                    citizenId = it.id,
+                    listDetails = listOf(Details.PHOTOS)
+                )
+            }.flatten()
+    }
+
     private suspend fun getProposedProject(
         projectProposalDocSnapshot: DocumentSnapshot,
         citizenId: String,
-        fields: Fields,
-    ): ProjectProposal? {
-        return null
+        listDetails: List<Details>,
+    ): ProjectProposalData? {
+        return projectProposalDocSnapshot.toObject(ProjectProposalData::class.java)?.apply {
+            if (listDetails.contains(Details.PHOTOS)) {
+                this.photos = photoRepository.getAllProposedProjectPhotos(citizenId, this.id)
+            }
+
+            citizenRepository.getCitizen(citizenId).collect { citizenResponse ->
+                if (citizenResponse is Response.Success) {
+                    this.proposedBy = citizenResponse.data
+                }
+            }
+        }
     }
 }

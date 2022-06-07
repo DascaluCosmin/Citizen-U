@@ -117,6 +117,7 @@
     <string name="project_motivation_hint">Miért kell megvalósítani?</string>
     <string name="project_location_hint">Projekt helyszíne</string>
     <string name="project_description_hint">A projekt leírása</string>
+    <string name="proposed_project_votes_label">votes</string>
 
     <string-array name="project_categories">
         <item>Mobilitás és hozzáférhetőség</item>

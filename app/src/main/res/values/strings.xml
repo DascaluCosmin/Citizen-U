@@ -122,6 +122,7 @@
     <string name="project_motivation_hint">Why should it be implemented?</string>
     <string name="project_location_hint">Project Location</string>
     <string name="project_description_hint">Project Description</string>
+    <string name="proposed_project_votes_label">votes</string>
 
     <string-array name="project_categories">
         <item>Mobility and accessibility</item>

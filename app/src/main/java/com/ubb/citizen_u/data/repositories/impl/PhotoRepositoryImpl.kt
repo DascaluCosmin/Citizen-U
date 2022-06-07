@@ -18,6 +18,7 @@ class PhotoRepositoryImpl @Inject constructor(
         private const val TAG = "PhotoRepositoryImpl"
         private const val FIREBASE_STORAGE_EVENTS_IMAGES = "images/events"
         private const val FIREBASE_STORAGE_INCIDENT_REPORTS_IMAGES = "images/incident_reports"
+        private const val FIREBASE_STORAGE_PROJECT_PROPOSAL__IMAGES = "proposed_projects"
     }
 
     override suspend fun getMainEventPhotoStorageReference(
@@ -44,6 +45,21 @@ class PhotoRepositoryImpl @Inject constructor(
             "$FIREBASE_STORAGE_INCIDENT_REPORTS_IMAGES/$citizenId/$incidentId/"
         val result = firebaseStorage.reference.child(pathToIncidentPhotosFolder)
             .listAll().await()
+        return result.items.map {
+            Photo().apply {
+                storageReference = it
+            }
+        }.toMutableList()
+    }
+
+    override suspend fun getAllProposedProjectPhotos(
+        citizenId: String,
+        proposedProjectId: String,
+    ): MutableList<Photo?> {
+        val pathToProjectProposalPhotosFolder =
+            "$FIREBASE_STORAGE_PROJECT_PROPOSAL__IMAGES/$citizenId/$proposedProjectId/photos"
+        val result =
+            firebaseStorage.reference.child(pathToProjectProposalPhotosFolder).listAll().await()
         return result.items.map {
             Photo().apply {
                 storageReference = it
