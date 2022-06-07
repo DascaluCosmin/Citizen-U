@@ -44,6 +44,7 @@ class ProjectProposalRepositoryImpl @Inject constructor(
                     .collection(DatabaseConstants.PROPOSED_PROJECTS_COL)
                     .add(projectProposal.mapToModelClass())
                     .await()
+                Thread.sleep(2000L)
 
                 listProposedProjectAttachment.forEach { attachment ->
                     attachmentRepository.saveAttachment(

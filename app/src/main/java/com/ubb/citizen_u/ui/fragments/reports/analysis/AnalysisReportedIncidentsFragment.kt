@@ -165,6 +165,7 @@ class AnalysisReportedIncidentsFragment : Fragment() {
                         )
                     }.toList()
 
+                Log.d(TAG, "Setting cluster with ${markerItems.size} items")
                 setUpCluster()
 
                 clusterManager.algorithm.maxDistanceBetweenClusteredItems = 30

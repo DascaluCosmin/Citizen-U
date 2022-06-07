@@ -14,7 +14,7 @@ import javax.inject.Singleton
 object FirebaseModule {
 
     // Could also be set to BuildConfig.DEBUG / BuildConfig.RELEASE
-    private const val USE_EMULATOR = true
+    private const val USE_EMULATOR = false
     private const val EMULATOR_SPECIAL_IP = "10.0.2.2"
     private const val EMULATOR_SPECIAL_PORT_FIRESTORE = 8080
     private const val EMULATOR_SPECIAL_PORT_AUTH = 9099

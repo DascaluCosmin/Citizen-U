@@ -52,6 +52,8 @@ class CitizenRequestRepositoryImpl @Inject constructor(
 
                 incident.category = getIncidentOverallCategory(listIncidentPhotos)
                     ?.replace('_', ' ')
+                Log.d(TAG, "The overall predicted category is ${incident.category}")
+
                 val citizen = incident.citizen
                 val result =
                     usersRef.document(citizen!!.id).collection(USER_REQUESTS_INCIDENTS_COL)
@@ -80,9 +82,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         photosGroupedByCategory.forEach {
             if (it.value.size > numberAppearancesMostPredictedCategory) {
                 mostPredictedCategory = it.key
-                numberAppearancesMostPredictedCategory = 1
-            } else if (it.value.size == numberAppearancesMostPredictedCategory) {
-                numberAppearancesMostPredictedCategory++
+                numberAppearancesMostPredictedCategory = it.value.size
             }
         }
 

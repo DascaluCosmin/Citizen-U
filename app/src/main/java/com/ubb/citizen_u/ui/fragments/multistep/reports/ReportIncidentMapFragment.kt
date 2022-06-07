@@ -90,8 +90,8 @@ class ReportIncidentMapFragment : Fragment() {
                         geocoder.getFromLocation(latitude, longitude, 1)
                     if (!addressList.isNullOrEmpty()) {
                         val reversedGeocodedAddress = addressList.first()
-                        val firstAddressLine = reversedGeocodedAddress.getAddressLine(0)
-                        if (!firstAddressLine.isNullOrEmpty()) {
+                        val firstAddressLine = reversedGeocodedAddress.thoroughfare + ", " + reversedGeocodedAddress.subThoroughfare
+                        if (firstAddressLine.isNotEmpty()) {
                             markerOptions.title(firstAddressLine)
                             citizenRequestViewModel.incidentAddress = firstAddressLine
                             citizenRequestViewModel.incidentLatitude = latitude
