@@ -76,6 +76,22 @@ class ProjectProposalViewModel @Inject constructor(
         _getOthersProposedProjectsState
     //endregion
 
+    //region Vote Project Proposals
+    private val _voteProjectProposalState: MutableSharedFlow<Response<Boolean>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val voteProjectProposalState: SharedFlow<Response<Boolean>> = _voteProjectProposalState
+
+    private val _undoVoteProjectProposalState: MutableSharedFlow<Response<Boolean>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val undoVoteProjectProposalState: SharedFlow<Response<Boolean>> = _undoVoteProjectProposalState
+    //endregion
+
     var currentSelectedProjectProposal: ProjectProposalData? = null
     var currentSelectedProjectProposalPhotoIndex = 0
     var currentSelectedProjectProposalCommentIndex = 0
@@ -84,12 +100,38 @@ class ProjectProposalViewModel @Inject constructor(
         listProposedProjectAttachment.add(attachment)
     }
 
+    fun voteProjectProposal(citizenId: String) {
+        Log.d(TAG,
+            "Citizen $citizenId is voting project proposal ${currentSelectedProjectProposal?.id}...")
+        viewModelScope.launch(Dispatchers.IO) {
+            projectProposalUseCases.voteProjectProposalUseCaseUseCase(currentSelectedProjectProposal!!,
+                citizenId).collect {
+                _voteProjectProposalState.tryEmit(it)
+                _voteProjectProposalState.resetReplayCache()
+            }
+        }
+    }
+
+    fun undoVoteProjectProposal(citizenId: String) {
+        Log.d(TAG,
+            "Citizen $citizenId is undoing project proposal ${currentSelectedProjectProposal?.id} vote...")
+        viewModelScope.launch(Dispatchers.IO) {
+            projectProposalUseCases.undoVoteProjectProposalUseCaseUseCase(
+                currentSelectedProjectProposal!!,
+                citizenId)
+                .collect {
+                    _undoVoteProjectProposalState.tryEmit(it)
+                    _undoVoteProjectProposalState.resetReplayCache()
+                }
+        }
+    }
+
     fun addCommentToCurrentProposedProject(comment: Comment) {
         Log.d(TAG,
             "Adding comment ${comment.text} to project proposal ${currentSelectedProjectProposal?.id}...")
         viewModelScope.launch(Dispatchers.IO) {
             currentSelectedProjectProposal?.let { projectProposal ->
-                projectProposalUseCases.addCommentToProjectProposal(projectProposal, comment)
+                projectProposalUseCases.addCommentToProjectProposalUseCase(projectProposal, comment)
                     .collect {
                         if (it is Response.Success) {
                             currentSelectedProjectProposal?.comments?.run {

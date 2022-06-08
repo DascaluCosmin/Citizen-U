@@ -72,6 +72,8 @@ object ProjectProposalConstants {
     //region Success
     const val SUCCESSFUL_ADDED_IMAGE = "The image has been added successfully!"
     const val SUCCESSFUL_ADDED_PDF = "The PDF file has been added successfully!"
+    const val SUCCESSFUL_VOTE = "Your vote has been added!"
+    const val SUCCESSFUL_UNDO_VOTE = "Your vote has been deleted!"
 
     const val SUCCESSFUL_PROPOSAL_PROJECT = "The project has been proposed successfully!"
     //endregion
@@ -104,6 +106,7 @@ object SettingsConstants {
 
 object ConfigurationConstants {
     const val IMAGE_CAROUSEL_NUMBER_OF_SECONDS = 3000L
+    const val SEPARATOR_VOTING_IDS = ","
 }
 
 object NotificationsConstants {

@@ -5,6 +5,8 @@ data class ProjectProposalUseCases(
     val getCitizenProposedProjectsUseCase: GetCitizenProposedProjectsUseCase,
     val getOthersProposedProjectsUseCase: GetOthersProposedProjectsUseCase,
     val getProposedProjectUseCase: GetProposedProjectUseCase,
-    val addCommentToProjectProposal: AddCommentToProjectProposalUseCase,
+    val addCommentToProjectProposalUseCase: AddCommentToProjectProposalUseCase,
+    val voteProjectProposalUseCaseUseCase: VoteProjectProposalUseCase,
+    val undoVoteProjectProposalUseCaseUseCase: UndoVoteProjectProposalUseCase,
 ) {
 }

@@ -43,7 +43,10 @@ object ProjectProposalModule {
             getOthersProposedProjectsUseCase = GetOthersProposedProjectsUseCase(
                 projectProposalRepository),
             getProposedProjectUseCase = GetProposedProjectUseCase(projectProposalRepository),
-            addCommentToProjectProposal = AddCommentToProjectProposalUseCase(
+            addCommentToProjectProposalUseCase = AddCommentToProjectProposalUseCase(
+                projectProposalRepository),
+            voteProjectProposalUseCaseUseCase = VoteProjectProposalUseCase(projectProposalRepository),
+            undoVoteProjectProposalUseCaseUseCase = UndoVoteProjectProposalUseCase(
                 projectProposalRepository)
         )
 }

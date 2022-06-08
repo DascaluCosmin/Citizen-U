@@ -14,6 +14,16 @@ interface ProjectProposalRepository {
         listProposedProjectAttachment: List<Attachment>,
     ): Flow<Response<Boolean>>
 
+    suspend fun voteProject(
+        projectProposal: ProjectProposalData,
+        citizenId: String,
+    ): Flow<Response<Boolean>>
+
+    suspend fun undoVoteProject(
+        projectProposal: ProjectProposalData,
+        citizenId: String,
+    ): Flow<Response<Boolean>>
+
     suspend fun getProjectProposal(
         citizenId: String,
         projectProposalId: String,
@@ -23,5 +33,8 @@ interface ProjectProposalRepository {
 
     suspend fun getAllProposedProjectsOfOthers(currentCitizenId: String): Flow<Response<List<ProjectProposalData?>>>
 
-    suspend fun addCommentToProjectProposal(projectProposal: ProjectProposal, comment: Comment): Flow<Response<Boolean>>
+    suspend fun addCommentToProjectProposal(
+        projectProposal: ProjectProposal,
+        comment: Comment,
+    ): Flow<Response<Boolean>>
 }

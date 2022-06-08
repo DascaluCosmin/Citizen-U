@@ -342,8 +342,17 @@
                         android:layout_marginTop="@dimen/generic_margin_half"
                         android:onClick="@{() -> proposedProjectsDetailsFragment.viewDocuments()}"
                         android:text="@string/view_documents_button_text"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/add_comment_button" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/vote_project_proposal_button" />
+
+                    <Button
+                        android:id="@+id/vote_project_proposal_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> proposedProjectsDetailsFragment.voteOrUndoVoteProject()}"
+                        android:text="@string/project_proposal_vote_button_text"
+                        app:layout_constraintBottom_toBottomOf="@id/add_comment_button"
+                        app:layout_constraintStart_toStartOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

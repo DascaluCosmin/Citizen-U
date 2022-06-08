@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import com.ubb.citizen_u.R
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.databinding.FragmentProposedProjectsDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
@@ -23,6 +24,8 @@ import com.ubb.citizen_u.ui.viewmodels.ProjectProposalViewModel
 import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_ADD_COMMENT
 import com.ubb.citizen_u.util.ConfigurationConstants.IMAGE_CAROUSEL_NUMBER_OF_SECONDS
 import com.ubb.citizen_u.util.DateFormatter
+import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_UNDO_VOTE
+import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_VOTE
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_COMMENT_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -67,6 +70,8 @@ class ProposedProjectsDetailsFragment : Fragment() {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { collectGetProjectProposalState() }
                 launch { collectAddCommentToProjectProposalState() }
+                launch { collectVoteProjectProposalState() }
+                launch { collectUndoVoteProjectProposalState() }
             }
         }
     }
@@ -127,6 +132,16 @@ class ProposedProjectsDetailsFragment : Fragment() {
                             binding.addCommentButton.visibility = View.GONE
                         }
 
+                        votedBy?.let { votedByValue ->
+                            if (votedByValue.contains(citizenViewModel.citizenId)) {
+                                binding.voteProjectProposalButton.text =
+                                    getString(R.string.project_proposal_unvote_button_text)
+                            } else {
+                                binding.voteProjectProposalButton.text =
+                                    getString(R.string.project_proposal_vote_button_text)
+                            }
+                        }
+
                         getCurrentComment(comments)
                     }
                 }
@@ -151,6 +166,52 @@ class ProposedProjectsDetailsFragment : Fragment() {
                     binding.addProjectProposalCommentTextfield.editText?.text?.clear()
                     toastErrorMessage(SUCCESSFUL_ADD_COMMENT)
                     getCurrentComment(it.data.comments)
+                }
+            }
+        }
+    }
+
+    private suspend fun collectVoteProjectProposalState() {
+        projectProposalViewModel.voteProjectProposalState.collect {
+            Log.d(TAG, "collectVoteProjectProposalState: Collecting response $it")
+            when (it) {
+                Response.Loading -> {
+                    binding.mainProgressbar.visibility = View.VISIBLE
+                }
+                is Response.Error -> {
+                    binding.mainProgressbar.visibility = View.GONE
+                    toastErrorMessage()
+                }
+                is Response.Success -> {
+                    binding.mainProgressbar.visibility = View.GONE
+                    binding.proposedProjectNumberOfVotes.text =
+                        projectProposalViewModel.currentSelectedProjectProposal!!.numberOfVotes.toString()
+                    binding.voteProjectProposalButton.text =
+                        getString(R.string.project_proposal_unvote_button_text)
+                    toastMessage(SUCCESSFUL_VOTE)
+                }
+            }
+        }
+    }
+
+    private suspend fun collectUndoVoteProjectProposalState() {
+        projectProposalViewModel.undoVoteProjectProposalState.collect {
+            Log.d(TAG, "collectUndoVoteProjectProposalState: Collecting response $it")
+            when (it) {
+                Response.Loading -> {
+                    binding.mainProgressbar.visibility = View.VISIBLE
+                }
+                is Response.Error -> {
+                    binding.mainProgressbar.visibility = View.GONE
+                    toastErrorMessage()
+                }
+                is Response.Success -> {
+                    binding.mainProgressbar.visibility = View.GONE
+                    binding.proposedProjectNumberOfVotes.text =
+                        projectProposalViewModel.currentSelectedProjectProposal!!.numberOfVotes.toString()
+                    binding.voteProjectProposalButton.text =
+                        getString(R.string.project_proposal_vote_button_text)
+                    toastMessage(SUCCESSFUL_UNDO_VOTE)
                 }
             }
         }
@@ -231,5 +292,16 @@ class ProposedProjectsDetailsFragment : Fragment() {
 
     fun viewDocuments() {
 
+    }
+
+    fun voteOrUndoVoteProject() {
+        val currentCitizen = citizenViewModel.currentCitizen
+
+        val voteButtonText = getString(R.string.project_proposal_vote_button_text)
+        if (binding.voteProjectProposalButton.text.equals(voteButtonText)) {
+            projectProposalViewModel.voteProjectProposal(currentCitizen.id)
+        } else {
+            projectProposalViewModel.undoVoteProjectProposal(currentCitizen.id)
+        }
     }
 }

@@ -11,8 +11,8 @@ import com.ubb.citizen_u.data.model.citizens.proposals.ProjectProposalData
 import com.ubb.citizen_u.data.repositories.*
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.CitizenConstants
+import com.ubb.citizen_u.util.ConfigurationConstants.SEPARATOR_VOTING_IDS
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
-import com.ubb.citizen_u.util.DatabaseConstants
 import com.ubb.citizen_u.util.DatabaseConstants.COMMENTS_COL
 import com.ubb.citizen_u.util.DatabaseConstants.PROPOSED_PROJECTS_COL
 import kotlinx.coroutines.flow.Flow
@@ -47,7 +47,7 @@ class ProjectProposalRepositoryImpl @Inject constructor(
                 }
 
                 val result = usersRef.document(proposedById)
-                    .collection(DatabaseConstants.PROPOSED_PROJECTS_COL)
+                    .collection(PROPOSED_PROJECTS_COL)
                     .add(projectProposal.mapToModelClass())
                     .await()
                 Thread.sleep(2000L)
@@ -64,6 +64,67 @@ class ProjectProposalRepositoryImpl @Inject constructor(
                 emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
             }
         }
+
+    override suspend fun voteProject(
+        projectProposal: ProjectProposalData,
+        citizenId: String,
+    ): Flow<Response<Boolean>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                projectProposal.numberOfVotes = projectProposal.numberOfVotes!! + 1
+
+                if (projectProposal.votedBy!!.isEmpty()) {
+                    projectProposal.votedBy = citizenId
+                } else {
+                    projectProposal.votedBy =
+                        projectProposal.votedBy + SEPARATOR_VOTING_IDS + citizenId
+                }
+
+                usersRef.document(projectProposal.proposedBy!!.id)
+                    .collection(PROPOSED_PROJECTS_COL)
+                    .document(projectProposal.id)
+                    .update("numberOfVotes",
+                        projectProposal.numberOfVotes,
+                        "votedBy",
+                        projectProposal.votedBy)
+                    .await()
+
+                emit(Response.Success(true))
+            } catch (exception: Exception) {
+                Log.e(TAG,
+                    "An error has occurred while voting the project ${projectProposal.id}: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
+    override suspend fun undoVoteProject(
+        projectProposal: ProjectProposalData,
+        citizenId: String,
+    ): Flow<Response<Boolean>> = flow {
+        try {
+            emit(Response.Loading)
+
+            projectProposal.numberOfVotes = projectProposal.numberOfVotes!! - 1
+            projectProposal.votedBy = projectProposal.votedBy?.replace(citizenId, "")
+
+            usersRef.document(projectProposal.proposedBy!!.id)
+                .collection(PROPOSED_PROJECTS_COL)
+                .document(projectProposal.id)
+                .update("numberOfVotes",
+                    projectProposal.numberOfVotes,
+                    "votedBy",
+                    projectProposal.votedBy)
+                .await()
+
+            emit(Response.Success(true))
+        } catch (exception: Exception) {
+            Log.e(TAG,
+                "An error has occurred while undoing the vote of the project ${projectProposal.id}: ${exception.message}")
+            emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+        }
+    }
 
     override suspend fun getProjectProposal(
         citizenId: String,

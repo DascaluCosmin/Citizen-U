@@ -17,6 +17,7 @@ open class ProjectProposal(
     var category: String? = null,
     var location: String? = null,
     var numberOfVotes: Int? = 0,
+    var votedBy: String? = ""
 ) {
 
     override fun toString(): String {
