@@ -3,13 +3,11 @@ package com.ubb.citizen_u.util.di
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.ubb.citizen_u.data.repositories.AttachmentRepository
-import com.ubb.citizen_u.data.repositories.CitizenRepository
-import com.ubb.citizen_u.data.repositories.CitizenRequestRepository
-import com.ubb.citizen_u.data.repositories.PhotoRepository
+import com.ubb.citizen_u.data.repositories.*
 import com.ubb.citizen_u.data.repositories.impl.AttachmentRepositoryImpl
 import com.ubb.citizen_u.data.repositories.impl.CitizenRepositoryImpl
 import com.ubb.citizen_u.data.repositories.impl.CitizenRequestRepositoryImpl
+import com.ubb.citizen_u.data.repositories.impl.CommentRepositoryImpl
 import com.ubb.citizen_u.domain.usescases.citizens.CitizenUseCases
 import com.ubb.citizen_u.domain.usescases.citizens.GetCitizenUseCase
 import com.ubb.citizen_u.domain.usescases.citizens.requests.*
@@ -42,12 +40,14 @@ object CitizenModule {
         @Named(INCIDENTS_CATEGORIES_COL) incidentCategoriesRef: CollectionReference,
         photoRepository: PhotoRepository,
         citizenRepository: CitizenRepository,
+        commentRepository: CommentRepository,
     ): CitizenRequestRepository =
         CitizenRequestRepositoryImpl(
             usersRef = usersRef,
             incidentCategoriesRef = incidentCategoriesRef,
             photoRepository = photoRepository,
-            citizenRepository = citizenRepository
+            citizenRepository = citizenRepository,
+            commentRepository = commentRepository
         )
 
     @Provides
@@ -60,6 +60,10 @@ object CitizenModule {
             usersRef = usersRef,
             firebaseStorage = firebaseStorage
         )
+
+    @Provides
+    @Singleton
+    fun providesCommentRepository(): CommentRepository = CommentRepositoryImpl()
 
     @Provides
     @Singleton

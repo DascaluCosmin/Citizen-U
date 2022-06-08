@@ -13,7 +13,10 @@
     <string name="date_separator_label">-</string>
     <string name="generic_category_label">Categorie</string>
     <string name="generic_description_label">Descriere</string>
+    <string name="generic_motivation_label">Motivație</string>
     <string name="generic_address_label">Adresa</string>
+    <string name="generic_location_label">Locație</string>
+    <string name="generic_number_of_votes_label">Număr de voturi</string>
     <string name="generic_posted_on_label">Postat în data de</string>
     <string name="generic_posted_by">Postat de către</string>
     <string name="generic_status_label">Status</string>
@@ -82,8 +85,8 @@
     <string name="incident_photo_hint">Te rog să fotografiezi incidentul…</string>
     <string name="add_comment_hint">Adaugă un nou comentariu</string>
     <string name="incident_category_dropdown_hint">Categorie incideent</string>
-    <string name="add_comment_button_text">Adaugă un comentariu</string>
-
+    <string name="add_comment_button_text">Adaugă comentariu</string>
+    <string name="view_documents_button_text">Vezi documente</string>
 
     <!-- Preference Titles -->
     <string name="language_header">Limbă</string>

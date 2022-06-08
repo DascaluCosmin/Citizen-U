@@ -205,7 +205,9 @@
         tools:layout="@layout/fragment_other_citizens_proposed_projects_transition">
         <action
             android:id="@+id/action_otherCitizensProposedProjectsTransitionFragment_to_proposedProjectsListFragment"
-            app:destination="@id/proposedProjectsListFragment" />
+            app:destination="@id/proposedProjectsListFragment"
+            app:popUpTo="@id/otherCitizensProposedProjectsTransitionFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/citizenProposedProjectsTransitionFragment"
@@ -214,7 +216,9 @@
         tools:layout="@layout/fragment_citizen_proposed_projects_transition">
         <action
             android:id="@+id/action_citizenProposedProjectsTransitionFragment_to_proposedProjectsListFragment"
-            app:destination="@id/proposedProjectsListFragment" />
+            app:destination="@id/proposedProjectsListFragment"
+            app:popUpTo="@id/citizenProposedProjectsTransitionFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/proposedProjectsListFragment"

@@ -5,16 +5,15 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.ubb.citizen_u.data.Details
 import com.ubb.citizen_u.data.model.Attachment
+import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.proposals.ProjectProposal
 import com.ubb.citizen_u.data.model.citizens.proposals.ProjectProposalData
-import com.ubb.citizen_u.data.repositories.AttachmentRepository
-import com.ubb.citizen_u.data.repositories.CitizenRepository
-import com.ubb.citizen_u.data.repositories.PhotoRepository
-import com.ubb.citizen_u.data.repositories.ProjectProposalRepository
+import com.ubb.citizen_u.data.repositories.*
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.CitizenConstants
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.DatabaseConstants
+import com.ubb.citizen_u.util.DatabaseConstants.COMMENTS_COL
 import com.ubb.citizen_u.util.DatabaseConstants.PROPOSED_PROJECTS_COL
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -27,6 +26,7 @@ class ProjectProposalRepositoryImpl @Inject constructor(
     private val attachmentRepository: AttachmentRepository,
     private val citizenRepository: CitizenRepository,
     private val photoRepository: PhotoRepository,
+    private val commentRepository: CommentRepository,
 ) : ProjectProposalRepository {
 
     companion object {
@@ -65,10 +65,10 @@ class ProjectProposalRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getProposedProject(
+    override suspend fun getProjectProposal(
         citizenId: String,
         projectProposalId: String,
-    ): Flow<Response<ProjectProposal?>> =
+    ): Flow<Response<ProjectProposalData?>> =
         flow {
             try {
                 emit(Response.Loading)
@@ -121,6 +121,33 @@ class ProjectProposalRepositoryImpl @Inject constructor(
             }
         }
 
+    override suspend fun addCommentToProjectProposal(
+        projectProposal: ProjectProposal,
+        comment: Comment,
+    ): Flow<Response<Boolean>> =
+        flow {
+            try {
+                emit(Response.Loading)
+                if (projectProposal.proposedBy == null) {
+                    emit(Response.Error(DEFAULT_ERROR_MESSAGE))
+                    return@flow
+                }
+
+                usersRef.document(projectProposal.proposedBy!!.id)
+                    .collection(PROPOSED_PROJECTS_COL)
+                    .document(projectProposal.id)
+                    .collection(COMMENTS_COL)
+                    .add(comment)
+                    .await()
+
+                emit(Response.Success(true))
+            } catch (exception: Exception) {
+                Log.e(TAG,
+                    "addCommentToProjectProposal: An error has occurred: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
+
     private suspend fun getAllProjectProposals(
         citizenId: String,
         listDetails: List<Details>,
@@ -158,6 +185,10 @@ class ProjectProposalRepositoryImpl @Inject constructor(
                 this.photos = photoRepository.getAllProposedProjectPhotos(citizenId, this.id)
             }
 
+            if (listDetails.contains(Details.COMMENTS)) {
+                comments = commentRepository.getAllComments(projectProposalDocSnapshot)
+            }
+
             citizenRepository.getCitizen(citizenId).collect { citizenResponse ->
                 if (citizenResponse is Response.Success) {
                     this.proposedBy = citizenResponse.data
@@ -165,4 +196,6 @@ class ProjectProposalRepositoryImpl @Inject constructor(
             }
         }
     }
+
+
 }

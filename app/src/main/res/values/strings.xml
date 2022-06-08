@@ -12,8 +12,11 @@
     <string name="date_separator_label" translatable="false">-</string>
     <string name="generic_category_label">Category</string>
     <string name="generic_description_label">Description</string>
+    <string name="generic_motivation_label">Motivation</string>
     <string name="generic_address_label">Address</string>
+    <string name="generic_location_label">Address</string>
     <string name="generic_posted_on_label">Posted on</string>
+    <string name="generic_number_of_votes_label">Number of votes</string>
     <string name="generic_posted_by">Posted by</string>
     <string name="generic_status_label">Status</string>
     <string name="generic_other_citizens_comments_label">Other citizens opinions</string>
@@ -87,6 +90,7 @@
     <string name="add_comment_hint">Add a new comment</string>
     <string name="incident_category_dropdown_hint">Incident Category</string>
     <string name="add_comment_button_text">Add comment</string>
+    <string name="view_documents_button_text">View documents</string>
 
     <!-- Preference Titles -->
     <string name="language_header">Language</string>

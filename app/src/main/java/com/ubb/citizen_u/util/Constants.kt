@@ -10,7 +10,7 @@ object ValidationConstants {
         "Please provide the incident headline!"
     const val INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE =
         "Please provide at least one photo of the incident!"
-    const val INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE =
+    const val INVALID_COMMENT_TEXT_ERROR_MESSAGE =
         "Please enter the comment!"
     const val INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE =
         "Please choose a category for the project!"
@@ -52,7 +52,7 @@ object CitizenRequestConstants {
 
     // region Success
     const val SUCCESSFUL_REPORT_INCIDENT = "The incident has been reported successfully!"
-    const val SUCCESSFUL_ADD_COMMENT_TO_INCIDENT = "The comment has been added successfully!"
+    const val SUCCESSFUL_ADD_COMMENT = "The comment has been added successfully!"
     // endregion
 
     const val INCIDENT_GENERIC_HEADLINE = "Incident"

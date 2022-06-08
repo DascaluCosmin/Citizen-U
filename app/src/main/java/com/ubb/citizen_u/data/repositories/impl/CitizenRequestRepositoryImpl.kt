@@ -9,6 +9,7 @@ import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.data.repositories.CitizenRepository
 import com.ubb.citizen_u.data.repositories.CitizenRequestRepository
+import com.ubb.citizen_u.data.repositories.CommentRepository
 import com.ubb.citizen_u.data.repositories.PhotoRepository
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.util.CitizenRequestConstants.DEFAULT_INCIDENT_CATEGORY
@@ -26,6 +27,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
     private val incidentCategoriesRef: CollectionReference,
     private val photoRepository: PhotoRepository,
     private val citizenRepository: CitizenRepository,
+    private val commentRepository: CommentRepository
 ) : CitizenRequestRepository {
 
     companion object {
@@ -246,7 +248,8 @@ class CitizenRequestRepositoryImpl @Inject constructor(
     ): Incident? {
         return incidentDocSnapshot.toObject(Incident::class.java)?.apply {
             if (listDetails.contains(Details.COMMENTS)) {
-                comments = getIncidentComments(incidentDocSnapshot = incidentDocSnapshot)
+                comments = commentRepository.getAllComments(incidentDocSnapshot)
+//                comments = getIncidentComments(incidentDocSnapshot = incidentDocSnapshot)
             }
 
             if (listDetails.contains(Details.PHOTOS)) {

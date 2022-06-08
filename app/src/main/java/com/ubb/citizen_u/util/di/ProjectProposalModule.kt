@@ -1,15 +1,9 @@
 package com.ubb.citizen_u.util.di
 
 import com.google.firebase.firestore.CollectionReference
-import com.ubb.citizen_u.data.repositories.AttachmentRepository
-import com.ubb.citizen_u.data.repositories.CitizenRepository
-import com.ubb.citizen_u.data.repositories.PhotoRepository
-import com.ubb.citizen_u.data.repositories.ProjectProposalRepository
+import com.ubb.citizen_u.data.repositories.*
 import com.ubb.citizen_u.data.repositories.impl.ProjectProposalRepositoryImpl
-import com.ubb.citizen_u.domain.usescases.projectproposals.GetCitizenProposedProjectsUseCase
-import com.ubb.citizen_u.domain.usescases.projectproposals.GetOthersProposedProjectsUseCase
-import com.ubb.citizen_u.domain.usescases.projectproposals.ProjectProposalUseCases
-import com.ubb.citizen_u.domain.usescases.projectproposals.ProposeProjectUseCase
+import com.ubb.citizen_u.domain.usescases.projectproposals.*
 import com.ubb.citizen_u.util.DatabaseConstants.USERS_COL
 import dagger.Module
 import dagger.Provides
@@ -29,12 +23,14 @@ object ProjectProposalModule {
         attachmentRepository: AttachmentRepository,
         citizenRepository: CitizenRepository,
         photoRepository: PhotoRepository,
+        commentRepository: CommentRepository,
     ): ProjectProposalRepository =
         ProjectProposalRepositoryImpl(
             usersRef = usersRef,
             attachmentRepository = attachmentRepository,
             citizenRepository = citizenRepository,
-            photoRepository = photoRepository
+            photoRepository = photoRepository,
+            commentRepository = commentRepository
         )
 
     @Provides
@@ -45,6 +41,9 @@ object ProjectProposalModule {
             getCitizenProposedProjectsUseCase = GetCitizenProposedProjectsUseCase(
                 projectProposalRepository),
             getOthersProposedProjectsUseCase = GetOthersProposedProjectsUseCase(
+                projectProposalRepository),
+            getProposedProjectUseCase = GetProposedProjectUseCase(projectProposalRepository),
+            addCommentToProjectProposal = AddCommentToProjectProposalUseCase(
                 projectProposalRepository)
         )
 }

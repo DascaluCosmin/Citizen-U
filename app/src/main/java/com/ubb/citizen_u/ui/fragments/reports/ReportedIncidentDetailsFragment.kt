@@ -20,10 +20,10 @@ import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
-import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_ADD_COMMENT_TO_INCIDENT
+import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_ADD_COMMENT
 import com.ubb.citizen_u.util.ConfigurationConstants.IMAGE_CAROUSEL_NUMBER_OF_SECONDS
 import com.ubb.citizen_u.util.DateFormatter
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE
+import com.ubb.citizen_u.util.ValidationConstants.INVALID_COMMENT_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -85,7 +85,7 @@ class ReportedIncidentDetailsFragment : Fragment() {
                     binding.mainProgressbar.visibility = View.GONE
 
                     binding.addIncidentCommentTextfield.editText?.text?.clear()
-                    toastMessage(SUCCESSFUL_ADD_COMMENT_TO_INCIDENT)
+                    toastMessage(SUCCESSFUL_ADD_COMMENT)
                     getCurrentComment(it.data.comments)
                 }
             }
@@ -105,6 +105,7 @@ class ReportedIncidentDetailsFragment : Fragment() {
                     binding.mainProgressbar.visibility = View.GONE
                     binding.reportedIncidentImage.visibility = View.GONE
                     binding.reportedIncidentDetails.visibility = View.GONE
+                    toastErrorMessage()
                 }
                 is Response.Success -> {
                     binding.mainProgressbar.visibility = View.GONE
@@ -192,7 +193,7 @@ class ReportedIncidentDetailsFragment : Fragment() {
             binding.addIncidentCommentTextfield.editText?.text.toString().trim { it <= ' ' }
         when {
             TextUtils.isEmpty(commentText) -> {
-                toastMessage(INVALID_INCIDENT_COMMENT_TEXT_ERROR_MESSAGE)
+                toastMessage(INVALID_COMMENT_TEXT_ERROR_MESSAGE)
             }
 
             else -> {
