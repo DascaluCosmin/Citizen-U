@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ubb.citizen_u.data.model.Attachment
+import com.ubb.citizen_u.data.model.Pdf
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.proposals.ProjectProposal
@@ -95,6 +96,7 @@ class ProjectProposalViewModel @Inject constructor(
     var currentSelectedProjectProposal: ProjectProposalData? = null
     var currentSelectedProjectProposalPhotoIndex = 0
     var currentSelectedProjectProposalCommentIndex = 0
+    var currentSelectedProjectProposalDocumentIndex = 0
 
     fun addAttachment(attachment: Attachment) {
         listProposedProjectAttachment.add(attachment)
@@ -201,6 +203,30 @@ class ProjectProposalViewModel @Inject constructor(
                 currentSelectedProjectProposalCommentIndex = it.size - 1
             }
             return comment
+        }
+        return null
+    }
+
+    @Synchronized
+    fun getNextProposedProjectDocument(): Pdf? {
+        currentSelectedProjectProposal?.documents?.let {
+            val document = it[currentSelectedProjectProposalDocumentIndex++]
+            if (currentSelectedProjectProposalDocumentIndex >= it.size) {
+                currentSelectedProjectProposalDocumentIndex = 0
+            }
+            return document
+        }
+        return null
+    }
+
+    @Synchronized
+    fun getPreviousProposedProjectDocument(): Pdf? {
+        currentSelectedProjectProposal?.documents?.let {
+            val document = it[currentSelectedProjectProposalDocumentIndex--]
+            if (currentSelectedProjectProposalDocumentIndex == -1) {
+                currentSelectedProjectProposalDocumentIndex = it.size - 1
+            }
+            return document
         }
         return null
     }

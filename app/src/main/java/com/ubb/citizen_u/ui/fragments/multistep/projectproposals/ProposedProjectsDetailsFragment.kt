@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
+import com.ubb.citizen_u.data.model.Pdf
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.databinding.FragmentProposedProjectsDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
@@ -297,21 +298,35 @@ class ProposedProjectsDetailsFragment : Fragment() {
 
         val currentProjectProposal = projectProposalViewModel.currentSelectedProjectProposal
         if (!currentProjectProposal?.documents.isNullOrEmpty()) {
-            currentProjectProposal?.documents?.get(0)?.let {
-                PdfFiller.fill(this,
-                    binding.mainProgressbar,
-                    binding.projectProposalPdf,
-                    it.storageReference)
+
+            currentProjectProposal?.documents?.let {
+                if (it.size < 2) {
+                    binding.nextDocumentButton.visibility = View.GONE
+                    binding.previousDocumentButton.visibility = View.GONE
+                } else {
+                    binding.nextDocumentButton.visibility = View.VISIBLE
+                    binding.previousDocumentButton.visibility = View.VISIBLE
+                }
+                showCurrentDocumentToProposedProject(it[0])
             }
         }
     }
 
     fun getNextDocumentToProjectProposal() {
-
+        showCurrentDocumentToProposedProject(projectProposalViewModel.getNextProposedProjectDocument())
     }
 
     fun getPreviousDocumentToProjectProposal() {
+        showCurrentDocumentToProposedProject(projectProposalViewModel.getPreviousProposedProjectDocument())
+    }
 
+    private fun showCurrentDocumentToProposedProject(document: Pdf?) {
+        document?.let {
+            PdfFiller.fill(this,
+                binding.mainProgressbar,
+                binding.projectProposalPdf,
+                it.storageReference)
+        }
     }
 
     fun viewContent() {
