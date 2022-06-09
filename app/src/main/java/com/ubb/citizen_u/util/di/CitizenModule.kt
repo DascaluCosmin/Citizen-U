@@ -4,10 +4,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.ubb.citizen_u.data.repositories.*
-import com.ubb.citizen_u.data.repositories.impl.AttachmentRepositoryImpl
-import com.ubb.citizen_u.data.repositories.impl.CitizenRepositoryImpl
-import com.ubb.citizen_u.data.repositories.impl.CitizenRequestRepositoryImpl
-import com.ubb.citizen_u.data.repositories.impl.CommentRepositoryImpl
+import com.ubb.citizen_u.data.repositories.impl.*
 import com.ubb.citizen_u.domain.usescases.citizens.CitizenUseCases
 import com.ubb.citizen_u.domain.usescases.citizens.GetCitizenUseCase
 import com.ubb.citizen_u.domain.usescases.citizens.requests.*
@@ -64,6 +61,11 @@ object CitizenModule {
     @Provides
     @Singleton
     fun providesCommentRepository(): CommentRepository = CommentRepositoryImpl()
+
+    @Provides
+    @Singleton
+    fun providesDocumentRepository(firebaseStorage: FirebaseStorage): DocumentRepository =
+        DocumentRepositoryImpl(firebaseStorage)
 
     @Provides
     @Singleton

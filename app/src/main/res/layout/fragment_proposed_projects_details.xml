@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <ImageView
                 android:id="@+id/proposed_project_image"
@@ -358,17 +358,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
 
-            <ProgressBar
-                android:id="@+id/main_progressbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -376,17 +365,67 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
-            <TextView
-                android:id="@+id/some_Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="aaa"
-                android:textSize="100sp"
+            <com.github.barteksc.pdfviewer.PDFView
+                android:id="@+id/project_proposal_pdf"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/generic_margin"
+                android:layout_marginBottom="@dimen/generic_margin"
+                app:layout_constraintBottom_toTopOf="@id/next_document_button"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/next_document_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/generic_margin_half"
+                android:background="@null"
+                android:onClick="@{() -> proposedProjectsDetailsFragment.getNextDocumentToProjectProposal()}"
+                android:scaleType="fitStart"
+                android:src="@drawable/ic_baseline_navigate_next_24"
+                app:layout_constraintBottom_toTopOf="@+id/view_content_button"
+                app:layout_constraintEnd_toEndOf="@id/project_proposal_pdf"
+
+                app:layout_constraintStart_toEndOf="@id/previous_document_button" />
+
+            <ImageButton
+                android:id="@+id/previous_document_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/generic_margin_half"
+                android:background="@null"
+                android:onClick="@{() -> proposedProjectsDetailsFragment.getPreviousDocumentToProjectProposal()}"
+                android:scaleType="fitEnd"
+                android:src="@drawable/ic_baseline_navigate_before_24"
+                app:layout_constraintBottom_toTopOf="@+id/view_content_button"
+                app:layout_constraintEnd_toStartOf="@id/next_document_button"
+                app:layout_constraintStart_toStartOf="@id/project_proposal_pdf" />
+
+            <Button
+                android:id="@+id/view_content_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> proposedProjectsDetailsFragment.viewContent()}"
+                android:text="@string/view_content_project_proposal_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/project_proposal_pdf"
+                app:layout_constraintStart_toStartOf="@id/project_proposal_pdf" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/main_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

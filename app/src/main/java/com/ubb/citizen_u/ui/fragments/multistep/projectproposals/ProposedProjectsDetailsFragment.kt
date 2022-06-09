@@ -28,6 +28,7 @@ import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_UNDO_VOTE
 import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_VOTE
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_COMMENT_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
+import com.ubb.citizen_u.util.glide.PdfFiller
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -291,7 +292,31 @@ class ProposedProjectsDetailsFragment : Fragment() {
     }
 
     fun viewDocuments() {
+        binding.proposedProjectTextContent.visibility = View.GONE
+        binding.proposedProjectDocumentContent.visibility = View.VISIBLE
 
+        val currentProjectProposal = projectProposalViewModel.currentSelectedProjectProposal
+        if (!currentProjectProposal?.documents.isNullOrEmpty()) {
+            currentProjectProposal?.documents?.get(0)?.let {
+                PdfFiller.fill(this,
+                    binding.mainProgressbar,
+                    binding.projectProposalPdf,
+                    it.storageReference)
+            }
+        }
+    }
+
+    fun getNextDocumentToProjectProposal() {
+
+    }
+
+    fun getPreviousDocumentToProjectProposal() {
+
+    }
+
+    fun viewContent() {
+        binding.proposedProjectTextContent.visibility = View.VISIBLE
+        binding.proposedProjectDocumentContent.visibility = View.GONE
     }
 
     fun voteOrUndoVoteProject() {

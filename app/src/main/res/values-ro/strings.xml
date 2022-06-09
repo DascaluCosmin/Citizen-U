@@ -125,6 +125,7 @@
     <string name="project_proposal_vote_button_text">Votează</string>
     <string name="project_proposal_unvote_button_text">Șterge vot</string>
     <string name="proposed_project_votes_label">voturi</string>
+    <string name="view_content_project_proposal_button">Înapoi la conținut</string>
 
     <string-array name="project_categories">
         <item>Mobilitate și accesibilitate</item>

@@ -24,13 +24,15 @@ object ProjectProposalModule {
         citizenRepository: CitizenRepository,
         photoRepository: PhotoRepository,
         commentRepository: CommentRepository,
+        documentRepository: DocumentRepository,
     ): ProjectProposalRepository =
         ProjectProposalRepositoryImpl(
             usersRef = usersRef,
             attachmentRepository = attachmentRepository,
             citizenRepository = citizenRepository,
             photoRepository = photoRepository,
-            commentRepository = commentRepository
+            commentRepository = commentRepository,
+            documentRepository = documentRepository
         )
 
     @Provides

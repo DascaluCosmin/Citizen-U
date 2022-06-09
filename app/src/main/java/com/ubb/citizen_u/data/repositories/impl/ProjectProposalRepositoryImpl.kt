@@ -27,6 +27,7 @@ class ProjectProposalRepositoryImpl @Inject constructor(
     private val citizenRepository: CitizenRepository,
     private val photoRepository: PhotoRepository,
     private val commentRepository: CommentRepository,
+    private val documentRepository: DocumentRepository,
 ) : ProjectProposalRepository {
 
     companion object {
@@ -243,11 +244,21 @@ class ProjectProposalRepositoryImpl @Inject constructor(
     ): ProjectProposalData? {
         return projectProposalDocSnapshot.toObject(ProjectProposalData::class.java)?.apply {
             if (listDetails.contains(Details.PHOTOS)) {
-                this.photos = photoRepository.getAllProposedProjectPhotos(citizenId, this.id)
+                this.photos = photoRepository.getAllProposedProjectPhotos(
+                    citizenId = citizenId,
+                    proposedProjectId = this.id
+                )
             }
 
             if (listDetails.contains(Details.COMMENTS)) {
                 comments = commentRepository.getAllComments(projectProposalDocSnapshot)
+            }
+
+            if (listDetails.contains(Details.DOCUMENTS)) {
+                documents = documentRepository.getAllProposedProjectDocuments(
+                    citizenId = citizenId,
+                    proposedProjectId = this.id
+                )
             }
 
             citizenRepository.getCitizen(citizenId).collect { citizenResponse ->

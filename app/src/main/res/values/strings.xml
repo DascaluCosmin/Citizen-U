@@ -129,6 +129,7 @@
     <string name="project_proposal_vote_button_text">Vote</string>
     <string name="project_proposal_unvote_button_text">Undo vote</string>
     <string name="proposed_project_votes_label">votes</string>
+    <string name="view_content_project_proposal_button">Back to content</string>
 
     <string-array name="project_categories">
         <item>Mobility and accessibility</item>
