@@ -115,10 +115,14 @@ object NotificationsConstants {
     const val CHANNEL_DESCRIPTION = "Citizen-U Periodic Events Notifications"
 
     const val NOTIFICATION_ID = 1
+    const val EVENT_PUSH_NOTIFICATION_ID = 2
     const val NOTIFICATION_WORKER_TAG = "NotificationWork"
 
     const val NOTIFICATION_PUBLIC_RELEASE_EVENT_ID_KEY = "publicReleaseEventDetailsId"
     const val NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY = "periodicEventDetailsId"
+
+    const val EVENT_PUSH_NOTIFICATION_TOPIC_ID = "new_event"
+    const val PUBLIC_RELEASE_PUSH_NOTIFICATION_TOPIC_ID = "council_event"
 }
 
 object CitizenConstants {

@@ -12,13 +12,17 @@ import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.messaging.FirebaseMessaging
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.ActivityMainBinding
 import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
+import com.ubb.citizen_u.util.NotificationsConstants.EVENT_PUSH_NOTIFICATION_TOPIC_ID
 import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY
+import com.ubb.citizen_u.util.NotificationsConstants.PUBLIC_RELEASE_PUSH_NOTIFICATION_TOPIC_ID
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -36,6 +40,9 @@ class MainActivity : AppCompatActivity() {
 
     private val authenticationViewModel: AuthenticationViewModel by viewModels()
     private val args: MainActivityArgs by navArgs()
+
+    @Inject
+    lateinit var firebaseMessaging: FirebaseMessaging
 
     /**
      *  Uncomment in order to show App Bar
@@ -62,6 +69,9 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
         overrideNavigationDrawerItems()
+
+        firebaseMessaging.subscribeToTopic(EVENT_PUSH_NOTIFICATION_TOPIC_ID)
+        firebaseMessaging.subscribeToTopic(PUBLIC_RELEASE_PUSH_NOTIFICATION_TOPIC_ID)
 //         setupActionBarWithNavController(navController, appBarConfiguration)
 //        supportActionBar?.hide()
     }

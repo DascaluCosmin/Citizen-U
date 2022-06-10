@@ -103,6 +103,9 @@ dependencies {
 
     implementation 'com.firebaseui:firebase-ui-storage:3.2.1' // For Firebase Storage + Glide
 
+    // Firebase messaging
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.5'
+
     // endregion
 
     // region Dagger-Hilt

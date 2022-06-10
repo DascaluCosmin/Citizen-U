@@ -35,6 +35,14 @@
             android:authorities="${applicationId}.androidx-startup"
             tools:node="remove" />
 
+        <service
+            android:name=".data.services.PushNotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="false"
