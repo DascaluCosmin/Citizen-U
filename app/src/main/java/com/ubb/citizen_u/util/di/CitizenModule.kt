@@ -3,6 +3,7 @@ package com.ubb.citizen_u.util.di
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.ubb.citizen_u.data.api.AddressApi
 import com.ubb.citizen_u.data.repositories.*
 import com.ubb.citizen_u.data.repositories.impl.*
 import com.ubb.citizen_u.domain.usescases.citizens.CitizenUseCases
@@ -38,13 +39,15 @@ object CitizenModule {
         photoRepository: PhotoRepository,
         citizenRepository: CitizenRepository,
         commentRepository: CommentRepository,
+        addressApi: AddressApi,
     ): CitizenRequestRepository =
         CitizenRequestRepositoryImpl(
             usersRef = usersRef,
             incidentCategoriesRef = incidentCategoriesRef,
             photoRepository = photoRepository,
             citizenRepository = citizenRepository,
-            commentRepository = commentRepository
+            commentRepository = commentRepository,
+            addressApi = addressApi
         )
 
     @Provides

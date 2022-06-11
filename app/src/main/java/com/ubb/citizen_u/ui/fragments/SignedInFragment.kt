@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
+import com.ubb.citizen_u.data.api.AddressApi
 import com.ubb.citizen_u.databinding.FragmentSignedInBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastErrorMessage
@@ -23,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -40,6 +42,9 @@ class SignedInFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
     private val args: SignedInFragmentArgs by navArgs()
+
+    @Inject
+    lateinit var addressApi: AddressApi
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -125,6 +130,26 @@ class SignedInFragment : Fragment() {
     }
 
     fun viewPublicEventsList() {
+//        lifecycleScope.launchWhenCreated {
+//            val result = try {
+//                addressApi.getAddress(46.7786231, 23.56184)
+//            } catch (exception: IOException) {
+//                Log.e(TAG,
+//                    "IOException: there might be an internet connection issue: ${exception.message}")
+//                toastErrorMessage("Internet Connection Issue")
+//                return@launchWhenCreated
+//            } catch (exception: HttpException) {
+//                Log.e(TAG, "HttpException: unexpected response: ${exception.message()}")
+//                toastErrorMessage()
+//                return@launchWhenCreated
+//            }
+//            if (result.isSuccessful && result.body() != null) {
+//                val address = result.body()
+//                toastMessage(address?.address?.suburb.toString())
+//            } else {
+//                Log.e(TAG, "An error has occurred. The result is ${result.isSuccessful}")
+//            }
+//        }
         findNavController().navigate(R.id.action_signedInFragment_to_eventsListFragment)
     }
 

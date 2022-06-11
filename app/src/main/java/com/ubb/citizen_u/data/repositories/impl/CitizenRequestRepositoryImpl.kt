@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.ubb.citizen_u.data.Details
+import com.ubb.citizen_u.data.api.AddressApi
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
@@ -20,6 +21,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
+import retrofit2.HttpException
+import java.io.IOException
 import javax.inject.Inject
 
 class CitizenRequestRepositoryImpl @Inject constructor(
@@ -27,7 +30,8 @@ class CitizenRequestRepositoryImpl @Inject constructor(
     private val incidentCategoriesRef: CollectionReference,
     private val photoRepository: PhotoRepository,
     private val citizenRepository: CitizenRepository,
-    private val commentRepository: CommentRepository
+    private val commentRepository: CommentRepository,
+    private val addressApi: AddressApi,
 ) : CitizenRequestRepository {
 
     companion object {
@@ -54,6 +58,8 @@ class CitizenRequestRepositoryImpl @Inject constructor(
 
                 incident.category = getIncidentOverallCategory(listIncidentPhotos)
                     ?.replace('_', ' ')
+                incident.neighborhood = getIncidentSuburb(incident)
+
                 Log.d(TAG, "The overall predicted category is ${incident.category}")
 
                 val citizen = incident.citizen
@@ -96,6 +102,34 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         }
 
         return if (isAmbiguousPredictedCategoryFlag == 0) mostPredictedCategory else DEFAULT_INCIDENT_CATEGORY
+    }
+
+    private suspend fun getIncidentSuburb(incident: Incident): String {
+        if (incident.latitude == null || incident.longitude == null) {
+            return ""
+        }
+
+        val response = try {
+            val response = addressApi.getAddress(
+                latitude = incident.latitude!!,
+                longitude = incident.longitude!!
+            )
+            response
+        } catch (exception: IOException) {
+            Log.e(TAG,
+                "IOException thrown while getting incident suburb. There might be an internet connection issue: ${exception.message}")
+            return ""
+        } catch (exception: HttpException) {
+            Log.e(TAG,
+                "HttpException thrown while getting incident suburb because of an unexpected result: ${exception.message()}")
+            return ""
+        }
+        return if (response.isSuccessful && response.body() != null) {
+            response.body()?.address?.suburb.toString()
+        } else {
+            Log.e(TAG, "An error has occurred. The result is ${response.isSuccessful}")
+            ""
+        }
     }
 
     override suspend fun getIncident(

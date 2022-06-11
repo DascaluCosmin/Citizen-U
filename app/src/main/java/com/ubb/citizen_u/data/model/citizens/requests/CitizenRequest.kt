@@ -6,7 +6,6 @@ import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.data.model.citizens.Comment
 import java.util.*
 
-// TODO: properties - title?
 abstract class CitizenRequest(
     @DocumentId var id: String = "",
     var citizen: Citizen? = null,
@@ -33,6 +32,7 @@ class Incident(
     var address: String? = null,
     var latitude: Double? = null,
     var longitude: Double? = null,
+    var neighborhood: String? = null,
 ) : CitizenRequest(
     citizen = citizen,
     description = description,
@@ -57,7 +57,7 @@ class Incident(
     }
 
     override fun toString(): String {
-        return "${super.toString()}, address = $address, latitude = $latitude, longitude = $longitude"
+        return "${super.toString()}, address = $address, latitude = $latitude, longitude = $longitude, neighborhood = $neighborhood"
     }
 }
 
