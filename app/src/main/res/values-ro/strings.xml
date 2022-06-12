@@ -93,6 +93,7 @@
     <string name="add_comment_button_text">Adaugă comentariu</string>
     <string name="view_documents_button_text">Vezi documente</string>
     <string name="generate_reports_button">Generează rapoarte</string>
+    <string name="generated_report_text">Raport generat</string>
 
     <!-- Generate Reports -->
     <string name="reports_category_all_hint">Toate categoriile</string>
@@ -174,4 +175,5 @@
 
     <!-- Constants -->
     <string name="city_hall_name">Primăria Cluj-Napoca</string>
+    <string name="city_hall_full_Name">Primăria și Consiliul Local Cluj-Napoca</string>
 </resources>

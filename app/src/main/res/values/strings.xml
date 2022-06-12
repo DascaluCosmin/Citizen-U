@@ -97,6 +97,7 @@
     <string name="add_comment_button_text">Add comment</string>
     <string name="view_documents_button_text">View documents</string>
     <string name="generate_reports_button">Generate reports</string>
+    <string name="generated_report_text">Generated report</string>
 
     <!-- Generate Reports -->
     <string name="reports_category_all_hint">All categories</string>
@@ -178,4 +179,5 @@
 
     <!-- Constants -->
     <string name="city_hall_name">Cluj-Napoca City Hall</string>
+    <string name="city_hall_full_Name">Cluj-Napoca City Hall and Local Council</string>
 </resources>

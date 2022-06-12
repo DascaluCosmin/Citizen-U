@@ -30,7 +30,6 @@ import com.ubb.citizen_u.util.TownHallConstants.ZOOM_WEIGHT
 import com.ubb.citizen_u.util.isNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
@@ -42,6 +41,7 @@ class AnalysisReportedIncidentsFragment : Fragment() {
 
     private lateinit var clusterManager: ClusterManager<IncidentClusterMarker>
     private lateinit var supportMapFragment: SupportMapFragment
+    private var category: String? = null
 
     private var _binding: FragmentAnalysisReportedIncidentsBinding? = null
     private val binding: FragmentAnalysisReportedIncidentsBinding get() = _binding!!
@@ -63,14 +63,10 @@ class AnalysisReportedIncidentsFragment : Fragment() {
             fragmentAnalysisReportedIncidents = this@AnalysisReportedIncidentsFragment
 
             (incidentCategoriesDropdown.editText as AutoCompleteTextView).setOnItemClickListener { _, _, position, _ ->
-                val category = citizenRequestViewModel.listIncidentCategories[position]
+                category = citizenRequestViewModel.listIncidentCategories[position]
                 Log.d(TAG, "Selected the $category category")
 
-                viewLifecycleOwner.lifecycleScope.launch {
-                    val reportedIncidents =
-                        citizenRequestViewModel.getAllReportedIncidentsState.first()
-                    consumeReportedIncidentsResponse(reportedIncidents, category)
-                }
+                citizenRequestViewModel.getAllReportedIncidents()
             }
         }
 
@@ -128,7 +124,7 @@ class AnalysisReportedIncidentsFragment : Fragment() {
 
     private suspend fun collectAllReportedIncidents() {
         citizenRequestViewModel.getAllReportedIncidentsState.collect {
-            consumeReportedIncidentsResponse(it)
+            consumeReportedIncidentsResponse(it, category)
         }
     }
 

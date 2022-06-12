@@ -132,6 +132,7 @@ class ProposedProjectsDetailsFragment : Fragment() {
                         if (proposedBy?.id == citizenViewModel.currentCitizen.id) {
                             binding.addProjectProposalCommentTextfield.visibility = View.GONE
                             binding.addCommentButton.visibility = View.GONE
+                            binding.voteProjectProposalButton.visibility = View.GONE
                         }
 
                         votedBy?.let { votedByValue ->

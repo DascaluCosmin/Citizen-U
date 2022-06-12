@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <ImageView
                 android:id="@+id/proposed_project_image"
@@ -349,10 +349,11 @@
                         android:id="@+id/vote_project_proposal_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
                         android:onClick="@{() -> proposedProjectsDetailsFragment.voteOrUndoVoteProject()}"
                         android:text="@string/project_proposal_vote_button_text"
-                        app:layout_constraintBottom_toBottomOf="@id/add_comment_button"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/add_project_proposal_comment_textfield" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -365,7 +366,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <com.github.barteksc.pdfviewer.PDFView
                 android:id="@+id/project_proposal_pdf"

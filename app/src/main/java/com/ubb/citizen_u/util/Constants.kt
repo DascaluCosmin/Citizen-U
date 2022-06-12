@@ -64,6 +64,13 @@ object CitizenRequestConstants {
     // endregion
 }
 
+object ReportsConstants {
+    // region Success
+    const val SUCCESSFUL_REPORT_GENERATED = "The report has been generated successfully!"
+
+    // endregion
+}
+
 object LocationConstants {
     const val FAILED_ADDRESS_COMPUTING = "The address cannot be determined at the moment!"
 }
@@ -150,6 +157,11 @@ const val DEFAULT_DATE_ERROR_MESSAGE = "UNKNOWN DATE"
 const val UNKNOWN = "UNKNOWN"
 
 const val EMPTY_STRING = ""
+
+object ApplicationPermissions {
+    const val PROVIDE_STORAGE_PERMISSIONS_CTA =
+        "Please provide storage permissions to the application!"
+}
 
 object FileExtensions {
     const val PHOTO_FILE_EXTENSION = ".jpg"

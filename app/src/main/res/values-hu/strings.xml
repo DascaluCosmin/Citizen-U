@@ -92,6 +92,7 @@
     <string name="add_comment_button_text">Megjegyzés</string>
     <string name="view_documents_button_text">Dokumentum megtekintése</string>
     <string name="generate_reports_button">Jelentéseket készíteni</string>
+    <string name="generated_report_text">Jelentés generált</string>
 
     <!-- Generate Reports -->
     <string name="reports_category_all_hint">Minden kategória</string>
@@ -174,4 +175,5 @@
 
     <!-- Constants -->
     <string name="city_hall_name">Kolozsvár Városháza</string>
+    <string name="city_hall_full_Name">Kolozsvár Városháza és a Helyi Tanács</string>
 </resources>
