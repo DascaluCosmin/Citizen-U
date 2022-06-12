@@ -258,4 +258,13 @@
             android:name="projectProposalId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/generateReportsReportedIncidentsFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.reports.GenerateReportsReportedIncidentsFragment"
+        android:label="fragment_generate_reports_reported_incidents"
+        tools:layout="@layout/fragment_generate_reports_reported_incidents" >
+        <action
+            android:id="@+id/action_generateReportsReportedIncidentsFragment_to_analysisReportedIncidentsFragment"
+            app:destination="@id/analysisReportedIncidentsFragment" />
+    </fragment>
 </navigation>

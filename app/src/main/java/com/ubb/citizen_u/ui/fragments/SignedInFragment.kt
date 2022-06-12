@@ -130,26 +130,6 @@ class SignedInFragment : Fragment() {
     }
 
     fun viewPublicEventsList() {
-//        lifecycleScope.launchWhenCreated {
-//            val result = try {
-//                addressApi.getAddress(46.7786231, 23.56184)
-//            } catch (exception: IOException) {
-//                Log.e(TAG,
-//                    "IOException: there might be an internet connection issue: ${exception.message}")
-//                toastErrorMessage("Internet Connection Issue")
-//                return@launchWhenCreated
-//            } catch (exception: HttpException) {
-//                Log.e(TAG, "HttpException: unexpected response: ${exception.message()}")
-//                toastErrorMessage()
-//                return@launchWhenCreated
-//            }
-//            if (result.isSuccessful && result.body() != null) {
-//                val address = result.body()
-//                toastMessage(address?.address?.suburb.toString())
-//            } else {
-//                Log.e(TAG, "An error has occurred. The result is ${result.isSuccessful}")
-//            }
-//        }
         findNavController().navigate(R.id.action_signedInFragment_to_eventsListFragment)
     }
 

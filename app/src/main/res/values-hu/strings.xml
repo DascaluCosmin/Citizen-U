@@ -15,6 +15,10 @@
     <string name="generic_motivation_label">Motiváció</string>
     <string name="generic_address_label">Cím</string>
     <string name="generic_location_label">Cím</string>
+    <string name="generic_neighborhood_label">Szomszédság</string>
+    <string name="generic_time_interval_label">Időintervallum</string>
+    <string name="generic_start_date_label">Kezdő dátum</string>
+    <string name="generic_end_date_label">Befejezés dátuma</string>
     <string name="generic_number_of_votes_label">Szavazatok számát</string>
     <string name="generic_posted_on_label">Közzétett</string>
     <string name="generic_posted_by">Általa megosztva</string>
@@ -74,6 +78,7 @@
     <string name="report_incident_fragment_label">Jelentse az esetet</string>
     <string name="citizen_reported_incidents_list_fragment_label">A bejelentett események</string>
     <string name="other_citizens_reported_incidents_list_fragment_label">Mások incidensekről számoltak be</string>
+    <string name="generate_reports_reported_incidents_fragment_label">Jelentéseket készíteni</string>
     <string name="reported_incidents_analysis_fragment_label">Jelentett események elemzése</string>
     <string name="report_incident_text">Jelentse az esetet</string>
     <string name="send_report_button_text">Jelentés küldése</string>
@@ -86,6 +91,37 @@
     <string name="incident_category_dropdown_hint">Incidens kategória</string>
     <string name="add_comment_button_text">Megjegyzés</string>
     <string name="view_documents_button_text">Dokumentum megtekintése</string>
+    <string name="generate_reports_button">Jelentéseket készíteni</string>
+
+    <!-- Generate Reports -->
+    <string name="reports_category_all_hint">Minden kategória</string>
+    <string name="reports_neighborhoods_all_hint">Minden környéken</string>
+    <string name="reports_date_today_hint">Ma</string>
+    <string name="generate_pdf_button_text">PDF Generálása</string>
+    <string name="view_incidents_on_map_button_text">Megtekintés a térképen</string>
+
+    <string-array name="neighborhoods">
+        <item>Minden környéken</item>
+        <item>Andrei Mureșanu</item>
+        <item>Becaș</item>
+        <item>Borhanci</item>
+        <item>Bulgaria</item>
+        <item>Bună Ziua</item>
+        <item>Centru</item>
+        <item>Dâmbul Rotund</item>
+        <item>Europa</item>
+        <item>Făget</item>
+        <item>Gheorgheni</item>
+        <item>Grădini Mănăștur</item>
+        <item>Grigorescu</item>
+        <item>Gruia</item>
+        <item>Iris</item>
+        <item>Între Lacuri</item>
+        <item>Mănăștur</item>
+        <item>Someșeni</item>
+        <item>Sopor</item>
+        <item>Zorilor</item>
+    </string-array>
 
     <!-- Preference Titles -->
     <string name="language_header">Nyelv</string>

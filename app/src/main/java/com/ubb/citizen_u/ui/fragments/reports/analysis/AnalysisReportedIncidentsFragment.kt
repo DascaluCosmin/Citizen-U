@@ -24,7 +24,6 @@ import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.util.CitizenRequestConstants
-import com.ubb.citizen_u.util.CitizenRequestConstants.DEFAULT_INCIDENT_CATEGORY
 import com.ubb.citizen_u.util.TownHallConstants.TOWN_HALL_LATITUDE_COORDINATE
 import com.ubb.citizen_u.util.TownHallConstants.TOWN_HALL_LONGITUDE_COORDINATE
 import com.ubb.citizen_u.util.TownHallConstants.ZOOM_WEIGHT
@@ -124,7 +123,6 @@ class AnalysisReportedIncidentsFragment : Fragment() {
             R.layout.incident_categories_dropdown,
             citizenRequestViewModel.listIncidentCategories
         )
-
         binding.incidentCategoriesAutocompleteView.setAdapter(incidentCategoriesArrayAdapter)
     }
 
@@ -136,7 +134,7 @@ class AnalysisReportedIncidentsFragment : Fragment() {
 
     private fun consumeReportedIncidentsResponse(
         it: Response<List<Incident?>>,
-        category: String? = DEFAULT_INCIDENT_CATEGORY,
+        category: String? = null,
     ) {
         Log.d(TAG, "collectAllReportedIncidents: Collecting response $it")
         when (it) {
@@ -151,7 +149,13 @@ class AnalysisReportedIncidentsFragment : Fragment() {
                 binding.mainProgressbar.visibility = View.GONE
                 val markerItems = it.data.asSequence()
                     .filterNotNull()
-                    .filter { it.category == category }
+                    .filter {
+                        // TODO: Setting to all categories by default will cause some clusters, TB decided
+                        if (category == null || category == getString(R.string.reports_category_all_hint)) {
+                            return@filter true
+                        }
+                        it.category == category
+                    }
                     .filterNot { incident ->
                         incident.latitude.isNull() || incident.longitude.isNull()
                     }

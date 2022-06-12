@@ -27,6 +27,7 @@ object ValidationConstants {
         "Please upload a PDF file!"
     const val INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE =
         "Please upload an image!"
+    const val START_DATE_AFTER_END_DATE = "The start date can't be after the end date"
 }
 
 object AuthenticationConstants {

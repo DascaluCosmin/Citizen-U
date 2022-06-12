@@ -33,8 +33,7 @@ class CitizenRequestViewModel @Inject constructor(
         private const val TAG = "UBB-CitizenRequestViewModel"
     }
 
-    private var _listIncidentCategories: List<String> = listOf()
-    val listIncidentCategories: List<String> get() = _listIncidentCategories
+    var listIncidentCategories: MutableList<String> = mutableListOf()
 
     private val addedIncidentPhotos: MutableList<Photo> = mutableListOf()
     private val listIncidentPhotosWithSource: MutableList<PhotoWithSource> = mutableListOf()
@@ -226,6 +225,8 @@ class CitizenRequestViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.getAllReportedIncidents(incidentCategory).collect {
                 _getAllReportedIncidentsState.tryEmit(it)
+
+                _getAllReportedIncidentsState.resetReplayCache()
             }
         }
     }
@@ -236,7 +237,7 @@ class CitizenRequestViewModel @Inject constructor(
             citizenRequestUseCase.getAllIncidentCategories().collect {
                 _incidentCategoriesState.tryEmit(it)
                 if (it is Response.Success) {
-                    _listIncidentCategories = it.data
+                    listIncidentCategories = it.data.toMutableList()
                 }
             }
         }

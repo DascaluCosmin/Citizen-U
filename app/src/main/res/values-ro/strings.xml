@@ -16,7 +16,11 @@
     <string name="generic_motivation_label">Motivație</string>
     <string name="generic_address_label">Adresa</string>
     <string name="generic_location_label">Locație</string>
+    <string name="generic_neighborhood_label">Cartier</string>
     <string name="generic_number_of_votes_label">Număr de voturi</string>
+    <string name="generic_start_date_label">Data de început</string>
+    <string name="generic_end_date_label">Data de sfârșit</string>
+    <string name="generic_time_interval_label">Perioadă</string>
     <string name="generic_posted_on_label">Postat în data de</string>
     <string name="generic_posted_by">Postat de către</string>
     <string name="generic_status_label">Status</string>
@@ -75,6 +79,7 @@
     <string name="report_incident_fragment_label">Raportează incident</string>
     <string name="citizen_reported_incidents_list_fragment_label">Incidentele raportate de tine</string>
     <string name="other_citizens_reported_incidents_list_fragment_label">Incidentele raportate de alții</string>
+    <string name="generate_reports_reported_incidents_fragment_label">Generează rapoarte</string>
     <string name="reported_incidents_analysis_fragment_label">Analiza incidentelor raportate</string>
     <string name="report_incident_text">Raportează incident</string>
     <string name="send_report_button_text">Trimite raport</string>
@@ -84,9 +89,40 @@
     <string name="incident_headline_hint">Te rog să introduci un scurt titlu…</string>
     <string name="incident_photo_hint">Te rog să fotografiezi incidentul…</string>
     <string name="add_comment_hint">Adaugă un nou comentariu</string>
-    <string name="incident_category_dropdown_hint">Categorie incideent</string>
+    <string name="incident_category_dropdown_hint">Categorie incident</string>
     <string name="add_comment_button_text">Adaugă comentariu</string>
     <string name="view_documents_button_text">Vezi documente</string>
+    <string name="generate_reports_button">Generează rapoarte</string>
+
+    <!-- Generate Reports -->
+    <string name="reports_category_all_hint">Toate categoriile</string>
+    <string name="reports_neighborhoods_all_hint">Toate cartierele</string>
+    <string name="reports_date_today_hint">Astăzi</string>
+    <string name="generate_pdf_button_text">Generează PDF</string>
+    <string name="view_incidents_on_map_button_text">Vezi pe hartă</string>
+
+    <string-array name="neighborhoods">
+        <item>Toate cartierele</item>
+        <item>Andrei Mureșanu</item>
+        <item>Becaș</item>
+        <item>Borhanci</item>
+        <item>Bulgaria</item>
+        <item>Bună Ziua</item>
+        <item>Centru</item>
+        <item>Dâmbul Rotund</item>
+        <item>Europa</item>
+        <item>Făget</item>
+        <item>Gheorgheni</item>
+        <item>Grădini Mănăștur</item>
+        <item>Grigorescu</item>
+        <item>Gruia</item>
+        <item>Iris</item>
+        <item>Între Lacuri</item>
+        <item>Mănăștur</item>
+        <item>Someșeni</item>
+        <item>Sopor</item>
+        <item>Zorilor</item>
+    </string-array>
 
     <!-- Preference Titles -->
     <string name="language_header">Limbă</string>

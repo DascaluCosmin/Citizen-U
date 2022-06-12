@@ -16,6 +16,10 @@
     <string name="generic_address_label">Address</string>
     <string name="generic_location_label">Address</string>
     <string name="generic_posted_on_label">Posted on</string>
+    <string name="generic_neighborhood_label">Neighborhood</string>
+    <string name="generic_time_interval_label">Time interval</string>
+    <string name="generic_start_date_label">Start Date</string>
+    <string name="generic_end_date_label">End Date</string>
     <string name="generic_number_of_votes_label">Number of votes</string>
     <string name="generic_posted_by">Posted by</string>
     <string name="generic_status_label">Status</string>
@@ -80,6 +84,7 @@
     <string name="citizen_reported_incidents_list_fragment_label">Your reported incidents</string>
     <string name="other_citizens_reported_incidents_list_fragment_label">Others reported incidents</string>
     <string name="reported_incidents_analysis_fragment_label">Reported Incidents Analysis</string>
+    <string name="generate_reports_reported_incidents_fragment_label">Generate Reports</string>
     <string name="report_incident_text">Report incident</string>
     <string name="send_report_button_text">Send report</string>
     <string name="take_photo_button_text">Take a photo</string>
@@ -91,6 +96,37 @@
     <string name="incident_category_dropdown_hint">Incident Category</string>
     <string name="add_comment_button_text">Add comment</string>
     <string name="view_documents_button_text">View documents</string>
+    <string name="generate_reports_button">Generate reports</string>
+
+    <!-- Generate Reports -->
+    <string name="reports_category_all_hint">All categories</string>
+    <string name="reports_neighborhoods_all_hint">All neighborhoods</string>
+    <string name="reports_date_today_hint">Today</string>
+    <string name="generate_pdf_button_text">Generate PDF</string>
+    <string name="view_incidents_on_map_button_text">View on map</string>
+
+    <string-array name="neighborhoods">
+        <item>All neighborhoods</item>
+        <item>Andrei Mureșanu</item>
+        <item>Becaș</item>
+        <item>Borhanci</item>
+        <item>Bulgaria</item>
+        <item>Bună Ziua</item>
+        <item>Centru</item>
+        <item>Dâmbul Rotund</item>
+        <item>Europa</item>
+        <item>Făget</item>
+        <item>Gheorgheni</item>
+        <item>Grădini Mănăștur</item>
+        <item>Grigorescu</item>
+        <item>Gruia</item>
+        <item>Iris</item>
+        <item>Între Lacuri</item>
+        <item>Mănăștur</item>
+        <item>Someșeni</item>
+        <item>Sopor</item>
+        <item>Zorilor</item>
+    </string-array>
 
     <!-- Preference Titles -->
     <string name="language_header">Language</string>
