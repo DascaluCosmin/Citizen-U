@@ -101,6 +101,7 @@
     <string name="reports_date_today_hint">Astăzi</string>
     <string name="generate_pdf_button_text">Generează PDF</string>
     <string name="view_incidents_on_map_button_text">Vezi pe hartă</string>
+    <string name="reports_found">incidente raportate găsite</string>
 
     <string-array name="neighborhoods">
         <item>Toate cartierele</item>

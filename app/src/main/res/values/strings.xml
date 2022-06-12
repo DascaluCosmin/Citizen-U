@@ -105,6 +105,7 @@
     <string name="reports_date_today_hint">Today</string>
     <string name="generate_pdf_button_text">Generate PDF</string>
     <string name="view_incidents_on_map_button_text">View on map</string>
+    <string name="reports_found">reported incidents found</string>
 
     <string-array name="neighborhoods">
         <item>All neighborhoods</item>

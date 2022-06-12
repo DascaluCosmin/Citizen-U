@@ -83,10 +83,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/generic_list_margin_between_items"
-            android:layout_marginTop="@dimen/generic_margin"
             android:text="@string/proposed_project_votes_label"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/proposed_project_title"
+            app:layout_constraintBottom_toBottomOf="@id/proposed_project_votes"
+            app:layout_constraintTop_toTopOf="@id/proposed_project_votes"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView

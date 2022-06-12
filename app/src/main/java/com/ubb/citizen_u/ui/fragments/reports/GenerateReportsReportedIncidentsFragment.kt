@@ -54,6 +54,8 @@ class GenerateReportsReportedIncidentsFragment : Fragment() {
         private const val PDF_NUMBER_OF_PAGES = 1
         private const val LOGO_WIDTH = 75
         private const val LOGO_HEIGHT = 150
+        private const val TITLE_TEXT_SIZE = 18f
+        private const val CONTENT_TEXT_SIZE = 16f
     }
 
     private lateinit var startDate: Date
@@ -261,7 +263,7 @@ class GenerateReportsReportedIncidentsFragment : Fragment() {
         val paintShapes = Paint()
         val paintContent = Paint().apply {
             typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
-            textSize = 18f
+            textSize = TITLE_TEXT_SIZE
             color = ContextCompat.getColor(requireContext(), R.color.primaryDarkColor)
         }
 
@@ -279,19 +281,38 @@ class GenerateReportsReportedIncidentsFragment : Fragment() {
             paintShapes
         )
 
+        val formattedStartDateString = DateConverter.convertToFormattedDateString(startDate)
+        val formattedEndDateString = DateConverter.convertToFormattedDateString(endDate)
+        val timeIntervalString =
+            "${getString(R.string.generic_time_interval_label)}: $formattedStartDateString - $formattedEndDateString"
         canvas.drawText(getString(R.string.city_hall_full_Name), 300f, 50f, paintContent)
         canvas.drawText(getString(R.string.generated_report_text), 380f, 80f, paintContent)
+        canvas.drawText(timeIntervalString, 310f, 110f, paintContent)
         canvas.drawText("(${getString(R.string.generic_category_label)}: $category, ${getString(R.string.generic_neighborhood_label)}: $neighborhood)",
             235f,
-            110f,
+            140f,
             paintContent)
 
         paintContent.color = ContextCompat.getColor(requireContext(), R.color.black)
-        paintContent.textSize = 16f
-        canvas.drawText("${reportedIncidents.size} reported incidents found",
+        paintContent.textSize = CONTENT_TEXT_SIZE
+        canvas.drawText("${reportedIncidents.size} ${getString(R.string.reports_found)}",
             60f,
             210f,
             paintContent)
+
+        var startY = 240f
+        val stepY = 30f
+        for ((index, incident) in reportedIncidents.withIndex()) {
+            val postedOnFormattedString =
+                DateConverter.convertToFormattedDateString(incident.sentDate!!)
+            val postedOnLabel = getString(R.string.generic_posted_on_label).replaceFirstChar {
+                it.lowercase(Locale.getDefault())
+            }
+            val content =
+                "#${index + 1}: ${incident.headline}, ${incident.address}, ${incident.status} , $postedOnLabel $postedOnFormattedString"
+            canvas.drawText(content, 60f, startY, paintContent)
+            startY += stepY
+        }
 
         pdf.finishPage(pdfPage)
 

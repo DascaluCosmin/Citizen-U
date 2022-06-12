@@ -100,6 +100,7 @@
     <string name="reports_date_today_hint">Ma</string>
     <string name="generate_pdf_button_text">PDF Generálása</string>
     <string name="view_incidents_on_map_button_text">Megtekintés a térképen</string>
+    <string name="reports_found">jelentett incidenseket találtak</string>
 
     <string-array name="neighborhoods">
         <item>Minden környéken</item>
