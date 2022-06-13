@@ -24,6 +24,7 @@
     <string name="generic_posted_on_label">Postat în data de</string>
     <string name="generic_posted_by">Postat de către</string>
     <string name="generic_status_label">Status</string>
+    <string name="generic_value_label">În valoare de</string>
     <string name="generic_other_citizens_comments_label">Păreri ale altor cetățeni</string>
     <string name="generic_next_button">Următorul pas</string>
     <string name="attachment_title_hint">Titlu</string>
@@ -173,6 +174,46 @@
         <item>Spații verzi și locuri de joacă</item>
     </string-array>
     <!-- endregion -->
+
+    <!-- region Public Spending -->
+    <string name="public_spending_fragment_label">Cheltuieli publice</string>
+    <string name="public_spending_textview">Cheltuieli publice</string>
+    <string name="public_spending_list_fragment_label">List cheltuielilor publice</string>
+    <string name="public_spending_by_source_of_funding_label">Cheltuieli publice după sursa de finanțare</string>
+    <string name="public_spending_by_source_of_category_label">Cheltuieli publice după categorie</string>
+    <string name="public_spending_button_source_of_funding_text">Vezi după sursa de finanțare</string>
+    <string name="public_spending_button_category_text">Vezi după categorie</string>
+    <string name="view_public_spending_button_text">Vezi cheltuielile publice</string>
+    <string name="public_spending_completion_date_label">Data încheierii</string>
+    <string name="public_spending_category_hint">Categorie cheltuieli publice</string>
+    <string name="public_spending_status_hint">Status cheltuieli publice</string>
+    <string name="public_spending_completion_year_hint">An finalizare cheltuieli publice</string>
+    <string name="public_spending_all_statuses_all_hint">Toate statusurile</string>
+    <string name="public_spending_all_categories_all_hint">Toate categoriile</string>
+    <string name="public_spending_all_years_all_hint">Toți anii</string>
+
+    <string-array name="statuses">
+        <item>Toate statusurile</item>
+        <item>În desfășurare</item>
+        <item>Finalizat</item>
+        <item>Întârziat</item>
+        <item>Amânat</item>
+    </string-array>
+
+    <string-array name="public_spending_categories">
+        <item>Toate categoriile</item>
+        <item>Proiecte de infrastructură rutieră</item>
+        <item>Proiecte de transport în comun</item>
+        <item>Proiecte de energie verde</item>
+        <item>Proiecte de centre culturale</item>
+        <item>Proiecte de construire și reabilitare de clădiri</item>
+        <item>Proiecte de unități medicale</item>
+        <item>Proiecte de sport și recreere</item>
+        <item>Proiecte de școli și grădinițe</item>
+    </string-array>
+
+    <!-- endregion -->
+
 
     <!-- Constants -->
     <string name="city_hall_name">Primăria Cluj-Napoca</string>

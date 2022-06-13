@@ -267,4 +267,18 @@
             android:id="@+id/action_generateReportsReportedIncidentsFragment_to_analysisReportedIncidentsFragment"
             app:destination="@id/analysisReportedIncidentsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/publicSpendingFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.publicspending.PublicSpendingFragment"
+        android:label="fragment_public_spending"
+        tools:layout="@layout/fragment_public_spending" >
+        <action
+            android:id="@+id/action_publicSpendingFragment_to_publicSpendingListFragment"
+            app:destination="@id/publicSpendingListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/publicSpendingListFragment"
+        android:name="com.ubb.citizen_u.ui.fragments.publicspending.PublicSpendingListFragment"
+        android:label="fragment_public_spending_list"
+        tools:layout="@layout/fragment_public_spending_list" />
 </navigation>

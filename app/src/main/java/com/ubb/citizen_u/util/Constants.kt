@@ -94,6 +94,7 @@ object DatabaseConstants {
     const val PUBLIC_EVENTS_COL = "events"
     const val PUBLIC_RELEASE_EVENTS_COL = "council_events"
     const val PROPOSED_PROJECTS_COL = "proposed_projects"
+    const val PUBLIC_SPENDING_COL = "public_spending"
     const val PHOTOS_COL = "photos"
     const val COMMENTS_COL = "comments"
     const val DOCUMENTS_COl = "documents"

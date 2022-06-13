@@ -54,6 +54,13 @@
             android:title="@string/others_citizens_proposed_projects_list_fragment_label" />
     </group>
 
+    <group android:id="@+id/publicSpendingGroup">
+        <item
+            android:id="@id/publicSpendingFragment"
+            android:icon="@drawable/ic_baseline_pie_chart_24"
+            android:title="@string/public_spending_fragment_label" />
+    </group>
+
     <group android:id="@+id/settingsGroup">
         <item
             android:id="@id/settingsFragment"

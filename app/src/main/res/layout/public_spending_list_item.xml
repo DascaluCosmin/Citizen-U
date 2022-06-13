@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/public_spending_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/cardview_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/public_spending_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/generic_list_margin_between_items"
+            android:textSize="@dimen/reported_incident_item_text_dimension"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Park&amp;Ride" />
+
+        <TextView
+            android:id="@+id/public_spending_status_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/generic_list_margin_between_items"
+            android:text="@string/generic_status_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/public_spending_title"
+            app:layout_constraintTop_toBottomOf="@id/public_spending_title" />
+
+        <TextView
+            android:id="@+id/public_spending_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/generic_list_margin_between_items"
+            android:layout_marginStart="@dimen/generic_margin_half"
+            app:layout_constraintBottom_toBottomOf="@id/public_spending_status_label"
+            app:layout_constraintStart_toEndOf="@id/public_spending_status_label"
+            app:layout_constraintTop_toTopOf="@id/public_spending_status_label"
+            tools:text="In progress" />
+
+        <TextView
+            android:id="@+id/public_spending_value_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/generic_list_margin_between_items"
+            android:text="@string/generic_value_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/public_spending_title"
+            app:layout_constraintTop_toBottomOf="@id/public_spending_status_label" />
+
+        <TextView
+            android:id="@+id/public_spending_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/generic_margin_half"
+            app:layout_constraintBottom_toBottomOf="@id/public_spending_value_label"
+            app:layout_constraintStart_toEndOf="@id/public_spending_value_label"
+            app:layout_constraintTop_toTopOf="@id/public_spending_value_label"
+            tools:text="4500000 lei" />
+
+        <TextView
+            android:id="@+id/public_spending_category_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/generic_list_margin_between_items"
+            android:text="@string/generic_category_label"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/public_spending_title"
+            app:layout_constraintTop_toBottomOf="@id/public_spending_value_label" />
+
+        <TextView
+            android:id="@+id/public_spending_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/generic_list_margin_between_items"
+            android:layout_marginStart="@dimen/generic_margin_half"
+            app:layout_constraintBottom_toBottomOf="@id/public_spending_category_label"
+            app:layout_constraintStart_toEndOf="@id/public_spending_category_label"
+            app:layout_constraintTop_toTopOf="@id/public_spending_category_label"
+            tools:text="Road infrastructure projects" />
+
+        <TextView
+            android:id="@+id/public_spending_completion_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/generic_margin_between_element"
+            android:text="@string/public_spending_completion_date_label"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/public_spending_status_label"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/public_spending_completion_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/generic_margin_between_element"
+            android:text="@string/public_spending_completion_date_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/public_spending_completion_date_label"
+            tools:text="@tools:sample/date/ddmmyy" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

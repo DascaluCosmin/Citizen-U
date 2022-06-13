@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragments.publicspending.PublicSpendingListFragment">
+
+    <data>
+
+        <variable
+            name="publicSpendingListFragment"
+            type="com.ubb.citizen_u.ui.fragments.publicspending.PublicSpendingListFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/public_spending_list_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/principal_text_view_quarter_margin_top"
+            android:text="@string/public_spending_list_fragment_label"
+            android:textSize="@dimen/generic_principal_text_view_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/public_spending_category_dropdown"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/generic_margin"
+            android:layout_marginTop="@dimen/generic_margin"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/public_spending_list_textview">
+
+            <AutoCompleteTextView
+                android:id="@+id/public_spending_category_autocomplete_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/public_spending_category_hint"
+                android:inputType="none"
+                android:textIsSelectable="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/public_spending_status_dropdown"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/generic_margin"
+            android:layout_marginTop="@dimen/generic_margin"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/public_spending_category_dropdown">
+
+            <AutoCompleteTextView
+                android:id="@+id/public_spending_status_autocomplete_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/public_spending_status_hint"
+                android:inputType="none"
+                android:textIsSelectable="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/public_spending_completion_year_dropdown"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="@dimen/generic_margin"
+            android:layout_marginTop="@dimen/generic_margin"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/public_spending_status_dropdown">
+
+            <AutoCompleteTextView
+                android:id="@+id/public_spending_completion_year_autocomplete_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/public_spending_completion_year_hint"
+                android:inputType="none"
+                android:textIsSelectable="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/public_spending_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/generic_margin"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/public_spending_completion_year_dropdown"
+            tools:itemCount="3"
+            tools:listitem="@layout/public_spending_list_item" />
+
+        <ProgressBar
+            android:id="@+id/main_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -23,6 +23,7 @@
     <string name="generic_posted_on_label">Közzétett</string>
     <string name="generic_posted_by">Általa megosztva</string>
     <string name="generic_status_label">Állapot</string>
+    <string name="generic_value_label">Érdemes</string>
     <string name="generic_other_citizens_comments_label">Más állampolgárok véleménye</string>
     <string name="generic_next_button">Következő</string>
     <string name="attachment_title_hint">Cím</string>
@@ -173,6 +174,44 @@
     </string-array>
     <!-- endregion -->
 
+    <!-- region Public Spending -->
+    <string name="public_spending_fragment_label">Közkiadások</string>
+    <string name="public_spending_list_fragment_label">Közkiadások listája</string>
+    <string name="public_spending_textview">Közkiadások</string>
+    <string name="public_spending_by_source_of_funding_label">Közkiadások finanszírozási forrás szerint</string>
+    <string name="public_spending_by_source_of_category_label">Közkiadások kategóriánként</string>
+    <string name="public_spending_button_source_of_funding_text">Megtekintés finanszírozási forrás szerint</string>
+    <string name="public_spending_button_category_text">Megtekintés kategória szerint</string>
+    <string name="view_public_spending_button_text">Nézze meg az állami kiadásokat</string>
+    <string name="public_spending_completion_date_label">Teljesítési dátum</string>
+    <string name="public_spending_category_hint">Közkiadási kategória</string>
+    <string name="public_spending_status_hint">Közkiadások helyzete</string>
+    <string name="public_spending_completion_year_hint">Közkiadások teljesítési éve</string>
+    <string name="public_spending_all_statuses_all_hint">Minden állapot</string>
+    <string name="public_spending_all_categories_all_hint">Minden kategória</string>
+    <string name="public_spending_all_years_all_hint">Minden évben</string>
+
+    <string-array name="statuses">
+        <item>Minden állapot</item>
+        <item>Folyamatban</item>
+        <item>Elkészült</item>
+        <item>Késleltetett</item>
+        <item>Elhalasztották</item>
+    </string-array>
+
+    <string-array name="public_spending_categories">
+        <item>Minden kategória</item>
+        <item>Közúti infrastrukturális projektek</item>
+        <item>Tömegközlekedési projektek</item>
+        <item>Zöld energia projekt</item>
+        <item>Kulturális központ projektek</item>
+        <item>Épületépítési és felújítási projektek</item>
+        <item>Orvosi egység projektek</item>
+        <item>Sport-és rekreációs projektek</item>
+        <item>Iskolai és óvodai projektek</item>
+    </string-array>
+
+    <!-- endregion -->
 
     <!-- Constants -->
     <string name="city_hall_name">Kolozsvár Városháza</string>

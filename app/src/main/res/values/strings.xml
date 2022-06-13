@@ -23,6 +23,7 @@
     <string name="generic_number_of_votes_label">Number of votes</string>
     <string name="generic_posted_by">Posted by</string>
     <string name="generic_status_label">Status</string>
+    <string name="generic_value_label">Value</string>
     <string name="generic_other_citizens_comments_label">Other citizens opinions</string>
     <string name="generic_next_button">Next</string>
     <string name="attachment_title_hint">Title</string>
@@ -176,6 +177,46 @@
         <item>Public areas design</item>
         <item>Green spaces and playgrounds</item>
     </string-array>
+    <!-- endregion -->
+
+
+    <!-- region Public Spending -->
+    <string name="public_spending_fragment_label">Public Spending</string>
+    <string name="public_spending_list_fragment_label">Public Spending List</string>
+    <string name="public_spending_textview">Public Spending</string>
+    <string name="public_spending_by_source_of_funding_label">Public Spending by Source of Funding</string>
+    <string name="public_spending_by_source_of_category_label">Public Spending by Category</string>
+    <string name="public_spending_button_source_of_funding_text">View by source of funding</string>
+    <string name="public_spending_button_category_text">View by category</string>
+    <string name="view_public_spending_button_text">View public spending</string>
+    <string name="public_spending_completion_date_label">Completion date</string>
+    <string name="public_spending_category_hint">Public spending category</string>
+    <string name="public_spending_status_hint">Public spending status</string>
+    <string name="public_spending_completion_year_hint">Public spending completion year</string>
+    <string name="public_spending_all_statuses_all_hint">All statuses</string>
+    <string name="public_spending_all_categories_all_hint">All categories</string>
+    <string name="public_spending_all_years_all_hint">All years</string>
+
+    <string-array name="statuses">
+        <item>All statuses</item>
+        <item>In progress</item>
+        <item>Completed</item>
+        <item>Delayed</item>
+        <item>Postponed</item>
+    </string-array>
+
+    <string-array name="public_spending_categories">
+        <item>All categories</item>
+        <item>Road infrastructure projects</item>
+        <item>Public transport projects</item>
+        <item>Green energy projects</item>
+        <item>Cultural center projects</item>
+        <item>Building construction and rehabilitation projects</item>
+        <item>Medical unit projects</item>
+        <item>Sports and recreation projects</item>
+        <item>School and kindergarten projects</item>
+    </string-array>
+
     <!-- endregion -->
 
     <!-- Constants -->

@@ -19,10 +19,14 @@ object DateConverter {
         }
     }
 
-    fun convertToFormattedDateString(date: Date): String {
+    fun convertToFormattedDateString(date: Date?): String {
+        if (date == null) {
+            return "null"
+        }
+
         val calendar = Calendar.getInstance()
         calendar.time = date
-        return "${calendar.get(Calendar.YEAR)}/${calendar.get(Calendar.MONTH)}/${
+        return "${calendar.get(Calendar.YEAR)}/${calendar.get(Calendar.MONTH) + 1}/${
             calendar.get(Calendar.DAY_OF_MONTH)
         }"
     }
