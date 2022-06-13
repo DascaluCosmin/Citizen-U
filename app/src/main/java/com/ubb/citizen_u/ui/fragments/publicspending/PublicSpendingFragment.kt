@@ -25,6 +25,7 @@ import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.PublicSpendingViewModel
+import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -81,6 +82,7 @@ class PublicSpendingFragment : Fragment() {
                 is Response.Success -> {
                     binding.mainProgressbar.visibility = View.GONE
                     Log.d(TAG, "Collected ${it.data.size} public spending items")
+                    groupPublicSpendingByCategory()
                 }
             }
         }
@@ -123,13 +125,21 @@ class PublicSpendingFragment : Fragment() {
         _binding = null
     }
 
-    private fun populatePieChart() {
+    private fun groupPublicSpendingByCategory() {
+        val groupByCategory = publicSpendingViewModel.listPublicSpending.filterNotNull()
+            .groupingBy {
+                it.category[DEFAULT_LANGUAGE]
+            }.aggregate { _, accumulator: Double?, element, _ ->
+                (element.value ?: 0.0) + (accumulator ?: 0.0)
+            }
+        populatePieChart(groupByCategory)
+    }
+
+    private fun populatePieChart(groupedPublicSpending: Map<String?, Double>) {
         val entries = ArrayList<PieEntry>()
-        entries.add(PieEntry(0.2f, "a"))
-        entries.add(PieEntry(0.3f, "b"))
-        entries.add(PieEntry(0.2f, "c"))
-        entries.add(PieEntry(0.2f, "d"))
-        entries.add(PieEntry(0.1f, "e"))
+        groupedPublicSpending.forEach {
+            entries.add(PieEntry(it.value.toFloat(), it.key))
+        }
 
         val colors = ArrayList<Int>()
         for (color in ColorTemplate.MATERIAL_COLORS) {

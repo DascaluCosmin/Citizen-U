@@ -178,7 +178,7 @@
     <!-- region Public Spending -->
     <string name="public_spending_fragment_label">Cheltuieli publice</string>
     <string name="public_spending_textview">Cheltuieli publice</string>
-    <string name="public_spending_list_fragment_label">List cheltuielilor publice</string>
+    <string name="public_spending_list_fragment_label">Lista cheltuielilor publice</string>
     <string name="public_spending_by_source_of_funding_label">Cheltuieli publice după sursa de finanțare</string>
     <string name="public_spending_by_source_of_category_label">Cheltuieli publice după categorie</string>
     <string name="public_spending_button_source_of_funding_text">Vezi după sursa de finanțare</string>
