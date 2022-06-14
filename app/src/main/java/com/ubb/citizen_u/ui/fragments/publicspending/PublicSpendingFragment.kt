@@ -18,12 +18,13 @@ import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.ubb.citizen_u.R
+import com.ubb.citizen_u.data.model.PublicSpending
 import com.ubb.citizen_u.databinding.FragmentPublicSpendingBinding
 import com.ubb.citizen_u.domain.model.Response
+import com.ubb.citizen_u.ui.util.AbsoluteValueFormatter
 import com.ubb.citizen_u.ui.util.toastErrorMessage
-import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.PublicSpendingViewModel
 import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
 import kotlinx.coroutines.flow.collect
@@ -82,7 +83,7 @@ class PublicSpendingFragment : Fragment() {
                 is Response.Success -> {
                     binding.mainProgressbar.visibility = View.GONE
                     Log.d(TAG, "Collected ${it.data.size} public spending items")
-                    groupPublicSpendingByCategory()
+                    viewPublicSpendingPieChartByCategory()
                 }
             }
         }
@@ -99,8 +100,8 @@ class PublicSpendingFragment : Fragment() {
             setUsePercentValues(true)
             setEntryLabelTextSize(12f)
             setEntryLabelColor(Color.BLACK)
-            setCenterTextSize(24f)
-            centerText = "Public Spending by Category"
+            setCenterTextSize(18f)
+            centerText = getString(R.string.public_spending_by_source_of_category_label)
             description.isEnabled = false
 
             legend.isEnabled = true
@@ -125,14 +126,27 @@ class PublicSpendingFragment : Fragment() {
         _binding = null
     }
 
-    private fun groupPublicSpendingByCategory() {
-        val groupByCategory = publicSpendingViewModel.listPublicSpending.filterNotNull()
-            .groupingBy {
-                it.category[DEFAULT_LANGUAGE]
-            }.aggregate { _, accumulator: Double?, element, _ ->
+    fun viewPublicSpendingPieChartByCategory() {
+        populatePieChartGroupBy {
+            it.category[DEFAULT_LANGUAGE]
+        }
+        pieChart.centerText = getString(R.string.public_spending_by_source_of_category_label)
+    }
+
+    fun viewPublicSpendingPieChartBySourceOfFunding() {
+        populatePieChartGroupBy {
+            it.sourceOfFunding[DEFAULT_LANGUAGE]
+        }
+        pieChart.centerText = getString(R.string.public_spending_by_source_of_funding_label)
+    }
+
+    private fun populatePieChartGroupBy(groupByFunction: (PublicSpending) -> String?) {
+        val group = publicSpendingViewModel.listPublicSpending.filterNotNull()
+            .groupingBy(groupByFunction)
+            .aggregate { _, accumulator: Double?, element, _ ->
                 (element.value ?: 0.0) + (accumulator ?: 0.0)
             }
-        populatePieChart(groupByCategory)
+        populatePieChart(group)
     }
 
     private fun populatePieChart(groupedPublicSpending: Map<String?, Double>) {
@@ -155,26 +169,15 @@ class PublicSpendingFragment : Fragment() {
 
         val data = PieData(dataset)
         data.setDrawValues(true)
-        data.setValueFormatter(PercentFormatter(pieChart))
+        data.setValueFormatter(AbsoluteValueFormatter())
         data.setValueTextSize(12f)
         data.setValueTextColor(Color.BLACK)
 
         pieChart.data = data
+        pieChart.setUsePercentValues(false)
         pieChart.invalidate()
-        pieChart.setOnHoverListener { view, motionEvent ->
-            toastMessage("Hovering")
-            true
-        }
 
         pieChart.animateY(1000, Easing.EaseInOutQuad)
-    }
-
-    fun viewPublicSpendingPieChartByCategory() {
-
-    }
-
-    fun viewPublicSpendingPieChartBySourceOfFunding() {
-
     }
 
     fun viewPublicSpendingList() {
