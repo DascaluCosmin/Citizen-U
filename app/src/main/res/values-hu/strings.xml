@@ -213,7 +213,10 @@
 
     <!-- endregion -->
 
-    <!-- Constants -->
+    <!--########################## Constants ########################## -->
     <string name="city_hall_name">Kolozsvár Városháza</string>
     <string name="city_hall_full_Name">Kolozsvár Városháza és a Helyi Tanács</string>
+
+    <!-- Project Proposals -->
+    <string name="SUCCESSFUL_VOTING">A szavazatát hozzáadtuk!</string>
 </resources>

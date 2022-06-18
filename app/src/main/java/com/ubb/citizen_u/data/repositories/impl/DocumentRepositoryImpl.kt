@@ -10,8 +10,8 @@ class DocumentRepositoryImpl(
 ) : DocumentRepository {
 
     companion object {
-        private const val FIREBASE_STORAGE_PROJECT_PROPOSALS = "proposed_projects"
-        private const val FIREBASE_STORAGE_PROJECT_PROPOSAL_DOCUMENT = "documents"
+        const val FIREBASE_STORAGE_PROJECT_PROPOSALS = "proposed_projects"
+        const val FIREBASE_STORAGE_PROJECT_PROPOSAL_DOCUMENT = "documents"
     }
 
     override suspend fun getAllProposedProjectDocuments(

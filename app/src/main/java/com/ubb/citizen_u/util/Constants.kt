@@ -80,7 +80,6 @@ object ProjectProposalConstants {
     //region Success
     const val SUCCESSFUL_ADDED_IMAGE = "The image has been added successfully!"
     const val SUCCESSFUL_ADDED_PDF = "The PDF file has been added successfully!"
-    const val SUCCESSFUL_VOTE = "Your vote has been added!"
     const val SUCCESSFUL_UNDO_VOTE = "Your vote has been deleted!"
 
     const val SUCCESSFUL_PROPOSAL_PROJECT = "The project has been proposed successfully!"
@@ -156,6 +155,7 @@ const val DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN =
     "An unexpected error has occurred! Please try again!"
 const val DEFAULT_DATE_ERROR_MESSAGE = "UNKNOWN DATE"
 const val UNKNOWN = "UNKNOWN"
+const val DEFAULT_TESTING_ERROR = "Testing Error"
 
 const val EMPTY_STRING = ""
 

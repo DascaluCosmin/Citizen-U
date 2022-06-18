@@ -219,7 +219,11 @@
 
     <!-- endregion -->
 
-    <!-- Constants -->
+    <!--########################## Constants ########################## -->
     <string name="city_hall_name">Cluj-Napoca City Hall</string>
     <string name="city_hall_full_Name">Cluj-Napoca City Hall and Local Council</string>
+
+
+    <!-- Project Proposals -->
+    <string name="SUCCESSFUL_VOTING">Your vote has been added!</string>
 </resources>

@@ -24,10 +24,9 @@ import com.ubb.citizen_u.data.model.PublicSpending
 import com.ubb.citizen_u.databinding.FragmentPublicSpendingBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.AbsoluteValueFormatter
+import com.ubb.citizen_u.ui.util.getCurrentLanguage
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.PublicSpendingViewModel
-import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class PublicSpendingFragment : Fragment() {
@@ -128,14 +127,14 @@ class PublicSpendingFragment : Fragment() {
 
     fun viewPublicSpendingPieChartByCategory() {
         populatePieChartGroupBy {
-            it.category[DEFAULT_LANGUAGE]
+            it.category[requireContext().getCurrentLanguage()]
         }
         pieChart.centerText = getString(R.string.public_spending_by_source_of_category_label)
     }
 
     fun viewPublicSpendingPieChartBySourceOfFunding() {
         populatePieChartGroupBy {
-            it.sourceOfFunding[DEFAULT_LANGUAGE]
+            it.sourceOfFunding[requireContext().getCurrentLanguage()]
         }
         pieChart.centerText = getString(R.string.public_spending_by_source_of_funding_label)
     }

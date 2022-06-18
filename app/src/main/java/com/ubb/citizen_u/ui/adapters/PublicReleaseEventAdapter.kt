@@ -27,7 +27,7 @@ class PublicReleaseEventAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val event = getItem(position)
-        (holder as PublicReleaseEventViewHolder).bind(event)
+        (holder as PublicReleaseEventViewHolder).bind(event, position % 2 == 0)
     }
 
     class EventsDiffCallBack : DiffUtil.ItemCallback<PublicReleaseEvent>() {

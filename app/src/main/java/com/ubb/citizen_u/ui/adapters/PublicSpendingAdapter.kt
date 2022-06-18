@@ -26,7 +26,7 @@ class PublicSpendingAdapter :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val publicSpending = getItem(position)
-        (holder as PublicSpendingViewHolder).bind(publicSpending)
+        (holder as PublicSpendingViewHolder).bind(publicSpending, position % 2 == 0)
     }
 
     class PublicSpendingDiffCallBack : DiffUtil.ItemCallback<PublicSpending>() {

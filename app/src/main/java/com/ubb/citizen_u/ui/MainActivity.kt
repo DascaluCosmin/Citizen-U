@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.menu.findItem(R.id.loginFragment).setOnMenuItemClickListener {
             authenticationViewModel.signOut()
 
-            Thread.sleep(1000L)
+            Thread.sleep(2000L)
             // TODO: This doesn't work as expected for Screens other than Home (has to be pressed twice)
             super.onBackPressed()
             true

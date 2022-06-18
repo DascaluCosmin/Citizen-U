@@ -26,12 +26,10 @@ import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_ADD_COMMENT
 import com.ubb.citizen_u.util.ConfigurationConstants.IMAGE_CAROUSEL_NUMBER_OF_SECONDS
 import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_UNDO_VOTE
-import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_VOTE
 import com.ubb.citizen_u.util.ValidationConstants.INVALID_COMMENT_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
 import com.ubb.citizen_u.util.glide.PdfFiller
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -191,7 +189,7 @@ class ProposedProjectsDetailsFragment : Fragment() {
                         projectProposalViewModel.currentSelectedProjectProposal!!.numberOfVotes.toString()
                     binding.voteProjectProposalButton.text =
                         getString(R.string.project_proposal_unvote_button_text)
-                    toastMessage(SUCCESSFUL_VOTE)
+                    toastMessage(getString(R.string.SUCCESSFUL_VOTING))
                 }
             }
         }
