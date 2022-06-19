@@ -22,7 +22,6 @@ import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import com.ubb.citizen_u.ui.workers.NotificationWorker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -139,6 +138,34 @@ class SignedInFragment : Fragment() {
 
     fun goToReportIncident() {
         findNavController().navigate(R.id.action_signedInFragment_to_reportIncidentFragment)
+    }
+
+    fun goToGenerateReports() {
+        findNavController().navigate(R.id.action_signedInFragment_to_generateReportsReportedIncidentsFragment)
+    }
+
+    fun goToProposedProject() {
+        findNavController().navigate(R.id.action_signedInFragment_to_projectProposalGeneralFragment)
+    }
+
+    fun goToPublicSpending() {
+        findNavController().navigate(R.id.action_signedInFragment_to_publicSpendingFragment)
+    }
+
+    fun viewCitizenProposedProjects() {
+        findNavController().navigate(R.id.action_signedInFragment_to_citizenProposedProjectsTransitionFragment)
+    }
+
+    fun viewOtherCitizensProposedProjects() {
+        findNavController().navigate(R.id.action_signedInFragment_to_otherCitizensProposedProjectsTransitionFragment)
+    }
+
+    fun viewCitizenReportedIncidents() {
+        findNavController().navigate(R.id.action_signedInFragment_to_citizenReportedIncidentsTransitionFragment)
+    }
+
+    fun viewOtherCitizensReportedIncidents() {
+        findNavController().navigate(R.id.action_signedInFragment_to_otherCitizensReportedIncidentsTransitionFragment)
     }
 
     private fun shouldGoToPeriodicEventDetails(): String? {

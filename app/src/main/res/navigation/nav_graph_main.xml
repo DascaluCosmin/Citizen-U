@@ -37,6 +37,27 @@
         <action
             android:id="@+id/action_signedInFragment_to_publicReleaseEventDetailsFragment"
             app:destination="@id/publicReleaseEventDetailsFragment" />
+        <action
+            android:id="@+id/action_signedInFragment_to_projectProposalGeneralFragment"
+            app:destination="@id/projectProposalGeneralFragment" />
+        <action
+            android:id="@+id/action_signedInFragment_to_publicSpendingFragment"
+            app:destination="@id/publicSpendingFragment" />
+        <action
+            android:id="@+id/action_signedInFragment_to_generateReportsReportedIncidentsFragment"
+            app:destination="@id/generateReportsReportedIncidentsFragment" />
+        <action
+            android:id="@+id/action_signedInFragment_to_citizenProposedProjectsTransitionFragment"
+            app:destination="@id/citizenProposedProjectsTransitionFragment" />
+        <action
+            android:id="@+id/action_signedInFragment_to_otherCitizensProposedProjectsTransitionFragment"
+            app:destination="@id/otherCitizensProposedProjectsTransitionFragment" />
+        <action
+            android:id="@+id/action_signedInFragment_to_otherCitizensReportedIncidentsTransitionFragment"
+            app:destination="@id/otherCitizensReportedIncidentsTransitionFragment" />
+        <action
+            android:id="@+id/action_signedInFragment_to_citizenReportedIncidentsTransitionFragment"
+            app:destination="@id/citizenReportedIncidentsTransitionFragment" />
     </fragment>
 
     <fragment

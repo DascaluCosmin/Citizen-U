@@ -59,7 +59,7 @@
     <string name="signed_in_your_account_textview_tools">Welcome, Cosmin</string>
     <string name="signed_in_logout_button">Ieși din cont</string>
     <string name="generic_undefined_value">undefined</string>
-    <string name="signed_in_view_public_events_button">Vizualizează evenimente publice</string>
+    <string name="signed_in_view_public_events_button">Vezi evenimentele publice</string>
     <string name="signed_in_view_public_release_events_button">Vezi comunicate publice</string>
 
     <!-- Events -->
@@ -177,6 +177,7 @@
 
     <!-- region Public Spending -->
     <string name="public_spending_fragment_label">Cheltuieli publice</string>
+    <string name="public_spending_fragment_button_text">Vezi cheltuielile publice</string>
     <string name="public_spending_textview">Cheltuieli publice</string>
     <string name="public_spending_list_fragment_label">Lista cheltuielilor publice</string>
     <string name="public_spending_by_source_of_funding_label">Cheltuieli publice după sursa de finanțare</string>

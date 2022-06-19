@@ -176,6 +176,7 @@
 
     <!-- region Public Spending -->
     <string name="public_spending_fragment_label">Közkiadások</string>
+    <string name="public_spending_fragment_button_text">Nézze meg az állami kiadásokat</string>
     <string name="public_spending_list_fragment_label">Közkiadások listája</string>
     <string name="public_spending_textview">Közkiadások</string>
     <string name="public_spending_by_source_of_funding_label">Közkiadások finanszírozási forrás szerint</string>
