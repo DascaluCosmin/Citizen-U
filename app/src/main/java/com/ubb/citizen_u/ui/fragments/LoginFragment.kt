@@ -22,11 +22,8 @@ import com.ubb.citizen_u.ui.util.fadeIn
 import com.ubb.citizen_u.ui.util.fadeOut
 import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
-import com.ubb.citizen_u.util.AuthenticationConstants
-import com.ubb.citizen_u.util.ValidationConstants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
@@ -86,7 +83,7 @@ class LoginFragment : Fragment() {
                             user.sendEmailVerification()
                             Toast.makeText(
                                 context,
-                                AuthenticationConstants.FAILED_SIGN_IN_UNVERIFIED_EMAIL_MESSAGE,
+                                getString(R.string.FAILED_SIGN_IN_UNVERIFIED_EMAIL_MESSAGE),
                                 Toast.LENGTH_SHORT
                             ).show()
                         } else {
@@ -142,14 +139,14 @@ class LoginFragment : Fragment() {
                 true -> {
                     Toast.makeText(
                         requireContext(),
-                        AuthenticationConstants.SUCCESSFUL_RESET_PASSWORD_EMAIL_SENT,
+                        getString(R.string.SUCCESSFUL_RESET_PASSWORD_EMAIL_SENT),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
                 false -> {
                     Toast.makeText(
                         requireContext(),
-                        AuthenticationConstants.FAILED_RESET_PASSWORD_EMAIL_NOT_SENT,
+                        getString(R.string.FAILED_RESET_PASSWORD_EMAIL_NOT_SENT),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -168,7 +165,7 @@ class LoginFragment : Fragment() {
     private fun showFailedSignIn() {
         Toast.makeText(
             context,
-            AuthenticationConstants.FAILED_SIGN_IN_MESSAGE,
+            getString(R.string.FAILED_SIGN_IN_MESSAGE),
             Toast.LENGTH_SHORT
         ).show()
     }
@@ -185,7 +182,7 @@ class LoginFragment : Fragment() {
             ) -> {
                 Toast.makeText(
                     context,
-                    ValidationConstants.INVALID_EMAIL_ERROR_MESSAGE,
+                    getString(R.string.INVALID_EMAIL_ERROR_MESSAGE),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -195,7 +192,7 @@ class LoginFragment : Fragment() {
             ) -> {
                 Toast.makeText(
                     context,
-                    ValidationConstants.INVALID_PASSWORD_ERROR_MESSAGE,
+                    getString(R.string.INVALID_PASSWORD_ERROR_MESSAGE),
                     Toast.LENGTH_SHORT
                 ).show()
             }

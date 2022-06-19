@@ -218,5 +218,40 @@
     <string name="city_hall_full_Name">Kolozsvár Városháza és a Helyi Tanács</string>
 
     <!-- Project Proposals -->
+    <string name="DEFAULT_ERROR_MESSAGE">Váratlan hiba történt!</string>
+    <string name="DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN">Váratlan hiba történt! Kérlek próbáld újra!</string>
     <string name="SUCCESSFUL_VOTING">A szavazatát hozzáadtuk!</string>
+    <string name="INVALID_EMAIL_ERROR_MESSAGE">Kérlek létező email címet adj meg!</string>
+    <string name="INVALID_PASSWORD_ERROR_MESSAGE">Kérjük írjon be egy érvényes jelszót!</string>
+    <string name="INVALID_FIRST_NAME_ERROR_MESSAGE">Kérjük, adjon meg egy keresztnevet!</string>
+    <string name="INVALID_LAST_NAME_ERROR_MESSAGE">Kérjük, adjon meg egy vezetéknevet!</string>
+    <string name="INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE">Kérjük, írja le az esetet!</string>
+    <string name="INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE">Kérjük, adja meg az esemény címét!</string>
+    <string name="INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE">Kérjük, adjon meg legalább egy fotót az esetről!</string>
+    <string name="INVALID_COMMENT_TEXT_ERROR_MESSAGE">Kérjük, írjon megjegyzést!</string>
+    <string name="INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE">Kérjük, válasszon kategóriát a projekthez!</string>
+    <string name="INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE">Kérjük, válasszon címet a projektnek!</string>
+    <string name="INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE">Kérjük, adja meg a projekt motivációját!</string>
+    <string name="INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE">Kérjük, adja meg a projekt helyszínét!</string>
+    <string name="INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE">Kérjük, írja be a projekt leírását!</string>
+    <string name="INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE">Kérjük, adja meg a fájl címét!</string>
+    <string name="INVALID_PDF_URI_TEXT_ERROR_MESSAGE">Kérjük, töltsön fel egy PDF fájlt!</string>
+    <string name="INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE">Kérjük, töltsön fel egy képet!</string>
+    <string name="START_DATE_AFTER_END_DATE">A kezdő dátum nem lehet későbbi a befejezési dátumnál!</string>
+    <string name="PROVIDE_STORAGE_PERMISSIONS_CTA">Kérjük, adja meg az alkalmazás tárolási engedélyeit!</string>
+    <string name="CITIZEN_MISSING_ERROR_MESSAGE">Ez a polgár eltűnt!</string>
+    <string name="SUCCESSFUL_REPORT_GENERATED">A jelentés elkészítése sikeres volt!</string>
+    <string name="FAILED_ADDRESS_COMPUTING">A cím jelenleg nem határozható meg!</string>
+    <string name="SUCCESSFUL_REGISTER_MESSAGE">Sikeresen regisztráltál! Kérjük, igazolja e-mail-címét!</string>
+    <string name="SUCCESSFUL_RESET_PASSWORD_EMAIL_SENT">A jelszó-visszaállítási e-mailt elküldtük. Kérlek ellenőrizd az e-mailed!</string>
+    <string name="FAILED_REGISTER_MESSAGE">A regisztráció meghiúsult! Kérlek próbáld újra!</string>
+    <string name="FAILED_SIGN_IN_UNVERIFIED_EMAIL_MESSAGE">Kérjük, bejelentkezés előtt igazolja e-mail-címét!</string>
+    <string name="FAILED_SIGN_IN_MESSAGE">A bejelentkezés nem sikerült! Kérlek próbáld újra!</string>
+    <string name="FAILED_RESET_PASSWORD_EMAIL_NOT_SENT">Hiba történt! Az e-mail visszaállítási jelszó nem lett elküldve.</string>
+    <string name="SUCCESSFUL_REPORT_INCIDENT">Az esetet sikeresen jelentették!</string>
+    <string name="SUCCESSFUL_ADD_COMMENT">A megjegyzést sikeresen hozzáadtuk!</string>
+    <string name="SUCCESSFUL_ADDED_IMAGE">A kép sikeresen hozzáadva!</string>
+    <string name="SUCCESSFUL_ADDED_PDF">A PDF fájl hozzáadása sikeresen megtörtént!</string>
+    <string name="SUCCESSFUL_UNDO_VOTE">A szavazatod törölve lett!</string>
+    <string name="SUCCESSFUL_PROPOSAL_PROJECT">A projektet sikeresen javasolták!</string>
 </resources>

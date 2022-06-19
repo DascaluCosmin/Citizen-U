@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import com.ubb.citizen_u.R
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.databinding.FragmentReportedIncidentDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
@@ -20,13 +21,10 @@ import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
-import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_ADD_COMMENT
 import com.ubb.citizen_u.util.ConfigurationConstants.IMAGE_CAROUSEL_NUMBER_OF_SECONDS
 import com.ubb.citizen_u.util.DateFormatter
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_COMMENT_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -85,7 +83,7 @@ class ReportedIncidentDetailsFragment : Fragment() {
                     binding.mainProgressbar.visibility = View.GONE
 
                     binding.addIncidentCommentTextfield.editText?.text?.clear()
-                    toastMessage(SUCCESSFUL_ADD_COMMENT)
+                    toastMessage(getString(R.string.SUCCESSFUL_ADD_COMMENT))
                     getCurrentComment(it.data.comments)
                 }
             }
@@ -193,7 +191,7 @@ class ReportedIncidentDetailsFragment : Fragment() {
             binding.addIncidentCommentTextfield.editText?.text.toString().trim { it <= ' ' }
         when {
             TextUtils.isEmpty(commentText) -> {
-                toastMessage(INVALID_COMMENT_TEXT_ERROR_MESSAGE)
+                toastMessage(getString(R.string.INVALID_COMMENT_TEXT_ERROR_MESSAGE))
             }
 
             else -> {

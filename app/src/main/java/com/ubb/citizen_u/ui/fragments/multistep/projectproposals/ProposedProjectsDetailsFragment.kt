@@ -22,11 +22,8 @@ import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.ui.viewmodels.ProjectProposalViewModel
-import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_ADD_COMMENT
 import com.ubb.citizen_u.util.ConfigurationConstants.IMAGE_CAROUSEL_NUMBER_OF_SECONDS
 import com.ubb.citizen_u.util.DateFormatter
-import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_UNDO_VOTE
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_COMMENT_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
 import com.ubb.citizen_u.util.glide.PdfFiller
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -165,7 +162,7 @@ class ProposedProjectsDetailsFragment : Fragment() {
                     binding.mainProgressbar.visibility = View.GONE
 
                     binding.addProjectProposalCommentTextfield.editText?.text?.clear()
-                    toastErrorMessage(SUCCESSFUL_ADD_COMMENT)
+                    toastErrorMessage(getString(R.string.SUCCESSFUL_ADD_COMMENT))
                     getCurrentComment(it.data.comments)
                 }
             }
@@ -212,7 +209,7 @@ class ProposedProjectsDetailsFragment : Fragment() {
                         projectProposalViewModel.currentSelectedProjectProposal!!.numberOfVotes.toString()
                     binding.voteProjectProposalButton.text =
                         getString(R.string.project_proposal_vote_button_text)
-                    toastMessage(SUCCESSFUL_UNDO_VOTE)
+                    toastMessage(getString(R.string.SUCCESSFUL_UNDO_VOTE))
                 }
             }
         }
@@ -256,7 +253,7 @@ class ProposedProjectsDetailsFragment : Fragment() {
             binding.addProjectProposalCommentTextfield.editText?.text.toString().trim { it <= ' ' }
         when {
             TextUtils.isEmpty(commentText) -> {
-                toastMessage(INVALID_COMMENT_TEXT_ERROR_MESSAGE)
+                toastMessage(getString(R.string.INVALID_COMMENT_TEXT_ERROR_MESSAGE))
             }
 
             else -> {

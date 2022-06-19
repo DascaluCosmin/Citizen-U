@@ -28,12 +28,9 @@ import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
-import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_REPORT_INCIDENT
-import com.ubb.citizen_u.util.LocationConstants.FAILED_ADDRESS_COMPUTING
 import com.ubb.citizen_u.util.TownHallConstants.TOWN_HALL_LATITUDE_COORDINATE
 import com.ubb.citizen_u.util.TownHallConstants.TOWN_HALL_LONGITUDE_COORDINATE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -90,7 +87,8 @@ class ReportIncidentMapFragment : Fragment() {
                         geocoder.getFromLocation(latitude, longitude, 1)
                     if (!addressList.isNullOrEmpty()) {
                         val reversedGeocodedAddress = addressList.first()
-                        val firstAddressLine = reversedGeocodedAddress.thoroughfare + ", " + reversedGeocodedAddress.subThoroughfare
+                        val firstAddressLine =
+                            reversedGeocodedAddress.thoroughfare + ", " + reversedGeocodedAddress.subThoroughfare
                         if (firstAddressLine.isNotEmpty()) {
                             markerOptions.title(firstAddressLine)
                             citizenRequestViewModel.incidentAddress = firstAddressLine
@@ -100,7 +98,7 @@ class ReportIncidentMapFragment : Fragment() {
                     }
                 } catch (exception: Exception) {
                     Log.e(TAG, "onCreateView: Error at doing reverse geo-coding")
-                    toastErrorMessage(FAILED_ADDRESS_COMPUTING)
+                    toastErrorMessage(getString(R.string.FAILED_ADDRESS_COMPUTING))
                 }
 
                 googleMap.clear()
@@ -142,7 +140,7 @@ class ReportIncidentMapFragment : Fragment() {
                     binding.mainProgressbar.visibility = View.VISIBLE
                 }
                 is Response.Success -> {
-                    toastMessage(SUCCESSFUL_REPORT_INCIDENT)
+                    toastMessage(getString(R.string.SUCCESSFUL_REPORT_INCIDENT))
                     goToUserProfile()
                 }
             }

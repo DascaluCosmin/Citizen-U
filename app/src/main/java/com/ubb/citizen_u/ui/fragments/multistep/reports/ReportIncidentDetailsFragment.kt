@@ -8,10 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentReportIncidentDetailsBinding
 import com.ubb.citizen_u.ui.util.toastErrorMessage
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -57,11 +56,11 @@ class ReportIncidentDetailsFragment : Fragment() {
                 .trim { it <= ' ' }
         when {
             TextUtils.isEmpty(description) -> toastErrorMessage(
-                INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE
+                getString(R.string.INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE)
             )
 
             TextUtils.isEmpty(headline) -> toastErrorMessage(
-                INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE
+                getString(R.string.INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE)
             )
 
             else -> {

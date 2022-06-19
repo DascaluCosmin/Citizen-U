@@ -14,6 +14,7 @@ import androidx.annotation.StringRes
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
+import com.ubb.citizen_u.R
 import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN
 import com.ubb.citizen_u.util.SettingsConstants
 import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
@@ -24,6 +25,11 @@ fun Fragment.toastMessage(message: String) {
 }
 
 fun Fragment.toastErrorMessage(errorMessage: String = DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN) {
+    if (errorMessage == DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN) {
+        Toast.makeText(context,
+            getString(R.string.DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN),
+            Toast.LENGTH_SHORT).show()
+    }
     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
 }
 

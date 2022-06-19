@@ -16,7 +16,6 @@ import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.DatabaseConstants.COMMENTS_COL
 import com.ubb.citizen_u.util.DatabaseConstants.PROPOSED_PROJECTS_COL
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject

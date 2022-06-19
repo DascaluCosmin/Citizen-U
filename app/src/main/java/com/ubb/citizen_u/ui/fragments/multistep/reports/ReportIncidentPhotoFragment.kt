@@ -32,7 +32,6 @@ import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.util.CitizenRequestConstants.DEFAULT_INCIDENT_CATEGORY
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -235,7 +234,7 @@ class ReportIncidentPhotoFragment : Fragment() {
             citizenRequestViewModel.listIncidentPhotoWithSourceLiveData.value.isNullOrEmpty() -> {
                 Log.d(TAG, "There are no incident photos")
                 toastErrorMessage(
-                    INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE
+                    getString(R.string.INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE)
                 )
             }
             else -> {

@@ -220,5 +220,40 @@
     <string name="city_hall_full_Name">Primăria și Consiliul Local Cluj-Napoca</string>
 
     <!-- Project Proposals -->
+    <string name="DEFAULT_ERROR_MESSAGE">O eroare neașteptată a avut loc!</string>
+    <string name="DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN">O eroare neașteptată a avut loc! Vă rugăm să încercați din nou!</string>
     <string name="SUCCESSFUL_VOTING">Votul a fost înregistrat cu succes!</string>
+    <string name="INVALID_EMAIL_ERROR_MESSAGE">Vă rugăm să introduceți o adresă de email validă!</string>
+    <string name="INVALID_PASSWORD_ERROR_MESSAGE">Vă rugăm să introduceți o parolă validă!</string>
+    <string name="INVALID_FIRST_NAME_ERROR_MESSAGE">Vă rugăm să introduceți un prenume valid!</string>
+    <string name="INVALID_LAST_NAME_ERROR_MESSAGE">Vă rugăm să introduceți un nume de familie valid!</string>
+    <string name="INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE">Vă rugăm să descrieți incidentul!</string>
+    <string name="INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE">Vă rugăm să introduceți titlul incidentului!</string>
+    <string name="INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE">Vă rugăm să introduceți cel puțin o fotografie a incidentului!</string>
+    <string name="INVALID_COMMENT_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți un comentariu!</string>
+    <string name="INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE">Vă rugăm să alegeți o categorie pentru proiect!</string>
+    <string name="INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți un titlu pentru proiect!</string>
+    <string name="INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți o motivare a proiectului!</string>
+    <string name="INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți o locație a proiectului!</string>
+    <string name="INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți o descriere a proiectului!</string>
+    <string name="INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți un titlu pentru fișierul atașat!</string>
+    <string name="INVALID_PDF_URI_TEXT_ERROR_MESSAGE">Vă rugăm să atașati un fișier PDF!</string>
+    <string name="INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE">Vă rugăm să atașati o fotografie!</string>
+    <string name="START_DATE_AFTER_END_DATE">Data de început nu poate fi după data de încheiere!</string>
+    <string name="PROVIDE_STORAGE_PERMISSIONS_CTA">Vă rugăm să permiteți acces la stocare aplicației!</string>
+    <string name="CITIZEN_MISSING_ERROR_MESSAGE">Acest cetățean nu a putut fi găsit!</string>
+    <string name="SUCCESSFUL_REPORT_GENERATED">Raportul a fost generat cu succes!</string>
+    <string name="FAILED_ADDRESS_COMPUTING">Locația nu a putut fi determinată în acest moment!</string>
+    <string name="SUCCESSFUL_REGISTER_MESSAGE">V-ați înregistrat cu succes! Vă rugăm să vă verificați adresa de email!</string>
+    <string name="SUCCESSFUL_RESET_PASSWORD_EMAIL_SENT">V-ați resetat parola cu succes! Vă rugăm să vă verificați adresa de email!</string>
+    <string name="FAILED_REGISTER_MESSAGE">Registrarea a eșuat! Vă rugăm să încercați din nou!</string>
+    <string name="FAILED_SIGN_IN_UNVERIFIED_EMAIL_MESSAGE">Vă rugăm să vă verificați adresa de email înainte de a vă autentifica!</string>
+    <string name="FAILED_SIGN_IN_MESSAGE">Autentificarea a eșuat! Vă rugăm să încercați din nou</string>
+    <string name="FAILED_RESET_PASSWORD_EMAIL_NOT_SENT">O eroare a avut loc! Email-ul de resetare a parolei nu a fost trimis!</string>
+    <string name="SUCCESSFUL_REPORT_INCIDENT">Incidentul a fost raportat cu succes!</string>
+    <string name="SUCCESSFUL_ADD_COMMENT">Comentariul a fost adăugat cu succes!</string>
+    <string name="SUCCESSFUL_ADDED_IMAGE">Imaginea a fost adăugată cu succes!</string>
+    <string name="SUCCESSFUL_ADDED_PDF">Fișierul PDF a fost adăugat cu succes!</string>
+    <string name="SUCCESSFUL_UNDO_VOTE">Votul a fost retras!</string>
+    <string name="SUCCESSFUL_PROPOSAL_PROJECT">Propunerea de proiect a fost adăugată cu succes!</string>
 </resources>

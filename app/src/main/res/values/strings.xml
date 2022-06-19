@@ -225,5 +225,40 @@
 
 
     <!-- Project Proposals -->
+    <string name="DEFAULT_ERROR_MESSAGE">An unexpected error has occurred!</string>
+    <string name="DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN">An unexpected error has occurred! Please try again!</string>
     <string name="SUCCESSFUL_VOTING">Your vote has been added!</string>
+    <string name="INVALID_EMAIL_ERROR_MESSAGE">Please enter a valid email!</string>
+    <string name="INVALID_PASSWORD_ERROR_MESSAGE">Please enter a valid password!</string>
+    <string name="INVALID_FIRST_NAME_ERROR_MESSAGE">Please enter a valid first name!</string>
+    <string name="INVALID_LAST_NAME_ERROR_MESSAGE">Please enter a valid last name!</string>
+    <string name="INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE">Please describe the incident!</string>
+    <string name="INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE">Please provide the incident headline!</string>
+    <string name="INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE">Please provide at least one photo of the incident!</string>
+    <string name="INVALID_COMMENT_TEXT_ERROR_MESSAGE">Please enter a comment!</string>
+    <string name="INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE">Please choose a category for the project!</string>
+    <string name="INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE">Please enter a title for the project!</string>
+    <string name="INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE">Please enter a motivation for the project!</string>
+    <string name="INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE">Please enter a location for the project!</string>
+    <string name="INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE">Please enter a description for the project!</string>
+    <string name="INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE">Please enter a title for the file!</string>
+    <string name="INVALID_PDF_URI_TEXT_ERROR_MESSAGE">Please upload a PDF file!</string>
+    <string name="INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE">Please upload an image!</string>
+    <string name="START_DATE_AFTER_END_DATE">The start date can\'t be after the end date</string>
+    <string name="PROVIDE_STORAGE_PERMISSIONS_CTA">Please provide storage permissions to the application!</string>
+    <string name="CITIZEN_MISSING_ERROR_MESSAGE">This citizen is missing!</string>
+    <string name="SUCCESSFUL_REPORT_GENERATED">The report has been generated successfully!</string>
+    <string name="FAILED_ADDRESS_COMPUTING">The address cannot be determined at the moment!</string>
+    <string name="SUCCESSFUL_REGISTER_MESSAGE">You have been successfully registered! Please verify your email!</string>
+    <string name="SUCCESSFUL_RESET_PASSWORD_EMAIL_SENT">The reset password email has been sent. Please check your email!</string>
+    <string name="FAILED_REGISTER_MESSAGE">The registration has failed! Please try again!</string>
+    <string name="FAILED_SIGN_IN_UNVERIFIED_EMAIL_MESSAGE">Please verify your email before signing in!</string>
+    <string name="FAILED_SIGN_IN_MESSAGE">The sign in has failed! Please try again!</string>
+    <string name="FAILED_RESET_PASSWORD_EMAIL_NOT_SENT">An error has occurred! The email reset password has not been sent.</string>
+    <string name="SUCCESSFUL_REPORT_INCIDENT">The incident has been reported successfully!</string>
+    <string name="SUCCESSFUL_ADD_COMMENT">The comment has been added successfully!</string>
+    <string name="SUCCESSFUL_ADDED_IMAGE">The image has been added successfully!</string>
+    <string name="SUCCESSFUL_ADDED_PDF">The PDF file has been added successfully!</string>
+    <string name="SUCCESSFUL_UNDO_VOTE">Your vote has been deleted!</string>
+    <string name="SUCCESSFUL_PROPOSAL_PROJECT">The project has been proposed successfully!</string>
 </resources>

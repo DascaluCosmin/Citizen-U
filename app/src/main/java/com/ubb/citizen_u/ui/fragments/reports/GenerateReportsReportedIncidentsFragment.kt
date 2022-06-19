@@ -31,12 +31,8 @@ import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
-import com.ubb.citizen_u.util.ApplicationPermissions
 import com.ubb.citizen_u.util.DateConverter
-import com.ubb.citizen_u.util.ReportsConstants
-import com.ubb.citizen_u.util.ValidationConstants
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -233,14 +229,14 @@ class GenerateReportsReportedIncidentsFragment : Fragment() {
 
     fun generatePDF() {
         if (!checkPermission()) {
-            toastErrorMessage(ApplicationPermissions.PROVIDE_STORAGE_PERMISSIONS_CTA)
+            toastErrorMessage(getString(R.string.PROVIDE_STORAGE_PERMISSIONS_CTA))
             requestPermission()
             return
         }
 
         Log.d(TAG, "The start date is $startDate, end date is $endDate")
         if (startDate.after(endDate)) {
-            toastErrorMessage(ValidationConstants.START_DATE_AFTER_END_DATE)
+            toastErrorMessage(getString(R.string.START_DATE_AFTER_END_DATE))
             return
         }
         citizenRequestViewModel.getAllReportedIncidents()
@@ -330,7 +326,7 @@ class GenerateReportsReportedIncidentsFragment : Fragment() {
 
         try {
             pdf.writeTo(FileOutputStream(file))
-            toastMessage(ReportsConstants.SUCCESSFUL_REPORT_GENERATED)
+            toastMessage(getString(R.string.SUCCESSFUL_REPORT_GENERATED))
         } catch (exception: Exception) {
             Log.e(TAG, "An error has occurred while generating pdf report: ${exception.message}")
             toastErrorMessage()

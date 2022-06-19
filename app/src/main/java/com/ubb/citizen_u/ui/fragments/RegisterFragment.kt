@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentRegisterBinding
-import com.ubb.citizen_u.util.ValidationConstants
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -52,7 +52,7 @@ class RegisterFragment : Fragment() {
                 binding.emailTextfield.editText?.text.toString().trim { it <= ' ' }) -> {
                 Toast.makeText(
                     context,
-                    ValidationConstants.INVALID_EMAIL_ERROR_MESSAGE,
+                    getString(R.string.INVALID_EMAIL_ERROR_MESSAGE),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -61,7 +61,7 @@ class RegisterFragment : Fragment() {
                 binding.passwordTextfield.editText?.text.toString().trim { it <= ' ' }) -> {
                 Toast.makeText(
                     context,
-                    ValidationConstants.INVALID_PASSWORD_ERROR_MESSAGE,
+                    getString(R.string.INVALID_PASSWORD_ERROR_MESSAGE),
                     Toast.LENGTH_SHORT
                 ).show()
             }
