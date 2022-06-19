@@ -262,4 +262,16 @@
     <string name="SUCCESSFUL_ADDED_PDF">The PDF file has been added successfully!</string>
     <string name="SUCCESSFUL_UNDO_VOTE">Your vote has been deleted!</string>
     <string name="SUCCESSFUL_PROPOSAL_PROJECT">The project has been proposed successfully!</string>
+
+    <!-- Content Description (Accessibility) -->
+    <string name="event_period_content_description">Event Period</string>
+    <string name="event_location_content_description">Event Location</string>
+    <string name="event_address_content_description">Event Address</string>
+    <string name="event_category_content_description">Event Category</string>
+    <string name="posted_on_content_description">Posted on the date of</string>
+    <string name="event_photo_content_description">Event Photo</string>
+    <string name="public_release_photo_content_description">Public Release Photo</string>
+    <string name="previous_comment_content_description">Previous comment</string>
+    <string name="next_comment_content_description">Next comment</string>
+    <string name="remove_added_incident_photo_content_description">Remove attached incident photo</string>
 </resources>

@@ -15,7 +15,7 @@
             android:id="@+id/event_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/list_image_height"
-            android:importantForAccessibility="no"
+            android:contentDescription="@string/public_release_photo_content_description"
             android:scaleType="centerCrop"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentPublicReleaseEventDetailsBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.util.getCurrentLanguage
@@ -18,7 +20,6 @@ import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import com.ubb.citizen_u.util.DateFormatter
 import com.ubb.citizen_u.util.glide.ImageFiller
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class PublicReleaseEventDetailsFragment : Fragment() {
@@ -84,13 +85,23 @@ class PublicReleaseEventDetailsFragment : Fragment() {
                         val language = requireContext().getCurrentLanguage()
 
                         binding.eventTitle.text = it.data.title[language]
+                        binding.eventCategory.text = it.data.category[language]
+                        binding.eventContent.text = it.data.content[language]
 
                         val randomEventPhoto = it.data.chooseRandomEventPhoto()
-                        ImageFiller.fill(
-                            requireContext(),
-                            binding.eventImage,
-                            randomEventPhoto
-                        )
+                        if (randomEventPhoto == null) {
+                            binding.eventImage.setImageResource(R.drawable.generic_town_hall_background)
+                            binding.eventImage.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                        } else {
+                            ImageFiller.fill(
+                                requireContext(),
+                                binding.eventImage,
+                                randomEventPhoto
+                            )
+                            randomEventPhoto.name?.let { photoName ->
+                                binding.eventImage.contentDescription = photoName
+                            }
+                        }
 
                         it.data.publicationDate?.let { publicationDate ->
                             binding.eventPublicationDate.text =

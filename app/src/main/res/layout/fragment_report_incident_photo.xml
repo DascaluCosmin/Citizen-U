@@ -64,6 +64,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="@dimen/generic_margin_half"
                 android:layout_marginBottom="@dimen/generic_margin_half"
+                android:contentDescription="@string/remove_added_incident_photo_content_description"
                 android:onClick="@{() -> reportIncidentPhotoFragment.removeLatestPhoto()}"
                 android:src="@drawable/ic_delete_photo_28"
                 android:visibility="gone"

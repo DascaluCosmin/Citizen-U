@@ -255,4 +255,16 @@
     <string name="SUCCESSFUL_ADDED_PDF">A PDF fájl hozzáadása sikeresen megtörtént!</string>
     <string name="SUCCESSFUL_UNDO_VOTE">A szavazatod törölve lett!</string>
     <string name="SUCCESSFUL_PROPOSAL_PROJECT">A projektet sikeresen javasolták!</string>
+
+    <!-- Content Description (Accessibility) -->
+    <string name="event_period_content_description">Rendezvény időszaka</string>
+    <string name="event_location_content_description">Rendezvény helyszíne</string>
+    <string name="event_address_content_description">Rendezvény címe</string>
+    <string name="event_category_content_description">Rendezvény kategória</string>
+    <string name="posted_on_content_description">Feladás dátuma</string>
+    <string name="event_photo_content_description">Esemény fotója</string>
+    <string name="public_release_photo_content_description">Nyilvános kiadású fotó</string>
+    <string name="previous_comment_content_description">Előző komment</string>
+    <string name="next_comment_content_description">Következő komment</string>
+    <string name="remove_added_incident_photo_content_description">Távolítsa el a mellékelt eseményről készült fotót</string>
 </resources>

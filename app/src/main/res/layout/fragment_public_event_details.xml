@@ -17,137 +17,196 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/event_details"
+        <ImageView
+            android:id="@+id/event_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:layout_height="0dp"
+            android:onClick="@{() -> publicEventDetailsFragment.goToEventOnlinePage()}"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/horizontal_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/event_photo3_sample"
+            android:contentDescription="@string/event_photo_content_description" />
 
-            <ImageView
-                android:id="@+id/event_image"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/horizontal_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/generic_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/vertical_end_guideline"
+            app:layout_constraintStart_toStartOf="@id/vertical_start_guideline"
+            app:layout_constraintTop_toTopOf="@id/horizontal_guideline">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/event_details"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:importantForAccessibility="no"
-                android:onClick="@{() -> publicEventDetailsFragment.goToEventOnlinePage()}"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/event_photo3_sample"
-                app:layout_constraintBottom_toBottomOf="@id/horizontal_guideline"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/vertical_guideline"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.1" />
+                android:visibility="gone"
+                tools:visibility="visible">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontal_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.3" />
+                <TextView
+                    android:id="@+id/event_title"
+                    style="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Untold" />
 
-            <TextView
-                android:id="@+id/event_title"
-                style="@style/TextAppearance.MaterialComponents.Headline3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@id/vertical_guideline"
-                app:layout_constraintTop_toTopOf="@id/horizontal_guideline"
-                tools:text="Untold" />
+                <ImageView
+                    android:id="@+id/calendar_imageview"
+                    android:layout_width="@dimen/event_details_icons_dimension"
+                    android:layout_height="@dimen/event_details_icons_dimension"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:contentDescription="@string/event_period_content_description"
+                    android:src="@drawable/ic_baseline_calendar_month_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/event_title" />
 
-            <ImageView
-                android:id="@+id/calendar_imageview"
-                android:layout_width="@dimen/event_details_icons_dimension"
-                android:layout_height="@dimen/event_details_icons_dimension"
-                android:layout_marginTop="@dimen/generic_margin"
-                android:src="@drawable/ic_baseline_calendar_month_24"
-                app:layout_constraintStart_toStartOf="@id/vertical_guideline"
-                app:layout_constraintTop_toBottomOf="@id/event_title" />
+                <TextView
+                    android:id="@+id/event_start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/events_margin_between_imageview_content"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@id/calendar_imageview"
+                    app:layout_constraintStart_toEndOf="@id/calendar_imageview"
+                    app:layout_constraintTop_toTopOf="@id/calendar_imageview"
+                    tools:text="@tools:sample/date/ddmmyy" />
 
-            <TextView
-                android:id="@+id/event_start_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/events_margin_between_imageview_content"
-                android:textColor="@color/grey"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@id/calendar_imageview"
-                app:layout_constraintStart_toEndOf="@id/calendar_imageview"
-                app:layout_constraintTop_toTopOf="@id/calendar_imageview"
-                tools:text="@tools:sample/date/ddmmyy" />
+                <TextView
+                    android:id="@+id/date_separator_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/generic_margin_between_dates_separator"
+                    android:text="@string/date_separator_label"
+                    android:textSize="@dimen/generic_date_dimension"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/event_start_date"
+                    app:layout_constraintStart_toEndOf="@id/event_start_date"
+                    app:layout_constraintTop_toTopOf="@id/event_start_date"
+                    tools:visibility="visible" />
 
-            <TextView
-                android:id="@+id/date_separator_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/generic_margin_between_dates_separator"
-                android:text="@string/date_separator_label"
-                android:textSize="@dimen/generic_date_dimension"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/event_start_date"
-                app:layout_constraintStart_toEndOf="@id/event_start_date"
-                tools:visibility="visible" />
+                <TextView
+                    android:id="@+id/event_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/generic_margin_between_dates_separator"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/generic_date_dimension"
+                    app:layout_constraintBottom_toBottomOf="@id/date_separator_label"
+                    app:layout_constraintStart_toEndOf="@id/date_separator_label"
+                    app:layout_constraintTop_toTopOf="@id/date_separator_label"
+                    tools:text="@tools:sample/date/ddmmyy" />
 
-            <TextView
-                android:id="@+id/event_end_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/generic_margin_between_dates_separator"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/generic_date_dimension"
-                app:layout_constraintBottom_toBottomOf="@id/date_separator_label"
-                app:layout_constraintStart_toEndOf="@id/date_separator_label"
-                tools:text="@tools:sample/date/ddmmyy" />
+                <ImageView
+                    android:id="@+id/location_imageview"
+                    android:layout_width="@dimen/event_details_icons_dimension"
+                    android:layout_height="@dimen/event_details_icons_dimension"
+                    android:layout_marginTop="@dimen/generic_margin_between_element"
+                    android:contentDescription="@string/event_location_content_description"
+                    android:src="@drawable/ic_baseline_location_city_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/calendar_imageview" />
 
-            <ImageView
-                android:id="@+id/location_imageview"
-                android:layout_width="@dimen/event_details_icons_dimension"
-                android:layout_height="@dimen/event_details_icons_dimension"
-                android:layout_marginTop="@dimen/generic_margin_between_element"
-                android:src="@drawable/ic_baseline_location_city_24"
-                app:layout_constraintStart_toStartOf="@id/vertical_guideline"
-                app:layout_constraintTop_toBottomOf="@id/calendar_imageview" />
+                <TextView
+                    android:id="@+id/event_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/events_margin_between_imageview_content"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/generic_date_dimension"
+                    app:layout_constraintBottom_toBottomOf="@id/location_imageview"
+                    app:layout_constraintStart_toEndOf="@+id/location_imageview"
+                    app:layout_constraintTop_toTopOf="@id/location_imageview"
+                    tools:text="Cluj-Napoca" />
 
-            <TextView
-                android:id="@+id/event_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/events_margin_between_imageview_content"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/generic_date_dimension"
-                app:layout_constraintBottom_toBottomOf="@id/location_imageview"
-                app:layout_constraintStart_toEndOf="@+id/location_imageview"
-                app:layout_constraintTop_toTopOf="@id/location_imageview"
-                tools:text="Cluj-Napoca" />
+                <ImageView
+                    android:id="@+id/address_imageview"
+                    android:layout_width="@dimen/event_details_icons_dimension"
+                    android:layout_height="@dimen/event_details_icons_dimension"
+                    android:layout_marginTop="@dimen/generic_margin_between_element"
+                    android:contentDescription="@string/event_address_content_description"
+                    android:src="@drawable/ic_outline_location_on_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/event_location" />
 
-            <ImageView
-                android:id="@+id/address_imageview"
-                android:layout_width="@dimen/event_details_icons_dimension"
-                android:layout_height="@dimen/event_details_icons_dimension"
-                android:layout_marginTop="@dimen/generic_margin_between_element"
-                android:src="@drawable/ic_outline_location_on_24"
-                app:layout_constraintStart_toStartOf="@id/vertical_guideline"
-                app:layout_constraintTop_toBottomOf="@id/event_location" />
+                <TextView
+                    android:id="@+id/event_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/events_margin_between_imageview_content"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/event_text_dimension"
+                    app:layout_constraintBottom_toBottomOf="@id/address_imageview"
+                    app:layout_constraintStart_toEndOf="@id/address_imageview"
+                    app:layout_constraintTop_toTopOf="@id/address_imageview"
+                    tools:text="Cluj Arena" />
 
-            <TextView
-                android:id="@+id/event_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/events_margin_between_imageview_content"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/event_text_dimension"
-                app:layout_constraintBottom_toBottomOf="@id/address_imageview"
-                app:layout_constraintStart_toEndOf="@id/address_imageview"
-                app:layout_constraintTop_toTopOf="@id/address_imageview"
-                tools:text="Cluj Arena" />
+                <ImageView
+                    android:id="@+id/category_imageview"
+                    android:layout_width="@dimen/event_details_icons_dimension"
+                    android:layout_height="@dimen/event_details_icons_dimension"
+                    android:layout_marginTop="@dimen/generic_margin_between_element"
+                    android:contentDescription="@string/event_address_content_description"
+                    android:src="@drawable/ic_baseline_category_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/address_imageview" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/event_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/events_margin_between_imageview_content"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/event_text_dimension"
+                    app:layout_constraintBottom_toBottomOf="@id/category_imageview"
+                    app:layout_constraintStart_toEndOf="@id/category_imageview"
+                    app:layout_constraintTop_toTopOf="@id/category_imageview"
+                    tools:text="Music" />
+
+                <TextView
+                    android:id="@+id/event_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/category_imageview"
+                    tools:text="Electric Castle is loved by the festival goers for its unique and immersive day &amp; night experience, awarded by the music festival industry for its relentless quality and appreciated by artists. Taking place next to the iconic 15th-century Bánffy Castle, in the pristine nature of Transylvania, Electric Castle surprises at every edition with a creative lineup, touching a diversity of genres, with new media installations &amp; performances, and disruptive talks. Breathtaking scenery and historical surroundings create an out of the ordinary way of living and feeling, which can’t be matched by other experiences." />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
 
         <ProgressBar
             android:id="@+id/main_progressbar"

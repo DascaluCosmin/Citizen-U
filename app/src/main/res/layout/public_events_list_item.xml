@@ -15,7 +15,7 @@
             android:id="@+id/event_item_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/list_image_height"
-            android:importantForAccessibility="no"
+            android:contentDescription="@string/event_photo_content_description"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,8 +27,8 @@
             style="?attr/textAppearanceHeadline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/generic_list_margin_between_items"
             android:layout_marginStart="@dimen/generic_margin"
+            android:layout_marginTop="@dimen/generic_list_margin_between_items"
             app:layout_constraintStart_toStartOf="@id/event_item_image"
             app:layout_constraintTop_toBottomOf="@id/event_item_image"
             tools:text="Untold" />
@@ -48,11 +48,11 @@
             android:id="@+id/event_item_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/generic_margin_half"
             android:textSize="@dimen/event_item_text_dimension"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/event_item_title"
             app:layout_constraintTop_toBottomOf="@id/event_item_title"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="@dimen/generic_margin_half"
             tools:text="Cluj-Arena" />
 
         <TextView

@@ -16,80 +16,130 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/public_release_event_details"
+        <ImageView
+            android:id="@+id/event_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:layout_height="0dp"
+            android:contentDescription="@string/public_release_photo_content_description"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/horizontal_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/public_release_photo_sample" />
 
-            <ImageView
-                android:id="@+id/event_image"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/horizontal_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/generic_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/vertical_end_guideline"
+            app:layout_constraintStart_toStartOf="@id/vertical_start_guideline"
+            app:layout_constraintTop_toTopOf="@id/horizontal_guideline">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/public_release_event_details"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:importantForAccessibility="no"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="@id/horizontal_guideline"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/public_release_photo_sample" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/vertical_start_guideline"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.1" />
+                android:visibility="gone"
+                tools:visibility="visible">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/horizontal_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.3" />
+                <TextView
+                    android:id="@+id/event_title"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Green Friday" />
 
-            <TextView
-                android:id="@+id/event_title"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_margin"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="@id/vertical_end_guideline"
-                app:layout_constraintStart_toStartOf="@id/vertical_start_guideline"
-                app:layout_constraintTop_toTopOf="@id/horizontal_guideline"
-                tools:text="Green Friday" />
+                <ImageView
+                    android:id="@+id/calendar_imageview"
+                    android:layout_width="@dimen/event_details_icons_dimension"
+                    android:layout_height="@dimen/event_details_icons_dimension"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:contentDescription="@string/posted_on_content_description"
+                    android:src="@drawable/ic_baseline_calendar_month_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/event_title" />
 
-            <ImageView
-                android:id="@id/calendar_imageview"
-                android:layout_width="@dimen/event_details_icons_dimension"
-                android:layout_height="@dimen/event_details_icons_dimension"
-                android:layout_marginTop="@dimen/generic_margin"
-                android:src="@drawable/ic_baseline_calendar_month_24"
-                app:layout_constraintStart_toStartOf="@id/vertical_start_guideline"
-                app:layout_constraintTop_toBottomOf="@id/event_title" />
+                <TextView
+                    android:id="@+id/event_publication_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/events_margin_between_imageview_content"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@id/calendar_imageview"
+                    app:layout_constraintStart_toEndOf="@id/calendar_imageview"
+                    app:layout_constraintTop_toTopOf="@id/calendar_imageview"
+                    tools:text="@tools:sample/date/ddmmyy" />
 
-            <TextView
-                android:id="@id/event_publication_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/events_margin_between_imageview_content"
-                android:textColor="@color/grey"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@id/calendar_imageview"
-                app:layout_constraintStart_toEndOf="@id/calendar_imageview"
-                app:layout_constraintTop_toTopOf="@id/calendar_imageview"
-                tools:text="@tools:sample/date/ddmmyy" />
+                <ImageView
+                    android:id="@+id/category_imageview"
+                    android:layout_width="@dimen/event_details_icons_dimension"
+                    android:layout_height="@dimen/event_details_icons_dimension"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:contentDescription="@string/event_category_content_description"
+                    android:src="@drawable/ic_baseline_category_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/calendar_imageview" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/vertical_end_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.9" />
+                <TextView
+                    android:id="@+id/event_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/events_margin_between_imageview_content"
+                    android:textColor="@color/grey"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/category_imageview"
+                    app:layout_constraintStart_toEndOf="@id/category_imageview"
+                    app:layout_constraintTop_toTopOf="@id/category_imageview"
+                    tools:text="The Mayor's agenda" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/event_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/category_imageview"
+                    tools:text="In the first ordinary meeting of the local council this year, the draft decision was approved approving the access and circulation of taxis on the lanes dedicated to public transport arranged on Nicolae Titulescu Blvd., Regele Ferdinand Street, Calea Floresti and Splaiul Independenței.
+Access and movement of taxis is allowed on the bus lanes only under the following conditions:
+1. Access is only allowed to taxis with a customer
+2. It is not allowed to embark-disembark customers from the dedicated lane
+3. It is not allowed to use public transport stations as embarkation / disembarkation points for customers, except for the time interval 23: 00-5: 00." />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
 
         <ProgressBar
             android:id="@+id/main_progressbar"

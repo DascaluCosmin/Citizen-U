@@ -25,9 +25,13 @@ class PublicReleaseEventViewHolder(
             }
 
             if (event.photos.size > 0) {
-                event.photos[0]?.let {
-                    binding.eventImage.visibility = View.VISIBLE
-                    ImageFiller.fill(itemView.context, binding.eventImage, it)
+                event.photos[0]?.let { publicReleasePhoto ->
+                    eventImage.visibility = View.VISIBLE
+                    ImageFiller.fill(itemView.context, eventImage, publicReleasePhoto)
+
+                    publicReleasePhoto.name?.let { photoName ->
+                        eventImage.contentDescription = photoName
+                    }
                 }
             }
 

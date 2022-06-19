@@ -257,4 +257,16 @@
     <string name="SUCCESSFUL_ADDED_PDF">Fișierul PDF a fost adăugat cu succes!</string>
     <string name="SUCCESSFUL_UNDO_VOTE">Votul a fost retras!</string>
     <string name="SUCCESSFUL_PROPOSAL_PROJECT">Propunerea de proiect a fost adăugată cu succes!</string>
+
+    <!-- Content Description (Accessibility) -->
+    <string name="event_period_content_description">Perioada evenimentului</string>
+    <string name="event_location_content_description">Locația evenimentului</string>
+    <string name="event_address_content_description">Adresa evenimentului</string>
+    <string name="event_category_content_description">Categoria evenimentului</string>
+    <string name="posted_on_content_description">Postat în data de</string>
+    <string name="event_photo_content_description">Fotografia evenimentului</string>
+    <string name="public_release_photo_content_description">Fotografia comunicatului de presă</string>
+    <string name="previous_comment_content_description">Comentariul precedent</string>
+    <string name="next_comment_content_description">Comentariul următor</string>
+    <string name="remove_added_incident_photo_content_description">Șterge fotografia atașată incidentului de raportat</string>
 </resources>
