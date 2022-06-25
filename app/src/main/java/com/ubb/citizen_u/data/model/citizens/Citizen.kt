@@ -5,12 +5,14 @@ import com.google.firebase.firestore.Exclude
 
 data class Citizen(
     @DocumentId var id: String = "",
+    var cnp: String? = null,
     var firstName: String? = null,
-    var lastName: String? = null
+    var lastName: String? = null,
+    var address: String? = null,
 ) {
 
     override fun toString(): String {
-        return "ID = $id, name = $firstName $lastName"
+        return "ID = $id, name = $firstName $lastName, CNP = $cnp"
     }
 
     @Exclude

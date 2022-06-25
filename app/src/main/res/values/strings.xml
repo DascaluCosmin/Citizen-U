@@ -6,6 +6,7 @@
 
     <!-- Generics -->
     <string name="generic_email_hint" translatable="false">Email</string>
+    <string name="generic_cnp_hint" translatable="false">CNP</string>
     <string name="generic_password_hint">Password</string>
     <string name="generic_firstname_hint">First Name</string>
     <string name="generic_lastname_hint">Last Name</string>
@@ -20,6 +21,7 @@
     <string name="generic_time_interval_label">Time interval</string>
     <string name="generic_start_date_label">Start Date</string>
     <string name="generic_end_date_label">End Date</string>
+    <string name="generic_date_of_birth_label">Date of birth</string>
     <string name="generic_number_of_votes_label">Number of votes</string>
     <string name="generic_posted_by">Posted by</string>
     <string name="generic_status_label">Status</string>
@@ -231,8 +233,10 @@
     <string name="SUCCESSFUL_VOTING">Your vote has been added!</string>
     <string name="INVALID_EMAIL_ERROR_MESSAGE">Please enter a valid email!</string>
     <string name="INVALID_PASSWORD_ERROR_MESSAGE">Please enter a valid password!</string>
+    <string name="INVALID_CNP_NAME_ERROR_MESSAGE">Please enter a valid CNP!</string>
     <string name="INVALID_FIRST_NAME_ERROR_MESSAGE">Please enter a valid first name!</string>
     <string name="INVALID_LAST_NAME_ERROR_MESSAGE">Please enter a valid last name!</string>
+    <string name="INVALID_ADDRESS_ERROR_MESSAGE">Please enter a valid address!</string>
     <string name="INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE">Please describe the incident!</string>
     <string name="INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE">Please provide the incident headline!</string>
     <string name="INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE">Please provide at least one photo of the incident!</string>

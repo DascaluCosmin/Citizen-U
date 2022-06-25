@@ -19,6 +19,7 @@
     <string name="generic_time_interval_label">Időintervallum</string>
     <string name="generic_start_date_label">Kezdő dátum</string>
     <string name="generic_end_date_label">Befejezés dátuma</string>
+    <string name="generic_date_of_birth_label">Születési dátum</string>
     <string name="generic_number_of_votes_label">Szavazatok számát</string>
     <string name="generic_posted_on_label">Közzétett</string>
     <string name="generic_posted_by">Általa megosztva</string>
@@ -224,8 +225,10 @@
     <string name="SUCCESSFUL_VOTING">A szavazatát hozzáadtuk!</string>
     <string name="INVALID_EMAIL_ERROR_MESSAGE">Kérlek létező email címet adj meg!</string>
     <string name="INVALID_PASSWORD_ERROR_MESSAGE">Kérjük írjon be egy érvényes jelszót!</string>
+    <string name="INVALID_CNP_NAME_ERROR_MESSAGE">Kérjük, adjon meg egy érvényes CNP!</string>
     <string name="INVALID_FIRST_NAME_ERROR_MESSAGE">Kérjük, adjon meg egy keresztnevet!</string>
     <string name="INVALID_LAST_NAME_ERROR_MESSAGE">Kérjük, adjon meg egy vezetéknevet!</string>
+    <string name="INVALID_ADDRESS_ERROR_MESSAGE">Kérjük, adjon meg egy érvényes címet!</string>
     <string name="INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE">Kérjük, írja le az esetet!</string>
     <string name="INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE">Kérjük, adja meg az esemény címét!</string>
     <string name="INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE">Kérjük, adjon meg legalább egy fotót az esetről!</string>

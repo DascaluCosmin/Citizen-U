@@ -52,6 +52,12 @@ class IdentityInformationFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentIdentityInformationBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
             identityInformationFragment = this@IdentityInformationFragment
         }
@@ -84,13 +90,22 @@ class IdentityInformationFragment : Fragment() {
                 }
             }
         }
-        return binding.root
     }
 
     fun goNext() {
         val firstName = binding.firstnameTextfield.editText?.text.toString().trim { it <= ' ' }
         val lastName = binding.lastnameTextfield.editText?.text.toString().trim { it <= ' ' }
+        val cnp = binding.cnpTextfield.editText?.text.toString().trim { it <= ' ' }
+        val address = binding.addressTextfield.editText?.text.toString().trim { it <= ' ' }
         when {
+            TextUtils.isEmpty(cnp) -> {
+                Toast.makeText(
+                    context,
+                    getString(R.string.INVALID_CNP_NAME_ERROR_MESSAGE),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
             TextUtils.isEmpty(firstName) -> {
                 Toast.makeText(
                     context,
@@ -107,10 +122,23 @@ class IdentityInformationFragment : Fragment() {
                 ).show()
             }
 
+            TextUtils.isEmpty(address) -> {
+                Toast.makeText(
+                    context,
+                    getString(R.string.INVALID_ADDRESS_ERROR_MESSAGE),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
             else -> {
                 val email = args.email
                 val password = args.password
-                val citizen = Citizen(firstName, lastName)
+                val citizen = Citizen(
+                    cnp = cnp,
+                    firstName = firstName,
+                    lastName = lastName,
+                    address = address
+                )
                 authenticationViewModel.registerUser(email, password, citizen)
             }
         }
