@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.ubb.citizen_u.data.Details
+import com.ubb.citizen_u.data.api.Address
 import com.ubb.citizen_u.data.api.AddressApi
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.Comment
@@ -18,7 +19,6 @@ import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.DatabaseConstants.COMMENTS_COL
 import com.ubb.citizen_u.util.DatabaseConstants.USER_REQUESTS_INCIDENTS_COL
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import retrofit2.HttpException
@@ -58,7 +58,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
 
                 incident.category = getIncidentOverallCategory(listIncidentPhotos)
                     ?.replace('_', ' ')
-                incident.neighborhood = getIncidentSuburb(incident)
+                incident.neighborhood = getIncidentAddress(incident)?.suburb
 
                 Log.d(TAG, "The overall predicted category is ${incident.category}")
 
@@ -104,9 +104,9 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         return if (isAmbiguousPredictedCategoryFlag == 0) mostPredictedCategory else DEFAULT_INCIDENT_CATEGORY
     }
 
-    private suspend fun getIncidentSuburb(incident: Incident): String {
+    private suspend fun getIncidentAddress(incident: Incident): Address? {
         if (incident.latitude == null || incident.longitude == null) {
-            return ""
+            return null
         }
 
         val response = try {
@@ -118,17 +118,17 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         } catch (exception: IOException) {
             Log.e(TAG,
                 "IOException thrown while getting incident suburb. There might be an internet connection issue: ${exception.message}")
-            return ""
+            return null
         } catch (exception: HttpException) {
             Log.e(TAG,
                 "HttpException thrown while getting incident suburb because of an unexpected result: ${exception.message()}")
-            return ""
+            return null
         }
         return if (response.isSuccessful && response.body() != null) {
-            response.body()?.address?.suburb.toString()
+            response.body()?.address
         } else {
             Log.e(TAG, "An error has occurred. The result is ${response.isSuccessful}")
-            ""
+            null
         }
     }
 
@@ -295,6 +295,7 @@ class CitizenRequestRepositoryImpl @Inject constructor(
                     this.citizen = citizenResponse.data
                 }
             }
+            updateSolveOfflineConflict(this)
         }
     }
 
@@ -304,5 +305,27 @@ class CitizenRequestRepositoryImpl @Inject constructor(
         return incidentCommentsSnapshot.documents.map {
             it.toObject(Comment::class.java)
         }.toMutableList()
+    }
+
+    private suspend fun updateSolveOfflineConflict(incident: Incident) {
+        val needsUpdate =
+            (incident.neighborhood.isNullOrEmpty() || incident.address.isNullOrEmpty())
+        if (needsUpdate) {
+            val address = getIncidentAddress(incident)
+            address?.let {
+                if (incident.neighborhood.isNullOrEmpty()) {
+                    incident.neighborhood = it.suburb
+                }
+                if (incident.address.isNullOrEmpty()) {
+                    incident.address = "${it.road}, ${it.house_number}"
+                }
+                usersRef.document(incident.citizen!!.id)
+                    .collection(USER_REQUESTS_INCIDENTS_COL)
+                    .document(incident.id)
+                    .update("neighborhood", incident.neighborhood,
+                        "address", incident.address
+                    )
+            }
+        }
     }
 }

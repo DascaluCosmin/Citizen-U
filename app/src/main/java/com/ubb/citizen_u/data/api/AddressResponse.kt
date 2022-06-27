@@ -13,4 +13,5 @@ data class Address(
     val postcode: String,
     val country: String,
     val country_code: String,
+    val house_number: String,
 )

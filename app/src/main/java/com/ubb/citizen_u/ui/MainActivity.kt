@@ -1,6 +1,8 @@
 package com.ubb.citizen_u.ui
 
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,7 @@ import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.util.NotificationsConstants.EVENT_PUSH_NOTIFICATION_TOPIC_ID
 import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY
 import com.ubb.citizen_u.util.NotificationsConstants.PUBLIC_RELEASE_PUSH_NOTIFICATION_TOPIC_ID
+import com.ubb.citizen_u.util.networking.NetworkReceiver
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
@@ -44,6 +47,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var firebaseMessaging: FirebaseMessaging
 
+    @Inject
+    lateinit var networkReceiver: NetworkReceiver
+
     /**
      *  Uncomment in order to show App Bar
      */
@@ -54,6 +60,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // setSupportActionBar(binding.toolbar)
+
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(networkReceiver, filter)
 
         navController =
             (supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment).navController
