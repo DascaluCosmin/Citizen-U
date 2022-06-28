@@ -16,7 +16,9 @@ import com.ubb.citizen_u.R
 import com.ubb.citizen_u.data.api.AddressApi
 import com.ubb.citizen_u.databinding.FragmentSignedInBinding
 import com.ubb.citizen_u.domain.model.Response
+import com.ubb.citizen_u.ui.MainActivity
 import com.ubb.citizen_u.ui.util.toastErrorMessage
+import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import com.ubb.citizen_u.ui.workers.NotificationWorker
@@ -34,6 +36,7 @@ class SignedInFragment : Fragment() {
     }
 
     private val citizenViewModel: CitizenViewModel by activityViewModels()
+    private val authenticationViewModel: AuthenticationViewModel by activityViewModels()
     private val eventViewModel: EventViewModel by activityViewModels()
 
     private var _binding: FragmentSignedInBinding? = null
@@ -166,6 +169,11 @@ class SignedInFragment : Fragment() {
 
     fun viewOtherCitizensReportedIncidents() {
         findNavController().navigate(R.id.action_signedInFragment_to_otherCitizensReportedIncidentsTransitionFragment)
+    }
+
+    fun signOut() {
+        authenticationViewModel.signOut()
+        (requireActivity() as MainActivity).onBackPressedLogout()
     }
 
     private fun shouldGoToPeriodicEventDetails(): String? {

@@ -87,6 +87,7 @@ class LoginFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
                         } else {
+                            authenticationViewModel.hasJustLoggedOff = false
                             navigateToUserProfile(user.uid)
                         }
                     }
@@ -121,7 +122,9 @@ class LoginFragment : Fragment() {
                 is Response.Success -> {
                     if (it.data != null) {
                         Log.d(TAG, "collectCurrentUserState: The ${it.data.id} is connected")
-                        navigateToUserProfile(it.data.id)
+                        if (!authenticationViewModel.hasJustLoggedOff) {
+                            navigateToUserProfile(it.data.id)
+                        }
                     } else {
                         Log.d(TAG, "collectCurrentUserState: There is no connected user")
                         binding.splashLayout.fadeOut()

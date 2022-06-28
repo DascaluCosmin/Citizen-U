@@ -99,8 +99,6 @@ class MainActivity : AppCompatActivity() {
     private fun overrideNavigationDrawerItems() {
         binding.navigationView.menu.findItem(R.id.loginFragment).setOnMenuItemClickListener {
             authenticationViewModel.signOut()
-
-            Thread.sleep(2000L)
             // TODO: This doesn't work as expected for Screens other than Home (has to be pressed twice)
             super.onBackPressed()
             true
@@ -122,5 +120,9 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    fun onBackPressedLogout() {
+        super.onBackPressed()
     }
 }
