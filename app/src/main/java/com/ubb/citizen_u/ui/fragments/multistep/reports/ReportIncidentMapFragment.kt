@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -46,6 +47,10 @@ class ReportIncidentMapFragment : Fragment() {
     private val citizenViewModel: CitizenViewModel by activityViewModels()
     private val citizenRequestViewModel: CitizenRequestViewModel by activityViewModels()
     private val args: ReportIncidentMapFragmentArgs by navArgs()
+
+    private val handler = Handler()
+    private lateinit var loadingSpinnerRunnable: Runnable
+
 
     private var _binding: FragmentReportIncidentMapBinding? = null
     val binding get() = _binding!!
@@ -146,8 +151,17 @@ class ReportIncidentMapFragment : Fragment() {
                 }
                 Response.Loading -> {
                     binding.mainProgressbar.visibility = View.VISIBLE
+
+                    loadingSpinnerRunnable = Runnable {
+                        Log.d(TAG, "Automatically stopped spinner")
+                        toastMessage(getString(R.string.SUCCESSFUL_REPORT_INCIDENT))
+                        goToUserProfile()
+                    }
+
+                    handler.postDelayed(loadingSpinnerRunnable, 15000L)
                 }
                 is Response.Success -> {
+                    handler.removeCallbacks(loadingSpinnerRunnable)
                     toastMessage(getString(R.string.SUCCESSFUL_REPORT_INCIDENT))
                     goToUserProfile()
                 }
@@ -172,6 +186,11 @@ class ReportIncidentMapFragment : Fragment() {
             citizenId = citizenViewModel.citizenId,
             citizen = citizenViewModel.currentCitizen
         )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(loadingSpinnerRunnable)
     }
 
     override fun onDestroyView() {
