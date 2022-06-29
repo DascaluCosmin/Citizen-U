@@ -25,10 +25,12 @@
         <TextView
             android:id="@+id/event_item_title"
             style="?attr/textAppearanceHeadline4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/generic_margin"
             android:layout_marginTop="@dimen/generic_list_margin_between_items"
+            android:layout_marginEnd="@dimen/generic_margin_between_element"
+            app:layout_constraintEnd_toStartOf="@id/event_item_category"
             app:layout_constraintStart_toStartOf="@id/event_item_image"
             app:layout_constraintTop_toBottomOf="@id/event_item_image"
             tools:text="Untold" />
@@ -40,17 +42,20 @@
             android:layout_marginTop="@dimen/generic_list_margin_between_items"
             android:layout_marginEnd="@dimen/generic_margin"
             android:textSize="@dimen/event_item_text_dimension"
+            app:layout_constraintBottom_toBottomOf="@id/event_item_title"
             app:layout_constraintEnd_toEndOf="@id/event_item_image"
-            app:layout_constraintTop_toBottomOf="@id/event_item_image"
+            app:layout_constraintTop_toTopOf="@id/event_item_title"
             tools:text="Music" />
 
         <TextView
             android:id="@+id/event_item_address"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/generic_margin_between_element"
             android:layout_marginBottom="@dimen/generic_margin_half"
             android:textSize="@dimen/event_item_text_dimension"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/event_item_start_date"
             app:layout_constraintStart_toStartOf="@id/event_item_title"
             app:layout_constraintTop_toBottomOf="@id/event_item_title"
             tools:text="Cluj-Arena" />
@@ -60,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/generic_margin_between_dates_separator"
-            android:textSize="@dimen/generic_date_dimension"
+            android:textSize="@dimen/generic_date_dimension_lower"
             app:layout_constraintBottom_toBottomOf="@id/date_separator_label"
             app:layout_constraintEnd_toStartOf="@id/date_separator_label"
             tools:text="@tools:sample/date/ddmmyy" />
@@ -79,7 +84,7 @@
             android:id="@+id/event_item_end_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/generic_date_dimension"
+            android:textSize="@dimen/generic_date_dimension_lower"
             app:layout_constraintBottom_toBottomOf="@id/event_item_address"
             app:layout_constraintEnd_toEndOf="@id/event_item_category"
             tools:text="@tools:sample/date/ddmmyy" />

@@ -14,6 +14,7 @@ import com.ubb.citizen_u.util.DatabaseConstants.PHOTOS_COL
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
+import java.util.*
 import javax.inject.Inject
 
 class EventRepositoryImpl @Inject constructor(
@@ -41,6 +42,12 @@ class EventRepositoryImpl @Inject constructor(
 
                 val sortedEvents = getAllPublicEventsList().sortedBy {
                     it?.startDate
+                }.filter {
+                    val oneWeekAgoDate = Date().apply {
+                        time -= 2 * 7 * 24 * 60 * 60 * 1000
+                    }
+
+                    it?.startDate!!.after(oneWeekAgoDate)
                 }
                 emit(Response.Success(sortedEvents))
             } catch (exception: Exception) {

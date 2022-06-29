@@ -68,8 +68,6 @@ class AuthenticationViewModel @Inject constructor(
         hasJustLoggedOff = true
         viewModelScope.launch(Dispatchers.IO) {
             authenticationUseCases.signOutUseCase()
-
-            // TODO: Probably you have to rest the _currentUserState
             _currentUserState.resetReplayCache()
         }
     }
@@ -80,11 +78,6 @@ class AuthenticationViewModel @Inject constructor(
             authenticationUseCases.getCurrentUserUseCase().collect {
                 delay(1000L)
                 _currentUserState.tryEmit(it)
-
-                // Here I did not use resetReplyCache because the first call to getCurrentUser()
-                // is done on onViewCreated(), but the first collector is started in Fragment.STARTED
-                // Thus, if I reset the cache, it will become empty and the collector will not be
-                // able to collect the first value emitted here
             }
         }
     }

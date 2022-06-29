@@ -21,6 +21,7 @@ import com.ubb.citizen_u.ui.util.getCurrentLanguage
 import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import com.ubb.citizen_u.util.DateFormatter
+import com.ubb.citizen_u.util.SettingsConstants.DEFAULT_LANGUAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
 import kotlinx.coroutines.launch
 
@@ -133,7 +134,7 @@ class PublicEventDetailsFragment : Fragment() {
                 val url = if (!it.websiteUrl.isNullOrEmpty()) {
                     it.websiteUrl!!
                 } else {
-                    "$DEFAULT_GOOGLE_SEARCH_SITE${it.title}"
+                    "$DEFAULT_GOOGLE_SEARCH_SITE${it.title[DEFAULT_LANGUAGE]}"
                 }
                 onlineEventIntent.data = Uri.parse(url)
                 startActivity(onlineEventIntent)

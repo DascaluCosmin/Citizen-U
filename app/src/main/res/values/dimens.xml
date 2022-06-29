@@ -25,6 +25,7 @@
     <dimen name="event_details_image_height">250dp</dimen>
     <dimen name="generic_list_margin_between_items">8dp</dimen>
     <dimen name="generic_date_dimension">20sp</dimen>
+    <dimen name="generic_date_dimension_lower">16sp</dimen>
     <dimen name="event_text_dimension">20sp</dimen>
     <dimen name="event_details_icons_dimension">32dp</dimen>
     <dimen name="events_margin_between_imageview_content">8dp</dimen>

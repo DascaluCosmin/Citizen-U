@@ -41,8 +41,6 @@ class ProjectProposalAttachmentFragment : Fragment() {
     companion object {
         private const val TAG = "UBB-ProjectProposalPdfFragment"
         private const val PDF_FILE_TYPE = "application/pdf"
-
-        // TODO: This has to be clarified if .jpg is accepted as well
         private const val PHOTO_FILE_TYPE = "image/*"
     }
 
@@ -230,7 +228,7 @@ class ProjectProposalAttachmentFragment : Fragment() {
             title = args.projectTitle,
             motivation = args.projectMotivation,
             description = args.projectDescription,
-            location = args.projectDescription,
+            location = args.projectLocation,
         ))
     }
 }

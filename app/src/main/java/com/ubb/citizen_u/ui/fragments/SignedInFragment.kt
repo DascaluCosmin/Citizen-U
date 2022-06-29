@@ -173,12 +173,13 @@ class SignedInFragment : Fragment() {
 
     fun signOut() {
         authenticationViewModel.signOut()
+
+        Thread.sleep(3000L)
         (requireActivity() as MainActivity).onBackPressedLogout()
     }
 
     private fun shouldGoToPeriodicEventDetails(): String? {
         if (eventViewModel.getCurrentPeriodicEventNotificationState() != NotificationWorker.PeriodicEventNotificationState.UNKNOWN) {
-            // Workaround in order to reset the periodicEvent when coming back from the Details Screen
             return null
         }
         return args.periodicEventDetailsId
