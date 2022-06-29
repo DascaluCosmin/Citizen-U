@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.ubb.citizen_u.R
 import com.ubb.citizen_u.data.model.Pdf
 import com.ubb.citizen_u.data.model.Photo
 import com.ubb.citizen_u.data.model.citizens.proposals.ProjectProposal
@@ -26,18 +27,10 @@ import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.ui.viewmodels.ProjectProposalViewModel
-import com.ubb.citizen_u.util.DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN
-import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_ADDED_IMAGE
-import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_ADDED_PDF
-import com.ubb.citizen_u.util.ProjectProposalConstants.SUCCESSFUL_PROPOSAL_PROJECT
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_PDF_URI_TEXT_ERROR_MESSAGE
 import com.ubb.citizen_u.util.glide.ImageFiller
 import com.ubb.citizen_u.util.isNull
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -46,11 +39,11 @@ import java.util.*
 class ProjectProposalAttachmentFragment : Fragment() {
 
     companion object {
-        const val TAG = "UBB-ProjectProposalPdfFragment"
-        const val PDF_FILE_TYPE = "application/pdf"
+        private const val TAG = "UBB-ProjectProposalPdfFragment"
+        private const val PDF_FILE_TYPE = "application/pdf"
 
         // TODO: This has to be clarified if .jpg is accepted as well
-        const val PHOTO_FILE_TYPE = "image/*"
+        private const val PHOTO_FILE_TYPE = "image/*"
     }
 
     private var _binding: FragmentProjectProposalAttachmentBinding? = null
@@ -63,7 +56,7 @@ class ProjectProposalAttachmentFragment : Fragment() {
     private lateinit var currentFileType: String
     private var currentFileUri: Uri? = null
 
-    private val uploadPdfResultLauncher =
+    private val uploadFileResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 result.data?.let { intent ->
@@ -130,11 +123,11 @@ class ProjectProposalAttachmentFragment : Fragment() {
                         TAG,
                         "collectProposeProjectState: An error has occurred at proposing the project: ${it.message}")
                     binding.mainProgressbar.visibility = View.GONE
-                    toastErrorMessage(DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN)
+                    toastErrorMessage()
                 }
                 is Response.Success -> {
                     binding.mainProgressbar.visibility = View.GONE
-                    toastMessage(SUCCESSFUL_PROPOSAL_PROJECT)
+                    toastMessage(getString(R.string.SUCCESSFUL_PROPOSAL_PROJECT))
 
                     val action =
                         ProjectProposalAttachmentFragmentDirections.actionProjectProposalAttachmentFragmentToSignedInFragment(
@@ -166,10 +159,10 @@ class ProjectProposalAttachmentFragment : Fragment() {
                 pdfDescriptionEdittext.editText?.text.toString().trim { it <= ' ' }
             when {
                 TextUtils.isEmpty(attachmentTitle) -> {
-                    toastErrorMessage(INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE)
+                    toastErrorMessage(getString(R.string.INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE))
                 }
                 currentFileUri.isNull() -> {
-                    toastErrorMessage(INVALID_PDF_URI_TEXT_ERROR_MESSAGE)
+                    toastErrorMessage(getString(R.string.INVALID_PDF_URI_TEXT_ERROR_MESSAGE))
                 }
 
                 else -> {
@@ -180,7 +173,7 @@ class ProjectProposalAttachmentFragment : Fragment() {
                     })
                     pdfTitleEdittext.editText?.text?.clear()
                     pdfDescriptionEdittext.editText?.text?.clear()
-                    toastMessage(SUCCESSFUL_ADDED_PDF)
+                    toastMessage(getString(R.string.SUCCESSFUL_ADDED_PDF))
                 }
             }
         }
@@ -193,10 +186,10 @@ class ProjectProposalAttachmentFragment : Fragment() {
                 imageDescriptionEdittext.editText?.text.toString().trim { it <= ' ' }
             when {
                 TextUtils.isEmpty(attachmentTitle) -> {
-                    toastErrorMessage(INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE)
+                    toastErrorMessage(getString(R.string.INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE))
                 }
                 currentFileUri.isNull() -> {
-                    toastErrorMessage(INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE)
+                    toastErrorMessage(getString(R.string.INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE))
                 }
 
                 else -> {
@@ -207,7 +200,7 @@ class ProjectProposalAttachmentFragment : Fragment() {
                     })
                     imageTitleEdittext.editText?.text?.clear()
                     imageDescriptionEdittext.editText?.text?.clear()
-                    toastMessage(SUCCESSFUL_ADDED_IMAGE)
+                    toastMessage(getString(R.string.SUCCESSFUL_ADDED_IMAGE))
                 }
             }
         }
@@ -221,11 +214,11 @@ class ProjectProposalAttachmentFragment : Fragment() {
         intent.type = fileType
         intent.action = Intent.ACTION_GET_CONTENT
         try {
-            uploadPdfResultLauncher.launch(intent)
+            uploadFileResultLauncher.launch(intent)
         } catch (exception: Exception) {
             Log.e(TAG,
                 "An exception has occurred at uploading the $fileType file: ${exception.message}")
-            toastMessage(DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN)
+            toastErrorMessage()
         }
     }
 

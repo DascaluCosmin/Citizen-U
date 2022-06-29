@@ -16,6 +16,192 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/logo_imageview"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
+            android:layout_marginTop="@dimen/principal_text_view_quarter_margin_top"
+            android:layout_marginBottom="@dimen/generic_margin_between_element"
+            android:importantForAccessibility="no"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/city_hall_textview"
+            style="@style/TextAppearance.MaterialComponents.Headline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/generic_margin"
+            android:text="@string/welcome_sign_in_textview"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logo_imageview" />
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/generic_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/city_hall_textview">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/welcome_textview"
+                    style="?attr/textAppearanceHeadline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signed_in_your_account_textview"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/signed_in_your_account_textview_tools" />
+
+                <Button
+                    android:id="@+id/view_public_events_button"
+                    android:layout_width="@dimen/width_views"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:onClick="@{() -> signedInFragment.viewPublicEventsList()}"
+                    android:text="@string/signed_in_view_public_events_button"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/welcome_textview" />
+
+                <Button
+                    android:id="@+id/view_public_release_events_button"
+                    android:layout_width="@dimen/width_views"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:backgroundTint="@color/primaryDarkColor"
+                    android:onClick="@{() -> signedInFragment.viewPublicReleaseEventsList()}"
+                    android:text="@string/signed_in_view_public_release_events_button"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/view_public_events_button" />
+
+                <Button
+                    android:id="@+id/goto_incident_report_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:onClick="@{() -> signedInFragment.goToReportIncident()}"
+                    android:text="@string/report_incident_text"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/view_public_release_events_button" />
+
+                <!-- Onclick from below -->
+
+                <Button
+                    android:id="@+id/view_incidents_by_you_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:backgroundTint="@color/primaryDarkColor"
+                    android:onClick="@{() -> signedInFragment.viewCitizenReportedIncidents()}"
+                    android:text="@string/citizen_reported_incidents_list_fragment_label"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/goto_incident_report_button" />
+
+                <Button
+                    android:id="@+id/view_incidents_by_others_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:onClick="@{() -> signedInFragment.viewOtherCitizensReportedIncidents()}"
+                    android:text="@string/other_citizens_reported_incidents_list_fragment_label"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/view_incidents_by_you_button" />
+
+                <Button
+                    android:id="@+id/goto_generate_reports"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:backgroundTint="@color/primaryDarkColor"
+                    android:onClick="@{() -> signedInFragment.goToGenerateReports()}"
+                    android:text="@string/generate_reports_reported_incidents_fragment_label"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/view_incidents_by_others_button" />
+
+                <Button
+                    android:id="@+id/goto_propose_project_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:onClick="@{() -> signedInFragment.goToProposedProject()}"
+                    android:text="@string/project_proposal_text"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/goto_generate_reports" />
+
+                <Button
+                    android:id="@+id/view_proposed_projects_by_you_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:backgroundTint="@color/primaryDarkColor"
+                    android:onClick="@{() -> signedInFragment.viewCitizenProposedProjects()}"
+                    android:text="@string/citizen_proposed_projects_list_fragment_label"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/goto_propose_project_button" />
+
+                <Button
+                    android:id="@+id/view_proposed_projects_by_others_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:onClick="@{() -> signedInFragment.viewOtherCitizensProposedProjects()}"
+                    android:text="@string/others_citizens_proposed_projects_list_fragment_label"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/view_proposed_projects_by_you_button" />
+
+                <Button
+                    android:id="@+id/goto_public_spending_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:backgroundTint="@color/primaryDarkColor"
+                    android:onClick="@{() -> signedInFragment.goToPublicSpending()}"
+                    android:text="@string/view_public_spending_button_text"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/view_proposed_projects_by_others_button" />
+
+                <Button
+                    android:id="@+id/sign_out_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin_half"
+                    android:backgroundTint="@color/primaryColor"
+                    android:onClick="@{() -> signedInFragment.signOut()}"
+                    android:text="@string/signed_in_logout_button"
+                    app:layout_constraintEnd_toEndOf="@id/welcome_textview"
+                    app:layout_constraintStart_toStartOf="@id/welcome_textview"
+                    app:layout_constraintTop_toBottomOf="@id/goto_public_spending_button" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
         <ProgressBar
             android:id="@+id/main_progressbar"
             android:layout_width="wrap_content"
@@ -27,58 +213,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:visibility="visible">
-
-            <TextView
-                android:id="@+id/welcome_textview"
-                style="?attr/textAppearanceHeadline4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/principal_text_view_margin_top"
-                android:text="@string/signed_in_your_account_textview"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/signed_in_your_account_textview_tools" />
-
-            <Button
-                android:id="@+id/view_public_events_button"
-                android:layout_width="@dimen/width_views"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_margin_between_element"
-                android:onClick="@{() -> signedInFragment.viewPublicEventsList()}"
-                android:text="@string/signed_in_view_public_events_button"
-                app:layout_constraintEnd_toEndOf="@id/welcome_textview"
-                app:layout_constraintStart_toStartOf="@id/welcome_textview"
-                app:layout_constraintTop_toBottomOf="@id/welcome_textview" />
-
-            <Button
-                android:id="@+id/view_public_release_events_button"
-                android:layout_width="@dimen/width_views"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_margin_between_element"
-                android:onClick="@{() -> signedInFragment.viewPublicReleaseEventsList()}"
-                android:text="@string/signed_in_view_public_release_events_button"
-                app:layout_constraintEnd_toEndOf="@id/welcome_textview"
-                app:layout_constraintStart_toStartOf="@id/welcome_textview"
-                app:layout_constraintTop_toBottomOf="@id/view_public_events_button" />
-
-            <Button
-                android:id="@+id/goto_incident_report_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/generic_margin_between_element"
-                android:onClick="@{() -> signedInFragment.goToReportIncident()}"
-                android:text="@string/report_incident_text"
-                app:layout_constraintEnd_toEndOf="@id/welcome_textview"
-                app:layout_constraintStart_toStartOf="@id/welcome_textview"
-                app:layout_constraintTop_toBottomOf="@id/view_public_release_events_button" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -30,6 +30,10 @@ class PublicEventViewHolder(
                 if (eventPhotos.isNotEmpty()) {
                     eventPhotos[0]?.let { eventPhoto ->
                         ImageFiller.fill(itemView.context, eventItemImage, eventPhoto)
+
+                        eventPhoto.name?.let { photoName ->
+                            eventItemImage.contentDescription = photoName
+                        }
                     }
                 }
             }

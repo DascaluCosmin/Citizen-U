@@ -8,15 +8,18 @@ import androidx.preference.SwitchPreference
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
+import com.google.firebase.messaging.FirebaseMessaging
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.workers.NotificationWorker
+import com.ubb.citizen_u.util.NotificationsConstants
 import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_WORKER_TAG
 import com.ubb.citizen_u.util.SettingsConstants.LANGUAGE_SETTINGS_KEY
 import com.ubb.citizen_u.util.SettingsConstants.NOTIFICATIONS_SETTINGS_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
 @AndroidEntryPoint
@@ -29,6 +32,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private lateinit var workManager: WorkManager
+
+    @Inject
+    lateinit var firebaseMessaging: FirebaseMessaging
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -49,11 +55,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (notificationsPreference.isChecked) {
                 Log.d(TAG, "onCreatePreferences: Enabling notifications...")
                 toastMessage(getString(R.string.settings_notification_summary_on_text))
+
                 createNotificationWork()
+                firebaseMessaging.subscribeToTopic(NotificationsConstants.EVENT_PUSH_NOTIFICATION_TOPIC_ID)
+                firebaseMessaging.subscribeToTopic(NotificationsConstants.PUBLIC_RELEASE_PUSH_NOTIFICATION_TOPIC_ID)
             } else {
                 Log.d(TAG, "onCreatePreferences: Disabling notifications...")
                 toastMessage(getString(R.string.settings_notifications_summary_off_text))
+
                 cancelNotificationWork()
+                firebaseMessaging.unsubscribeFromTopic(NotificationsConstants.EVENT_PUSH_NOTIFICATION_TOPIC_ID)
+                firebaseMessaging.unsubscribeFromTopic(NotificationsConstants.PUBLIC_RELEASE_PUSH_NOTIFICATION_TOPIC_ID)
             }
             true
         }

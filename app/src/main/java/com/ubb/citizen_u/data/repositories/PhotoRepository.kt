@@ -15,6 +15,8 @@ interface PhotoRepository {
 
     suspend fun getAllIncidentPhotos(citizenId: String, incidentId: String): MutableList<Photo?>
 
+    suspend fun getAllProposedProjectPhotos(citizenId: String, proposedProjectId: String): MutableList<Photo?>
+
     suspend fun saveIncidentPhotos(
         listIncidentPhotoUri: List<Uri>,
         incidentId: String,

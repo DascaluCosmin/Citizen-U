@@ -32,7 +32,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/report_incident_headline_edittext"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/generic_edittext_height"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/generic_margin"
             android:layout_marginTop="@dimen/generic_margin"
             android:hint="@string/incident_headline_hint"

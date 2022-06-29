@@ -21,10 +21,8 @@ import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.databinding.FragmentIdentityInformationBinding
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
-import com.ubb.citizen_u.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -51,9 +49,15 @@ class IdentityInformationFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentIdentityInformationBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.apply {
             identityInformationFragment = this@IdentityInformationFragment
         }
@@ -77,7 +81,7 @@ class IdentityInformationFragment : Fragment() {
                         is Response.Success -> {
                             Toast.makeText(
                                 context,
-                                AuthenticationConstants.SUCCESSFUL_REGISTER_MESSAGE,
+                                getString(R.string.SUCCESSFUL_REGISTER_MESSAGE),
                                 Toast.LENGTH_SHORT
                             ).show()
                             findNavController().navigate(R.id.action_identityInformationFragment_to_loginFragment)
@@ -86,17 +90,26 @@ class IdentityInformationFragment : Fragment() {
                 }
             }
         }
-        return binding.root
     }
 
     fun goNext() {
         val firstName = binding.firstnameTextfield.editText?.text.toString().trim { it <= ' ' }
         val lastName = binding.lastnameTextfield.editText?.text.toString().trim { it <= ' ' }
+        val cnp = binding.cnpTextfield.editText?.text.toString().trim { it <= ' ' }
+        val address = binding.addressTextfield.editText?.text.toString().trim { it <= ' ' }
         when {
+            TextUtils.isEmpty(cnp) -> {
+                Toast.makeText(
+                    context,
+                    getString(R.string.INVALID_CNP_NAME_ERROR_MESSAGE),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
             TextUtils.isEmpty(firstName) -> {
                 Toast.makeText(
                     context,
-                    ValidationConstants.INVALID_FIRST_NAME_ERROR_MESSAGE,
+                    getString(R.string.INVALID_FIRST_NAME_ERROR_MESSAGE),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -104,7 +117,15 @@ class IdentityInformationFragment : Fragment() {
             TextUtils.isEmpty(lastName) -> {
                 Toast.makeText(
                     context,
-                    ValidationConstants.INVALID_LAST_NAME_ERROR_MESSAGE,
+                    getString(R.string.INVALID_LAST_NAME_ERROR_MESSAGE),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            TextUtils.isEmpty(address) -> {
+                Toast.makeText(
+                    context,
+                    getString(R.string.INVALID_ADDRESS_ERROR_MESSAGE),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -112,7 +133,12 @@ class IdentityInformationFragment : Fragment() {
             else -> {
                 val email = args.email
                 val password = args.password
-                val citizen = Citizen(firstName, lastName)
+                val citizen = Citizen(
+                    cnp = cnp,
+                    firstName = firstName,
+                    lastName = lastName,
+                    address = address
+                )
                 authenticationViewModel.registerUser(email, password, citizen)
             }
         }

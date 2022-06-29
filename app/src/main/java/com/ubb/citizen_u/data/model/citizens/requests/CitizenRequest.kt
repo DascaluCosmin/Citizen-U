@@ -6,7 +6,6 @@ import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.data.model.citizens.Comment
 import java.util.*
 
-// TODO: properties - title?
 abstract class CitizenRequest(
     @DocumentId var id: String = "",
     var citizen: Citizen? = null,
@@ -27,8 +26,20 @@ class Incident(
     description: String? = null,
     headline: String? = null,
     sentDate: Date? = null,
-    val address: String? = null,
-) : CitizenRequest(description = description, headline = headline, sentDate = sentDate) {
+    citizen: Citizen? = null,
+    photos: MutableList<Photo?> = mutableListOf(),
+    var category: String? = null,
+    var address: String? = null,
+    var latitude: Double? = null,
+    var longitude: Double? = null,
+    var neighborhood: String? = null,
+) : CitizenRequest(
+    citizen = citizen,
+    description = description,
+    headline = headline,
+    sentDate = sentDate,
+    photos = photos
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -46,7 +57,7 @@ class Incident(
     }
 
     override fun toString(): String {
-        return "${super.toString()}, address = $address"
+        return "${super.toString()}, address = $address, latitude = $latitude, longitude = $longitude, neighborhood = $neighborhood"
     }
 }
 

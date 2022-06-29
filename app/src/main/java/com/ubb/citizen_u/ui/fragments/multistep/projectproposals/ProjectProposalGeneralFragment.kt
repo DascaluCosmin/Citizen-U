@@ -13,11 +13,6 @@ import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentProjectProposalGeneralBinding
 import com.ubb.citizen_u.ui.util.getDefaultLocalizedArrayStringResource
 import com.ubb.citizen_u.ui.util.toastErrorMessage
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE
-import com.ubb.citizen_u.util.ValidationConstants.INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE
 
 class ProjectProposalGeneralFragment : Fragment() {
 
@@ -69,24 +64,24 @@ class ProjectProposalGeneralFragment : Fragment() {
                 projectDescriptionEdittext.editText?.text.toString().trim { it <= ' ' }
             when {
                 TextUtils.isEmpty(unlocalizedProjectCategory) -> {
-                    toastErrorMessage(INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE)
+                    toastErrorMessage(getString(R.string.INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE))
                 }
 
                 TextUtils.isEmpty(projectTitle) -> {
-                    toastErrorMessage(INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE)
+                    toastErrorMessage(getString(R.string.INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE))
                 }
 
                 TextUtils.isEmpty(projectMotivation) -> {
-                    toastErrorMessage(INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE)
+                    toastErrorMessage(getString(R.string.INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE))
                 }
 
                 TextUtils.isEmpty(projectLocation) -> {
-                    toastErrorMessage(INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE)
+                    toastErrorMessage(getString(R.string.INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE))
                 }
 
                 TextUtils.isEmpty(
                     projectDescription) -> {
-                    toastErrorMessage(INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE)
+                    toastErrorMessage(getString(R.string.INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE))
                 }
 
                 else -> {

@@ -1,16 +1,17 @@
 package com.ubb.citizen_u.ui.viewmodels
 
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ubb.citizen_u.data.model.Photo
+import com.ubb.citizen_u.data.model.citizens.Citizen
 import com.ubb.citizen_u.data.model.citizens.Comment
 import com.ubb.citizen_u.data.model.citizens.requests.Incident
 import com.ubb.citizen_u.domain.model.Response
 import com.ubb.citizen_u.domain.usescases.citizens.requests.CitizenRequestUseCase
+import com.ubb.citizen_u.ui.model.PhotoWithSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -32,9 +33,16 @@ class CitizenRequestViewModel @Inject constructor(
         private const val TAG = "UBB-CitizenRequestViewModel"
     }
 
-    private val listIncidentPhotoUri: MutableList<Uri> = mutableListOf()
-    private val _listIncidentPhotoUriLiveData = MutableLiveData<MutableList<Uri>>()
-    val listIncidentPhotoUriLiveData: LiveData<MutableList<Uri>> = _listIncidentPhotoUriLiveData
+    var listIncidentCategories: MutableList<String> = mutableListOf()
+
+    private val addedIncidentPhotos: MutableList<Photo> = mutableListOf()
+    private val listIncidentPhotosWithSource: MutableList<PhotoWithSource> = mutableListOf()
+
+    private val _listIncidentPhotoWithSourceLiveData =
+        MutableLiveData<MutableList<PhotoWithSource>>()
+    val listIncidentPhotoWithSourceLiveData: LiveData<MutableList<PhotoWithSource>> =
+        _listIncidentPhotoWithSourceLiveData
+
 
     private val _addReportIncidentState: MutableSharedFlow<Response<Boolean>> = MutableSharedFlow(
         replay = 1,
@@ -65,29 +73,53 @@ class CitizenRequestViewModel @Inject constructor(
         )
     val getOthersReportedIncidentsState: SharedFlow<Response<List<Incident?>>> =
         _getOthersReportedIncidentsState
+
+    private val _getAllReportedIncidentsState: MutableSharedFlow<Response<List<Incident?>>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val getAllReportedIncidentsState: SharedFlow<Response<List<Incident?>>> =
+        _getAllReportedIncidentsState
     //endregion
 
+    //region Comments
     private val _addCommentToIncidentState: MutableSharedFlow<Response<Incident>> =
         MutableSharedFlow(
             replay = 1,
             onBufferOverflow = BufferOverflow.DROP_OLDEST
         )
     val addCommentToIncidentState: SharedFlow<Response<Incident>> = _addCommentToIncidentState
+    //endregion
+
+    //region Incident Categories
+    private val _incidentCategoriesState: MutableSharedFlow<Response<List<String>>> =
+        MutableSharedFlow(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val incidentCategoriesState: SharedFlow<Response<List<String>>> = _incidentCategoriesState
+    //endregion
 
     var incidentAddress: String = ""
+    var incidentLongitude: Double = 0.0
+    var incidentLatitude: Double = 0.0
 
     var currentSelectedIncident: Incident? = null
     var currentSelectedIncidentPhotoIndex = 0
     var currentSelectedIncidentCommentIndex = 0
 
-    fun addIncidentPhoto(uri: Uri) {
-        listIncidentPhotoUri.add(uri)
-        _listIncidentPhotoUriLiveData.value = listIncidentPhotoUri
+    fun addIncidentPhoto(photoWithSource: PhotoWithSource) {
+        listIncidentPhotosWithSource.add(photoWithSource)
+        _listIncidentPhotoWithSourceLiveData.postValue(listIncidentPhotosWithSource)
+
+        addedIncidentPhotos.add(photoWithSource.photo!!)
     }
 
     fun removeLatestPhoto() {
-        listIncidentPhotoUri.removeLast()
-        _listIncidentPhotoUriLiveData.value = listIncidentPhotoUri
+        listIncidentPhotosWithSource.removeLast()
+        addedIncidentPhotos.removeLast()
+        _listIncidentPhotoWithSourceLiveData.value = listIncidentPhotosWithSource
     }
 
     fun getNextIncidentPhoto(): Photo? {
@@ -125,22 +157,27 @@ class CitizenRequestViewModel @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun reportIncident(description: String, headline: String, citizenId: String) {
+    fun reportIncident(description: String, headline: String, citizenId: String, citizen: Citizen) {
         // TODO: Validate Address
         Log.d(TAG, "Adding incident for citizen $citizenId...")
         viewModelScope.launch(Dispatchers.IO) {
+            val listIncidentPhoto = listIncidentPhotosWithSource.map { it.photo }.toList()
+
             citizenRequestUseCase.reportIncidentUseCase(
                 incident = Incident(
+                    citizen = citizen,
                     description = description,
                     headline = headline,
                     sentDate = Date(),
                     address = incidentAddress,
+                    longitude = incidentLongitude,
+                    latitude = incidentLatitude,
+                    photos = listIncidentPhoto.toMutableList()
                 ),
-                citizenId = citizenId,
-                listIncidentPhotoUri = listIncidentPhotoUri,
+                listIncidentPhotos = listIncidentPhoto.filterNotNull(),
             ).collect { response ->
                 if (response is Response.Success) {
-                    listIncidentPhotoUri.clear()
+                    listIncidentPhotosWithSource.clear()
                 }
                 _addReportIncidentState.tryEmit(response)
                 _addReportIncidentState.resetReplayCache()
@@ -178,6 +215,30 @@ class CitizenRequestViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             citizenRequestUseCase.getOthersReportedIncidents(currentCitizenId).collect {
                 _getOthersReportedIncidentsState.tryEmit(it)
+            }
+        }
+    }
+
+    fun getAllReportedIncidents(incidentCategory: String? = null) {
+        Log.d(TAG,
+            "getAllReportedIncidents: Getting all reported incidents for category $incidentCategory...")
+        viewModelScope.launch(Dispatchers.IO) {
+            citizenRequestUseCase.getAllReportedIncidents(incidentCategory).collect {
+                _getAllReportedIncidentsState.tryEmit(it)
+
+                _getAllReportedIncidentsState.resetReplayCache()
+            }
+        }
+    }
+
+    fun getAllIncidentCategories() {
+        Log.d(TAG, "getAllIncidentCategories: Getting all incident categories...")
+        viewModelScope.launch(Dispatchers.IO) {
+            citizenRequestUseCase.getAllIncidentCategories().collect {
+                _incidentCategoriesState.tryEmit(it)
+                if (it is Response.Success) {
+                    listIncidentCategories = it.data.toMutableList()
+                }
             }
         }
     }

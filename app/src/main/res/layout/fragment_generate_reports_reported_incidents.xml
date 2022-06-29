@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragments.reports.GenerateReportsReportedIncidentsFragment">
+
+    <data>
+
+        <variable
+            name="generateReportsReportedIncidentsFragment"
+            type="com.ubb.citizen_u.ui.fragments.reports.GenerateReportsReportedIncidentsFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/generate_reports_textview"
+            style="@style/TextAppearance.MaterialComponents.Headline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/principal_text_view_quarter_margin_top"
+            android:text="@string/generate_reports_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/generic_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/generate_reports_textview">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_layout_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/incident_category_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/generic_margin"
+                    android:text="@string/generic_category_label"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/incident_categories_dropdown"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="@dimen/generic_margin"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    app:hintAnimationEnabled="false"
+                    app:hintEnabled="false"
+                    app:layout_constraintStart_toStartOf="@id/incident_category_label"
+                    app:layout_constraintTop_toBottomOf="@id/incident_category_label">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/incident_categories_autocomplete_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/reports_category_all_hint"
+                        android:inputType="none"
+                        android:textIsSelectable="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/incident_neighborhood_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:text="@string/generic_neighborhood_label"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@id/incident_category_label"
+                    app:layout_constraintTop_toBottomOf="@id/incident_categories_dropdown" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/incident_neighborhood_dropdown"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="@dimen/generic_margin"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    app:hintAnimationEnabled="false"
+                    app:hintEnabled="false"
+                    app:layout_constraintStart_toStartOf="@id/incident_neighborhood_label"
+                    app:layout_constraintTop_toBottomOf="@id/incident_neighborhood_label">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/incident_neighborhood_autocomplete_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/reports_neighborhoods_all_hint"
+                        android:inputType="none"
+                        android:textIsSelectable="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/incident_start_date_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:text="@string/generic_start_date_label"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/incident_neighborhood_dropdown" />
+
+                <CalendarView
+                    android:id="@+id/start_date_calendar_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/generic_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/incident_neighborhood_label"
+                    app:layout_constraintTop_toBottomOf="@id/incident_start_date_label" />
+
+                <TextView
+                    android:id="@+id/incident_end_date_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/generic_end_date_label"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/start_date_calendar_view" />
+
+                <CalendarView
+                    android:id="@+id/end_date_calendar_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/generic_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/incident_neighborhood_label"
+                    app:layout_constraintTop_toBottomOf="@id/incident_end_date_label" />
+
+                <Button
+                    android:id="@+id/generate_reports_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> generateReportsReportedIncidentsFragment.generatePDF()}"
+                    android:text="@string/generate_pdf_button_text"
+                    app:layout_constraintEnd_toEndOf="@id/end_date_calendar_view"
+                    app:layout_constraintStart_toStartOf="@id/end_date_calendar_view"
+                    app:layout_constraintTop_toBottomOf="@id/end_date_calendar_view" />
+
+                <Button
+                    android:id="@+id/view_incidents_on_map_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> generateReportsReportedIncidentsFragment.viewIncidentsOnMap()}"
+                    android:text="@string/view_incidents_on_map_button_text"
+                    app:layout_constraintEnd_toEndOf="@id/end_date_calendar_view"
+                    app:layout_constraintStart_toStartOf="@id/end_date_calendar_view"
+                    app:layout_constraintTop_toBottomOf="@id/generate_reports_button" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/main_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

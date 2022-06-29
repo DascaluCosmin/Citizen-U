@@ -78,6 +78,27 @@
                     tools:text="Pipeline is under poor condition" />
 
                 <TextView
+                    android:id="@+id/reported_incident_category_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/generic_margin"
+                    android:text="@string/generic_category_label"
+                    android:textColor="@color/primaryColor"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reported_incident_headline" />
+
+                <TextView
+                    android:id="@+id/reported_incident_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reported_incident_category_label"
+                    tools:text="Pipeline" />
+
+                <TextView
                     android:id="@+id/reported_incident_description_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -86,7 +107,7 @@
                     android:textColor="@color/primaryColor"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reported_incident_headline" />
+                    app:layout_constraintTop_toBottomOf="@id/reported_incident_category" />
 
                 <TextView
                     android:id="@+id/reported_incident_description"
@@ -235,6 +256,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:background="@null"
+                            android:contentDescription="@string/previous_comment_content_description"
                             android:onClick="@{() -> reportedIncidentDetailsFragment.getPreviousCommentToIncident()}"
                             android:scaleType="fitEnd"
                             android:src="@drawable/ic_baseline_navigate_before_24"
@@ -248,6 +270,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/generic_margin"
                             android:background="@null"
+                            android:contentDescription="@string/next_comment_content_description"
                             android:onClick="@{() -> reportedIncidentDetailsFragment.getNextCommentToIncident()}"
                             android:scaleType="fitStart"
                             android:src="@drawable/ic_baseline_navigate_next_24"

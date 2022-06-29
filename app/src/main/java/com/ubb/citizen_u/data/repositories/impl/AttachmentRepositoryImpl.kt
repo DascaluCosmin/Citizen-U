@@ -46,6 +46,8 @@ class AttachmentRepositoryImpl @Inject constructor(
             .collection(DatabaseConstants.PROPOSED_PROJECTS_COL).document(projectProposalId)
             .collection(attachmentCollection)
             .add(attachmentModel).await()
+
+        Thread.sleep(2000L)
         attachment.id = result.id
 
         saveAttachmentFile(
@@ -82,5 +84,6 @@ class AttachmentRepositoryImpl @Inject constructor(
         (attachment as AttachmentData).uri?.let {
             firebaseStorage.getReference(path).putFile(it).await()
         }
+        Thread.sleep(2000L)
     }
 }

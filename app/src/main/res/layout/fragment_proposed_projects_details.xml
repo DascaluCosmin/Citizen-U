@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_project_proposal_details"
+    tools:context="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProposedProjectsDetailsFragment">
+
+    <data>
+
+        <variable
+            name="proposedProjectsDetailsFragment"
+            type="com.ubb.citizen_u.ui.fragments.multistep.projectproposals.ProposedProjectsDetailsFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/proposed_project_text_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            tools:visibility="visible">
+
+            <ImageView
+                android:id="@+id/proposed_project_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:importantForAccessibility="no"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@id/horizontal_guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_vertical_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_vertical_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/horizontal_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.3" />
+
+            <ScrollView
+                android:id="@+id/scroll_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/end_vertical_guideline"
+                app:layout_constraintStart_toStartOf="@id/start_vertical_guideline"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_guideline">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/proposed_project_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/proposed_project_title"
+                        style="@style/TextAppearance.MaterialComponents.Headline5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Detunata Park - Community Center" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_category_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:text="@string/generic_category_label"
+                        android:textColor="@color/primaryColor"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_title" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_category"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/grey"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_category_label"
+                        tools:text="Public areas design" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_motivation_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:text="@string/generic_motivation_label"
+                        android:textColor="@color/primaryColor"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_category" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_motivation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/grey"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_motivation_label"
+                        tools:text="With an area of approximate 10 hectare, this is the largest green area of the Gheorgheni neighborhood. It has the potential of being a community center in fresh air." />
+
+                    <TextView
+                        android:id="@+id/proposed_project_location_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:text="@string/generic_address_label"
+                        android:textColor="@color/primaryColor"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_motivation" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_location"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_location_label"
+                        tools:text="The area of Detunata Park" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_description_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:text="@string/generic_description_label"
+                        android:textColor="@color/primaryColor"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_location" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_description"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_description_label"
+                        tools:text="The natural setting will be kept the same, but it will be improved in order to be more accessible. People will have the change to spend some free time in the community, in this wonderful space. The pavilions are important points, they allow all age groups to have activities and meetings, regardless of the weather conditions. The pavilions will host small public gatherings but they can also become a source of income. For instance, the Oradea municipality has a small pavilion with an upright piano where anyone can delight the passing pedestrians." />
+
+                    <TextView
+                        android:id="@+id/proposed_project_posted_by"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_posted_by_label"
+                        tools:text="John Doe" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_posted_by_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:text="@string/generic_posted_by"
+                        android:textColor="@color/primaryColor"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_description" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_posted_on_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:text="@string/generic_posted_on_label"
+                        android:textColor="@color/primaryColor"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_posted_by" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_posted_on"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_posted_on_label"
+                        tools:text="@tools:sample/date/ddmmyy" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_number_of_votes_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:text="@string/generic_number_of_votes_label"
+                        android:textColor="@color/primaryColor"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_posted_on" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_number_of_votes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_number_of_votes_label"
+                        tools:text="100" />
+
+                    <TextView
+                        android:id="@+id/proposed_project_comments_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:text="@string/generic_other_citizens_comments_label"
+                        android:textColor="@color/primaryColor"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_number_of_votes" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/proposed_project_comment_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_comments_label">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/proposed_project_comment_posted_by"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/generic_margin_half"
+                                android:textColor="@color/primaryColor"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Cosmin Dascalu" />
+
+                            <TextView
+                                android:id="@+id/proposed_project_comment_posted_on"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/generic_margin_half"
+                                android:textColor="@color/primaryColor"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="@tools:sample/date/ddmmyy" />
+
+                            <TextView
+                                android:id="@+id/proposed_project_comment_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/generic_margin_half"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/proposed_project_comment_posted_by"
+                                tools:text="This a great idea, I have always wanted to spend more time with my kids in the park, even on rainy and cold days. With such a pavilion, our wish will become true" />
+
+                            <ImageButton
+                                android:id="@+id/previous_proposal_comment_button"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:contentDescription="@string/previous_comment_content_description"
+                                android:onClick="@{() -> proposedProjectsDetailsFragment.getPreviousCommentToProjectProposal()}"
+                                android:scaleType="fitEnd"
+                                android:src="@drawable/ic_baseline_navigate_before_24"
+                                app:layout_constraintEnd_toStartOf="@id/next_proposal_comment_button"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/proposed_project_comment_text" />
+
+                            <ImageButton
+                                android:id="@+id/next_proposal_comment_button"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/generic_margin"
+                                android:background="@null"
+                                android:contentDescription="@string/next_comment_content_description"
+                                android:onClick="@{() -> proposedProjectsDetailsFragment.getNextCommentToProjectProposal()}"
+                                android:scaleType="fitStart"
+                                android:src="@drawable/ic_baseline_navigate_next_24"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/previous_proposal_comment_button"
+                                app:layout_constraintTop_toBottomOf="@id/proposed_project_comment_text" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_project_proposal_comment_textfield"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:hint="@string/add_comment_hint"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/proposed_project_comment_layout">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="top"
+                            android:inputType="textMultiLine"
+                            android:lines="4"
+                            android:scrollbars="vertical" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/add_comment_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:onClick="@{() -> proposedProjectsDetailsFragment.addProjectProposalComment()}"
+                        android:text="@string/add_comment_button_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/add_project_proposal_comment_textfield" />
+
+                    <Button
+                        android:id="@+id/view_documents_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin_half"
+                        android:onClick="@{() -> proposedProjectsDetailsFragment.viewDocuments()}"
+                        android:text="@string/view_documents_button_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/vote_project_proposal_button" />
+
+                    <Button
+                        android:id="@+id/vote_project_proposal_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/generic_margin"
+                        android:onClick="@{() -> proposedProjectsDetailsFragment.voteOrUndoVoteProject()}"
+                        android:text="@string/project_proposal_vote_button_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/add_project_proposal_comment_textfield" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/proposed_project_document_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <com.github.barteksc.pdfviewer.PDFView
+                android:id="@+id/project_proposal_pdf"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/generic_margin"
+                android:layout_marginBottom="@dimen/generic_margin"
+                app:layout_constraintBottom_toTopOf="@id/next_document_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/next_document_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/generic_margin_half"
+                android:background="@null"
+                android:onClick="@{() -> proposedProjectsDetailsFragment.getNextDocumentToProjectProposal()}"
+                android:scaleType="fitStart"
+                android:src="@drawable/ic_baseline_navigate_next_24"
+                app:layout_constraintBottom_toTopOf="@+id/view_content_button"
+                app:layout_constraintEnd_toEndOf="@id/project_proposal_pdf"
+
+                app:layout_constraintStart_toEndOf="@id/previous_document_button" />
+
+            <ImageButton
+                android:id="@+id/previous_document_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/generic_margin_half"
+                android:background="@null"
+                android:onClick="@{() -> proposedProjectsDetailsFragment.getPreviousDocumentToProjectProposal()}"
+                android:scaleType="fitEnd"
+                android:src="@drawable/ic_baseline_navigate_before_24"
+                app:layout_constraintBottom_toTopOf="@+id/view_content_button"
+                app:layout_constraintEnd_toStartOf="@id/next_document_button"
+                app:layout_constraintStart_toStartOf="@id/project_proposal_pdf" />
+
+            <Button
+                android:id="@+id/view_content_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> proposedProjectsDetailsFragment.viewContent()}"
+                android:text="@string/view_content_project_proposal_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/project_proposal_pdf"
+                app:layout_constraintStart_toStartOf="@id/project_proposal_pdf" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/main_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

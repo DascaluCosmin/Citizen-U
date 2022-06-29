@@ -10,11 +10,21 @@
     <string name="generic_firstname_hint">Keresztnév</string>
     <string name="generic_lastname_hint">Vezetéknév</string>
     <string name="date_separator_label" translatable="false">-</string>
+    <string name="generic_category_label">Kategória</string>
     <string name="generic_description_label">Leírás</string>
+    <string name="generic_motivation_label">Motiváció</string>
     <string name="generic_address_label">Cím</string>
+    <string name="generic_location_label">Cím</string>
+    <string name="generic_neighborhood_label">Szomszédság</string>
+    <string name="generic_time_interval_label">Időintervallum</string>
+    <string name="generic_start_date_label">Kezdő dátum</string>
+    <string name="generic_end_date_label">Befejezés dátuma</string>
+    <string name="generic_date_of_birth_label">Születési dátum</string>
+    <string name="generic_number_of_votes_label">Szavazatok számát</string>
     <string name="generic_posted_on_label">Közzétett</string>
     <string name="generic_posted_by">Általa megosztva</string>
     <string name="generic_status_label">Állapot</string>
+    <string name="generic_value_label">Érdemes</string>
     <string name="generic_other_citizens_comments_label">Más állampolgárok véleménye</string>
     <string name="generic_next_button">Következő</string>
     <string name="attachment_title_hint">Cím</string>
@@ -70,6 +80,8 @@
     <string name="report_incident_fragment_label">Jelentse az esetet</string>
     <string name="citizen_reported_incidents_list_fragment_label">A bejelentett események</string>
     <string name="other_citizens_reported_incidents_list_fragment_label">Mások incidensekről számoltak be</string>
+    <string name="generate_reports_reported_incidents_fragment_label">Jelentéseket készíteni</string>
+    <string name="reported_incidents_analysis_fragment_label">Jelentett események elemzése</string>
     <string name="report_incident_text">Jelentse az esetet</string>
     <string name="send_report_button_text">Jelentés küldése</string>
     <string name="take_photo_button_text">Fotózni</string>
@@ -78,7 +90,42 @@
     <string name="incident_headline_hint">Kérjük, adjon meg egy rövid címet…</string>
     <string name="incident_photo_hint">Kérem, készítsen egy képet az esetről…</string>
     <string name="add_comment_hint">Új megjegyzés hozzáadása</string>
-    <string name="add_comment_button_text">Megjegyzés hozzáadása</string>
+    <string name="incident_category_dropdown_hint">Incidens kategória</string>
+    <string name="add_comment_button_text">Megjegyzés</string>
+    <string name="view_documents_button_text">Dokumentum megtekintése</string>
+    <string name="generate_reports_button">Jelentéseket készíteni</string>
+    <string name="generated_report_text">Jelentés generált</string>
+
+    <!-- Generate Reports -->
+    <string name="reports_category_all_hint">Minden kategória</string>
+    <string name="reports_neighborhoods_all_hint">Minden környéken</string>
+    <string name="reports_date_today_hint">Ma</string>
+    <string name="generate_pdf_button_text">PDF Generálása</string>
+    <string name="view_incidents_on_map_button_text">Megtekintés a térképen</string>
+    <string name="reports_found">jelentett incidenseket találtak</string>
+
+    <string-array name="neighborhoods">
+        <item>Minden környéken</item>
+        <item>Andrei Mureșanu</item>
+        <item>Becaș</item>
+        <item>Borhanci</item>
+        <item>Bulgaria</item>
+        <item>Bună Ziua</item>
+        <item>Centru</item>
+        <item>Dâmbul Rotund</item>
+        <item>Europa</item>
+        <item>Făget</item>
+        <item>Gheorgheni</item>
+        <item>Grădini Mănăștur</item>
+        <item>Grigorescu</item>
+        <item>Gruia</item>
+        <item>Iris</item>
+        <item>Între Lacuri</item>
+        <item>Mănăștur</item>
+        <item>Someșeni</item>
+        <item>Sopor</item>
+        <item>Zorilor</item>
+    </string-array>
 
     <!-- Preference Titles -->
     <string name="language_header">Nyelv</string>
@@ -114,6 +161,10 @@
     <string name="project_motivation_hint">Miért kell megvalósítani?</string>
     <string name="project_location_hint">Projekt helyszíne</string>
     <string name="project_description_hint">A projekt leírása</string>
+    <string name="project_proposal_vote_button_text">Szavazás</string>
+    <string name="project_proposal_unvote_button_text">Visszavonja</string>
+    <string name="proposed_project_votes_label">votes</string>
+    <string name="view_content_project_proposal_button">Vissza a tartalomhoz</string>
 
     <string-array name="project_categories">
         <item>Mobilitás és hozzáférhetőség</item>
@@ -124,7 +175,99 @@
     </string-array>
     <!-- endregion -->
 
+    <!-- region Public Spending -->
+    <string name="public_spending_fragment_label">Közkiadások</string>
+    <string name="public_spending_fragment_button_text">Nézze meg az állami kiadásokat</string>
+    <string name="public_spending_list_fragment_label">Közkiadások listája</string>
+    <string name="public_spending_textview">Közkiadások</string>
+    <string name="public_spending_by_source_of_funding_label">Közkiadások finanszírozási forrás szerint</string>
+    <string name="public_spending_by_source_of_category_label">Közkiadások kategóriánként</string>
+    <string name="public_spending_button_source_of_funding_text">Megtekintés finanszírozási forrás szerint</string>
+    <string name="public_spending_button_category_text">Megtekintés kategória szerint</string>
+    <string name="view_public_spending_button_text">Nézze meg az állami kiadásokat</string>
+    <string name="public_spending_completion_date_label">Teljesítési dátum</string>
+    <string name="public_spending_category_hint">Közkiadási kategória</string>
+    <string name="public_spending_status_hint">Közkiadások helyzete</string>
+    <string name="public_spending_completion_year_hint">Közkiadások teljesítési éve</string>
+    <string name="public_spending_all_statuses_all_hint">Minden állapot</string>
+    <string name="public_spending_all_categories_all_hint">Minden kategória</string>
+    <string name="public_spending_all_years_all_hint">Minden évben</string>
 
-    <!-- Constants -->
+    <string-array name="statuses">
+        <item>Minden állapot</item>
+        <item>Folyamatban</item>
+        <item>Elkészült</item>
+        <item>Késleltetett</item>
+        <item>Elhalasztották</item>
+    </string-array>
+
+    <string-array name="public_spending_categories">
+        <item>Minden kategória</item>
+        <item>Közúti infrastrukturális projektek</item>
+        <item>Tömegközlekedési projektek</item>
+        <item>Zöld energia projekt</item>
+        <item>Kulturális központ projektek</item>
+        <item>Épületépítési és felújítási projektek</item>
+        <item>Orvosi egység projektek</item>
+        <item>Sport-és rekreációs projektek</item>
+        <item>Iskolai és óvodai projektek</item>
+    </string-array>
+
+    <!-- endregion -->
+
+    <!--########################## Constants ########################## -->
     <string name="city_hall_name">Kolozsvár Városháza</string>
+    <string name="city_hall_full_Name">Kolozsvár Városháza és a Helyi Tanács</string>
+
+    <!-- Project Proposals -->
+    <string name="DEFAULT_ERROR_MESSAGE">Váratlan hiba történt!</string>
+    <string name="DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN">Váratlan hiba történt! Kérlek próbáld újra!</string>
+    <string name="SUCCESSFUL_VOTING">A szavazatát hozzáadtuk!</string>
+    <string name="INVALID_EMAIL_ERROR_MESSAGE">Kérlek létező email címet adj meg!</string>
+    <string name="INVALID_PASSWORD_ERROR_MESSAGE">Kérjük írjon be egy érvényes jelszót!</string>
+    <string name="INVALID_CNP_NAME_ERROR_MESSAGE">Kérjük, adjon meg egy érvényes CNP!</string>
+    <string name="INVALID_FIRST_NAME_ERROR_MESSAGE">Kérjük, adjon meg egy keresztnevet!</string>
+    <string name="INVALID_LAST_NAME_ERROR_MESSAGE">Kérjük, adjon meg egy vezetéknevet!</string>
+    <string name="INVALID_ADDRESS_ERROR_MESSAGE">Kérjük, adjon meg egy érvényes címet!</string>
+    <string name="INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE">Kérjük, írja le az esetet!</string>
+    <string name="INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE">Kérjük, adja meg az esemény címét!</string>
+    <string name="INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE">Kérjük, adjon meg legalább egy fotót az esetről!</string>
+    <string name="INVALID_COMMENT_TEXT_ERROR_MESSAGE">Kérjük, írjon megjegyzést!</string>
+    <string name="INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE">Kérjük, válasszon kategóriát a projekthez!</string>
+    <string name="INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE">Kérjük, válasszon címet a projektnek!</string>
+    <string name="INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE">Kérjük, adja meg a projekt motivációját!</string>
+    <string name="INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE">Kérjük, adja meg a projekt helyszínét!</string>
+    <string name="INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE">Kérjük, írja be a projekt leírását!</string>
+    <string name="INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE">Kérjük, adja meg a fájl címét!</string>
+    <string name="INVALID_PDF_URI_TEXT_ERROR_MESSAGE">Kérjük, töltsön fel egy PDF fájlt!</string>
+    <string name="INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE">Kérjük, töltsön fel egy képet!</string>
+    <string name="START_DATE_AFTER_END_DATE">A kezdő dátum nem lehet későbbi a befejezési dátumnál!</string>
+    <string name="PROVIDE_STORAGE_PERMISSIONS_CTA">Kérjük, adja meg az alkalmazás tárolási engedélyeit!</string>
+    <string name="CITIZEN_MISSING_ERROR_MESSAGE">Ez a polgár eltűnt!</string>
+    <string name="SUCCESSFUL_REPORT_GENERATED">A jelentés elkészítése sikeres volt!</string>
+    <string name="FAILED_ADDRESS_COMPUTING">A cím jelenleg nem határozható meg!</string>
+    <string name="SUCCESSFUL_REGISTER_MESSAGE">Sikeresen regisztráltál! Kérjük, igazolja e-mail-címét!</string>
+    <string name="SUCCESSFUL_RESET_PASSWORD_EMAIL_SENT">A jelszó-visszaállítási e-mailt elküldtük. Kérlek ellenőrizd az e-mailed!</string>
+    <string name="FAILED_REGISTER_MESSAGE">A regisztráció meghiúsult! Kérlek próbáld újra!</string>
+    <string name="FAILED_SIGN_IN_UNVERIFIED_EMAIL_MESSAGE">Kérjük, bejelentkezés előtt igazolja e-mail-címét!</string>
+    <string name="FAILED_SIGN_IN_MESSAGE">A bejelentkezés nem sikerült! Kérlek próbáld újra!</string>
+    <string name="FAILED_RESET_PASSWORD_EMAIL_NOT_SENT">Hiba történt! Az e-mail visszaállítási jelszó nem lett elküldve.</string>
+    <string name="SUCCESSFUL_REPORT_INCIDENT">Az esetet sikeresen jelentették!</string>
+    <string name="SUCCESSFUL_ADD_COMMENT">A megjegyzést sikeresen hozzáadtuk!</string>
+    <string name="SUCCESSFUL_ADDED_IMAGE">A kép sikeresen hozzáadva!</string>
+    <string name="SUCCESSFUL_ADDED_PDF">A PDF fájl hozzáadása sikeresen megtörtént!</string>
+    <string name="SUCCESSFUL_UNDO_VOTE">A szavazatod törölve lett!</string>
+    <string name="SUCCESSFUL_PROPOSAL_PROJECT">A projektet sikeresen javasolták!</string>
+
+    <!-- Content Description (Accessibility) -->
+    <string name="event_period_content_description">Rendezvény időszaka</string>
+    <string name="event_location_content_description">Rendezvény helyszíne</string>
+    <string name="event_address_content_description">Rendezvény címe</string>
+    <string name="event_category_content_description">Rendezvény kategória</string>
+    <string name="posted_on_content_description">Feladás dátuma</string>
+    <string name="event_photo_content_description">Esemény fotója</string>
+    <string name="public_release_photo_content_description">Nyilvános kiadású fotó</string>
+    <string name="previous_comment_content_description">Előző komment</string>
+    <string name="next_comment_content_description">Következő komment</string>
+    <string name="remove_added_incident_photo_content_description">Távolítsa el a mellékelt eseményről készült fotót</string>
 </resources>

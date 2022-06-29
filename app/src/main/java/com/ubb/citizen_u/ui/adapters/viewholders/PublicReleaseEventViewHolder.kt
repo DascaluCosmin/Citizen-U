@@ -1,5 +1,6 @@
 package com.ubb.citizen_u.ui.adapters.viewholders
 
+import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.ubb.citizen_u.data.model.events.PublicReleaseEvent
@@ -13,7 +14,7 @@ class PublicReleaseEventViewHolder(
     private val eventDetailsOnClickCallBack: (PublicReleaseEvent) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(event: PublicReleaseEvent) {
+    fun bind(event: PublicReleaseEvent, isEvenPosition: Boolean) {
         binding.apply {
             eventCategory.text = event.category[language]
             eventHeadline.text = event.headline[language]
@@ -24,14 +25,22 @@ class PublicReleaseEventViewHolder(
             }
 
             if (event.photos.size > 0) {
-                event.photos[0]?.let {
-                    binding.eventImage.visibility = View.VISIBLE
-                    ImageFiller.fill(itemView.context, binding.eventImage, it)
+                event.photos[0]?.let { publicReleasePhoto ->
+                    eventImage.visibility = View.VISIBLE
+                    ImageFiller.fill(itemView.context, eventImage, publicReleasePhoto)
+
+                    publicReleasePhoto.name?.let { photoName ->
+                        eventImage.contentDescription = photoName
+                    }
                 }
             }
 
             eventCard.setOnClickListener {
                 eventDetailsOnClickCallBack(event)
+            }
+
+            if (isEvenPosition) {
+                eventCard.setCardBackgroundColor(Color.LTGRAY)
             }
         }
     }

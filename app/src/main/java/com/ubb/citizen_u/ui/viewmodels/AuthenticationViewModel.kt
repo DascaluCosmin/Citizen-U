@@ -14,7 +14,6 @@ import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,6 +26,8 @@ class AuthenticationViewModel @Inject constructor(
     companion object {
         const val TAG = "UBB-AuthenticationViewModel"
     }
+
+    var hasJustLoggedOff: Boolean = false
 
     private val _signInState = MutableSharedFlow<Response<FirebaseUser?>>(
         replay = 1,
@@ -64,10 +65,12 @@ class AuthenticationViewModel @Inject constructor(
 
     fun signOut() {
         Log.d(TAG, "signOut: Signing out current user...")
+        hasJustLoggedOff = true
         viewModelScope.launch(Dispatchers.IO) {
             authenticationUseCases.signOutUseCase()
 
             // TODO: Probably you have to rest the _currentUserState
+            _currentUserState.resetReplayCache()
         }
     }
 

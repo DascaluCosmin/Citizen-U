@@ -1,6 +1,8 @@
 package com.ubb.citizen_u.ui
 
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,13 +14,18 @@ import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.messaging.FirebaseMessaging
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.ActivityMainBinding
 import com.ubb.citizen_u.ui.util.loadLocale
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
+import com.ubb.citizen_u.util.NotificationsConstants.EVENT_PUSH_NOTIFICATION_TOPIC_ID
 import com.ubb.citizen_u.util.NotificationsConstants.NOTIFICATION_PERIODIC_EVENT_EVENT_ID_KEY
+import com.ubb.citizen_u.util.NotificationsConstants.PUBLIC_RELEASE_PUSH_NOTIFICATION_TOPIC_ID
+import com.ubb.citizen_u.util.networking.NetworkReceiver
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -37,6 +44,12 @@ class MainActivity : AppCompatActivity() {
     private val authenticationViewModel: AuthenticationViewModel by viewModels()
     private val args: MainActivityArgs by navArgs()
 
+    @Inject
+    lateinit var firebaseMessaging: FirebaseMessaging
+
+    @Inject
+    lateinit var networkReceiver: NetworkReceiver
+
     /**
      *  Uncomment in order to show App Bar
      */
@@ -47,6 +60,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // setSupportActionBar(binding.toolbar)
+
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(networkReceiver, filter)
 
         navController =
             (supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment).navController
@@ -62,6 +78,9 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
         overrideNavigationDrawerItems()
+
+        firebaseMessaging.subscribeToTopic(EVENT_PUSH_NOTIFICATION_TOPIC_ID)
+        firebaseMessaging.subscribeToTopic(PUBLIC_RELEASE_PUSH_NOTIFICATION_TOPIC_ID)
 //         setupActionBarWithNavController(navController, appBarConfiguration)
 //        supportActionBar?.hide()
     }
@@ -80,7 +99,6 @@ class MainActivity : AppCompatActivity() {
     private fun overrideNavigationDrawerItems() {
         binding.navigationView.menu.findItem(R.id.loginFragment).setOnMenuItemClickListener {
             authenticationViewModel.signOut()
-
             // TODO: This doesn't work as expected for Screens other than Home (has to be pressed twice)
             super.onBackPressed()
             true
@@ -102,5 +120,9 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    fun onBackPressedLogout() {
+        super.onBackPressed()
     }
 }

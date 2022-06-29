@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentReportIncidentMapBinding
@@ -27,10 +29,10 @@ import com.ubb.citizen_u.ui.util.toastErrorMessage
 import com.ubb.citizen_u.ui.util.toastMessage
 import com.ubb.citizen_u.ui.viewmodels.CitizenRequestViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
-import com.ubb.citizen_u.util.CitizenRequestConstants.SUCCESSFUL_REPORT_INCIDENT
-import com.ubb.citizen_u.util.LocationConstants.FAILED_ADDRESS_COMPUTING
+import com.ubb.citizen_u.util.TownHallConstants.TOWN_HALL_LATITUDE_COORDINATE
+import com.ubb.citizen_u.util.TownHallConstants.TOWN_HALL_LONGITUDE_COORDINATE
+import com.ubb.citizen_u.util.networking.InternetConnection
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -45,6 +47,10 @@ class ReportIncidentMapFragment : Fragment() {
     private val citizenViewModel: CitizenViewModel by activityViewModels()
     private val citizenRequestViewModel: CitizenRequestViewModel by activityViewModels()
     private val args: ReportIncidentMapFragmentArgs by navArgs()
+
+    private val handler = Handler()
+    private lateinit var loadingSpinnerRunnable: Runnable
+
 
     private var _binding: FragmentReportIncidentMapBinding? = null
     val binding get() = _binding!!
@@ -64,6 +70,14 @@ class ReportIncidentMapFragment : Fragment() {
             ) {
                 googleMap.isMyLocationEnabled = true
             }
+
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                LatLng(
+                    TOWN_HALL_LATITUDE_COORDINATE,
+                    TOWN_HALL_LONGITUDE_COORDINATE
+                ), ZOOM_WEIGHT
+            ))
+
             googleMap.setOnMapClickListener { latLng ->
                 val latitude = latLng.latitude
                 val longitude = latLng.longitude
@@ -73,21 +87,31 @@ class ReportIncidentMapFragment : Fragment() {
                 markerOptions.title("${latLng.latitude} : ${latLng.longitude}")
 
                 // Reverse Geo-Coding
-                val geocoder = Geocoder(requireContext(), Locale.getDefault())
-                try {
-                    val addressList: List<Address> =
-                        geocoder.getFromLocation(latitude, longitude, 1)
-                    if (!addressList.isNullOrEmpty()) {
-                        val reversedGeocodedAddress = addressList.first()
-                        val firstAddressLine = reversedGeocodedAddress.getAddressLine(0)
-                        if (!firstAddressLine.isNullOrEmpty()) {
-                            markerOptions.title(firstAddressLine)
-                            citizenRequestViewModel.incidentAddress = firstAddressLine
+                if (InternetConnection.isOnline(requireContext())) {
+                    val geocoder = Geocoder(requireContext(), Locale.getDefault())
+                    try {
+                        val addressList: List<Address> =
+                            geocoder.getFromLocation(latitude, longitude, 1)
+                        if (!addressList.isNullOrEmpty()) {
+                            val reversedGeocodedAddress = addressList.first()
+                            val firstAddressLine =
+                                reversedGeocodedAddress.thoroughfare + ", " + reversedGeocodedAddress.subThoroughfare
+                            if (firstAddressLine.isNotEmpty()) {
+                                markerOptions.title(firstAddressLine)
+                                citizenRequestViewModel.incidentAddress = firstAddressLine
+                                citizenRequestViewModel.incidentLatitude = latitude
+                                citizenRequestViewModel.incidentLongitude = longitude
+                            }
                         }
+                    } catch (exception: Exception) {
+                        Log.e(TAG, "onCreateView: Error at doing reverse geo-coding")
+                        toastErrorMessage(getString(R.string.FAILED_ADDRESS_COMPUTING))
                     }
-                } catch (exception: Exception) {
-                    Log.e(TAG, "onCreateView: Error at doing reverse geo-coding")
-                    toastErrorMessage(FAILED_ADDRESS_COMPUTING)
+                } else {
+                    Log.d(TAG,
+                        "onCreateView: No internet connection. Gathered only latitude and longitude")
+                    citizenRequestViewModel.incidentLongitude = longitude
+                    citizenRequestViewModel.incidentLatitude = latitude
                 }
 
                 googleMap.clear()
@@ -127,9 +151,18 @@ class ReportIncidentMapFragment : Fragment() {
                 }
                 Response.Loading -> {
                     binding.mainProgressbar.visibility = View.VISIBLE
+
+                    loadingSpinnerRunnable = Runnable {
+                        Log.d(TAG, "Automatically stopped spinner")
+                        toastMessage(getString(R.string.SUCCESSFUL_REPORT_INCIDENT))
+                        goToUserProfile()
+                    }
+
+                    handler.postDelayed(loadingSpinnerRunnable, 15000L)
                 }
                 is Response.Success -> {
-                    toastMessage(SUCCESSFUL_REPORT_INCIDENT)
+                    handler.removeCallbacks(loadingSpinnerRunnable)
+                    toastMessage(getString(R.string.SUCCESSFUL_REPORT_INCIDENT))
                     goToUserProfile()
                 }
             }
@@ -150,8 +183,14 @@ class ReportIncidentMapFragment : Fragment() {
         citizenRequestViewModel.reportIncident(
             description = args.incidentDescription,
             headline = args.incidentHeadline,
-            citizenId = citizenViewModel.citizenId
+            citizenId = citizenViewModel.citizenId,
+            citizen = citizenViewModel.currentCitizen
         )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(loadingSpinnerRunnable)
     }
 
     override fun onDestroyView() {

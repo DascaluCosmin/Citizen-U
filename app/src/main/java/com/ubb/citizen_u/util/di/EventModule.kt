@@ -67,6 +67,6 @@ object EventModule {
     @Provides
     @Singleton
     @Named(PUBLIC_RELEASE_EVENTS_COL)
-    fun providesPublicReleaseEventsRef(firebaseFirestore: FirebaseFirestore) =
+    fun providesPublicReleaseEventsRef(firebaseFirestore: FirebaseFirestore): CollectionReference =
         firebaseFirestore.collection(PUBLIC_RELEASE_EVENTS_COL)
 }

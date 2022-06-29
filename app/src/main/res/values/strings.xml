@@ -6,15 +6,26 @@
 
     <!-- Generics -->
     <string name="generic_email_hint" translatable="false">Email</string>
+    <string name="generic_cnp_hint" translatable="false">CNP</string>
     <string name="generic_password_hint">Password</string>
     <string name="generic_firstname_hint">First Name</string>
     <string name="generic_lastname_hint">Last Name</string>
     <string name="date_separator_label" translatable="false">-</string>
+    <string name="generic_category_label">Category</string>
     <string name="generic_description_label">Description</string>
+    <string name="generic_motivation_label">Motivation</string>
     <string name="generic_address_label">Address</string>
+    <string name="generic_location_label">Address</string>
     <string name="generic_posted_on_label">Posted on</string>
+    <string name="generic_neighborhood_label">Neighborhood</string>
+    <string name="generic_time_interval_label">Time interval</string>
+    <string name="generic_start_date_label">Start Date</string>
+    <string name="generic_end_date_label">End Date</string>
+    <string name="generic_date_of_birth_label">Date of birth</string>
+    <string name="generic_number_of_votes_label">Number of votes</string>
     <string name="generic_posted_by">Posted by</string>
     <string name="generic_status_label">Status</string>
+    <string name="generic_value_label">Value</string>
     <string name="generic_other_citizens_comments_label">Other citizens opinions</string>
     <string name="generic_next_button">Next</string>
     <string name="attachment_title_hint">Title</string>
@@ -75,6 +86,8 @@
     <string name="report_incident_fragment_label">Report Incident</string>
     <string name="citizen_reported_incidents_list_fragment_label">Your reported incidents</string>
     <string name="other_citizens_reported_incidents_list_fragment_label">Others reported incidents</string>
+    <string name="reported_incidents_analysis_fragment_label">Reported Incidents Analysis</string>
+    <string name="generate_reports_reported_incidents_fragment_label">Generate Reports</string>
     <string name="report_incident_text">Report incident</string>
     <string name="send_report_button_text">Send report</string>
     <string name="take_photo_button_text">Take a photo</string>
@@ -83,7 +96,42 @@
     <string name="incident_headline_hint">Please provide a short headline…</string>
     <string name="incident_photo_hint">Please take a picture of the incident…</string>
     <string name="add_comment_hint">Add a new comment</string>
+    <string name="incident_category_dropdown_hint">Incident Category</string>
     <string name="add_comment_button_text">Add comment</string>
+    <string name="view_documents_button_text">View documents</string>
+    <string name="generate_reports_button">Generate reports</string>
+    <string name="generated_report_text">Generated report</string>
+
+    <!-- Generate Reports -->
+    <string name="reports_category_all_hint">All categories</string>
+    <string name="reports_neighborhoods_all_hint">All neighborhoods</string>
+    <string name="reports_date_today_hint">Today</string>
+    <string name="generate_pdf_button_text">Generate PDF</string>
+    <string name="view_incidents_on_map_button_text">View on map</string>
+    <string name="reports_found">reported incidents found</string>
+
+    <string-array name="neighborhoods">
+        <item>All neighborhoods</item>
+        <item>Andrei Mureșanu</item>
+        <item>Becaș</item>
+        <item>Borhanci</item>
+        <item>Bulgaria</item>
+        <item>Bună Ziua</item>
+        <item>Centru</item>
+        <item>Dâmbul Rotund</item>
+        <item>Europa</item>
+        <item>Făget</item>
+        <item>Gheorgheni</item>
+        <item>Grădini Mănăștur</item>
+        <item>Grigorescu</item>
+        <item>Gruia</item>
+        <item>Iris</item>
+        <item>Între Lacuri</item>
+        <item>Mănăștur</item>
+        <item>Someșeni</item>
+        <item>Sopor</item>
+        <item>Zorilor</item>
+    </string-array>
 
     <!-- Preference Titles -->
     <string name="language_header">Language</string>
@@ -119,6 +167,10 @@
     <string name="project_motivation_hint">Why should it be implemented?</string>
     <string name="project_location_hint">Project Location</string>
     <string name="project_description_hint">Project Description</string>
+    <string name="project_proposal_vote_button_text">Vote</string>
+    <string name="project_proposal_unvote_button_text">Undo vote</string>
+    <string name="proposed_project_votes_label">votes</string>
+    <string name="view_content_project_proposal_button">Back to content</string>
 
     <string-array name="project_categories">
         <item>Mobility and accessibility</item>
@@ -129,6 +181,101 @@
     </string-array>
     <!-- endregion -->
 
-    <!-- Constants -->
+
+    <!-- region Public Spending -->
+    <string name="public_spending_fragment_label">Public Spending</string>
+    <string name="public_spending_fragment_button_text">View Public Spending</string>
+    <string name="public_spending_list_fragment_label">Public Spending List</string>
+    <string name="public_spending_textview">Public Spending</string>
+    <string name="public_spending_by_source_of_funding_label">Public Spending by Source of Funding</string>
+    <string name="public_spending_by_source_of_category_label">Public Spending by Category</string>
+    <string name="public_spending_button_source_of_funding_text">View by source of funding</string>
+    <string name="public_spending_button_category_text">View by category</string>
+    <string name="view_public_spending_button_text">View public spending</string>
+    <string name="public_spending_completion_date_label">Completion date</string>
+    <string name="public_spending_category_hint">Public spending category</string>
+    <string name="public_spending_status_hint">Public spending status</string>
+    <string name="public_spending_completion_year_hint">Public spending completion year</string>
+    <string name="public_spending_all_statuses_all_hint">All statuses</string>
+    <string name="public_spending_all_categories_all_hint">All categories</string>
+    <string name="public_spending_all_years_all_hint">All years</string>
+
+    <string-array name="statuses">
+        <item>All statuses</item>
+        <item>In progress</item>
+        <item>Completed</item>
+        <item>Delayed</item>
+        <item>Postponed</item>
+    </string-array>
+
+    <string-array name="public_spending_categories">
+        <item>All categories</item>
+        <item>Road infrastructure projects</item>
+        <item>Public transport projects</item>
+        <item>Green energy projects</item>
+        <item>Cultural center projects</item>
+        <item>Building construction and rehabilitation projects</item>
+        <item>Medical unit projects</item>
+        <item>Sports and recreation projects</item>
+        <item>School and kindergarten projects</item>
+    </string-array>
+
+    <!-- endregion -->
+
+    <!--########################## Constants ########################## -->
     <string name="city_hall_name">Cluj-Napoca City Hall</string>
+    <string name="city_hall_full_Name">Cluj-Napoca City Hall and Local Council</string>
+
+
+    <!-- Project Proposals -->
+    <string name="DEFAULT_ERROR_MESSAGE">An unexpected error has occurred!</string>
+    <string name="DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN">An unexpected error has occurred! Please try again!</string>
+    <string name="SUCCESSFUL_VOTING">Your vote has been added!</string>
+    <string name="INVALID_EMAIL_ERROR_MESSAGE">Please enter a valid email!</string>
+    <string name="INVALID_PASSWORD_ERROR_MESSAGE">Please enter a valid password!</string>
+    <string name="INVALID_CNP_NAME_ERROR_MESSAGE">Please enter a valid CNP!</string>
+    <string name="INVALID_FIRST_NAME_ERROR_MESSAGE">Please enter a valid first name!</string>
+    <string name="INVALID_LAST_NAME_ERROR_MESSAGE">Please enter a valid last name!</string>
+    <string name="INVALID_ADDRESS_ERROR_MESSAGE">Please enter a valid address!</string>
+    <string name="INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE">Please describe the incident!</string>
+    <string name="INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE">Please provide the incident headline!</string>
+    <string name="INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE">Please provide at least one photo of the incident!</string>
+    <string name="INVALID_COMMENT_TEXT_ERROR_MESSAGE">Please enter a comment!</string>
+    <string name="INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE">Please choose a category for the project!</string>
+    <string name="INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE">Please enter a title for the project!</string>
+    <string name="INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE">Please enter a motivation for the project!</string>
+    <string name="INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE">Please enter a location for the project!</string>
+    <string name="INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE">Please enter a description for the project!</string>
+    <string name="INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE">Please enter a title for the file!</string>
+    <string name="INVALID_PDF_URI_TEXT_ERROR_MESSAGE">Please upload a PDF file!</string>
+    <string name="INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE">Please upload an image!</string>
+    <string name="START_DATE_AFTER_END_DATE">The start date can\'t be after the end date</string>
+    <string name="PROVIDE_STORAGE_PERMISSIONS_CTA">Please provide storage permissions to the application!</string>
+    <string name="CITIZEN_MISSING_ERROR_MESSAGE">This citizen is missing!</string>
+    <string name="SUCCESSFUL_REPORT_GENERATED">The report has been generated successfully!</string>
+    <string name="FAILED_ADDRESS_COMPUTING">The address cannot be determined at the moment!</string>
+    <string name="SUCCESSFUL_REGISTER_MESSAGE">You have been successfully registered! Please verify your email!</string>
+    <string name="SUCCESSFUL_RESET_PASSWORD_EMAIL_SENT">The reset password email has been sent. Please check your email!</string>
+    <string name="FAILED_REGISTER_MESSAGE">The registration has failed! Please try again!</string>
+    <string name="FAILED_SIGN_IN_UNVERIFIED_EMAIL_MESSAGE">Please verify your email before signing in!</string>
+    <string name="FAILED_SIGN_IN_MESSAGE">The sign in has failed! Please try again!</string>
+    <string name="FAILED_RESET_PASSWORD_EMAIL_NOT_SENT">An error has occurred! The email reset password has not been sent.</string>
+    <string name="SUCCESSFUL_REPORT_INCIDENT">The incident has been reported successfully!</string>
+    <string name="SUCCESSFUL_ADD_COMMENT">The comment has been added successfully!</string>
+    <string name="SUCCESSFUL_ADDED_IMAGE">The image has been added successfully!</string>
+    <string name="SUCCESSFUL_ADDED_PDF">The PDF file has been added successfully!</string>
+    <string name="SUCCESSFUL_UNDO_VOTE">Your vote has been deleted!</string>
+    <string name="SUCCESSFUL_PROPOSAL_PROJECT">The project has been proposed successfully!</string>
+
+    <!-- Content Description (Accessibility) -->
+    <string name="event_period_content_description">Event Period</string>
+    <string name="event_location_content_description">Event Location</string>
+    <string name="event_address_content_description">Event Address</string>
+    <string name="event_category_content_description">Event Category</string>
+    <string name="posted_on_content_description">Posted on the date of</string>
+    <string name="event_photo_content_description">Event Photo</string>
+    <string name="public_release_photo_content_description">Public Release Photo</string>
+    <string name="previous_comment_content_description">Previous comment</string>
+    <string name="next_comment_content_description">Next comment</string>
+    <string name="remove_added_incident_photo_content_description">Remove attached incident photo</string>
 </resources>

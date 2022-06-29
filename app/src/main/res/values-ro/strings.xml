@@ -11,11 +11,21 @@
     <string name="generic_firstname_hint">Prenume</string>
     <string name="generic_lastname_hint">Nume de familie</string>
     <string name="date_separator_label">-</string>
+    <string name="generic_category_label">Categorie</string>
     <string name="generic_description_label">Descriere</string>
+    <string name="generic_motivation_label">Motivație</string>
     <string name="generic_address_label">Adresa</string>
+    <string name="generic_location_label">Locație</string>
+    <string name="generic_neighborhood_label">Cartier</string>
+    <string name="generic_number_of_votes_label">Număr de voturi</string>
+    <string name="generic_start_date_label">Data de început</string>
+    <string name="generic_end_date_label">Data de sfârșit</string>
+    <string name="generic_date_of_birth_label">Data nașterii</string>
+    <string name="generic_time_interval_label">Perioadă</string>
     <string name="generic_posted_on_label">Postat în data de</string>
     <string name="generic_posted_by">Postat de către</string>
     <string name="generic_status_label">Status</string>
+    <string name="generic_value_label">În valoare de</string>
     <string name="generic_other_citizens_comments_label">Păreri ale altor cetățeni</string>
     <string name="generic_next_button">Următorul pas</string>
     <string name="attachment_title_hint">Titlu</string>
@@ -50,7 +60,7 @@
     <string name="signed_in_your_account_textview_tools">Welcome, Cosmin</string>
     <string name="signed_in_logout_button">Ieși din cont</string>
     <string name="generic_undefined_value">undefined</string>
-    <string name="signed_in_view_public_events_button">Vizualizează evenimente publice</string>
+    <string name="signed_in_view_public_events_button">Vezi evenimentele publice</string>
     <string name="signed_in_view_public_release_events_button">Vezi comunicate publice</string>
 
     <!-- Events -->
@@ -71,6 +81,8 @@
     <string name="report_incident_fragment_label">Raportează incident</string>
     <string name="citizen_reported_incidents_list_fragment_label">Incidentele raportate de tine</string>
     <string name="other_citizens_reported_incidents_list_fragment_label">Incidentele raportate de alții</string>
+    <string name="generate_reports_reported_incidents_fragment_label">Generează rapoarte</string>
+    <string name="reported_incidents_analysis_fragment_label">Analiza incidentelor raportate</string>
     <string name="report_incident_text">Raportează incident</string>
     <string name="send_report_button_text">Trimite raport</string>
     <string name="take_photo_button_text">Fă o poză</string>
@@ -79,8 +91,42 @@
     <string name="incident_headline_hint">Te rog să introduci un scurt titlu…</string>
     <string name="incident_photo_hint">Te rog să fotografiezi incidentul…</string>
     <string name="add_comment_hint">Adaugă un nou comentariu</string>
-    <string name="add_comment_button_text">Adaugă un comentariu</string>
+    <string name="incident_category_dropdown_hint">Categorie incident</string>
+    <string name="add_comment_button_text">Adaugă comentariu</string>
+    <string name="view_documents_button_text">Vezi documente</string>
+    <string name="generate_reports_button">Generează rapoarte</string>
+    <string name="generated_report_text">Raport generat</string>
 
+    <!-- Generate Reports -->
+    <string name="reports_category_all_hint">Toate categoriile</string>
+    <string name="reports_neighborhoods_all_hint">Toate cartierele</string>
+    <string name="reports_date_today_hint">Astăzi</string>
+    <string name="generate_pdf_button_text">Generează PDF</string>
+    <string name="view_incidents_on_map_button_text">Vezi pe hartă</string>
+    <string name="reports_found">incidente raportate găsite</string>
+
+    <string-array name="neighborhoods">
+        <item>Toate cartierele</item>
+        <item>Andrei Mureșanu</item>
+        <item>Becaș</item>
+        <item>Borhanci</item>
+        <item>Bulgaria</item>
+        <item>Bună Ziua</item>
+        <item>Centru</item>
+        <item>Dâmbul Rotund</item>
+        <item>Europa</item>
+        <item>Făget</item>
+        <item>Gheorgheni</item>
+        <item>Grădini Mănăștur</item>
+        <item>Grigorescu</item>
+        <item>Gruia</item>
+        <item>Iris</item>
+        <item>Între Lacuri</item>
+        <item>Mănăștur</item>
+        <item>Someșeni</item>
+        <item>Sopor</item>
+        <item>Zorilor</item>
+    </string-array>
 
     <!-- Preference Titles -->
     <string name="language_header">Limbă</string>
@@ -116,6 +162,10 @@
     <string name="project_motivation_hint">De ce ar trebui implementat?</string>
     <string name="project_location_hint">Locația proiectului</string>
     <string name="project_description_hint">Descrierea proiectului</string>
+    <string name="project_proposal_vote_button_text">Votează</string>
+    <string name="project_proposal_unvote_button_text">Șterge vot</string>
+    <string name="proposed_project_votes_label">voturi</string>
+    <string name="view_content_project_proposal_button">Înapoi la conținut</string>
 
     <string-array name="project_categories">
         <item>Mobilitate și accesibilitate</item>
@@ -126,6 +176,100 @@
     </string-array>
     <!-- endregion -->
 
-    <!-- Constants -->
+    <!-- region Public Spending -->
+    <string name="public_spending_fragment_label">Cheltuieli publice</string>
+    <string name="public_spending_fragment_button_text">Vezi cheltuielile publice</string>
+    <string name="public_spending_textview">Cheltuieli publice</string>
+    <string name="public_spending_list_fragment_label">Lista cheltuielilor publice</string>
+    <string name="public_spending_by_source_of_funding_label">Cheltuieli publice după sursa de finanțare</string>
+    <string name="public_spending_by_source_of_category_label">Cheltuieli publice după categorie</string>
+    <string name="public_spending_button_source_of_funding_text">Vezi după sursa de finanțare</string>
+    <string name="public_spending_button_category_text">Vezi după categorie</string>
+    <string name="view_public_spending_button_text">Vezi cheltuielile publice</string>
+    <string name="public_spending_completion_date_label">Data încheierii</string>
+    <string name="public_spending_category_hint">Categorie cheltuieli publice</string>
+    <string name="public_spending_status_hint">Status cheltuieli publice</string>
+    <string name="public_spending_completion_year_hint">An finalizare cheltuieli publice</string>
+    <string name="public_spending_all_statuses_all_hint">Toate statusurile</string>
+    <string name="public_spending_all_categories_all_hint">Toate categoriile</string>
+    <string name="public_spending_all_years_all_hint">Toți anii</string>
+
+    <string-array name="statuses">
+        <item>Toate statusurile</item>
+        <item>În desfășurare</item>
+        <item>Finalizat</item>
+        <item>Întârziat</item>
+        <item>Amânat</item>
+    </string-array>
+
+    <string-array name="public_spending_categories">
+        <item>Toate categoriile</item>
+        <item>Proiecte de infrastructură rutieră</item>
+        <item>Proiecte de transport în comun</item>
+        <item>Proiecte de energie verde</item>
+        <item>Proiecte de centre culturale</item>
+        <item>Proiecte de construire și reabilitare de clădiri</item>
+        <item>Proiecte de unități medicale</item>
+        <item>Proiecte de sport și recreere</item>
+        <item>Proiecte de școli și grădinițe</item>
+    </string-array>
+
+    <!-- endregion -->
+
+
+    <!--########################## Constants ########################## -->
     <string name="city_hall_name">Primăria Cluj-Napoca</string>
+    <string name="city_hall_full_Name">Primăria și Consiliul Local Cluj-Napoca</string>
+
+    <!-- Project Proposals -->
+    <string name="DEFAULT_ERROR_MESSAGE">O eroare neașteptată a avut loc!</string>
+    <string name="DEFAULT_ERROR_MESSAGE_PLEASE_TRY_AGAIN">O eroare neașteptată a avut loc! Vă rugăm să încercați din nou!</string>
+    <string name="SUCCESSFUL_VOTING">Votul a fost înregistrat cu succes!</string>
+    <string name="INVALID_EMAIL_ERROR_MESSAGE">Vă rugăm să introduceți o adresă de email validă!</string>
+    <string name="INVALID_PASSWORD_ERROR_MESSAGE">Vă rugăm să introduceți o parolă validă!</string>
+    <string name="INVALID_CNP_NAME_ERROR_MESSAGE">Vă rugăm să introduceți un CNP valid!</string>
+    <string name="INVALID_FIRST_NAME_ERROR_MESSAGE">Vă rugăm să introduceți un prenume valid!</string>
+    <string name="INVALID_LAST_NAME_ERROR_MESSAGE">Vă rugăm să introduceți un nume de familie valid!</string>
+    <string name="INVALID_ADDRESS_ERROR_MESSAGE">Vă rugăm să introduceți o adresă validă!</string>
+    <string name="INVALID_REPORT_INCIDENT_DESCRIPTION_ERROR_MESSAGE">Vă rugăm să descrieți incidentul!</string>
+    <string name="INVALID_REPORT_INCIDENT_HEADLINE_ERROR_MESSAGE">Vă rugăm să introduceți titlul incidentului!</string>
+    <string name="INVALID_REPORT_INCIDENT_PHOTO_ERROR_MESSAGE">Vă rugăm să introduceți cel puțin o fotografie a incidentului!</string>
+    <string name="INVALID_COMMENT_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți un comentariu!</string>
+    <string name="INVALID_PROJECT_CATEGORY_TEXT_ERROR_MESSAGE">Vă rugăm să alegeți o categorie pentru proiect!</string>
+    <string name="INVALID_PROJECT_TITLE_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți un titlu pentru proiect!</string>
+    <string name="INVALID_PROJECT_MOTIVATION_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți o motivare a proiectului!</string>
+    <string name="INVALID_PROJECT_LOCATION_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți o locație a proiectului!</string>
+    <string name="INVALID_PROJECT_DESCRIPTION_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți o descriere a proiectului!</string>
+    <string name="INVALID_ATTACHMENT_TITLE_TEXT_ERROR_MESSAGE">Vă rugăm să introduceți un titlu pentru fișierul atașat!</string>
+    <string name="INVALID_PDF_URI_TEXT_ERROR_MESSAGE">Vă rugăm să atașati un fișier PDF!</string>
+    <string name="INVALID_IMAGE_URI_TEXT_ERROR_MESSAGE">Vă rugăm să atașati o fotografie!</string>
+    <string name="START_DATE_AFTER_END_DATE">Data de început nu poate fi după data de încheiere!</string>
+    <string name="PROVIDE_STORAGE_PERMISSIONS_CTA">Vă rugăm să permiteți acces la stocare aplicației!</string>
+    <string name="CITIZEN_MISSING_ERROR_MESSAGE">Acest cetățean nu a putut fi găsit!</string>
+    <string name="SUCCESSFUL_REPORT_GENERATED">Raportul a fost generat cu succes!</string>
+    <string name="FAILED_ADDRESS_COMPUTING">Locația nu a putut fi determinată în acest moment!</string>
+    <string name="SUCCESSFUL_REGISTER_MESSAGE">V-ați înregistrat cu succes! Vă rugăm să vă verificați adresa de email!</string>
+    <string name="SUCCESSFUL_RESET_PASSWORD_EMAIL_SENT">V-ați resetat parola cu succes! Vă rugăm să vă verificați adresa de email!</string>
+    <string name="FAILED_REGISTER_MESSAGE">Registrarea a eșuat! Vă rugăm să încercați din nou!</string>
+    <string name="FAILED_SIGN_IN_UNVERIFIED_EMAIL_MESSAGE">Vă rugăm să vă verificați adresa de email înainte de a vă autentifica!</string>
+    <string name="FAILED_SIGN_IN_MESSAGE">Autentificarea a eșuat! Vă rugăm să încercați din nou</string>
+    <string name="FAILED_RESET_PASSWORD_EMAIL_NOT_SENT">O eroare a avut loc! Email-ul de resetare a parolei nu a fost trimis!</string>
+    <string name="SUCCESSFUL_REPORT_INCIDENT">Incidentul a fost raportat cu succes!</string>
+    <string name="SUCCESSFUL_ADD_COMMENT">Comentariul a fost adăugat cu succes!</string>
+    <string name="SUCCESSFUL_ADDED_IMAGE">Imaginea a fost adăugată cu succes!</string>
+    <string name="SUCCESSFUL_ADDED_PDF">Fișierul PDF a fost adăugat cu succes!</string>
+    <string name="SUCCESSFUL_UNDO_VOTE">Votul a fost retras!</string>
+    <string name="SUCCESSFUL_PROPOSAL_PROJECT">Propunerea de proiect a fost adăugată cu succes!</string>
+
+    <!-- Content Description (Accessibility) -->
+    <string name="event_period_content_description">Perioada evenimentului</string>
+    <string name="event_location_content_description">Locația evenimentului</string>
+    <string name="event_address_content_description">Adresa evenimentului</string>
+    <string name="event_category_content_description">Categoria evenimentului</string>
+    <string name="posted_on_content_description">Postat în data de</string>
+    <string name="event_photo_content_description">Fotografia evenimentului</string>
+    <string name="public_release_photo_content_description">Fotografia comunicatului de presă</string>
+    <string name="previous_comment_content_description">Comentariul precedent</string>
+    <string name="next_comment_content_description">Comentariul următor</string>
+    <string name="remove_added_incident_photo_content_description">Șterge fotografia atașată incidentului de raportat</string>
 </resources>

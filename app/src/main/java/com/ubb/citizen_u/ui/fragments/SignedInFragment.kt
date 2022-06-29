@@ -13,16 +13,19 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ubb.citizen_u.R
+import com.ubb.citizen_u.data.api.AddressApi
 import com.ubb.citizen_u.databinding.FragmentSignedInBinding
 import com.ubb.citizen_u.domain.model.Response
+import com.ubb.citizen_u.ui.MainActivity
 import com.ubb.citizen_u.ui.util.toastErrorMessage
+import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
 import com.ubb.citizen_u.ui.viewmodels.CitizenViewModel
 import com.ubb.citizen_u.ui.viewmodels.EventViewModel
 import com.ubb.citizen_u.ui.workers.NotificationWorker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -33,6 +36,7 @@ class SignedInFragment : Fragment() {
     }
 
     private val citizenViewModel: CitizenViewModel by activityViewModels()
+    private val authenticationViewModel: AuthenticationViewModel by activityViewModels()
     private val eventViewModel: EventViewModel by activityViewModels()
 
     private var _binding: FragmentSignedInBinding? = null
@@ -40,6 +44,9 @@ class SignedInFragment : Fragment() {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
     private val args: SignedInFragmentArgs by navArgs()
+
+    @Inject
+    lateinit var addressApi: AddressApi
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -134,6 +141,39 @@ class SignedInFragment : Fragment() {
 
     fun goToReportIncident() {
         findNavController().navigate(R.id.action_signedInFragment_to_reportIncidentFragment)
+    }
+
+    fun goToGenerateReports() {
+        findNavController().navigate(R.id.action_signedInFragment_to_generateReportsReportedIncidentsFragment)
+    }
+
+    fun goToProposedProject() {
+        findNavController().navigate(R.id.action_signedInFragment_to_projectProposalGeneralFragment)
+    }
+
+    fun goToPublicSpending() {
+        findNavController().navigate(R.id.action_signedInFragment_to_publicSpendingFragment)
+    }
+
+    fun viewCitizenProposedProjects() {
+        findNavController().navigate(R.id.action_signedInFragment_to_citizenProposedProjectsTransitionFragment)
+    }
+
+    fun viewOtherCitizensProposedProjects() {
+        findNavController().navigate(R.id.action_signedInFragment_to_otherCitizensProposedProjectsTransitionFragment)
+    }
+
+    fun viewCitizenReportedIncidents() {
+        findNavController().navigate(R.id.action_signedInFragment_to_citizenReportedIncidentsTransitionFragment)
+    }
+
+    fun viewOtherCitizensReportedIncidents() {
+        findNavController().navigate(R.id.action_signedInFragment_to_otherCitizensReportedIncidentsTransitionFragment)
+    }
+
+    fun signOut() {
+        authenticationViewModel.signOut()
+        (requireActivity() as MainActivity).onBackPressedLogout()
     }
 
     private fun shouldGoToPeriodicEventDetails(): String? {

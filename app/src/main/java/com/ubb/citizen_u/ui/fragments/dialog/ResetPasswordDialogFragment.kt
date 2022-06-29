@@ -5,22 +5,14 @@ import android.app.Dialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.ubb.citizen_u.R
 import com.ubb.citizen_u.databinding.FragmentDialogResetPasswordBinding
 import com.ubb.citizen_u.ui.viewmodels.AuthenticationViewModel
-import com.ubb.citizen_u.util.AuthenticationConstants
-import com.ubb.citizen_u.util.ValidationConstants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -63,7 +55,7 @@ class ResetPasswordDialogFragment : DialogFragment() {
         if (TextUtils.isEmpty(email.trim { emailValue -> emailValue <= ' ' })) {
             Toast.makeText(
                 requireContext(),
-                ValidationConstants.INVALID_EMAIL_ERROR_MESSAGE,
+                getString(R.string.INVALID_EMAIL_ERROR_MESSAGE),
                 Toast.LENGTH_SHORT
             ).show()
         } else {

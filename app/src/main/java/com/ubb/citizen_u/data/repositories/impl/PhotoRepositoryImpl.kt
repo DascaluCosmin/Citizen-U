@@ -1,6 +1,7 @@
 package com.ubb.citizen_u.data.repositories.impl
 
 import android.net.Uri
+import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.ubb.citizen_u.data.model.Photo
@@ -17,6 +18,7 @@ class PhotoRepositoryImpl @Inject constructor(
         private const val TAG = "PhotoRepositoryImpl"
         private const val FIREBASE_STORAGE_EVENTS_IMAGES = "images/events"
         private const val FIREBASE_STORAGE_INCIDENT_REPORTS_IMAGES = "images/incident_reports"
+        private const val FIREBASE_STORAGE_PROJECT_PROPOSALS = "proposed_projects"
     }
 
     override suspend fun getMainEventPhotoStorageReference(
@@ -50,6 +52,21 @@ class PhotoRepositoryImpl @Inject constructor(
         }.toMutableList()
     }
 
+    override suspend fun getAllProposedProjectPhotos(
+        citizenId: String,
+        proposedProjectId: String,
+    ): MutableList<Photo?> {
+        val pathToProjectProposalPhotosFolder =
+            "$FIREBASE_STORAGE_PROJECT_PROPOSALS/$citizenId/$proposedProjectId/photos"
+        val result =
+            firebaseStorage.reference.child(pathToProjectProposalPhotosFolder).listAll().await()
+        return result.items.map {
+            Photo().apply {
+                storageReference = it
+            }
+        }.toMutableList()
+    }
+
     override suspend fun saveIncidentPhotos(
         listIncidentPhotoUri: List<Uri>,
         incidentId: String,
@@ -62,6 +79,7 @@ class PhotoRepositoryImpl @Inject constructor(
                 firebaseStorage.getReference("$pathToCitizenIncidentReportsFolder/${uri.lastPathSegment}")
                     .putFile(uri).await()
             if (!result.task.isSuccessful) {
+                Log.e(TAG, "saveIncidentPhotos: ${result.task.exception?.message}")
                 return false
             }
         }
