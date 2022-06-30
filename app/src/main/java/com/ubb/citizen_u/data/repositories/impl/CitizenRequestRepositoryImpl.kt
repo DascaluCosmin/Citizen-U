@@ -162,7 +162,9 @@ class CitizenRequestRepositoryImpl @Inject constructor(
                 val incidents = getAllIncidentsList(
                     citizenId = citizenId,
                     listDetails = listOf(Details.PHOTOS)
-                )
+                ).sortedByDescending {
+                    it?.sentDate
+                }
                 emit(Response.Success(incidents))
             } catch (exception: Exception) {
                 Log.d(TAG, "getAllIncidentsOfCitizen: An error has occurred: ${exception.message}")
@@ -248,6 +250,9 @@ class CitizenRequestRepositoryImpl @Inject constructor(
                     listDetails = listOf(Details.PHOTOS)
                 )
             }.flatten()
+            .sortedByDescending {
+                it?.sentDate
+            }
     }
 
     private suspend fun getAllIncidentsList(): List<Incident?> {

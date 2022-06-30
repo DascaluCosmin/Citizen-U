@@ -40,7 +40,7 @@ import java.util.*
 class ReportIncidentMapFragment : Fragment() {
 
     companion object {
-        private const val TAG = "ReportIncidentMapFragment"
+        private const val TAG = "UBB-ReportIncidentMapFragment"
         private const val ZOOM_WEIGHT = 15.0f
     }
 
@@ -50,6 +50,9 @@ class ReportIncidentMapFragment : Fragment() {
 
     private val handler = Handler()
     private lateinit var loadingSpinnerRunnable: Runnable
+
+    private val handlerCoordinates = Handler()
+    private lateinit var coordinatesRunnable: Runnable
 
 
     private var _binding: FragmentReportIncidentMapBinding? = null
@@ -69,6 +72,7 @@ class ReportIncidentMapFragment : Fragment() {
                     Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
             ) {
                 googleMap.isMyLocationEnabled = true
+                googleMap.uiSettings.isMyLocationButtonEnabled = true
             }
 
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
@@ -120,6 +124,20 @@ class ReportIncidentMapFragment : Fragment() {
                     // Make sure the marker title is displayed without needing to click it
                     showInfoWindow()
                 }
+            }
+
+            googleMap.setOnMyLocationButtonClickListener {
+                coordinatesRunnable = Runnable {
+                    val longitude = googleMap.cameraPosition.target.longitude
+                    val latitude = googleMap.cameraPosition.target.latitude
+
+                    Log.d(TAG, "coordinates runnable: ($longitude, $latitude)")
+                    citizenRequestViewModel.incidentLatitude = latitude
+                    citizenRequestViewModel.incidentLongitude = longitude
+                }
+
+                handlerCoordinates.postDelayed(coordinatesRunnable, 1000L)
+                false
             }
         }
 

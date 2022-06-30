@@ -20,7 +20,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
-    private val authenticationUseCases: AuthenticationUseCases
+    private val authenticationUseCases: AuthenticationUseCases,
 ) : ViewModel() {
 
     companion object {
@@ -53,6 +53,12 @@ class AuthenticationViewModel @Inject constructor(
     )
     val registerUserState: SharedFlow<Response<Void>> = _registerUserState
 
+    private val _signOutState = MutableSharedFlow<Response<Boolean>>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val signOutState: SharedFlow<Response<Boolean>> = _signOutState
+
     fun signIn(email: String, password: String) {
         Log.d(TAG, "signIn: Signing in user $email...")
         viewModelScope.launch(Dispatchers.IO) {
@@ -67,8 +73,10 @@ class AuthenticationViewModel @Inject constructor(
         Log.d(TAG, "signOut: Signing out current user...")
         hasJustLoggedOff = true
         viewModelScope.launch(Dispatchers.IO) {
-            authenticationUseCases.signOutUseCase()
             _currentUserState.resetReplayCache()
+            authenticationUseCases.signOutUseCase().collect {
+                _signOutState.tryEmit(it)
+            }
         }
     }
 

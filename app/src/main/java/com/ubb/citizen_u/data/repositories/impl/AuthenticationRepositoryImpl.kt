@@ -40,9 +40,19 @@ class AuthenticationRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun signOut() {
-        firebaseAuth.signOut()
-    }
+    override suspend fun signOut(): Flow<Response<Boolean>> =
+        flow {
+            try {
+                emit(Response.Loading)
+
+                firebaseAuth.signOut()
+
+                emit(Response.Success(true))
+            } catch (exception: Exception) {
+                Log.e(TAG, "An error has occurred while logging out: ${exception.message}")
+                emit(Response.Error(exception.message ?: DEFAULT_ERROR_MESSAGE))
+            }
+        }
 
     override suspend fun getCurrentUser() =
         flow {
@@ -78,7 +88,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
     override suspend fun registerUser(
         email: String,
         password: String,
-        citizen: Citizen
+        citizen: Citizen,
     ): Flow<Response<Void>> {
         return flow {
             try {

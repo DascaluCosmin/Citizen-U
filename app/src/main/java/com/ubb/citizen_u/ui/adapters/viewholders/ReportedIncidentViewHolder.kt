@@ -20,25 +20,26 @@ class ReportedIncidentViewHolder(
             reportedIncidentAddress.text = incident.address
 
             reportedIncidentStatus.text = incident.status.toString().lowercase()
+                .replace("_", " ")
                 .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
-            incident.sentDate?.let {
-                reportedIncidentSendDate.text = DateFormatter.format(it)
-            }
+                    incident.sentDate?.let {
+                        reportedIncidentSendDate.text = DateFormatter.format(it)
+                    }
 
-            incident.photos.let { reportedIncidentPhotos ->
-                if (reportedIncidentPhotos.isNotEmpty()) {
-                    reportedIncidentPhotos[0]?.let { reportedIncidentPhoto ->
-                        ImageFiller.fill(itemView.context,
-                            reportedIncidentImage,
-                            reportedIncidentPhoto)
+                    incident.photos.let { reportedIncidentPhotos ->
+                        if (reportedIncidentPhotos.isNotEmpty()) {
+                            reportedIncidentPhotos[0]?.let { reportedIncidentPhoto ->
+                                ImageFiller.fill(itemView.context,
+                                    reportedIncidentImage,
+                                    reportedIncidentPhoto)
+                            }
+                        }
+                    }
+
+                    reportedIncidentCard.setOnClickListener {
+                        reportedIncidentDetailsOnClickCallBack(incident)
                     }
                 }
-            }
-
-            reportedIncidentCard.setOnClickListener {
-                reportedIncidentDetailsOnClickCallBack(incident)
-            }
         }
     }
-}

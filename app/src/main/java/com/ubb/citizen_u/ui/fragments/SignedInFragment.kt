@@ -67,6 +67,7 @@ class SignedInFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { collectCitizenState() }
+                launch { collectSignOutState() }
             }
         }
     }
@@ -126,6 +127,26 @@ class SignedInFragment : Fragment() {
         }
     }
 
+    private suspend fun collectSignOutState() {
+        authenticationViewModel.signOutState.collect {
+            Log.d(TAG, "collectSignOutState: Collecting response $it")
+            when (it) {
+                Response.Loading -> {
+                    binding.mainProgressbar.visibility = View.VISIBLE
+                }
+                is Response.Error -> {
+                    Log.d(TAG, "collectSignOutState: An error has occurred ${it.message}")
+                    binding.mainProgressbar.visibility = View.GONE
+                    toastErrorMessage()
+                }
+                is Response.Success -> {
+                    binding.mainProgressbar.visibility = View.GONE
+                    (requireActivity() as MainActivity).onBackPressedLogout()
+                }
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -174,8 +195,8 @@ class SignedInFragment : Fragment() {
     fun signOut() {
         authenticationViewModel.signOut()
 
-        Thread.sleep(3000L)
-        (requireActivity() as MainActivity).onBackPressedLogout()
+//        Thread.sleep(3000L)
+//        (requireActivity() as MainActivity).onBackPressedLogout()
     }
 
     private fun shouldGoToPeriodicEventDetails(): String? {

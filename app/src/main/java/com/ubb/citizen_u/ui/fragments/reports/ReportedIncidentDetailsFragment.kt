@@ -119,7 +119,11 @@ class ReportedIncidentDetailsFragment : Fragment() {
                         binding.reportedIncidentDescription.text = description
                         binding.reportedIncidentAddress.text = address
                         binding.reportedIncidentPostedBy.text = citizen?.getFullName()
-                        binding.reportedIncidentStatus.text = status.toString().uppercase()
+                        binding.reportedIncidentStatus.text = status.toString().lowercase()
+                            .replace("_", " ")
+                            .replaceFirstChar { incidentStatus ->
+                                if (incidentStatus.isLowerCase()) incidentStatus.titlecase(Locale.getDefault()) else incidentStatus.toString()
+                            }
 
                         sentDate?.let { sentDate ->
                             binding.reportedIncidentPostedOn.text =

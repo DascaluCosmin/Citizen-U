@@ -9,7 +9,7 @@ interface AuthenticationRepository {
 
     suspend fun signIn(email: String, password: String): Flow<Response<FirebaseUser?>>
 
-    suspend fun signOut()
+    suspend fun signOut(): Flow<Response<Boolean>>
 
     suspend fun getCurrentUser(): Flow<Response<Citizen?>>
 
